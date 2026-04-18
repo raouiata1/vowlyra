@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #CCCCCC;
+  color: #1a1a1a;
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Ensure bottom padding for ChatBar */
+main {
+  padding-bottom: 60px;
+}
+
+/* ── Mobile responsive overrides ─────────────────────────── */
+
+/* Nav: hide nav links on small screens */
+.nav-links {
+  display: flex;
+}
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-inner {
+    padding: 0 16px !important;
+  }
+}
+
+/* Hero: single column on mobile */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  /* Slider: sichtbar direkt unter CTAs/Proof-Bar */
+  .hero-image-grid {
+    display: block !important;
+    width: calc(100% - 40px);
+    height: 260px;
+    border-radius: 16px;
+    margin: 24px 20px 0;
+    overflow: hidden;
+  }
+  .hero-section {
+    padding: 40px 20px 48px !important;
+  }
+  .hero-h1 {
+    font-size: 36px !important;
+    letter-spacing: -0.8px !important;
+  }
+  .hero-ctas {
+    flex-wrap: wrap;
+  }
+  .hero-proof {
+    font-size: 12px !important;
+  }
+}
+
+/* Demo: single column on mobile */
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .demo-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .demo-section {
+    padding: 48px 20px !important;
+  }
+  .demo-subtitle {
+    margin-bottom: 28px !important;
+  }
+}
+
+/* HowItWorks: flex row with arrow connectors */
+.hiw-grid {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.hiw-connector {
+  display: flex;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+.hiw-card {
+  flex: 1;
+  background: #fff;
+  border: none;
+  border-top: 4px solid #1DB954;
+  border-radius: 16px;
+  padding: 36px 28px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hiw-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(29,185,84,0.15);
+}
+@media (max-width: 767px) {
+  .hiw-grid {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .hiw-connector {
+    display: none;
+  }
+  .hiw-section {
+    padding: 48px 20px !important;
+  }
+}
+
+/* Pricing: 3-column grid, single column on mobile */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 767px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .pricing-section {
+    padding: 48px 20px !important;
+  }
+  .pricing-standard { order: 1; }
+  .pricing-express  { order: 2; }
+  .pricing-garantie { order: 3; }
+}
+
+/* FAQ: reduce padding on mobile */
+@media (max-width: 767px) {
+  .faq-section {
+    padding: 48px 20px !important;
+  }
+}
+
+/* UGC: reduce padding on mobile */
+@media (max-width: 767px) {
+  .ugc-section {
+    padding: 40px 0 48px !important;
+  }
+}
+
+/* Section headings: smaller on mobile */
+@media (max-width: 767px) {
+  .section-h2 {
+    font-size: 28px !important;
+    letter-spacing: -0.5px !important;
+  }
+}
+
