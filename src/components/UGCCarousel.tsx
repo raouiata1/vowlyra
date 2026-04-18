@@ -1,15 +1,14 @@
 "use client";
 
 const cards = [
-  { name: "Lena M.", occasion: "Geburtstag", src: "/ugc-1.MOV", likes: "2.4K", comments: "183" },
-  { name: "Marco & Julia", occasion: "Hochzeit", src: "/ugc-2.MOV", likes: "5.1K", comments: "342" },
-  { name: "Familie Braun", occasion: "Weihnachten", src: "/ugc-3.MOV", likes: "1.8K", comments: "97" },
-  { name: "Nico R.", occasion: "Überraschung", src: "/ugc-4.MP4", likes: "3.2K", comments: "218" },
-  { name: "Anna K.", occasion: "Jahrestag", src: "/ugc-5.MOV", likes: "4.7K", comments: "291" },
-  { name: "Thomas H.", occasion: "Geburtstag", src: "/ugc-6.MP4", likes: "1.1K", comments: "64" },
-  { name: "Sophie & Ben", occasion: "Hochzeit", src: "/ugc-7.MP4", likes: "6.3K", comments: "415" },
-  { name: "Karin W.", occasion: "Valentinstag", src: "/ugc-8.MOV", likes: "2.9K", comments: "176" },
-  { name: "David & Clara", occasion: "Jahrestag", src: "/ugc-9.MOV", likes: "3.8K", comments: "253" },
+  { name: "Lena M.", occasion: "Geburtstag", src: "https://media.vowlyra.com/ugc-1.MOV", likes: "2.4K", comments: "183" },
+  { name: "Marco & Julia", occasion: "Hochzeit", src: "https://media.vowlyra.com/ugc-2.MOV", likes: "5.1K", comments: "342" },
+  { name: "Familie Braun", occasion: "Weihnachten", src: "https://media.vowlyra.com/ugc-3.MOV", likes: "1.8K", comments: "97" },
+  { name: "Nico R.", occasion: "Überraschung", src: "https://media.vowlyra.com/ugc-4.MP4", likes: "3.2K", comments: "218" },
+  { name: "Anna K.", occasion: "Jahrestag", src: "https://media.vowlyra.com/ugc-5.MOV", likes: "4.7K", comments: "291" },
+  { name: "Thomas H.", occasion: "Geburtstag", src: "https://media.vowlyra.com/ugc-6.MP4", likes: "1.1K", comments: "64" },
+  { name: "Sophie & Ben", occasion: "Hochzeit", src: "https://media.vowlyra.com/ugc-7.MP4", likes: "6.3K", comments: "415" },
+  { name: "Karin W.", occasion: "Valentinstag", src: "https://media.vowlyra.com/ugc-8.MOV", likes: "2.9K", comments: "176" },
 ];
 
 const allCards = [...cards, ...cards];
