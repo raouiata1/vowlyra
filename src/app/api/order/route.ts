@@ -45,10 +45,12 @@ export async function POST(request: NextRequest) {
       }
     )
 
+    const responseText = await queueResponse.text()
+    console.log('Cloudflare Response Status:', queueResponse.status)
+    console.log('Cloudflare Response Body:', responseText)
+
     if (!queueResponse.ok) {
-      const errorText = await queueResponse.text()
-      console.error('Cloudflare Queue Fehler:', errorText)
-      throw new Error(`Queue Fehler: ${queueResponse.status}`)
+      throw new Error(`Queue Fehler: ${queueResponse.status} - ${responseText}`)
     }
 
     return NextResponse.json({

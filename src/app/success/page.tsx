@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const WA_LINK =
-  "https://wa.me/WHATSAPP_NUMBER?text=Hallo%2C%20ich%20habe%20gerade%20meinen%20Song%20bestellt!";
 
 const TOTAL_SECONDS = 1200; // 20 minutes
 const CIRCUMFERENCE = 340;
@@ -37,17 +35,24 @@ function formatTime(secs: number) {
 }
 
 export default function SuccessPage() {
-  const [elapsed, setElapsed]       = useState(0);
-  const [liveCount, setLiveCount]   = useState(getRandomCount());
-  const [email, setEmail]           = useState("");
-  const [labelKey, setLabelKey]     = useState(0);
-  const [showPopup, setShowPopup]   = useState(false);
-  const [showTyping, setShowTyping] = useState(false);
-  const [showMsg2, setShowMsg2]     = useState(false);
-  const [chatTime]                  = useState(() => {
-    const now = new Date();
-    return `${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
-  });
+  const [elapsed, setElapsed]     = useState(0);
+  const [liveCount, setLiveCount] = useState(getRandomCount());
+  const [email, setEmail]         = useState("");
+  const [labelKey, setLabelKey]   = useState(0);
+
+  // Load Crisp on page mount — widget appears automatically bottom-right
+  useEffect(() => {
+    window.$crisp = [];
+    window.CRISP_WEBSITE_ID = "13d9d527-448d-4c25-bb2d-ce315a673134";
+    const script = document.createElement("script");
+    script.src = "https://client.crisp.chat/l.js";
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
@@ -55,18 +60,13 @@ export default function SuccessPage() {
 
     const timer   = setInterval(() => setElapsed((e) => Math.min(e + 1, TOTAL_SECONDS)), 1000);
     const counter = setInterval(() => setLiveCount(getRandomCount()), 8000);
-    const popup   = setTimeout(() => {
-      setShowPopup(true);
-      setTimeout(() => setShowTyping(true), 200);
-      setTimeout(() => { setShowTyping(false); setShowMsg2(true); }, 1700);
-    }, 2000);
-    return () => { clearInterval(timer); clearInterval(counter); clearTimeout(popup); };
+    return () => { clearInterval(timer); clearInterval(counter); };
   }, []);
 
-  const remaining      = TOTAL_SECONDS - elapsed;
-  const done           = remaining === 0;
-  const dashOffset     = done ? 0 : CIRCUMFERENCE * (1 - elapsed / TOTAL_SECONDS);
-  const currentLabel   = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? "Trailer wird vorbereitet...";
+  const remaining    = TOTAL_SECONDS - elapsed;
+  const done         = remaining === 0;
+  const dashOffset   = done ? 0 : CIRCUMFERENCE * (1 - elapsed / TOTAL_SECONDS);
+  const currentLabel = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? "Trailer wird vorbereitet...";
 
   // trigger label fade on change
   useEffect(() => { setLabelKey((k) => k + 1); }, [currentLabel]);
@@ -94,33 +94,6 @@ export default function SuccessPage() {
         @keyframes confettiRise {
           0%   { transform: translateY(0) scale(1); opacity: 1; }
           100% { transform: translateY(-60px) scale(0.5); opacity: 0; }
-        }
-        @keyframes whatsapp-pulse {
-          0%   { transform: scale(1); opacity: 1; }
-          70%  { transform: scale(1.4); opacity: 0; }
-          100% { transform: scale(1.4); opacity: 0; }
-        }
-        .wa-tooltip {
-          opacity: 0;
-          pointer-events: none;
-          transform: translateX(-6px);
-          transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-        .wa-tooltip.visible {
-          opacity: 1;
-          pointer-events: auto;
-          transform: translateX(0);
-        }
-        @keyframes slideInLeft {
-          from { transform: translateX(-120%); opacity: 0; }
-          to   { transform: translateX(0);    opacity: 1; }
-        }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50%       { transform: translateY(-4px); }
-        }
-        .wa-chat-popup {
-          animation: slideInLeft 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
         .status-label {
           animation: fadeIn 0.5s ease forwards;
@@ -175,9 +148,7 @@ export default function SuccessPage() {
           {/* SVG Circle */}
           <div style={{ position: "relative", width: 120, height: 120 }}>
             <svg width="120" height="120" viewBox="0 0 120 120" style={{ transform: "rotate(-90deg)" }}>
-              {/* Background circle */}
               <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" strokeWidth="6" />
-              {/* Progress circle */}
               <circle
                 cx="60" cy="60" r="54"
                 fill="none"
@@ -266,75 +237,6 @@ export default function SuccessPage() {
         )}
 
       </div>
-
-      {/* WhatsApp Chat Popup – fixed bottom-right */}
-      {showPopup && (
-        <div
-          className="wa-chat-popup"
-          style={{ position: "fixed", bottom: 24, right: 24, zIndex: 60, width: 300, background: "#fff", borderRadius: 16, boxShadow: "0 8px 32px rgba(0,0,0,0.15)", overflow: "hidden", fontFamily: "system-ui, -apple-system, sans-serif" }}
-        >
-          {/* Header */}
-          <div style={{ background: "#075E54", padding: "12px 16px", display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 40, height: 40, borderRadius: "50%", background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 18, fontWeight: 700, flexShrink: 0 }}>D</div>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>Dani</div>
-              <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, display: "flex", alignItems: "center", gap: 4 }}>
-                tippt gerade
-                <span style={{ display: "inline-flex", gap: 3, alignItems: "center" }}>
-                  {[0, 1, 2].map((i) => (
-                    <span key={i} style={{ width: 4, height: 4, borderRadius: "50%", background: "rgba(255,255,255,0.7)", display: "inline-block", animation: "bounce 0.9s ease-in-out infinite", animationDelay: `${i * 0.15}s` }} />
-                  ))}
-                </span>
-              </div>
-            </div>
-            <button onClick={() => setShowPopup(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.7)", fontSize: 18, cursor: "pointer", padding: 0, lineHeight: 1 }}>✕</button>
-          </div>
-
-          {/* Chat area */}
-          <div style={{ background: "#ECE5DD", padding: "12px 16px", display: "flex", flexDirection: "column", gap: 8 }}>
-            {/* Message 1 */}
-            <div style={{ background: "#fff", borderRadius: "8px 8px 8px 0", padding: "8px 12px", maxWidth: 220, alignSelf: "flex-start" }}>
-              <div style={{ fontSize: 13, color: "#1a1a1a" }}>Hi! Ich bin Dani 👋</div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4, marginTop: 4 }}>
-                <span style={{ fontSize: 10, color: "#999" }}>{chatTime}</span>
-                <span style={{ fontSize: 11, color: "#4FC3F7", fontWeight: 700 }}>✓✓</span>
-              </div>
-            </div>
-
-            {/* Typing indicator */}
-            {showTyping && (
-              <div style={{ background: "#fff", borderRadius: "8px 8px 8px 0", padding: "10px 14px", alignSelf: "flex-start", display: "flex", gap: 4, alignItems: "center" }}>
-                {[0, 1, 2].map((i) => (
-                  <span key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: "#999", display: "inline-block", animation: "bounce 0.9s ease-in-out infinite", animationDelay: `${i * 0.15}s` }} />
-                ))}
-              </div>
-            )}
-
-            {/* Message 2 */}
-            {showMsg2 && (
-              <div style={{ background: "#fff", borderRadius: "8px 8px 8px 0", padding: "8px 12px", maxWidth: 240, alignSelf: "flex-start" }}>
-                <div style={{ fontSize: 13, color: "#1a1a1a", lineHeight: 1.5 }}>Ich erstelle gerade deinen persönlichen Song-Trailer 🎵 Schreib mir kurz – ich passe alles genau auf dich an!</div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 4, marginTop: 4 }}>
-                  <span style={{ fontSize: 10, color: "#999" }}>{chatTime}</span>
-                  <span style={{ fontSize: 11, color: "#4FC3F7", fontWeight: 700 }}>✓✓</span>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Reply Button */}
-          <a
-            href="https://wa.me/WHATSAPP_NUMBER?text=Hi%20Dani!%20Ich%20habe%20gerade%20meinen%20Song%20bestellt."
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setShowPopup(false)}
-            style={{ display: "block", background: "#25D366", color: "#fff", fontWeight: 700, padding: "12px 16px", textAlign: "center", fontSize: 14, textDecoration: "none" }}
-          >
-            Jetzt antworten auf WhatsApp →
-          </a>
-        </div>
-      )}
-
     </div>
   );
 }
