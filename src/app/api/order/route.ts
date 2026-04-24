@@ -1,5 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+const sendToProducer = async (orderData: any, retries = 3): Promise<boolean> => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(
+        process.env.CF_PRODUCER_URL!,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': process.env.CF_API_KEY!
+          },
+          body: JSON.stringify(orderData)
+        }
+      )
+      if (response.ok) return true
+      throw new Error(`HTTP ${response.status}`)
+    } catch (error) {
+      if (i === retries - 1) return false
+      await new Promise(r => setTimeout(r, 1000 * (i + 1)))
+    }
+  }
+  return false
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -29,28 +53,13 @@ export async function POST(request: NextRequest) {
       spezialzeile: body.spezialzeile || ''
     }
 
-    const queueResponse = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ACCOUNT_ID}/queues/${process.env.CF_QUEUE_ID}/messages/batch`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.CF_API_TOKEN}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          messages: [{
-            body: orderData
-          }]
-        })
-      }
-    )
+    const success = await sendToProducer(orderData)
 
-    const responseText = await queueResponse.text()
-    console.log('Cloudflare Response Status:', queueResponse.status)
-    console.log('Cloudflare Response Body:', responseText)
-
-    if (!queueResponse.ok) {
-      throw new Error(`Queue Fehler: ${queueResponse.status} - ${responseText}`)
+    if (!success) {
+      return NextResponse.json(
+        { success: false, error: 'Producer nicht erreichbar' },
+        { status: 503 }
+      )
     }
 
     return NextResponse.json({
@@ -61,7 +70,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('API Fehler:', error)
     return NextResponse.json(
-      { success: false, error: 'Fehler beim Senden' },
+      { success: false, error: 'Interner Fehler' },
       { status: 500 }
     )
   }
