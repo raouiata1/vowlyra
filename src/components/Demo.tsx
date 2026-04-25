@@ -172,7 +172,7 @@ export default function Demo() {
               <img
                 src="https://media.vowlyra.com/Vynil.jpg"
                 alt="Vinyl"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{ width: "80%", height: "80%", objectFit: "cover" }}
               />
             </div>
             <div>
