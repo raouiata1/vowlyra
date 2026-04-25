@@ -151,7 +151,7 @@ export default function Demo() {
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
             {[
               "Jeder Song ist 100% einzigartig",
-              "Trailer in ~2 Minuten in deiner Inbox",
+              "Trailer in ~3 Minuten in deiner Inbox",
               "Nur zahlen, wenn der Trailer gefällt",
             ].map((item) => (
               <li key={item} style={{ color: "#ccc", fontSize: 14, display: "flex", gap: 10, alignItems: "flex-start" }}>
@@ -176,7 +176,7 @@ export default function Demo() {
               />
             </div>
             <div>
-              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Für dich, Mama</div>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Für dich, Irene</div>
               <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Vowlyra · Geburtstagsgeschenk</div>
             </div>
           </div>
