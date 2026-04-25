@@ -203,8 +203,8 @@ export default function Hero() {
               letterSpacing: "-1.5px",
             }}
           >
-            Dein persönlicher Song{" "}
-            <span style={{ color: "#1DB954" }}>In 5 Minuten.</span>
+            Deine Geschichte als einzigartiger Song{" "}
+            <span style={{ color: "#1DB954" }}>in wenigen Minuten</span>.
           </h1>
 
           <p
@@ -216,8 +216,8 @@ export default function Hero() {
               maxWidth: 460,
             }}
           >
-            Gib deine Geschichte ein – wir erstellen einen einzigartigen Song,
-            der Gänsehaut garantiert. Trailer kostenlos, Song erst nach Zahlung.
+            Überrasche jemanden mit einem persönlichen Song, der verbindet, berührt und für immer in Erinnerung bleibt.{" "}
+            Perfekt für Geburtstag, Hochzeit oder einfach, um Danke zu sagen.
           </p>
 
           {/* CTAs */}
@@ -237,7 +237,7 @@ export default function Hero() {
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              Jetzt Song erstellen
+              Jetzt persönlichen Song erstellen
             </Link>
             <a
               href="#demo"
@@ -280,9 +280,9 @@ export default function Hero() {
               textAlign: "center",
             }}
           >
-            <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
             <span style={{ color: "#FFB800", fontSize: 15, margin: "0 6px 0 8px", letterSpacing: "1px" }}>★★★★★</span>
-            <span style={{ color: "#999", fontSize: 12 }}>aus 2.400+ Songs</span>
+            <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
+            <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span>
             <Sep />
             <span>Trailer ~30 Sek. kostenlos</span>
             <Sep />
