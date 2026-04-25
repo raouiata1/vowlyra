@@ -279,7 +279,6 @@ export default function Hero() {
               fontSize: 13,
               fontWeight: 500,
               textAlign: "center",
-              flexWrap: "wrap",
             }}
           >
           
