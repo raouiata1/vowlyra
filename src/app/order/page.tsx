@@ -189,6 +189,7 @@ export default function OrderPage() {
       const data = await response.json()
 
       if (data.success) {
+        sessionStorage.setItem('vowlyra_email', answers.email)
         router.push('/success')
       } else {
         alert('Fehler – bitte versuche es erneut')
