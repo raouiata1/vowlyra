@@ -133,8 +133,7 @@ function HeroSlider() {
         style={{
           position: "absolute",
           bottom: 14,
-          left: "50%",
-          transform: "translateX(-50%)",
+          right: 16,
           display: "flex",
           gap: 6,
           alignItems: "center",
@@ -165,6 +164,9 @@ function HeroSlider() {
           .hero-slide-info { padding: 14px !important; }
           .hero-slide-name { font-size: 14px !important; }
           .hero-slide-occasion, .hero-slide-quote { font-size: 11px !important; }
+          .hero-ctas { flex-direction: column; align-items: center; }
+          .hero-ctas a { width: 100%; text-align: center; box-sizing: border-box; }
+          .hero-proof { align-items: center; }
         }
       `}</style>
     </div>
@@ -221,7 +223,7 @@ export default function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="hero-ctas" style={{ display: "flex", gap: 12, marginBottom: 36 }}>
+          <div className="hero-ctas" style={{ display: "flex", gap: 12, marginBottom: 36, flexWrap: "wrap" }}>
             <Link
               href="/order"
               style={{
@@ -271,23 +273,25 @@ export default function Hero() {
             className="hero-proof"
             style={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 0,
-              flexWrap: "wrap",
+              flexDirection: "column",
+              gap: 6,
               color: "#555",
               fontSize: 13,
               fontWeight: 500,
-              textAlign: "center",
-
             }}
           >
-          
-          <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
-            <span style={{ color: "#FFB800", fontSize: 15, margin: "0 6px 0 8px", letterSpacing: "1px" }}>★★★★★</span>
-            <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span><br/><span> <br />Trailer ~30 Sek.</span>
-            <Sep />
-            <span>Song 2–4 Min.</span>
+            {/* Row 1: Rating */}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
+              <span style={{ color: "#FFB800", fontSize: 15, margin: "0 6px 0 8px", letterSpacing: "1px" }}>★★★★★</span>
+              <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span>
+            </div>
+            {/* Row 2: Delivery times */}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span>Trailer ~30 Sek.</span>
+              <Sep />
+              <span>Song 2–4 Min.</span>
+            </div>
           </div>
         </div>
 
