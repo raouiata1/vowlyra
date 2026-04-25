@@ -29,23 +29,15 @@ const steps = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="2" />
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-        <path d="M9 10h6M9 14l6-4" />
       </svg>
     ),
     title: "Song nach Zahlung – sofort",
-    description: "Gefällt dir der Trailer? Bezahle einmalig 14,99€ und dein 2–4 Min. Song landet in deinem Postfach.",
+    description: "Gefällt dir der Trailer? Bezahle einmalig und dein vollständiger Song landet in deinem Postfach.",
   },
 ];
 
 const ArrowRight = () => (
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      flexShrink: 0,
-    }}
-  >
+  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
       <path d="M6 14h16M16 8l6 6-6 6" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -70,15 +62,15 @@ export default function HowItWorks() {
             style={{
               display: "inline-block",
               background: "#1DB95420",
-              color: "#1DB954",
+              color: "#1a1a1a",
               borderRadius: 500,
               padding: "6px 16px",
               fontSize: 13,
-              fontWeight: 600,
+              fontWeight: 700,
               marginBottom: 8,
             }}
           >
-            So einfach geht's
+            So einfach geht&apos;s
           </div>
           <h2
             className="section-h2"
@@ -99,7 +91,6 @@ export default function HowItWorks() {
           {steps.map((step, i) => (
             <React.Fragment key={step.number}>
               <div className="hiw-card">
-                {/* Number Badge */}
                 <span
                   style={{
                     background: "#1DB954",
@@ -114,8 +105,6 @@ export default function HowItWorks() {
                 >
                   {step.number}
                 </span>
-
-                {/* Icon */}
                 <div
                   style={{
                     width: 48,
@@ -130,25 +119,13 @@ export default function HowItWorks() {
                 >
                   {step.icon}
                 </div>
-
-                <h3
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: "#1a1a1a",
-                    margin: 0,
-                    marginBottom: 12,
-                    lineHeight: 1.3,
-                  }}
-                >
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#1a1a1a", margin: 0, marginBottom: 12, lineHeight: 1.3 }}>
                   {step.title}
                 </h3>
                 <p style={{ fontSize: 14, color: "#555", lineHeight: 1.7, margin: 0 }}>
                   {step.description}
                 </p>
               </div>
-
-              {/* Arrow between cards (desktop only) */}
               {i < steps.length - 1 && (
                 <div className="hiw-connector" style={{ padding: "0 12px" }}>
                   <ArrowRight />
@@ -156,6 +133,54 @@ export default function HowItWorks() {
               )}
             </React.Fragment>
           ))}
+        </div>
+
+        {/* Delivery info */}
+        <div
+          style={{
+            marginTop: 40,
+            display: "flex",
+            gap: 16,
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <div
+            style={{
+              background: "#fff",
+              border: "1.5px solid #1DB954",
+              borderRadius: 12,
+              padding: "14px 24px",
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span style={{ fontSize: 14, color: "#1a1a1a" }}>
+              <strong>Standard:</strong> Song in 1 Stunde erstellt
+            </span>
+          </div>
+          <div
+            style={{
+              background: "#1a1a1a",
+              border: "1.5px solid #1DB954",
+              borderRadius: 12,
+              padding: "14px 24px",
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span style={{ fontSize: 14, color: "#fff" }}>
+              <strong style={{ color: "#1DB954" }}>Express:</strong> Song in weniger als 20 Minuten
+            </span>
+          </div>
         </div>
       </div>
     </section>

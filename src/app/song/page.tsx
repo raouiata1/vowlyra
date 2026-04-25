@@ -33,32 +33,65 @@ const PREVIEW_FAQS = [
     q: "Wie schnell erhalte ich den vollständigen Song?",
     a: "Innerhalb weniger Minuten nach der Zahlung wird der Song automatisch an deine E-Mail-Adresse gesendet. In den meisten Fällen dauert es unter 5 Minuten.",
   },
-  {
-    q: "Gibt es eine Geld-zurück-Garantie?",
-    a: "Ja – 100%. Wenn du mit dem vollständigen Song nicht zufrieden bist, erstatten wir dir den vollen Betrag, ohne Fragen zu stellen. Deine Zufriedenheit hat für uns absoluten Vorrang.",
-  },
 ];
+
+// ─── SVG Icons ────────────────────────────────────────────────────────────────
+
+const SkipBackSVG = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
+  </svg>
+);
+
+const SkipForwardSVG = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+  </svg>
+);
+
+const PlaySVG = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: 2 }}>
+    <polygon points="5 3 19 12 5 21 5 3"/>
+  </svg>
+);
+
+const PauseSVG = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+    <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+  </svg>
+);
+
+const LockSVG = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+  </svg>
+);
+
+const MusicSVG = () => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 18V5l12-2v13"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="16" r="3"/>
+  </svg>
+);
 
 // ─── page component ───────────────────────────────────────────────────────────
 
 export default function SongPage() {
-  // ── URL params ───────────────────────────────────────────────────────────
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [payUrl, setPayUrl] = useState<string>("/order");
   const [urlChecked, setUrlChecked] = useState(false);
 
-  // ── player state ─────────────────────────────────────────────────────────
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  // ── FAQ accordion ─────────────────────────────────────────────────────────
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // ── read query params ────────────────────────────────────────────────────
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setPreviewUrl(params.get("preview"));
@@ -67,7 +100,6 @@ export default function SongPage() {
     setUrlChecked(true);
   }, []);
 
-  // ── sync play/pause with audio element ──────────────────────────────────
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !previewUrl) return;
@@ -112,64 +144,25 @@ export default function SongPage() {
     audio.currentTime = Math.max(0, Math.min(audio.duration || 0, audio.currentTime + secs));
   }
 
-  // ── loading guard ─────────────────────────────────────────────────────────
   if (!urlChecked) return null;
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // FALLBACK – no preview URL
-  // ─────────────────────────────────────────────────────────────────────────
+  // ─── FALLBACK ─────────────────────────────────────────────────────────────
   if (!previewUrl) {
     return (
       <>
         <Nav />
-        <main
-          style={{
-            background: "#121212",
-            minHeight: "100vh",
-            fontFamily: "system-ui, -apple-system, sans-serif",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ textAlign: "center", padding: "40px 24px", maxWidth: 480 }}>
-            <div style={{ fontSize: 64, marginBottom: 24 }}>🎵</div>
-            <h1
-              style={{
-                color: "#fff",
-                fontSize: 28,
-                fontWeight: 800,
-                marginBottom: 12,
-                fontFamily: "system-ui, -apple-system, sans-serif",
-              }}
-            >
+            <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(29,185,84,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: "#1DB954" }}>
+              <MusicSVG />
+            </div>
+            <h1 style={{ color: "#fff", fontSize: 28, fontWeight: 800, marginBottom: 12, fontFamily: "system-ui, -apple-system, sans-serif" }}>
               Kein Song gefunden
             </h1>
-            <p
-              style={{
-                color: "#999",
-                fontSize: 16,
-                lineHeight: 1.7,
-                marginBottom: 32,
-                fontFamily: "system-ui, -apple-system, sans-serif",
-              }}
-            >
+            <p style={{ color: "#999", fontSize: 16, lineHeight: 1.7, marginBottom: 32, fontFamily: "system-ui, -apple-system, sans-serif" }}>
               Der Link ist ungültig oder abgelaufen. Erstelle jetzt deinen persönlichen Song.
             </p>
-            <a
-              href="/order"
-              style={{
-                background: "linear-gradient(135deg, #1DB954, #17a349)",
-                color: "#000",
-                borderRadius: 500,
-                padding: "14px 32px",
-                fontSize: 15,
-                fontWeight: 700,
-                textDecoration: "none",
-                display: "inline-block",
-                boxShadow: "0 4px 15px rgba(29,185,84,0.4)",
-              }}
-            >
+            <a href="/order" style={{ background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000", borderRadius: 500, padding: "14px 32px", fontSize: 15, fontWeight: 700, textDecoration: "none", display: "inline-block", boxShadow: "0 4px 15px rgba(29,185,84,0.4)" }}>
               Neuen Song erstellen
             </a>
           </div>
@@ -179,20 +172,12 @@ export default function SongPage() {
     );
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // MAIN PAGE
-  // ─────────────────────────────────────────────────────────────────────────
+  // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
       <Nav />
 
-      <main
-        style={{
-          background: "#121212",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-        }}
-      >
-        {/* Hidden real audio element */}
+      <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}
           src={previewUrl}
@@ -202,7 +187,7 @@ export default function SongPage() {
           preload="metadata"
         />
 
-        {/* ══ HERO + PLAYER ══════════════════════════════════════════════════ */}
+        {/* HERO + PLAYER */}
         <section
           className="song-hero"
           style={{
@@ -214,101 +199,53 @@ export default function SongPage() {
           <div style={{ maxWidth: 580, margin: "0 auto", textAlign: "center" }}>
 
             {/* Badge */}
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                background: "#1DB95420",
-                color: "#1DB954",
-                borderRadius: 500,
-                padding: "6px 16px",
-                fontSize: 13,
-                fontWeight: 600,
-                marginBottom: 20,
-              }}
-            >
-              🎵 Dein Song ist fertig
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 20 }}>
+              Dein Song ist fertig
             </div>
 
             {/* H1 */}
-            <h1
-              className="song-h1"
-              style={{
-                fontSize: 48,
-                fontWeight: 800,
-                color: "#fff",
-                lineHeight: 1.1,
-                letterSpacing: "-1.5px",
-                margin: "0 0 14px",
-              }}
-            >
+            <h1 className="song-h1" style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1.1, letterSpacing: "-1.5px", margin: "0 0 14px" }}>
               Dein Song ist{" "}
               <span style={{ color: "#1DB954" }}>bereit</span>
             </h1>
 
             {/* Subheadline */}
-            <p
-              className="song-subtitle"
-              style={{
-                color: "#999",
-                fontSize: 17,
-                lineHeight: 1.7,
-                margin: "0 0 36px",
-              }}
-            >
+            <p className="song-subtitle" style={{ color: "#999", fontSize: 17, lineHeight: 1.7, margin: "0 0 24px" }}>
               Höre deine Vorschau und schalte die vollständige Version frei
             </p>
 
-            {/* ── PLAYER CARD ─────────────────────────────────────────────── */}
-            <div
-              style={{
-                background: "#181818",
-                border: "1px solid #282828",
-                borderRadius: 20,
-                padding: "28px 28px 24px",
-                marginBottom: 28,
-                textAlign: "left",
-              }}
-            >
+            {/* Delivery info */}
+            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 32 }}>
+              <div style={{ background: "rgba(29,185,84,0.1)", border: "1px solid rgba(29,185,84,0.25)", borderRadius: 20, padding: "6px 14px", fontSize: 12, color: "#ccc", display: "flex", alignItems: "center", gap: 6 }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span><strong style={{ color: "#fff" }}>Standard:</strong> 1 Stunde</span>
+              </div>
+              <div style={{ background: "rgba(29,185,84,0.1)", border: "1px solid rgba(29,185,84,0.25)", borderRadius: 20, padding: "6px 14px", fontSize: 12, color: "#ccc", display: "flex", alignItems: "center", gap: 6 }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <span><strong style={{ color: "#fff" }}>Express:</strong> unter 20 Minuten</span>
+              </div>
+            </div>
+
+            {/* PLAYER CARD */}
+            <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 20, padding: "28px 28px 24px", marginBottom: 28, textAlign: "left" }}>
+
               {/* Track header */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 14,
-                  marginBottom: 24,
-                }}
-              >
-                {/* Album art */}
-                <div
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 12,
-                    background: "linear-gradient(135deg, #1DB954 0%, #17a349 100%)",
-                    flexShrink: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 26,
-                    boxShadow: "0 4px 20px rgba(29,185,84,0.35)",
-                  }}
-                >
-                  🎵
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+                <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://media.vowlyra.com/Vynil.jpg"
+                    alt="Vinyl"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div
-                    style={{
-                      color: "#fff",
-                      fontWeight: 700,
-                      fontSize: 16,
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
+                  <div style={{ color: "#fff", fontWeight: 700, fontSize: 16, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     Dein persönlicher Song
                   </div>
                   <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>
@@ -316,260 +253,104 @@ export default function SongPage() {
                   </div>
                 </div>
 
-                {/* Preview badge */}
-                <div
-                  style={{
-                    background: "#1DB95415",
-                    color: "#1DB954",
-                    borderRadius: 6,
-                    padding: "4px 10px",
-                    fontSize: 11,
-                    fontWeight: 600,
-                    flexShrink: 0,
-                    border: "1px solid #1DB95430",
-                  }}
-                >
+                <div style={{ background: "#1DB95415", color: "#1DB954", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95430" }}>
                   30s Preview
                 </div>
               </div>
 
               {/* Waveform */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 3,
-                  height: 44,
-                  marginBottom: 14,
-                }}
-              >
+              <div style={{ display: "flex", alignItems: "center", gap: 3, height: 44, marginBottom: 14 }}>
                 {WAVE_HEIGHTS.map((h, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      flex: 1,
-                      height: h,
-                      background:
-                        i / WAVE_HEIGHTS.length < progress / 100
-                          ? "#1DB954"
-                          : "#333",
-                      borderRadius: 3,
-                      animation: playing
-                        ? `wave ${0.6 + (i % 5) * 0.15}s ease-in-out infinite alternate`
-                        : "none",
-                      transition: "background 0.2s",
-                    }}
-                  />
+                  <div key={i} style={{ flex: 1, height: h, background: i / WAVE_HEIGHTS.length < progress / 100 ? "#1DB954" : "#333", borderRadius: 3, animation: playing ? `wave ${0.6 + (i % 5) * 0.15}s ease-in-out infinite alternate` : "none", transition: "background 0.2s" }} />
                 ))}
               </div>
 
-              {/* Progress bar (seekable) */}
-              <div
-                onClick={handleSeek}
-                style={{
-                  height: 4,
-                  background: "#333",
-                  borderRadius: 2,
-                  cursor: "pointer",
-                  marginBottom: 8,
-                  position: "relative",
-                }}
-              >
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${progress}%`,
-                    background: "#1DB954",
-                    borderRadius: 2,
-                    transition: "width 0.1s linear",
-                  }}
-                />
+              {/* Progress bar */}
+              <div onClick={handleSeek} style={{ height: 4, background: "#333", borderRadius: 2, cursor: "pointer", marginBottom: 8, position: "relative" }}>
+                <div style={{ height: "100%", width: `${progress}%`, background: "#1DB954", borderRadius: 2, transition: "width 0.1s linear" }} />
               </div>
 
-              {/* Time display */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  color: "#555",
-                  fontSize: 12,
-                  marginBottom: 22,
-                }}
-              >
+              {/* Time */}
+              <div style={{ display: "flex", justifyContent: "space-between", color: "#555", fontSize: 12, marginBottom: 22 }}>
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(duration || 30)}</span>
               </div>
 
-              {/* Playback controls */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 32,
-                }}
-              >
-                <button
-                  onClick={() => skipBy(-10)}
-                  style={ctrlBtn}
-                  title="10s zurück"
-                >
-                  ⏮
+              {/* Controls */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 32 }}>
+                <button onClick={() => skipBy(-10)} style={ctrlBtn} title="10s zurück">
+                  <SkipBackSVG />
                 </button>
 
                 <button
                   onClick={() => setPlaying((p) => !p)}
                   style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: "50%",
-                    background: "#1DB954",
-                    border: "none",
-                    cursor: "pointer",
-                    fontSize: 22,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#000",
+                    width: 56, height: 56, borderRadius: "50%", background: "#1DB954", border: "none", cursor: "pointer", fontSize: 22,
+                    display: "flex", alignItems: "center", justifyContent: "center", color: "#000",
                     transition: "transform 0.1s, box-shadow 0.2s",
-                    boxShadow: playing
-                      ? "0 0 24px rgba(29,185,84,0.65)"
-                      : "0 4px 16px rgba(29,185,84,0.4)",
+                    boxShadow: playing ? "0 0 24px rgba(29,185,84,0.65)" : "0 4px 16px rgba(29,185,84,0.4)",
                     flexShrink: 0,
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.transform = "scale(1.07)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "scale(1)")
-                  }
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                 >
-                  {playing ? "⏸" : "▶"}
+                  {playing ? <PauseSVG /> : <PlaySVG />}
                 </button>
 
-                <button
-                  onClick={() => skipBy(10)}
-                  style={ctrlBtn}
-                  title="10s vor"
-                >
-                  ⏭
+                <button onClick={() => skipBy(10)} style={ctrlBtn} title="10s vor">
+                  <SkipForwardSVG />
                 </button>
               </div>
             </div>
-            {/* /player card */}
 
-            {/* ── PRIMARY CTA ──────────────────────────────────────────────── */}
+            {/* PRIMARY CTA */}
             <a
               href={payUrl}
               className="song-cta-primary"
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 10,
-                background: "linear-gradient(135deg, #1DB954, #17a349)",
-                color: "#000",
-                borderRadius: 500,
-                padding: "18px 40px",
-                fontSize: 17,
-                fontWeight: 800,
-                textDecoration: "none",
-                boxShadow: "0 6px 28px rgba(29,185,84,0.5)",
-                transition: "transform 0.15s, box-shadow 0.15s",
-                letterSpacing: "-0.3px",
-                width: "100%",
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
+                borderRadius: 500, padding: "18px 40px", fontSize: 17, fontWeight: 800,
+                textDecoration: "none", boxShadow: "0 6px 28px rgba(29,185,84,0.5)",
+                transition: "transform 0.15s, box-shadow 0.15s", letterSpacing: "-0.3px", width: "100%",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.02)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 36px rgba(29,185,84,0.65)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow =
-                  "0 6px 28px rgba(29,185,84,0.5)";
-              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; e.currentTarget.style.boxShadow = "0 8px 36px rgba(29,185,84,0.65)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 6px 28px rgba(29,185,84,0.5)"; }}
             >
-              <span>🔓</span>
+              <LockSVG />
               <span>Vollständigen Song freischalten</span>
             </a>
 
-            <p
-              style={{
-                color: "#555",
-                fontSize: 13,
-                marginTop: 12,
-                marginBottom: 0,
-              }}
-            >
+            <p style={{ color: "#555", fontSize: 13, marginTop: 12, marginBottom: 0 }}>
               Sofortiger Zugang nach Zahlung · Kein Abo · Einmalig
             </p>
 
             {/* Trust row */}
-            <div
-              className="song-trust-row"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 20,
-                marginTop: 20,
-                flexWrap: "wrap",
-              }}
-            >
-              {["🔒 Sicher bezahlen", "⚡ Sofortlieferung", "💯 Geld-zurück-Garantie"].map(
-                (item) => (
-                  <span
-                    key={item}
-                    style={{ color: "#666", fontSize: 12, fontWeight: 500 }}
-                  >
-                    {item}
-                  </span>
-                )
-              )}
+            <div className="song-trust-row" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginTop: 20, flexWrap: "wrap" }}>
+              {[
+                { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, label: "Sicher bezahlen" },
+                { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, label: "Sofortlieferung" },
+              ].map((item) => (
+                <span key={item.label} style={{ color: "#666", fontSize: 12, fontWeight: 500, display: "flex", alignItems: "center", gap: 5 }}>
+                  {item.icon} {item.label}
+                </span>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ══ UGC CAROUSEL (exact same component) ════════════════════════════ */}
+        {/* UGC CAROUSEL */}
         <UGCCarousel />
 
-        {/* ══ FAQ SECTION ════════════════════════════════════════════════════ */}
-        <section
-          className="song-faq"
-          style={{
-            background: "#0f0f0f",
-            padding: "80px 40px 100px",
-          }}
-        >
+        {/* FAQ SECTION */}
+        <section className="song-faq" style={{ background: "#0f0f0f", padding: "80px 40px 100px" }}>
           <div style={{ maxWidth: 720, margin: "0 auto" }}>
 
-            {/* Header */}
             <div style={{ textAlign: "center", marginBottom: 40 }}>
-              <div
-                style={{
-                  display: "inline-block",
-                  background: "#1DB95420",
-                  color: "#1DB954",
-                  borderRadius: 500,
-                  padding: "6px 16px",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  marginBottom: 8,
-                }}
-              >
+              <div style={{ display: "inline-block", background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
                 Häufige Fragen
               </div>
-              <h2
-                className="section-h2"
-                style={{
-                  fontSize: 40,
-                  fontWeight: 800,
-                  color: "#fff",
-                  letterSpacing: "-1px",
-                  margin: 0,
-                }}
-              >
+              <h2 className="section-h2" style={{ fontSize: 40, fontWeight: 800, color: "#fff", letterSpacing: "-1px", margin: 0 }}>
                 Alles, was du wissen musst
               </h2>
             </div>
@@ -579,70 +360,20 @@ export default function SongPage() {
               {PREVIEW_FAQS.map((faq, i) => {
                 const isOpen = openFaq === i;
                 return (
-                  <div
-                    key={i}
-                    style={{
-                      background: "#181818",
-                      border: "0.5px solid #2a2a2a",
-                      borderRadius: 14,
-                      overflow: "hidden",
-                    }}
-                  >
+                  <div key={i} style={{ background: "#181818", border: "0.5px solid #2a2a2a", borderRadius: 14, overflow: "hidden" }}>
                     <button
                       onClick={() => setOpenFaq(isOpen ? null : i)}
-                      style={{
-                        width: "100%",
-                        textAlign: "left",
-                        background: "none",
-                        border: "none",
-                        padding: "20px 24px",
-                        cursor: "pointer",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        gap: 16,
-                      }}
+                      style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "20px 24px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}
                     >
-                      <span
-                        style={{
-                          fontSize: 15,
-                          fontWeight: 600,
-                          color: "#fff",
-                          fontFamily: "system-ui, -apple-system, sans-serif",
-                        }}
-                      >
+                      <span style={{ fontSize: 15, fontWeight: 600, color: "#fff", fontFamily: "system-ui, -apple-system, sans-serif" }}>
                         {faq.q}
                       </span>
-                      <span
-                        style={{
-                          fontSize: 18,
-                          color: "#666",
-                          flexShrink: 0,
-                          transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                          transition: "transform 0.2s ease",
-                          display: "inline-block",
-                        }}
-                      >
+                      <span style={{ fontSize: 18, color: "#666", flexShrink: 0, transform: isOpen ? "rotate(45deg)" : "rotate(0deg)", transition: "transform 0.2s ease", display: "inline-block" }}>
                         +
                       </span>
                     </button>
-                    <div
-                      style={{
-                        maxHeight: isOpen ? 300 : 0,
-                        overflow: "hidden",
-                        transition: "max-height 0.3s ease",
-                      }}
-                    >
-                      <p
-                        style={{
-                          margin: 0,
-                          padding: "0 24px 20px",
-                          fontSize: 14,
-                          color: "#888",
-                          lineHeight: 1.7,
-                          fontFamily: "system-ui, -apple-system, sans-serif",
-                        }}
-                      >
+                    <div style={{ maxHeight: isOpen ? 300 : 0, overflow: "hidden", transition: "max-height 0.3s ease" }}>
+                      <p style={{ margin: 0, padding: "0 24px 20px", fontSize: 14, color: "#888", lineHeight: 1.7, fontFamily: "system-ui, -apple-system, sans-serif" }}>
                         {faq.a}
                       </p>
                     </div>
@@ -656,67 +387,38 @@ export default function SongPage() {
               <a
                 href={payUrl}
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "linear-gradient(135deg, #1DB954, #17a349)",
-                  color: "#000",
-                  borderRadius: 500,
-                  padding: "16px 36px",
-                  fontSize: 16,
-                  fontWeight: 800,
-                  textDecoration: "none",
-                  boxShadow: "0 4px 20px rgba(29,185,84,0.4)",
-                  transition: "transform 0.15s",
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
+                  borderRadius: 500, padding: "16px 36px", fontSize: 16, fontWeight: 800,
+                  textDecoration: "none", boxShadow: "0 4px 20px rgba(29,185,84,0.4)", transition: "transform 0.15s",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.02)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
+                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
               >
-                <span>🔓</span>
+                <LockSVG />
                 <span>Vollständigen Song freischalten</span>
               </a>
               <p style={{ color: "#555", fontSize: 12, marginTop: 10, marginBottom: 0 }}>
-                Sofortiger Zugang · 100% Geld-zurück-Garantie
+                Sofortiger Zugang · Einmalige Zahlung
               </p>
             </div>
           </div>
         </section>
 
-        {/* ══ STICKY MOBILE CTA ══════════════════════════════════════════════ */}
-        {/* Visible only on mobile via CSS */}
+        {/* STICKY MOBILE CTA */}
         <div className="song-sticky">
           <a
             href={payUrl}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              background: "linear-gradient(135deg, #1DB954, #17a349)",
-              color: "#000",
-              padding: "15px 24px",
-              fontSize: 16,
-              fontWeight: 800,
-              textDecoration: "none",
-              letterSpacing: "-0.2px",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
+              padding: "15px 24px", fontSize: 16, fontWeight: 800, textDecoration: "none", letterSpacing: "-0.2px",
             }}
           >
-            <span>🔓</span>
+            <LockSVG />
             <span>Vollständigen Song freischalten</span>
           </a>
-          <p
-            style={{
-              textAlign: "center",
-              color: "#888",
-              fontSize: 11,
-              margin: "6px 0 0",
-              paddingBottom: 2,
-            }}
-          >
+          <p style={{ textAlign: "center", color: "#888", fontSize: 11, margin: "6px 0 0", paddingBottom: 2 }}>
             Sofortiger Zugang · Einmalige Zahlung
           </p>
         </div>
@@ -730,7 +432,6 @@ export default function SongPage() {
           to   { transform: scaleY(1.2); }
         }
 
-        /* Sticky CTA: hidden on desktop, shown on mobile */
         .song-sticky {
           display: none;
         }
@@ -745,7 +446,7 @@ export default function SongPage() {
           }
           .song-subtitle {
             font-size: 15px !important;
-            margin-bottom: 24px !important;
+            margin-bottom: 20px !important;
           }
           .song-cta-primary {
             font-size: 15px !important;
@@ -774,14 +475,16 @@ export default function SongPage() {
   );
 }
 
-// ── shared style ──────────────────────────────────────────────────────────────
-
 const ctrlBtn: React.CSSProperties = {
   background: "none",
   border: "none",
   color: "#777",
-  fontSize: 22,
   cursor: "pointer",
-  padding: 4,
+  padding: 8,
   lineHeight: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "50%",
+  transition: "color 0.15s",
 };

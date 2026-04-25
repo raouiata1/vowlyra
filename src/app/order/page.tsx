@@ -461,7 +461,7 @@ export default function OrderPage() {
   };
 
   const subtitleStyle: React.CSSProperties = {
-    color: "#777",
+    color: "#1a1a1a",
     fontSize: 16,
     margin: "0 0 32px 0",
     lineHeight: 1.6,
@@ -561,7 +561,9 @@ export default function OrderPage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <Image src="/logo.png" width={120} height={38} alt="Vowlyra" style={{ objectFit: "contain" }} />
+          <a href="/" style={{ display: "flex" }}>
+            <Image src="/logo.png" width={120} height={38} alt="Vowlyra" style={{ objectFit: "contain" }} />
+          </a>
           {currentStep > 0 && (
             <button
               onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}
@@ -617,6 +619,7 @@ export default function OrderPage() {
             opacity: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))) ? 0.5 : 1,
             transition: "opacity 0.15s, transform 0.15s",
             display: "block",
+            margin: "48px auto 0",
             position: "relative",
             zIndex: 10,
             touchAction: "manipulation",

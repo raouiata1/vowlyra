@@ -27,7 +27,7 @@ export default function Nav() {
         }}
       >
         {/* Logo */}
-        <a href="#">
+        <a href="/" style={{ display: "flex" }}>
           <Image
             src="/logo.png"
             height={40}
