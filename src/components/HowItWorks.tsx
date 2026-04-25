@@ -62,7 +62,7 @@ export default function HowItWorks() {
             style={{
               display: "inline-block",
               background: "#1a1a1a",
-              color: "#ffffff",
+              color: "#1DB954",
               borderRadius: 500,
               padding: "6px 16px",
               fontSize: 13,
@@ -77,7 +77,7 @@ export default function HowItWorks() {
             style={{
               fontSize: 40,
               fontWeight: 800,
-              color: "#1DB954",
+              color: "#FFFFFF",
               letterSpacing: "-1px",
               margin: 0,
             }}
