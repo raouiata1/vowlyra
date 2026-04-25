@@ -56,8 +56,8 @@ export default function UGCCarousel() {
             margin: 0,
           }}
         >
+        Der Moment<br />wenn sie den Song hören          
         </h2>
-        Der Moment<br/>wenn sie den Song hören
       </div>
 
       {/* Carousel Track */}
