@@ -9,8 +9,8 @@ const steps = [
         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
       </svg>
     ),
-    title: "Erzähl uns deine Geschichte",
-    description: "Anlass, Namen und eine besondere Erinnerung – in 2 Minuten ausgefüllt.",
+    title: "Erzähl uns eure Geschichte",
+    description: "Ein paar Stichpunkte reichen – wir verwandeln eure Erinnerungen in einen Song, der echte Gefühle auslöst.",
   },
   {
     number: "02",
@@ -20,8 +20,8 @@ const steps = [
         <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
       </svg>
     ),
-    title: "Dein kostenloser Trailer",
-    description: "In ~2 Minuten bekommst du einen 30-Sekunden-Vorgeschmack per E-Mail – ohne Risiko.",
+    title: "Erhalte deinen kostenlosen Gänsehaut-Trailer",
+    description: "In wenigen Minuten bekommst du einen ersten Vorgeschmack.<br/>Gefällt er dir? Dann entscheidest du selbst.",
   },
   {
     number: "03",
@@ -31,8 +31,8 @@ const steps = [
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
       </svg>
     ),
-    title: "Song nach Zahlung – sofort",
-    description: "Gefällt dir der Trailer? Bezahle einmalig und dein vollständiger Song landet in deinem Postfach.",
+    title: "Überrasche einen besonderen Menschen mit dem fertigen Song",
+    description: "Bezahle nur, wenn du überzeugt bist – und erlebe ihre Reaktion, wenn sie ihn hört.",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function HowItWorks() {
               marginBottom: 8,
             }}
           >
-            So einfach geht&apos;s
+            SO EINFACH GEHT&apos;S
           </div>
           <h2
             className="section-h2"
@@ -82,7 +82,7 @@ export default function HowItWorks() {
               margin: 0,
             }}
           >
-            In 3 Schritten zum perfekten Song
+            In wenigen Minuten<br/>zum emotionalsten Geschenk deines Lebens.
           </h2>
         </div>
 
@@ -160,7 +160,7 @@ export default function HowItWorks() {
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
             <span style={{ fontSize: 14, color: "#1a1a1a" }}>
-              <strong>Standard:</strong> Song in 1 Stunde erstellt
+              <strong>Standard:</strong> Dein Song in 1 Stunde erstellt
             </span>
           </div>
           <div
@@ -178,7 +178,7 @@ export default function HowItWorks() {
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
             <span style={{ fontSize: 14, color: "#fff" }}>
-              <strong style={{ color: "#1DB954" }}>Express:</strong> Song in weniger als 20 Minuten
+              <strong style={{ color: "#1DB954" }}>Express:</strong> Dein Song in weniger als 20 Minuten
             </span>
           </div>
         </div>

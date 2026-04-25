@@ -36,7 +36,7 @@ export default function UGCCarousel() {
           style={{
             display: "inline-block",
             background: "#1a1a1a",
-            color: "#ffffff",
+            color: "#22C55E",
             borderRadius: 500,
             padding: "6px 16px",
             fontSize: 13,
@@ -44,19 +44,19 @@ export default function UGCCarousel() {
             marginBottom: 8,
           }}
         >
-          Von echten Kunden
+          ECHTE REAKTIONEN VON KUNDEN
         </div>
         <h2
           className="section-h2"
           style={{
             fontSize: 40,
             fontWeight: 800,
-            color: "#ffffff",
+            color: "#FFFFFF",
             letterSpacing: "-1px",
             margin: 0,
           }}
         >
-          Tausende glückliche Momente
+          Der Moment<br>wenn sie den Song hören
         </h2>
       </div>
 

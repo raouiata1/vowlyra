@@ -20,7 +20,7 @@ export default function Nav() {
           maxWidth: 1100,
           margin: "0 auto",
           padding: "0 24px",
-          height: 60,
+          height: 70,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -30,8 +30,8 @@ export default function Nav() {
         <a href="/" style={{ display: "flex" }}>
           <Image
             src="/logo.png"
-            height={40}
-            width={140}
+            height={45}
+            width={145}
             alt="Vowlyra"
             style={{ objectFit: "contain" }}
           />

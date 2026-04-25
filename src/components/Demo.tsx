@@ -125,8 +125,8 @@ export default function Demo() {
             persönlich es klingt.
           </h2>
           <p className="demo-subtitle" style={{ color: "#999", fontSize: 16, lineHeight: 1.7, marginBottom: 28 }}>
-            Dieser Song wurde für eine Mutter erstellt – basierend auf echten
-            Erinnerungen und Momenten. So klingt dein Song auch.
+            Basierend auf echten Erinnerungen,<br/>Orten und Momenten.
+            Jeder Song erzählt eure persönliche Geschichte.
           </p>
 
           {/* Delivery info */}
@@ -176,8 +176,8 @@ export default function Demo() {
               />
             </div>
             <div>
-              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Für dich, Irene</div>
-              <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Vowlyra · Geburtstagsgeschenk</div>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Für dich, Irene ❤️</div>
+              <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Jahrestag · erstellt von Vowlyra</div>
             </div>
           </div>
 

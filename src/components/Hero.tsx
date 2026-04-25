@@ -279,14 +279,13 @@ export default function Hero() {
               fontSize: 13,
               fontWeight: 500,
               textAlign: "center",
+
             }}
           >
           
           <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
             <span style={{ color: "#FFB800", fontSize: 15, margin: "0 6px 0 8px", letterSpacing: "1px" }}>★★★★★</span>
-            <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span>
-            <Sep />
-            <span>Trailer ~30 Sek.</span>
+            <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span><br/><span>Trailer ~30 Sek.</span>
             <Sep />
             <span>Song 2–4 Min.</span>
           </div>
