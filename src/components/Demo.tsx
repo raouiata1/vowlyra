@@ -120,7 +120,7 @@ export default function Demo() {
             className="section-h2"
             style={{ fontSize: 40, fontWeight: 800, color: "#fff", lineHeight: 1.15, letterSpacing: "-1px", margin: 0, marginBottom: 12 }}
           >
-            ECHTER SONG · ECHTE GESCHICHTE
+            ECHTER SONG<br/>ECHTE GESCHICHTE
             <br />
             So klingt ein Geschenk, das sie nie vergessen wird.
           </h2>
