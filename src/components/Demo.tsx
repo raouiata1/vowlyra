@@ -120,13 +120,12 @@ export default function Demo() {
             className="section-h2"
             style={{ fontSize: 40, fontWeight: 800, color: "#fff", lineHeight: 1.15, letterSpacing: "-1px", margin: 0, marginBottom: 12 }}
           >
-            Hör selbst, wie
+            ECHTER SONG · ECHTE GESCHICHTE
             <br />
-            persönlich es klingt.
+            So klingt ein Geschenk, das sie nie vergessen wird.
           </h2>
           <p className="demo-subtitle" style={{ color: "#999", fontSize: 16, lineHeight: 1.7, marginBottom: 28 }}>
-            Basierend auf echten Erinnerungen,<br/>Orten und Momenten.
-            Jeder Song erzählt eure persönliche Geschichte.
+            Basierend auf echten Erinnerungen,<br/>Orten und Momenten.<br/>Jeder Song erzählt eure persönliche Geschichte.
           </p>
 
           {/* Delivery info */}

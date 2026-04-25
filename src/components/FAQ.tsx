@@ -44,7 +44,7 @@ export default function FAQ() {
           <div
             style={{
               display: "inline-block",
-              background: "#1DB95420",
+              background: "#1a1a1a",
               color: "#1DB954",
               borderRadius: 500,
               padding: "6px 16px",

@@ -19,8 +19,8 @@ export default function Pricing() {
           <div
             style={{
               display: "inline-block",
-              background: "#1DB95420",
-              color: "#1a1a1a",
+              background: "#1a1a1a",
+              color: "#1DB954",
               borderRadius: 500,
               padding: "6px 16px",
               fontSize: 13,
