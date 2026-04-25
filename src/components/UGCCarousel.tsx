@@ -36,7 +36,7 @@ export default function UGCCarousel() {
           style={{
             display: "inline-block",
             background: "#1a1a1a",
-            color: "#22C55E",
+            color: "#1DB954",
             borderRadius: 500,
             padding: "6px 16px",
             fontSize: 13,
