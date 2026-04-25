@@ -203,7 +203,7 @@ export default function Hero() {
               letterSpacing: "-1.5px",
             }}
           >
-            Deine Geschichte als einzigartiger Song{" "}
+            Deine Geschichte als einzigartiger Song <br />
             <span style={{ color: "#1DB954" }}>in wenigen Minuten</span>.
           </h1>
 
@@ -251,6 +251,7 @@ export default function Hero() {
                 textDecoration: "none",
                 border: "2px solid #1a1a1a",
                 transition: "all 0.2s ease",
+                flexWrap: "wrap",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "#1a1a1a";
@@ -278,13 +279,15 @@ export default function Hero() {
               fontSize: 13,
               fontWeight: 500,
               textAlign: "center",
+              flexWrap: "wrap",
             }}
           >
+          
+          <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
             <span style={{ color: "#FFB800", fontSize: 15, margin: "0 6px 0 8px", letterSpacing: "1px" }}>★★★★★</span>
-            <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
             <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span>
             <Sep />
-            <span>Trailer ~30 Sek. kostenlos</span>
+            <span>Trailer ~30 Sek.</span>
             <Sep />
             <span>Song 2–4 Min.</span>
           </div>
