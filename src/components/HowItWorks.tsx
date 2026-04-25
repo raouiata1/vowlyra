@@ -77,7 +77,7 @@ export default function HowItWorks() {
             style={{
               fontSize: 40,
               fontWeight: 800,
-              color: "#ffffff",
+              color: "#1DB954",
               letterSpacing: "-1px",
               margin: 0,
             }}

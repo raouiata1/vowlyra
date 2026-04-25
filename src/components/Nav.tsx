@@ -10,7 +10,7 @@ export default function Nav() {
         background: "#CCCCCC",
         borderBottom: "none",
         position: "sticky",
-        top: 10,
+        top: 0,
         zIndex: 100,
       }}
     >
