@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import Nav from "@/components/Nav";
 import UGCCarousel from "@/components/UGCCarousel";
-import ChatBar from "@/components/ChatBar";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -167,7 +166,6 @@ export default function SongPage() {
             </a>
           </div>
         </main>
-        <ChatBar />
       </>
     );
   }
@@ -423,8 +421,6 @@ export default function SongPage() {
           </p>
         </div>
       </main>
-
-      <ChatBar />
 
       <style>{`
         @keyframes wave {
