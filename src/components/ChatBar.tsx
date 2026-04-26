@@ -282,7 +282,7 @@ export default function ChatBar() {
               width: 56,
               height: 56,
               borderRadius: "50%",
-              background: "#1DB954",
+              background: "#25D366",
               border: "none",
               cursor: "pointer",
               display: "flex",
@@ -300,14 +300,14 @@ export default function ChatBar() {
                   position: "absolute",
                   inset: 0,
                   borderRadius: "50%",
-                  background: "#1DB954",
+                  background: "#25D366",
                   animation: "cb-pulse 2.2s ease-out infinite",
                   zIndex: 0,
                 }}
               />
             )}
 
-            {/* WhatsApp logo with mix-blend transparent */}
+            {/* WhatsApp logo */}
             {!panelVisible && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -319,7 +319,6 @@ export default function ChatBar() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  mixBlendMode: "multiply",
                   zIndex: 1,
                 }}
               />
