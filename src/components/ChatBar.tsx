@@ -311,7 +311,7 @@ export default function ChatBar() {
             {!panelVisible && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src="https://media.vowlyra.com/Whatsapp_logo.jpg"
+                src="https://media.vowlyra.com/whatsapp_logo.png"
                 alt="WhatsApp"
                 style={{
                   position: "absolute",
