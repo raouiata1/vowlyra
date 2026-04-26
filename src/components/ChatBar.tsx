@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { crispHandoff, loadCrisp } from "@/lib/crisp";
 
@@ -61,6 +62,85 @@ export default function ChatBar() {
   const sending = phase === "loading";
 
   return (
+    <>
+    {/* ── WhatsApp floating button – bottom left ── */}
+    <a
+      href="https://wa.me/WHATSAPP_NUMBER"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="wa-fab"
+      aria-label="WhatsApp schreiben"
+      style={{
+        position: "fixed",
+        bottom: 24,
+        left: 20,
+        zIndex: 9999,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 4,
+        textDecoration: "none",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+      }}
+    >
+      <style>{`
+        @keyframes wa-pulse {
+          0%   { transform: scale(1);   opacity: 1; }
+          70%  { transform: scale(1.5); opacity: 0; }
+          100% { transform: scale(1.5); opacity: 0; }
+        }
+        .wa-fab-circle { transition: transform 0.15s; }
+        .wa-fab:hover .wa-fab-circle { transform: scale(1.06); }
+      `}</style>
+      <div
+        className="wa-fab-circle"
+        style={{
+          position: "relative",
+          width: 56,
+          height: 56,
+          borderRadius: "50%",
+          background: "#25D366",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 4px 20px rgba(37,211,102,0.4)",
+          overflow: "hidden",
+        }}
+      >
+        {/* pulse ring */}
+        <span
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "50%",
+            background: "#25D366",
+            animation: "wa-pulse 2.4s ease-out infinite",
+          }}
+        />
+        <Image
+          src="https://media.vowlyra.com/Whatsapp_logo.jpg"
+          width={56}
+          height={56}
+          alt="WhatsApp"
+          style={{ position: "relative", zIndex: 1, borderRadius: "50%", objectFit: "cover" }}
+        />
+      </div>
+      <span
+        style={{
+          background: "#25D366",
+          color: "#fff",
+          borderRadius: 500,
+          fontSize: 10,
+          fontWeight: 600,
+          padding: "2px 9px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        WhatsApp
+      </span>
+    </a>
+
+    {/* ── Crisp chat – bottom right ── */}
     <div
       style={{
         position: "fixed",
@@ -352,5 +432,6 @@ export default function ChatBar() {
         )}
       </div>
     </div>
+    </>
   );
 }
