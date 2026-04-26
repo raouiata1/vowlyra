@@ -269,111 +269,73 @@ export default function ChatBar() {
         </div>
       )}
 
-      {/* ── floating button ─────────────────────────────────────────────────── */}
+      {/* ── floating logo (no frame) ──────────────────────────────────────── */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-        {/* wrapper: relative so online-dot can escape overflow:hidden */}
-        <div style={{ position: "relative", width: 56, height: 56 }}>
-          <button
-            className="cb-btn"
-            onClick={() => setPhase((p) => (p === "idle" ? "open" : "idle"))}
-            aria-label={panelVisible ? "Chat schließen" : "Chat öffnen"}
-            style={{
-              position: "relative",
-              width: 56,
-              height: 56,
-              borderRadius: "50%",
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden",
+        <style>{`
+          @keyframes wa-wiggle {
+            0%,55%,100% { transform: rotate(0deg) scale(1); }
+            60%          { transform: rotate(-14deg) scale(1.08); }
+            65%          { transform: rotate(14deg) scale(1.08); }
+            70%          { transform: rotate(-10deg) scale(1.05); }
+            75%          { transform: rotate(10deg) scale(1.05); }
+            80%          { transform: rotate(-5deg) scale(1.02); }
+            85%          { transform: rotate(0deg) scale(1); }
+          }
+        `}</style>
+
+        <div style={{ position: "relative", cursor: "pointer" }}
+          onClick={() => setPhase((p) => (p === "idle" ? "open" : "idle"))}>
+
+          {/* WhatsApp logo — animated when closed, × when open */}
+          {panelVisible ? (
+            <div style={{
+              width: 60, height: 60, borderRadius: "50%",
+              background: "#1DB954",
+              display: "flex", alignItems: "center", justifyContent: "center",
               boxShadow: "0 4px 20px rgba(0,0,0,0.17)",
-              transition: "transform 0.15s",
-            }}
-          >
-            {/* pulse ring — only when chat is closed */}
-            {!panelVisible && (
-              <span
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  borderRadius: "50%",
-                  background: "#25D366",
-                  animation: "cb-pulse 2.2s ease-out infinite",
-                  zIndex: 0,
-                }}
-              />
-            )}
-
-            {/* WhatsApp logo */}
-            {!panelVisible && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src="https://media.vowlyra.com/whatsapp_logo.png"
-                alt="WhatsApp"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  zIndex: 1,
-                }}
-              />
-            )}
-
-            {/* × when open */}
-            {panelVisible && (
-              <span
-                style={{
-                  position: "relative",
-                  color: "#fff",
-                  fontWeight: 700,
-                  fontSize: 22,
-                  lineHeight: 1,
-                  userSelect: "none",
-                  zIndex: 2,
-                }}
-              >
-                ×
-              </span>
-            )}
-          </button>
-
-          {/* online dot — outside button so it's not clipped */}
-          {!panelVisible && (
-            <span
+            }}>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 24, lineHeight: 1, userSelect: "none" }}>×</span>
+            </div>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="https://media.vowlyra.com/whatsapp_logo.png"
+              alt="WhatsApp"
               style={{
-                position: "absolute",
-                top: 2,
-                right: 2,
-                width: 14,
-                height: 14,
-                background: "#25D366",
-                border: "2.5px solid #fff",
-                borderRadius: "50%",
-                zIndex: 10,
-                pointerEvents: "none",
+                width: 60,
+                height: 60,
+                display: "block",
+                animation: "wa-wiggle 3.5s ease-in-out infinite",
+                filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.2))",
               }}
             />
+          )}
+
+          {/* online dot */}
+          {!panelVisible && (
+            <span style={{
+              position: "absolute",
+              top: 2, right: 2,
+              width: 14, height: 14,
+              background: "#25D366",
+              border: "2.5px solid #fff",
+              borderRadius: "50%",
+              pointerEvents: "none",
+            }} />
           )}
         </div>
 
         {/* "Online" pill */}
         {!panelVisible && (
-          <span
-            style={{
-              background: "#25D366",
-              color: "#fff",
-              borderRadius: 500,
-              fontSize: 10,
-              fontWeight: 600,
-              padding: "2px 9px",
-              whiteSpace: "nowrap",
-            }}
-          >
+          <span style={{
+            background: "#25D366",
+            color: "#fff",
+            borderRadius: 500,
+            fontSize: 10,
+            fontWeight: 600,
+            padding: "2px 9px",
+            whiteSpace: "nowrap",
+          }}>
             Online
           </span>
         )}

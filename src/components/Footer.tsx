@@ -145,8 +145,8 @@ export default function Footer() {
                 <img
                   src="https://media.vowlyra.com/whatsapp_logo.png"
                   alt="WhatsApp"
-                  width={32}
-                  height={32}
+                  width={48}
+                  height={48}
                   style={{ borderRadius: "50%", objectFit: "cover", flexShrink: 0, display: "block" }}
                 />
                 WhatsApp
