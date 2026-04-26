@@ -26,7 +26,7 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section
@@ -78,9 +78,10 @@ export default function FAQ() {
                 key={i}
                 style={{
                   background: "#fff",
-                  border: "0.5px solid #e0e0e0",
+                  border: isOpen ? "1.5px solid #1DB954" : "0.5px solid #e0e0e0",
                   borderRadius: 14,
                   overflow: "hidden",
+                  transition: "border-color 0.2s",
                 }}
               >
                 <button

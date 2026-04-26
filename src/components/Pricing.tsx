@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Pricing() {
+  const [hovered, setHovered] = useState<"standard" | "express" | null>(null);
+
   return (
     <section
       id="preise"
@@ -55,6 +58,8 @@ export default function Pricing() {
           {/* Standard Card */}
           <div
             className="pricing-standard"
+            onMouseEnter={() => setHovered("standard")}
+            onMouseLeave={() => setHovered(null)}
             style={{
               background: "#fff",
               border: "1.5px solid #1DB954",
@@ -62,6 +67,10 @@ export default function Pricing() {
               padding: 32,
               display: "flex",
               flexDirection: "column",
+              transform: hovered === "standard" ? "translateY(-6px)" : "none",
+              boxShadow: hovered === "standard" ? "0 14px 40px rgba(29,185,84,0.16)" : "none",
+              transition: "transform 0.22s, box-shadow 0.22s",
+              cursor: "default",
             }}
           >
             <span style={{
@@ -150,6 +159,8 @@ export default function Pricing() {
           {/* Express Card */}
           <div
             className="pricing-express"
+            onMouseEnter={() => setHovered("express")}
+            onMouseLeave={() => setHovered(null)}
             style={{
               background: "#1a1a1a",
               border: "1.5px solid #1DB954",
@@ -157,6 +168,10 @@ export default function Pricing() {
               padding: 32,
               display: "flex",
               flexDirection: "column",
+              transform: hovered === "express" ? "translateY(-6px)" : "none",
+              boxShadow: hovered === "express" ? "0 14px 40px rgba(29,185,84,0.24)" : "0 4px 20px rgba(0,0,0,0.12)",
+              transition: "transform 0.22s, box-shadow 0.22s",
+              cursor: "default",
             }}
           >
             <span style={{

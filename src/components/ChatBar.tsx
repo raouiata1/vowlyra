@@ -280,7 +280,9 @@ export default function ChatBar() {
             width: 56,
             height: 56,
             borderRadius: "50%",
-            background: "#1DB954",
+            background: panelVisible
+              ? "#1DB954"
+              : `url('https://media.vowlyra.com/Whatsapp_logo.jpg') center/cover no-repeat`,
             border: "none",
             cursor: "pointer",
             display: "flex",
@@ -297,25 +299,27 @@ export default function ChatBar() {
                 position: "absolute",
                 inset: 0,
                 borderRadius: "50%",
-                background: "#1DB954",
+                background: "rgba(37,211,102,0.4)",
                 animation: "cb-pulse 2.2s ease-out infinite",
               }}
             />
           )}
 
-          {/* "L" avatar or × toggle */}
-          <span
-            style={{
-              position: "relative",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: panelVisible ? 22 : 20,
-              lineHeight: 1,
-              userSelect: "none",
-            }}
-          >
-            {panelVisible ? "×" : "L"}
-          </span>
+          {/* × when open */}
+          {panelVisible && (
+            <span
+              style={{
+                position: "relative",
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: 22,
+                lineHeight: 1,
+                userSelect: "none",
+              }}
+            >
+              ×
+            </span>
+          )}
 
           {/* online dot */}
           {!panelVisible && (
@@ -329,6 +333,7 @@ export default function ChatBar() {
                 background: "#25D366",
                 border: "2.5px solid #fff",
                 borderRadius: "50%",
+                zIndex: 2,
               }}
             />
           )}

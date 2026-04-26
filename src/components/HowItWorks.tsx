@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 const steps = [
   {
@@ -21,7 +23,7 @@ const steps = [
       </svg>
     ),
     title: "Erhalte deinen kostenlosen Gänsehaut-Trailer",
-    description: "In wenigen Minuten bekommst du einen ersten Vorgeschmack.<br/>Gefällt er dir? Dann entscheidest du selbst.",
+    description: "In wenigen Minuten bekommst du einen ersten Vorgeschmack. Gefällt er dir? Dann entscheidest du selbst.",
   },
   {
     number: "03",
@@ -45,6 +47,8 @@ const ArrowRight = () => (
 );
 
 export default function HowItWorks() {
+  const [hovered, setHovered] = useState<number | null>(null);
+
   return (
     <section
       id="so-funktionierts"
@@ -55,6 +59,20 @@ export default function HowItWorks() {
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
+      <style>{`
+        .hiw-grid {
+          display: flex;
+          align-items: stretch;
+          gap: 0;
+        }
+        .hiw-connector { display: flex; align-items: center; padding: 0 12px; }
+        @media (max-width: 767px) {
+          .hiw-section { padding: 60px 20px !important; }
+          .hiw-grid { flex-direction: column; gap: 16px; }
+          .hiw-connector { display: none !important; }
+          .section-h2 { font-size: 28px !important; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
@@ -90,7 +108,26 @@ export default function HowItWorks() {
         <div className="hiw-grid">
           {steps.map((step, i) => (
             <React.Fragment key={step.number}>
-              <div className="hiw-card">
+              <div
+                className="hiw-card"
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  background: "#fff",
+                  border: hovered === i ? "1.5px solid #1DB954" : "1.5px solid #e0e0e0",
+                  borderRadius: 16,
+                  padding: "28px 24px",
+                  textAlign: "center",
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  cursor: "default",
+                  transform: hovered === i ? "translateY(-6px)" : "translateY(0)",
+                  boxShadow: hovered === i ? "0 12px 32px rgba(29,185,84,0.14)" : "none",
+                  transition: "border-color 0.22s, transform 0.22s, box-shadow 0.22s",
+                }}
+              >
                 <span
                   style={{
                     background: "#1DB954",
@@ -110,11 +147,13 @@ export default function HowItWorks() {
                     width: 48,
                     height: 48,
                     borderRadius: "50%",
-                    background: "#e8f5e9",
+                    background: hovered === i ? "#d4f5e0" : "#e8f5e9",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     margin: "0 auto 16px auto",
+                    transform: hovered === i ? "scale(1.1)" : "scale(1)",
+                    transition: "background 0.22s, transform 0.22s",
                   }}
                 >
                   {step.icon}
@@ -145,42 +184,44 @@ export default function HowItWorks() {
             flexWrap: "wrap",
           }}
         >
-          <div
-            style={{
-              background: "#fff",
-              border: "1.5px solid #1DB954",
-              borderRadius: 12,
-              padding: "14px 24px",
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
-            <span style={{ fontSize: 14, color: "#1a1a1a" }}>
-              <strong>Standard:</strong> Dein Song in 1 Stunde erstellt
-            </span>
-          </div>
-          <div
-            style={{
-              background: "#1a1a1a",
-              border: "1.5px solid #1DB954",
-              borderRadius: 12,
-              padding: "14px 24px",
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-            <span style={{ fontSize: 14, color: "#fff" }}>
-              <strong style={{ color: "#1DB954" }}>Express:</strong> Dein Song in weniger als 20 Minuten
-            </span>
-          </div>
+          {[
+            {
+              bg: "#fff", border: "#1DB954", textColor: "#1a1a1a",
+              icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+              label: <><strong>Standard:</strong> Dein Song in 1 Stunde erstellt</>,
+            },
+            {
+              bg: "#1a1a1a", border: "#1DB954", textColor: "#fff",
+              icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+              label: <><strong style={{ color: "#1DB954" }}>Express:</strong> Dein Song in weniger als 20 Minuten</>,
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              style={{
+                background: item.bg,
+                border: `1.5px solid ${item.border}`,
+                borderRadius: 12,
+                padding: "14px 24px",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                transition: "transform 0.2s, box-shadow 0.2s",
+                cursor: "default",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(29,185,84,0.18)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = "none";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+              }}
+            >
+              {item.icon}
+              <span style={{ fontSize: 14, color: item.textColor }}>{item.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
