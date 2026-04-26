@@ -1,7 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 
 const steps = [
   {
@@ -14,7 +11,6 @@ const steps = [
     ),
     title: "Erzähl uns eure Geschichte",
     description: "Ein paar Stichpunkte reichen – wir verwandeln eure Erinnerungen in einen Song, der echte Gefühle auslöst.",
-    cta: "Jetzt starten →",
   },
   {
     number: "02",
@@ -25,8 +21,7 @@ const steps = [
       </svg>
     ),
     title: "Erhalte deinen kostenlosen Gänsehaut-Trailer",
-    description: "In wenigen Minuten bekommst du einen ersten Vorgeschmack. Gefällt er dir? Dann entscheidest du selbst.",
-    cta: "Demo anhören →",
+    description: "In wenigen Minuten bekommst du einen ersten Vorgeschmack.<br/>Gefällt er dir? Dann entscheidest du selbst.",
   },
   {
     number: "03",
@@ -38,22 +33,18 @@ const steps = [
     ),
     title: "Überrasche einen besonderen Menschen mit dem fertigen Song",
     description: "Bezahle nur, wenn du überzeugt bist – und erlebe ihre Reaktion, wenn sie ihn hört.",
-    cta: "Song erstellen →",
   },
 ];
 
-const ArrowRight = ({ active }: { active: boolean }) => (
+const ArrowRight = () => (
   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-      style={{ transition: "transform 0.3s ease", transform: active ? "translateX(4px)" : "none" }}>
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
       <path d="M6 14h16M16 8l6 6-6 6" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   </div>
 );
 
 export default function HowItWorks() {
-  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
-
   return (
     <section
       id="so-funktionierts"
@@ -64,56 +55,6 @@ export default function HowItWorks() {
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
-      <style>{`
-        .hiw-card {
-          background: #fff;
-          border: 1.5px solid #e0e0e0;
-          borderRadius: 16px;
-          padding: 28px 24px;
-          textAlign: center;
-          flex: 1;
-          display: flex;
-          flexDirection: column;
-          alignItems: center;
-          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-          cursor: default;
-        }
-        .hiw-card:hover {
-          border-color: #1DB954;
-          transform: translateY(-6px);
-          box-shadow: 0 12px 40px rgba(29,185,84,0.15);
-        }
-        .hiw-card-cta {
-          display: inline-block;
-          marginTop: 14px;
-          color: #1DB954;
-          fontWeight: 700;
-          fontSize: 13px;
-          opacity: 0;
-          transform: translateY(4px);
-          transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-        .hiw-card:hover .hiw-card-cta {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .hiw-grid {
-          display: flex;
-          align-items: stretch;
-          gap: 0;
-        }
-        .hiw-connector {
-          display: flex;
-          align-items: center;
-          padding: 0 12px;
-        }
-        @media (max-width: 767px) {
-          .hiw-section { padding: 60px 20px !important; }
-          .hiw-grid { flex-direction: column; gap: 16px; }
-          .hiw-connector { display: none !important; }
-          .section-h2 { font-size: 28px !important; }
-        }
-      `}</style>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
@@ -149,22 +90,17 @@ export default function HowItWorks() {
         <div className="hiw-grid">
           {steps.map((step, i) => (
             <React.Fragment key={step.number}>
-              <div
-                className="hiw-card"
-                onMouseEnter={() => setHoveredStep(i)}
-                onMouseLeave={() => setHoveredStep(null)}
-              >
+              <div className="hiw-card">
                 <span
                   style={{
-                    background: hoveredStep === i ? "#1DB954" : "#1a1a1a",
-                    color: hoveredStep === i ? "#000" : "#1DB954",
+                    background: "#1DB954",
+                    color: "#000",
                     borderRadius: 6,
                     fontSize: 11,
                     fontWeight: 700,
                     padding: "2px 8px",
                     letterSpacing: "0.5px",
                     marginBottom: 12,
-                    transition: "background 0.25s, color 0.25s",
                   }}
                 >
                   {step.number}
@@ -174,13 +110,11 @@ export default function HowItWorks() {
                     width: 48,
                     height: 48,
                     borderRadius: "50%",
-                    background: hoveredStep === i ? "#d4f5e0" : "#e8f5e9",
+                    background: "#e8f5e9",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     margin: "0 auto 16px auto",
-                    transition: "background 0.25s, transform 0.25s",
-                    transform: hoveredStep === i ? "scale(1.1)" : "scale(1)",
                   }}
                 >
                   {step.icon}
@@ -188,14 +122,13 @@ export default function HowItWorks() {
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: "#1a1a1a", margin: 0, marginBottom: 12, lineHeight: 1.3 }}>
                   {step.title}
                 </h3>
-                <p style={{ fontSize: 14, color: "#555", lineHeight: 1.7, margin: 0, flex: 1 }}>
+                <p style={{ fontSize: 14, color: "#555", lineHeight: 1.7, margin: 0 }}>
                   {step.description}
                 </p>
-                <span className="hiw-card-cta">{step.cta}</span>
               </div>
               {i < steps.length - 1 && (
                 <div className="hiw-connector" style={{ padding: "0 12px" }}>
-                  <ArrowRight active={hoveredStep === i} />
+                  <ArrowRight />
                 </div>
               )}
             </React.Fragment>
@@ -221,16 +154,6 @@ export default function HowItWorks() {
               display: "flex",
               alignItems: "center",
               gap: 10,
-              transition: "transform 0.2s, box-shadow 0.2s",
-              cursor: "default",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-              (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(29,185,84,0.15)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.transform = "none";
-              (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
             }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -249,16 +172,6 @@ export default function HowItWorks() {
               display: "flex",
               alignItems: "center",
               gap: 10,
-              transition: "transform 0.2s, box-shadow 0.2s",
-              cursor: "default",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-              (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(29,185,84,0.25)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.transform = "none";
-              (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
             }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -268,38 +181,6 @@ export default function HowItWorks() {
               <strong style={{ color: "#1DB954" }}>Express:</strong> Dein Song in weniger als 20 Minuten
             </span>
           </div>
-        </div>
-
-        {/* CTA below */}
-        <div style={{ textAlign: "center", marginTop: 40 }}>
-          <Link
-            href="/order"
-            style={{
-              display: "inline-block",
-              background: "#1DB954",
-              color: "#000",
-              borderRadius: 500,
-              padding: "15px 36px",
-              fontSize: 16,
-              fontWeight: 700,
-              textDecoration: "none",
-              boxShadow: "0 4px 20px rgba(29,185,84,0.35)",
-              transition: "transform 0.15s, box-shadow 0.15s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.05)";
-              e.currentTarget.style.boxShadow = "0 8px 32px rgba(29,185,84,0.5)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 4px 20px rgba(29,185,84,0.35)";
-            }}
-          >
-            Jetzt meinen Song erstellen
-          </Link>
-          <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, marginTop: 10 }}>
-            Trailer kostenlos · Nur zahlen wenn du überzeugt bist
-          </p>
         </div>
       </div>
     </section>

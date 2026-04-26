@@ -194,38 +194,6 @@ export default function UGCCarousel() {
         </div>
       </div>
 
-      {/* CTA after carousel */}
-      <div style={{ textAlign: "center", marginTop: 40, padding: "0 24px" }}>
-        <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 15, marginBottom: 16 }}>
-          Berühre auch du jemanden mit einem persönlichen Song.
-        </p>
-        <a
-          href="/order"
-          style={{
-            display: "inline-block",
-            background: "#1DB954",
-            color: "#000",
-            borderRadius: 500,
-            padding: "14px 32px",
-            fontSize: 15,
-            fontWeight: 700,
-            textDecoration: "none",
-            boxShadow: "0 4px 20px rgba(29,185,84,0.4)",
-            transition: "transform 0.15s, box-shadow 0.15s",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.05)";
-            (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 8px 32px rgba(29,185,84,0.55)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
-            (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 4px 20px rgba(29,185,84,0.4)";
-          }}
-        >
-          Jetzt meinen Song erstellen →
-        </a>
-      </div>
-
       {/* VIDEO POPUP */}
       {popup && (
         <div
