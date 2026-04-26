@@ -76,10 +76,6 @@ export default function Footer() {
             <p style={{ color: "#555", fontSize: 14, lineHeight: 1.7, margin: "0 0 16px 0" }}>
               Personalisierte Songs für jeden besonderen Moment.
             </p>
-            <div className="stars-row">
-              <span style={{ color: "#FFB800", fontSize: 14 }}>★★★★★</span>
-              <span style={{ color: "#555", fontSize: 13 }}>4,9 / 5 aus 2.400+ Songs</span>
-            </div>
           </div>
 
           {/* Cols 2–4 */}
@@ -168,7 +164,7 @@ export default function Footer() {
           }}
         >
           <span style={{ color: "#777", fontSize: 12 }}>
-            © Vowlyra. Vowlyra startet ab 2026.
+            © 2026 Vowlyra. Alle Rechte vorbehalten.
           </span>
         </div>
       </div>
