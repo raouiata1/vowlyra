@@ -271,57 +271,79 @@ export default function ChatBar() {
 
       {/* ── floating button ─────────────────────────────────────────────────── */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-        <button
-          className="cb-btn"
-          onClick={() => setPhase((p) => (p === "idle" ? "open" : "idle"))}
-          aria-label={panelVisible ? "Chat schließen" : "Chat öffnen"}
-          style={{
-            position: "relative",
-            width: 56,
-            height: 56,
-            borderRadius: "50%",
-            background: panelVisible
-              ? "#1DB954"
-              : `url('https://media.vowlyra.com/Whatsapp_logo.jpg') center/cover no-repeat`,
-            border: "none",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.17)",
-            transition: "transform 0.15s",
-          }}
-        >
-          {/* pulse ring — only when chat is closed */}
-          {!panelVisible && (
-            <span
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "50%",
-                background: "rgba(37,211,102,0.4)",
-                animation: "cb-pulse 2.2s ease-out infinite",
-              }}
-            />
-          )}
+        {/* wrapper: relative so online-dot can escape overflow:hidden */}
+        <div style={{ position: "relative", width: 56, height: 56 }}>
+          <button
+            className="cb-btn"
+            onClick={() => setPhase((p) => (p === "idle" ? "open" : "idle"))}
+            aria-label={panelVisible ? "Chat schließen" : "Chat öffnen"}
+            style={{
+              position: "relative",
+              width: 56,
+              height: 56,
+              borderRadius: "50%",
+              background: "#1DB954",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              overflow: "hidden",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.17)",
+              transition: "transform 0.15s",
+            }}
+          >
+            {/* pulse ring — only when chat is closed */}
+            {!panelVisible && (
+              <span
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  borderRadius: "50%",
+                  background: "#1DB954",
+                  animation: "cb-pulse 2.2s ease-out infinite",
+                  zIndex: 0,
+                }}
+              />
+            )}
 
-          {/* × when open */}
-          {panelVisible && (
-            <span
-              style={{
-                position: "relative",
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: 22,
-                lineHeight: 1,
-                userSelect: "none",
-              }}
-            >
-              ×
-            </span>
-          )}
+            {/* WhatsApp logo with mix-blend transparent */}
+            {!panelVisible && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src="https://media.vowlyra.com/Whatsapp_logo.jpg"
+                alt="WhatsApp"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  mixBlendMode: "multiply",
+                  zIndex: 1,
+                }}
+              />
+            )}
 
-          {/* online dot */}
+            {/* × when open */}
+            {panelVisible && (
+              <span
+                style={{
+                  position: "relative",
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 22,
+                  lineHeight: 1,
+                  userSelect: "none",
+                  zIndex: 2,
+                }}
+              >
+                ×
+              </span>
+            )}
+          </button>
+
+          {/* online dot — outside button so it's not clipped */}
           {!panelVisible && (
             <span
               style={{
@@ -333,11 +355,12 @@ export default function ChatBar() {
                 background: "#25D366",
                 border: "2.5px solid #fff",
                 borderRadius: "50%",
-                zIndex: 2,
+                zIndex: 10,
+                pointerEvents: "none",
               }}
             />
           )}
-        </button>
+        </div>
 
         {/* "Online" pill */}
         {!panelVisible && (
