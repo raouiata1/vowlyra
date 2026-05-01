@@ -67,8 +67,8 @@ export default function Footer() {
             <a href="/" style={{ display: "inline-block", marginBottom: 12 }}>
               <Image
                 src="https://media.vowlyra.com/Primary_Logo_with_Icon.png"
-                width={100}
-                height={32}
+                width={140}
+                height={36}
                 alt="Vowlyra"
                 style={{ objectFit: "contain" }}
               />
