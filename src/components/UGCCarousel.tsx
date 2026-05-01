@@ -24,7 +24,7 @@ export default function UGCCarousel() {
     <section
       className="ugc-section"
       style={{
-        background: "#CCCCCC",
+        background: "#121212",
         padding: "60px 0 80px",
         fontFamily: "system-ui, -apple-system, sans-serif",
         overflow: "hidden",

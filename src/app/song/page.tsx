@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Nav from "@/components/Nav";
 import UGCCarousel from "@/components/UGCCarousel";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -148,6 +149,7 @@ export default function SongPage() {
   if (!previewUrl) {
     return (
       <>
+        <Nav hideLogo dark />
         <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ textAlign: "center", padding: "40px 24px", maxWidth: 480 }}>
             <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(29,185,84,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: "#1DB954" }}>
@@ -171,6 +173,7 @@ export default function SongPage() {
   // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
+      <Nav hideLogo dark />
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}

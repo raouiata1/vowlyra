@@ -3,12 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Nav() {
+export default function Nav({ hideLogo = false, dark = false }: { hideLogo?: boolean; dark?: boolean }) {
   return (
     <nav
       style={{
-        background: "#CCCCCC",
-        borderBottom: "none",
+        background: dark ? "#121212" : "#CCCCCC",
+        borderBottom: dark ? "1px solid #1e1e1e" : "none",
         position: "sticky",
         top: 0,
         zIndex: 100,
@@ -23,19 +23,21 @@ export default function Nav() {
           height: 70,
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: hideLogo ? "flex-end" : "space-between",
         }}
       >
         {/* Logo */}
-        <a href="/" style={{ display: "flex" }}>
-          <Image
-            src="/logo.png"
-            height={45}
-            width={145}
-            alt="Vowlyra"
-            style={{ objectFit: "contain" }}
-          />
-        </a>
+        {!hideLogo && (
+          <a href="/" style={{ display: "flex" }}>
+            <Image
+              src="/logo.png"
+              height={45}
+              width={145}
+              alt="Vowlyra"
+              style={{ objectFit: "contain" }}
+            />
+          </a>
+        )}
 
         {/* Links + CTA wrapper */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
