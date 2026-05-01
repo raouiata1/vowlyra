@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "media.vowlyra.com",
       },
+      {
+        protocol: "https",
+        hostname: "media.audynia.com",
+      },
     ],
   },
 };
