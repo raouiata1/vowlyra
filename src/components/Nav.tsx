@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Nav({ hideLogo = false, dark = false, leftLogo }: { hideLogo?: boolean; dark?: boolean; leftLogo?: string }) {
+export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel, ctaHref }: { hideLogo?: boolean; dark?: boolean; leftLogo?: string; ctaLabel?: string; ctaHref?: string }) {
   return (
     <nav
       style={{
@@ -59,7 +59,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo }: { hide
 
           {/* CTA always visible */}
           <Link
-            href="/order"
+            href={ctaHref ?? "/order"}
             style={{
               background: "linear-gradient(135deg, #1DB954, #17a349)",
               color: "#000",
@@ -83,7 +83,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo }: { hide
               e.currentTarget.style.boxShadow = "0 4px 15px rgba(29,185,84,0.4)";
             }}
           >
-            Song erstellen
+            {ctaLabel ?? "Song erstellen"}
           </Link>
         </div>
       </div>

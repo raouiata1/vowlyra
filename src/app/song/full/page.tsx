@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Nav from "@/components/Nav";
-import UGCCarousel from "@/components/UGCCarousel";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -14,25 +13,6 @@ function formatTime(s: number) {
 }
 
 const WAVE_HEIGHTS = [18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28];
-
-const PREVIEW_FAQS = [
-  {
-    q: "Was passiert nach der Zahlung?",
-    a: "Sofort nach der Zahlung erhältst du den vollständigen Song (ca. 3 Minuten) als hochwertige MP3-Datei direkt per E-Mail zugeschickt. Der Prozess ist vollständig automatisiert – kein Warten.",
-  },
-  {
-    q: "Kann ich den Song herunterladen und teilen?",
-    a: "Ja! Du bekommst den vollständigen Song als MP3-Datei, die du unbegrenzt herunterladen, speichern und teilen kannst. Dein Song, dein Eigentum.",
-  },
-  {
-    q: "Welche Zahlungsarten werden akzeptiert?",
-    a: "Wir akzeptieren alle gängigen Kreditkarten (Visa, Mastercard, Amex), PayPal sowie SEPA-Lastschrift – sicher und verschlüsselt über Stripe abgewickelt.",
-  },
-  {
-    q: "Wie schnell erhalte ich den vollständigen Song?",
-    a: "Innerhalb weniger Minuten nach der Zahlung wird der Song automatisch an deine E-Mail-Adresse gesendet. In den meisten Fällen dauert es unter 5 Minuten.",
-  },
-];
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 
@@ -60,13 +40,6 @@ const PauseSVG = () => (
   </svg>
 );
 
-const LockSVG = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-  </svg>
-);
-
 const MusicSVG = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M9 18V5l12-2v13"/>
@@ -75,11 +48,19 @@ const MusicSVG = () => (
   </svg>
 );
 
+const DownloadSVG = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+);
+
 // ─── page component ───────────────────────────────────────────────────────────
 
-export default function SongPage() {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [payUrl, setPayUrl] = useState<string>("/order");
+export default function FullSongPage() {
+  const [songUrl, setSongUrl] = useState<string | null>(null);
+  const [songTitle, setSongTitle] = useState<string>("Dein persönlicher Song");
   const [urlChecked, setUrlChecked] = useState(false);
 
   const [playing, setPlaying] = useState(false);
@@ -87,27 +68,25 @@ export default function SongPage() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setPreviewUrl(params.get("preview"));
-    const pay = params.get("pay");
-    if (pay) setPayUrl(pay);
+    setSongUrl(params.get("song"));
+    const title = params.get("title");
+    if (title) setSongTitle(decodeURIComponent(title));
     setUrlChecked(true);
   }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !previewUrl) return;
+    if (!audio || !songUrl) return;
     if (playing) {
       audio.play().catch(() => setPlaying(false));
     } else {
       audio.pause();
     }
-  }, [playing, previewUrl]);
+  }, [playing, songUrl]);
 
   function handleTimeUpdate() {
     const audio = audioRef.current;
@@ -146,10 +125,10 @@ export default function SongPage() {
   if (!urlChecked) return null;
 
   // ─── FALLBACK ─────────────────────────────────────────────────────────────
-  if (!previewUrl) {
+  if (!songUrl) {
     return (
       <>
-        <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song freischalten" ctaHref={payUrl} />
+        <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song erstellen" />
         <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ textAlign: "center", padding: "40px 24px", maxWidth: 480 }}>
             <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(29,185,84,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: "#1DB954" }}>
@@ -173,11 +152,11 @@ export default function SongPage() {
   // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
-      <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song freischalten" ctaHref={payUrl} />
+      <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song erstellen" />
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}
-          src={previewUrl}
+          src={songUrl}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={handleEnded}
@@ -186,49 +165,34 @@ export default function SongPage() {
 
         {/* HERO + PLAYER */}
         <section
-          className="song-hero"
+          className="fullsong-hero"
           style={{
             background: "#121212",
             padding: "64px 40px 80px",
-            borderBottom: "1px solid #1e1e1e",
+            minHeight: "calc(100vh - 70px)",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <div style={{ maxWidth: 580, margin: "0 auto", textAlign: "center" }}>
+          <div style={{ maxWidth: 580, margin: "0 auto", textAlign: "center", width: "100%" }}>
 
             {/* Badge */}
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 20 }}>
-              Dein Song ist fertig
+              ✦ Vollständiger Song freigeschaltet
             </div>
 
             {/* H1 */}
-            <h1 className="song-h1" style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1.1, letterSpacing: "-1.5px", margin: "0 0 14px" }}>
-              Dein Song ist{" "}
-              <span style={{ color: "#1DB954" }}>bereit</span>
+            <h1 className="fullsong-h1" style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1.1, letterSpacing: "-1.5px", margin: "0 0 14px" }}>
+              Dein Song gehört{" "}
+              <span style={{ color: "#1DB954" }}>dir</span>
             </h1>
 
-            {/* Subheadline */}
-            <p className="song-subtitle" style={{ color: "#999", fontSize: 17, lineHeight: 1.7, margin: "0 0 24px" }}>
-              Höre deine Vorschau und schalte die vollständige Version frei
+            <p className="fullsong-subtitle" style={{ color: "#999", fontSize: 17, lineHeight: 1.7, margin: "0 0 32px" }}>
+              Genieße deinen persönlichen Song in voller Länge
             </p>
 
-            {/* Delivery info */}
-            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 32 }}>
-              <div style={{ background: "rgba(29,185,84,0.1)", border: "1px solid rgba(29,185,84,0.25)", borderRadius: 20, padding: "6px 14px", fontSize: 12, color: "#ccc", display: "flex", alignItems: "center", gap: 6 }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <span><strong style={{ color: "#fff" }}>Standard:</strong> 1 Stunde</span>
-              </div>
-              <div style={{ background: "rgba(29,185,84,0.1)", border: "1px solid rgba(29,185,84,0.25)", borderRadius: 20, padding: "6px 14px", fontSize: 12, color: "#ccc", display: "flex", alignItems: "center", gap: 6 }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                </svg>
-                <span><strong style={{ color: "#fff" }}>Express:</strong> unter 20 Minuten</span>
-              </div>
-            </div>
-
             {/* PLAYER CARD */}
-            <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 20, padding: "28px 28px 24px", marginBottom: 28, textAlign: "left" }}>
+            <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 20, padding: "28px 28px 24px", marginBottom: 24, textAlign: "left" }}>
 
               {/* Track header */}
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
@@ -243,15 +207,15 @@ export default function SongPage() {
 
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ color: "#fff", fontWeight: 700, fontSize: 16, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    Dein persönlicher Song
+                    {songTitle}
                   </div>
                   <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>
-                    Vowlyra · Vorschau
+                    Vowlyra · Vollständiger Song
                   </div>
                 </div>
 
                 <div style={{ background: "#1DB95415", color: "#1DB954", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95430" }}>
-                  30s Preview
+                  Full Song
                 </div>
               </div>
 
@@ -270,7 +234,7 @@ export default function SongPage() {
               {/* Time */}
               <div style={{ display: "flex", justifyContent: "space-between", color: "#555", fontSize: 12, marginBottom: 22 }}>
                 <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration || 30)}</span>
+                <span>{formatTime(duration)}</span>
               </div>
 
               {/* Controls */}
@@ -300,144 +264,49 @@ export default function SongPage() {
               </div>
             </div>
 
-            {/* PRIMARY CTA */}
+            {/* DOWNLOAD BUTTON */}
             <a
-              href={payUrl}
-              className="song-cta-primary"
+              href={songUrl}
+              download
+              className="fullsong-download"
               style={{
                 display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-                background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
-                borderRadius: 500, padding: "18px 40px", fontSize: 17, fontWeight: 800,
-                textDecoration: "none", boxShadow: "0 6px 28px rgba(29,185,84,0.5)",
-                transition: "transform 0.15s, box-shadow 0.15s", letterSpacing: "-0.3px", width: "100%",
+                background: "#1e1e1e", color: "#fff",
+                border: "1px solid #333",
+                borderRadius: 500, padding: "16px 40px", fontSize: 15, fontWeight: 700,
+                textDecoration: "none", transition: "background 0.15s, border-color 0.15s", width: "100%",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; e.currentTarget.style.boxShadow = "0 8px 36px rgba(29,185,84,0.65)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 6px 28px rgba(29,185,84,0.5)"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#2a2a2a"; e.currentTarget.style.borderColor = "#444"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#1e1e1e"; e.currentTarget.style.borderColor = "#333"; }}
             >
-              <LockSVG />
-              <span>Vollständigen Song freischalten</span>
+              <DownloadSVG />
+              <span>Song herunterladen</span>
             </a>
 
-            <p style={{ color: "#555", fontSize: 13, marginTop: 12, marginBottom: 0 }}>
-              Sofortiger Zugang nach Zahlung · Kein Abo · Einmalig
+            <p style={{ color: "#444", fontSize: 12, marginTop: 14, marginBottom: 0 }}>
+              Dein Song · Für immer · Kein Abo
             </p>
-
-            {/* Trust row */}
-            <div className="song-trust-row" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginTop: 20, flexWrap: "wrap" }}>
-              {[
-                { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, label: "Sicher bezahlen" },
-                { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, label: "Sofortlieferung" },
-              ].map((item) => (
-                <span key={item.label} style={{ color: "#666", fontSize: 12, fontWeight: 500, display: "flex", alignItems: "center", gap: 5 }}>
-                  {item.icon} {item.label}
-                </span>
-              ))}
-            </div>
           </div>
         </section>
-
-        {/* UGC CAROUSEL */}
-        <UGCCarousel />
-
-        {/* FAQ SECTION */}
-        <section className="song-faq" style={{ background: "#0f0f0f", padding: "80px 40px 100px" }}>
-          <div style={{ maxWidth: 720, margin: "0 auto" }}>
-
-            <div style={{ textAlign: "center", marginBottom: 40 }}>
-              <div style={{ display: "inline-block", background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
-                Häufige Fragen
-              </div>
-              <h2 className="section-h2" style={{ fontSize: 40, fontWeight: 800, color: "#fff", letterSpacing: "-1px", margin: 0 }}>
-                Alles, was du wissen musst
-              </h2>
-            </div>
-
-            {/* Accordion */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {PREVIEW_FAQS.map((faq, i) => {
-                const isOpen = openFaq === i;
-                return (
-                  <div key={i} style={{ background: "#181818", border: "0.5px solid #2a2a2a", borderRadius: 14, overflow: "hidden" }}>
-                    <button
-                      onClick={() => setOpenFaq(isOpen ? null : i)}
-                      style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "20px 24px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}
-                    >
-                      <span style={{ fontSize: 15, fontWeight: 600, color: "#fff", fontFamily: "system-ui, -apple-system, sans-serif" }}>
-                        {faq.q}
-                      </span>
-                      <span style={{ fontSize: 18, color: "#666", flexShrink: 0, transform: isOpen ? "rotate(45deg)" : "rotate(0deg)", transition: "transform 0.2s ease", display: "inline-block" }}>
-                        +
-                      </span>
-                    </button>
-                    <div style={{ maxHeight: isOpen ? 300 : 0, overflow: "hidden", transition: "max-height 0.3s ease" }}>
-                      <p style={{ margin: 0, padding: "0 24px 20px", fontSize: 14, color: "#888", lineHeight: 1.7, fontFamily: "system-ui, -apple-system, sans-serif" }}>
-                        {faq.a}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Bottom CTA */}
-            <div style={{ textAlign: "center", marginTop: 48 }}>
-              <a
-                href={payUrl}
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 8,
-                  background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
-                  borderRadius: 500, padding: "16px 36px", fontSize: 16, fontWeight: 800,
-                  textDecoration: "none", boxShadow: "0 4px 20px rgba(29,185,84,0.4)", transition: "transform 0.15s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-              >
-                <LockSVG />
-                <span>Vollständigen Song freischalten</span>
-              </a>
-              <p style={{ color: "#555", fontSize: 12, marginTop: 10, marginBottom: 0 }}>
-                Sofortiger Zugang · Einmalige Zahlung
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* STICKY MOBILE CTA */}
-        <div className="song-sticky">
-          <a
-            href={payUrl}
-            style={{
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
-              padding: "15px 24px", fontSize: 16, fontWeight: 800, textDecoration: "none", letterSpacing: "-0.2px",
-            }}
-          >
-            <LockSVG />
-            <span>Vollständigen Song freischalten</span>
-          </a>
-          <p style={{ textAlign: "center", color: "#888", fontSize: 11, margin: "6px 0 0", paddingBottom: 2 }}>
-            Sofortiger Zugang · Einmalige Zahlung
-          </p>
-        </div>
 
         {/* FOOTER */}
         <footer style={{ background: "#0a0a0a", borderTop: "1px solid #1e1e1e", padding: "28px 40px" }}>
           <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
             <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center" }}>
-              <a href="/impressum" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
+              <a href="/impressum" style={{ color: "#555", fontSize: 13, textDecoration: "none" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
               >Impressum</a>
-              <a href="/agb" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
+              <a href="/agb" style={{ color: "#555", fontSize: 13, textDecoration: "none" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
               >AGB</a>
-              <a href="/datenschutz" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
+              <a href="/datenschutz" style={{ color: "#555", fontSize: 13, textDecoration: "none" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
               >Datenschutzrichtlinien</a>
             </div>
-            <p style={{ color: "#333", fontSize: 12, margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
+            <p style={{ color: "#333", fontSize: 12, margin: 0 }}>
               © {new Date().getFullYear()} Vowlyra. Alle Rechte vorbehalten.
             </p>
           </div>
@@ -450,42 +319,20 @@ export default function SongPage() {
           to   { transform: scaleY(1.2); }
         }
 
-        .song-sticky {
-          display: none;
-        }
-
         @media (max-width: 767px) {
-          .song-hero {
-            padding: 36px 20px 100px !important;
+          .fullsong-hero {
+            padding: 36px 20px 60px !important;
           }
-          .song-h1 {
+          .fullsong-h1 {
             font-size: 34px !important;
             letter-spacing: -0.8px !important;
           }
-          .song-subtitle {
+          .fullsong-subtitle {
             font-size: 15px !important;
-            margin-bottom: 20px !important;
           }
-          .song-cta-primary {
-            font-size: 15px !important;
-            padding: 16px 20px !important;
-          }
-          .song-trust-row {
-            gap: 12px !important;
-          }
-          .song-faq {
-            padding: 48px 20px 140px !important;
-          }
-          .song-sticky {
-            display: block;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 200;
-            background: #1a1a1a;
-            border-top: 1px solid #282828;
-            padding: 10px 20px 14px;
+          .fullsong-download {
+            font-size: 14px !important;
+            padding: 14px 20px !important;
           }
         }
       `}</style>
