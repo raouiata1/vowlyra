@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Nav({ hideLogo = false, dark = false, rightLogo }: { hideLogo?: boolean; dark?: boolean; rightLogo?: string }) {
+export default function Nav({ hideLogo = false, dark = false, leftLogo }: { hideLogo?: boolean; dark?: boolean; leftLogo?: string }) {
   return (
     <nav
       style={{
@@ -23,11 +23,20 @@ export default function Nav({ hideLogo = false, dark = false, rightLogo }: { hid
           height: 70,
           display: "flex",
           alignItems: "center",
-          justifyContent: (hideLogo && !rightLogo) ? "flex-end" : "space-between",
+          justifyContent: (hideLogo && !leftLogo) ? "flex-end" : "space-between",
         }}
       >
-        {/* Logo */}
-        {!hideLogo && (
+        {/* Left: Primary Logo or custom leftLogo */}
+        {leftLogo ? (
+          <a href="/" style={{ display: "flex" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={leftLogo}
+              alt="Vowlyra"
+              style={{ height: 40, width: "auto", objectFit: "contain", display: "block" }}
+            />
+          </a>
+        ) : !hideLogo ? (
           <a href="/" style={{ display: "flex" }}>
             <Image
               src="https://media.vowlyra.com/Primary_Logo.png"
@@ -37,58 +46,46 @@ export default function Nav({ hideLogo = false, dark = false, rightLogo }: { hid
               style={{ objectFit: "contain" }}
             />
           </a>
-        )}
+        ) : null}
 
-        {/* Right logo (replaces links + CTA when provided) */}
-        {rightLogo ? (
-          <div style={{ marginLeft: "auto" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={rightLogo}
-              alt="Vowlyra"
-              style={{ height: 40, width: "auto", objectFit: "contain", display: "block" }}
-            />
+        {/* Right: Links + CTA */}
+        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+          {/* Nav links – hidden on mobile via .nav-links class */}
+          <div className="nav-links" style={{ alignItems: "center", gap: 32 }}>
+            <a href="#demo" style={linkStyle}>Demo</a>
+            <a href="#preise" style={linkStyle}>Preise</a>
+            <a href="#faq" style={linkStyle}>FAQ</a>
           </div>
-        ) : (
-          /* Links + CTA wrapper */
-          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {/* Nav links – hidden on mobile via .nav-links class */}
-            <div className="nav-links" style={{ alignItems: "center", gap: 32 }}>
-              <a href="#demo" style={linkStyle}>Demo</a>
-              <a href="#preise" style={linkStyle}>Preise</a>
-              <a href="#faq" style={linkStyle}>FAQ</a>
-            </div>
 
-            {/* CTA always visible */}
-            <Link
-              href="/order"
-              style={{
-                background: "linear-gradient(135deg, #1DB954, #17a349)",
-                color: "#000",
-                borderRadius: 500,
-                padding: "10px 24px",
-                fontSize: 14,
-                fontWeight: 700,
-                letterSpacing: "0.3px",
-                textDecoration: "none",
-                boxShadow: "0 4px 15px rgba(29,185,84,0.4)",
-                transition: "transform 0.15s, box-shadow 0.15s",
-                whiteSpace: "nowrap",
-                display: "inline-block",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 6px 20px rgba(29,185,84,0.5)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 4px 15px rgba(29,185,84,0.4)";
-              }}
-            >
-              Song erstellen
-            </Link>
-          </div>
-        )}
+          {/* CTA always visible */}
+          <Link
+            href="/order"
+            style={{
+              background: "linear-gradient(135deg, #1DB954, #17a349)",
+              color: "#000",
+              borderRadius: 500,
+              padding: "10px 24px",
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: "0.3px",
+              textDecoration: "none",
+              boxShadow: "0 4px 15px rgba(29,185,84,0.4)",
+              transition: "transform 0.15s, box-shadow 0.15s",
+              whiteSpace: "nowrap",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow = "0 6px 20px rgba(29,185,84,0.5)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 4px 15px rgba(29,185,84,0.4)";
+            }}
+          >
+            Song erstellen
+          </Link>
+        </div>
       </div>
     </nav>
   );
