@@ -66,7 +66,7 @@ export default function Footer() {
           <div className="footer-col1">
             <a href="/" style={{ display: "inline-block", marginBottom: 12 }}>
               <Image
-                src="https://media.vowlyra.com/Primary_Logo_with_Icon.png"
+                src="https://media.audynia.com/Primary_Logo_with_Icon.png"
                 width={140}
                 height={36}
                 alt="Audynia"

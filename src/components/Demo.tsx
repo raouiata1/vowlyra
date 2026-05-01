@@ -169,7 +169,7 @@ export default function Demo() {
             <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://media.vowlyra.com/Vynil.jpg"
+                src="https://media.audynia.com/Vynil.jpg"
                 alt="Vinyl"
                 style={{ width: "80%", height: "80%", objectFit: "cover" }}
               />

@@ -152,7 +152,7 @@ export default function FullSongPage() {
   // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
-      <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song erstellen" />
+      <Nav dark leftLogo="https://media.audynia.com/Secondary_Logo_with_Icon.png" ctaLabel="Song erstellen" />
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}
