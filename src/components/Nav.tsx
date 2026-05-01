@@ -39,7 +39,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
         ) : !hideLogo ? (
           <a href="/" style={{ display: "flex" }}>
             <Image
-              src="https://media.audynia.com/Primary_Logo.png"
+              src="https://media.vowlyra.com/Primary_Logo.png"
               height={45}
               width={145}
               alt="Audynia"
