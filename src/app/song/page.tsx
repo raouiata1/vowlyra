@@ -173,7 +173,7 @@ export default function SongPage() {
   // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
-      <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song freischalten" ctaHref={payUrl} />
+      <Nav dark leftLogo="https://media.audynia.com/Secondary_Logo.png" ctaLabel="Song freischalten" ctaHref={payUrl} />
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}
