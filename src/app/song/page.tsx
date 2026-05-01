@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Nav from "@/components/Nav";
 import UGCCarousel from "@/components/UGCCarousel";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -149,7 +148,6 @@ export default function SongPage() {
   if (!previewUrl) {
     return (
       <>
-        <Nav />
         <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ textAlign: "center", padding: "40px 24px", maxWidth: 480 }}>
             <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(29,185,84,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: "#1DB954" }}>
@@ -173,8 +171,6 @@ export default function SongPage() {
   // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
-      <Nav />
-
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}
@@ -189,7 +185,7 @@ export default function SongPage() {
         <section
           className="song-hero"
           style={{
-            background: "linear-gradient(180deg, #0a0a0a 0%, #121212 100%)",
+            background: "#121212",
             padding: "64px 40px 80px",
             borderBottom: "1px solid #1e1e1e",
           }}
@@ -420,6 +416,29 @@ export default function SongPage() {
             Sofortiger Zugang · Einmalige Zahlung
           </p>
         </div>
+
+        {/* FOOTER */}
+        <footer style={{ background: "#0a0a0a", borderTop: "1px solid #1e1e1e", padding: "28px 40px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center" }}>
+              <a href="/impressum" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
+              >Impressum</a>
+              <a href="/agb" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
+              >AGB</a>
+              <a href="/datenschutz" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
+              >Datenschutzrichtlinien</a>
+            </div>
+            <p style={{ color: "#333", fontSize: 12, margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
+              © {new Date().getFullYear()} Vowlyra. Alle Rechte vorbehalten.
+            </p>
+          </div>
+        </footer>
       </main>
 
       <style>{`
