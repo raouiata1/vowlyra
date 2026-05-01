@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vowlyra – Dein persönlicher Song in 5 Minuten",
+  title: "Audynia – Dein persönlicher Song in 5 Minuten",
   description:
     "KI-personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab 29,99€.",
 };

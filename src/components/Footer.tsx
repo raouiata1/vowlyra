@@ -69,7 +69,7 @@ export default function Footer() {
                 src="https://media.vowlyra.com/Primary_Logo_with_Icon.png"
                 width={140}
                 height={36}
-                alt="Vowlyra"
+                alt="Audynia"
                 style={{ objectFit: "contain" }}
               />
             </a>
@@ -164,7 +164,7 @@ export default function Footer() {
           }}
         >
           <span style={{ color: "#777", fontSize: 12 }}>
-            © 2026 Vowlyra. Alle Rechte vorbehalten.
+            © 2026 Audynia. Alle Rechte vorbehalten.
           </span>
         </div>
       </div>

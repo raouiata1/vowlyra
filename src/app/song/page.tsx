@@ -246,7 +246,7 @@ export default function SongPage() {
                     Dein persönlicher Song
                   </div>
                   <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>
-                    Vowlyra · Vorschau
+                    Audynia · Vorschau
                   </div>
                 </div>
 
@@ -438,7 +438,7 @@ export default function SongPage() {
               >Datenschutzrichtlinien</a>
             </div>
             <p style={{ color: "#333", fontSize: 12, margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
-              © {new Date().getFullYear()} Vowlyra. Alle Rechte vorbehalten.
+              © {new Date().getFullYear()} Audynia. Alle Rechte vorbehalten.
             </p>
           </div>
         </footer>

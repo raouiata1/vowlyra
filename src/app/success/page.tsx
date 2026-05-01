@@ -55,7 +55,7 @@ export default function SuccessPage() {
   }, []);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem("vowlyra_email");
+    const stored = sessionStorage.getItem("audynia_email");
     if (stored) setEmail(stored);
 
     const timer   = setInterval(() => setElapsed((e) => Math.min(e + 1, TOTAL_SECONDS)), 1000);
@@ -110,7 +110,7 @@ export default function SuccessPage() {
 
       {/* Header */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#CCCCCC", padding: "20px 24px", zIndex: 99 }}>
-        <Image src="https://media.vowlyra.com/Primary_Logo_with_Icon.png" width={120} height={38} alt="Vowlyra" style={{ objectFit: "contain" }} />
+        <Image src="https://media.vowlyra.com/Primary_Logo_with_Icon.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
       </div>
 
       {/* Main Content */}
@@ -136,7 +136,7 @@ export default function SuccessPage() {
 
         {/* Subtitle */}
         <p style={{ fontSize: 16, color: "#777", textAlign: "center", maxWidth: 480, lineHeight: 1.6, marginTop: 12, marginBottom: 0, ...fadeIn("0.4s") }}>
-          Das Vowlyra-Team arbeitet gerade an deinem persönlichen Song. Du erhältst deinen exklusiven Trailer in wenigen Minuten per E-Mail.
+          Das Audynia-Team arbeitet gerade an deinem persönlichen Song. Du erhältst deinen exklusiven Trailer in wenigen Minuten per E-Mail.
         </p>
 
         {/* Circle Timer */}

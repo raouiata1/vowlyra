@@ -249,7 +249,7 @@ export default function UGCCarousel() {
             {/* Info bar */}
             <div style={{ padding: "14px 16px", borderBottom: "1px solid #222" }}>
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 15 }}>{popup.name}</div>
-              <div style={{ color: "#777", fontSize: 12, marginTop: 2 }}>{popup.occasion} · Vowlyra</div>
+              <div style={{ color: "#777", fontSize: 12, marginTop: 2 }}>{popup.occasion} · Audynia</div>
             </div>
 
             {/* Video */}

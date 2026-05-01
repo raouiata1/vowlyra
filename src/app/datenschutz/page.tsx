@@ -12,7 +12,7 @@ export default function DatenschutzPage() {
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 36 }}>1. Verantwortlicher</h2>
           <p style={{ margin: "0 0 16px" }}>
-            Verantwortlich für die Datenverarbeitung auf dieser Website ist Vowlyra, erreichbar unter support@vowlyra.com.
+            Verantwortlich für die Datenverarbeitung auf dieser Website ist Audynia, erreichbar unter support@vowlyra.com.
           </p>
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 36 }}>2. Erhebung und Verarbeitung personenbezogener Daten</h2>

@@ -210,7 +210,7 @@ export default function FullSongPage() {
                     {songTitle}
                   </div>
                   <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>
-                    Vowlyra · Vollständiger Song
+                    Audynia · Vollständiger Song
                   </div>
                 </div>
 
@@ -307,7 +307,7 @@ export default function FullSongPage() {
               >Datenschutzrichtlinien</a>
             </div>
             <p style={{ color: "#333", fontSize: 12, margin: 0 }}>
-              © {new Date().getFullYear()} Vowlyra. Alle Rechte vorbehalten.
+              © {new Date().getFullYear()} Audynia. Alle Rechte vorbehalten.
             </p>
           </div>
         </footer>

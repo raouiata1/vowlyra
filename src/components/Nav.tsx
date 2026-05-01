@@ -32,7 +32,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={leftLogo}
-              alt="Vowlyra"
+              alt="Audynia"
               style={{ height: 40, width: "auto", objectFit: "contain", display: "block" }}
             />
           </a>
@@ -42,7 +42,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
               src="https://media.vowlyra.com/Primary_Logo.png"
               height={45}
               width={145}
-              alt="Vowlyra"
+              alt="Audynia"
               style={{ objectFit: "contain" }}
             />
           </a>

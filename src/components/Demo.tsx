@@ -176,7 +176,7 @@ export default function Demo() {
             </div>
             <div>
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Für dich, Irene ❤️</div>
-              <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Jahrestag · erstellt von Vowlyra</div>
+              <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Jahrestag · erstellt von Audynia</div>
             </div>
           </div>
 

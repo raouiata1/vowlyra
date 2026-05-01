@@ -9,7 +9,7 @@ export default function ImpressumPage() {
 
         <div style={{ color: "#888", fontSize: 15, lineHeight: 1.8 }}>
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 32 }}>Angaben gemäß § 5 TMG</h2>
-          <p style={{ margin: "0 0 8px" }}>Vowlyra</p>
+          <p style={{ margin: "0 0 8px" }}>Audynia</p>
           <p style={{ margin: "0 0 8px" }}>[Straße und Hausnummer]</p>
           <p style={{ margin: "0 0 8px" }}>[PLZ Ort]</p>
           <p style={{ margin: "0 0 8px" }}>Deutschland</p>
