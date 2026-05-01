@@ -110,7 +110,7 @@ export default function SuccessPage() {
 
       {/* Header */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#CCCCCC", padding: "20px 24px", zIndex: 99 }}>
-        <Image src="/logo.png" width={120} height={38} alt="Vowlyra" style={{ objectFit: "contain" }} />
+        <Image src="https://media.vowlyra.com/Secondary_Logo_with_Icon.png" width={120} height={38} alt="Vowlyra" style={{ objectFit: "contain" }} />
       </div>
 
       {/* Main Content */}

@@ -66,7 +66,7 @@ export default function Footer() {
           <div className="footer-col1">
             <a href="/" style={{ display: "inline-block", marginBottom: 12 }}>
               <Image
-                src="/logo.png"
+                src="https://media.vowlyra.com/Primary_Logo_with_Icon.png"
                 width={100}
                 height={32}
                 alt="Vowlyra"
