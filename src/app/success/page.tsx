@@ -110,7 +110,7 @@ export default function SuccessPage() {
 
       {/* Header */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#CCCCCC", padding: "20px 24px", zIndex: 99 }}>
-        <Image src="https://media.vowlyra.com/Primary_Logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+        <Image src="https://media.audynia.com/Primary_Logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
       </div>
 
       {/* Main Content */}
