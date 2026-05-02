@@ -281,32 +281,64 @@ export default function ChatBar() {
 
       {/* ── welcome bubble ───────────────────────────────────────────────── */}
       {showBubble && !panelVisible && (
-        <div style={{
-          position: "relative",
-          marginBottom: 8,
-          background: "#fff",
-          borderRadius: "12px 12px 4px 12px",
-          padding: "12px 32px 12px 14px",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.13)",
-          maxWidth: 220,
-          fontSize: 13.5,
-          lineHeight: 1.55,
-          color: "#1a1a1a",
-          animation: "cb-slide-up 0.35s ease",
-          cursor: "pointer",
-        }}
+        <div
           onClick={() => { setShowBubble(false); setPhase("open"); }}
+          style={{
+            marginBottom: 12,
+            background: "#fff",
+            borderRadius: 16,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.16)",
+            width: 280,
+            overflow: "hidden",
+            animation: "cb-slide-up 0.35s ease",
+            cursor: "pointer",
+          }}
         >
-          Hey, lass uns deinen Song zusammen erstellen! 🎵
-          <button
-            onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
-            style={{
-              position: "absolute", top: 6, right: 8,
-              background: "none", border: "none",
-              cursor: "pointer", fontSize: 15,
-              color: "#aaa", lineHeight: 1, padding: "2px 4px",
-            }}
-          >×</button>
+          {/* header — same as chat panel */}
+          <div style={{
+            background: "#1DB954",
+            padding: "10px 12px",
+            display: "flex",
+            alignItems: "center",
+            gap: 9,
+          }}>
+            <div style={{
+              width: 32, height: 32, borderRadius: "50%",
+              background: "rgba(255,255,255,0.22)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontWeight: 700, fontSize: 14, color: "#fff", flexShrink: 0,
+            }}>L</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>Lisa</div>
+              <div style={{ color: "rgba(255,255,255,0.82)", fontSize: 11 }}>● Online · antwortet sofort</div>
+            </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
+              style={{
+                background: "none", border: "none", cursor: "pointer",
+                color: "rgba(255,255,255,0.75)", fontSize: 18, lineHeight: 1,
+                padding: "2px 4px",
+              }}
+            >×</button>
+          </div>
+
+          {/* message bubble */}
+          <div style={{ padding: "12px 14px 14px" }}>
+            <div style={{
+              display: "inline-block",
+              background: "#f1f0f0",
+              borderRadius: "4px 14px 14px 14px",
+              padding: "9px 13px",
+              fontSize: 13.5,
+              color: "#1a1a1a",
+              lineHeight: 1.5,
+            }}>
+              Hey, lass uns deinen Song zusammen erstellen! 🎵
+            </div>
+            <div style={{ fontSize: 11, color: "#aaa", marginTop: 5, textAlign: "right" }}>
+              Jetzt antworten →
+            </div>
+          </div>
         </div>
       )}
 
