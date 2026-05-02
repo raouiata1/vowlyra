@@ -295,7 +295,7 @@ export default function ChatBar() {
               boxShadow: "0 4px 20px rgba(0,0,0,0.13)",
               border: "1px solid #efefef",
               width: 210,
-              marginBottom: 90,
+              marginBottom: 70,
               animation: "cb-slide-up 0.35s ease",
               cursor: "pointer",
               overflow: "hidden",
