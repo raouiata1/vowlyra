@@ -280,7 +280,7 @@ export default function ChatBar() {
       )}
 
       {/* ── bubble + button row ──────────────────────────────────────────── */}
-      <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", gap: 10 }}>
+      <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", gap: 4 }}>
 
         {/* welcome bubble — kompakt, stylisch, links neben Button */}
         {showBubble && !panelVisible && (
@@ -292,7 +292,7 @@ export default function ChatBar() {
               boxShadow: "0 4px 20px rgba(0,0,0,0.13)",
               border: "1px solid #efefef",
               width: 210,
-              marginBottom: 50,
+              marginBottom: 80,
               animation: "cb-slide-up 0.35s ease",
               cursor: "pointer",
               overflow: "hidden",
