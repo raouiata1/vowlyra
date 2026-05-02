@@ -6,7 +6,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Audynia – Dein persönlicher Song in 5 Minuten",
   description:
-    "KI-personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab 29,99€.",
+    "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€.",
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  }
 };
 
 export default function RootLayout({
