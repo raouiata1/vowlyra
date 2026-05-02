@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 
-const DEMO_AUDIO_URL = "https://media.vowlyra.com/demo_song_full.mp3";
+const DEMO_AUDIO_URL = "https://media.audynia.com/demo_song_full.mp3";
 const WAVE_HEIGHTS = [18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28];
 
 function formatTime(s: number) {
