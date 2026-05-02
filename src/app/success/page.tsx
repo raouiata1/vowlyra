@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import ChatBar from "@/components/ChatBar";
 
 
 const TOTAL_SECONDS = 1200; // 20 minutes
@@ -40,19 +41,6 @@ export default function SuccessPage() {
   const [email, setEmail]         = useState("");
   const [labelKey, setLabelKey]   = useState(0);
 
-  // Load Crisp on page mount — widget appears automatically bottom-right
-  useEffect(() => {
-    window.$crisp = [];
-    window.CRISP_WEBSITE_ID = "13d9d527-448d-4c25-bb2d-ce315a673134";
-    const script = document.createElement("script");
-    script.src = "https://client.crisp.chat/l.js";
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("audynia_email");
@@ -72,6 +60,7 @@ export default function SuccessPage() {
   useEffect(() => { setLabelKey((k) => k + 1); }, [currentLabel]);
 
   return (
+    <>
     <div style={{ background: "#CCCCCC", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
       <style>{`
         @keyframes checkIn {
@@ -238,5 +227,7 @@ export default function SuccessPage() {
 
       </div>
     </div>
+    <ChatBar />
+    </>
   );
 }

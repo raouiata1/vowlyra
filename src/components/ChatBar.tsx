@@ -16,12 +16,22 @@ type Phase =
 export default function ChatBar() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [input, setInput] = useState("");
+  const [showBubble, setShowBubble] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // ── silently pre-load Crisp after 5 s of idle time ──────────────────────
-  // The script loads in the background; the widget stays hidden until handoff.
   useEffect(() => {
     const t = setTimeout(loadCrisp, 5_000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // ── auto-show welcome bubble once per session after 4 s ──────────────────
+  useEffect(() => {
+    if (sessionStorage.getItem("audynia_bubble_shown")) return;
+    const t = setTimeout(() => {
+      setShowBubble(true);
+      sessionStorage.setItem("audynia_bubble_shown", "1");
+    }, 4_000);
     return () => clearTimeout(t);
   }, []);
 
@@ -269,6 +279,37 @@ export default function ChatBar() {
         </div>
       )}
 
+      {/* ── welcome bubble ───────────────────────────────────────────────── */}
+      {showBubble && !panelVisible && (
+        <div style={{
+          position: "relative",
+          marginBottom: 8,
+          background: "#fff",
+          borderRadius: "12px 12px 4px 12px",
+          padding: "12px 32px 12px 14px",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.13)",
+          maxWidth: 220,
+          fontSize: 13.5,
+          lineHeight: 1.55,
+          color: "#1a1a1a",
+          animation: "cb-slide-up 0.35s ease",
+          cursor: "pointer",
+        }}
+          onClick={() => { setShowBubble(false); setPhase("open"); }}
+        >
+          Hey, lass uns deinen Song zusammen erstellen! 🎵
+          <button
+            onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
+            style={{
+              position: "absolute", top: 6, right: 8,
+              background: "none", border: "none",
+              cursor: "pointer", fontSize: 15,
+              color: "#aaa", lineHeight: 1, padding: "2px 4px",
+            }}
+          >×</button>
+        </div>
+      )}
+
       {/* ── floating logo (no frame) ──────────────────────────────────────── */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
         <style>{`
@@ -284,7 +325,7 @@ export default function ChatBar() {
         `}</style>
 
         <div style={{ position: "relative", cursor: "pointer" }}
-          onClick={() => setPhase((p) => (p === "idle" ? "open" : "idle"))}>
+          onClick={() => { setShowBubble(false); setPhase((p) => (p === "idle" ? "open" : "idle")); }}>
 
           {/* WhatsApp logo — animated when closed, × when open */}
           {panelVisible ? (
