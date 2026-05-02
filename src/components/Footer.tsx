@@ -42,11 +42,19 @@ export default function Footer() {
           grid-template-columns: 1fr 1.5fr;
           gap: 40px;
         }
+        .stars-row { display: flex; align-items: center; gap: 8px; }
         @media (max-width: 767px) {
           .footer-outer { padding: 48px 20px 32px; }
-          .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+          .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
           .footer-col1 { text-align: center; }
-          .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+          .footer-col1 .stars-row { justify-content: center; }
+          .footer-links-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+          }
           .footer-link { font-size: 13px !important; }
         }
       `}</style>
@@ -70,7 +78,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Cols 2–3 */}
+          {/* Cols 2–4 */}
           <div className="footer-links-grid">
 
             {/* Col 2 – Produkt */}
@@ -103,16 +111,20 @@ export default function Footer() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 10,
+                  background: "transparent",
                   color: "#1a1a1a",
+                  borderRadius: 500,
                   fontSize: 13,
                   fontWeight: 600,
+                  padding: "4px 0",
                   textDecoration: "none",
+                  marginBottom: 12,
                   transition: "opacity 0.15s",
                 }}
               >
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, display: "block" }}>
-                  <rect width="48" height="48" rx="24" fill="#25D366"/>
-                  <path d="M34.5 13.5C32.1 11.1 28.95 9.75 25.65 9.75C18.75 9.75 13.2 15.3 13.2 22.2C13.2 24.45 13.8 26.55 14.85 28.35L13.05 34.95L19.8 33.15C21.525 34.125 23.55 34.65 25.65 34.65C32.55 34.65 38.1 29.1 38.1 22.2C38.1 18.9 36.9 15.9 34.5 13.5ZM25.65 32.55C23.775 32.55 21.975 32.025 20.4 31.125L20.025 30.9L16.05 31.95L17.1 28.05L16.875 27.675C15.9 26.025 15.3 24.15 15.3 22.2C15.3 16.425 20.025 11.85 25.65 11.85C28.425 11.85 31.05 12.975 32.925 14.925C34.875 16.8 35.925 19.425 35.925 22.2C36 27.975 31.35 32.55 25.65 32.55ZM31.275 24.825C30.975 24.675 29.475 23.925 29.175 23.85C28.875 23.7 28.65 23.7 28.5 24C28.35 24.3 27.675 25.05 27.525 25.275C27.375 25.5 27.15 25.5 26.85 25.35C25.275 24.6 24.225 24 23.175 22.275C22.875 21.75 23.625 21.825 24.225 20.55C24.375 20.4 24.3 20.175 24.225 20.025C24.15 19.875 23.4 18.375 23.175 17.7C22.95 17.1 22.65 17.175 22.5 17.175C22.35 17.175 22.125 17.175 21.9 17.175C21.675 17.175 21.3 17.25 21 17.55C20.7 17.85 19.8 18.675 19.8 20.175C19.8 21.675 21.075 23.1 21.225 23.325C21.375 23.55 23.4 26.7 26.475 28.05C28.5 28.95 29.325 29.025 30.375 28.875C31.05 28.8 32.4 28.05 32.7 27.225C33 26.4 33 25.725 32.85 25.575C32.775 25.2 32.55 25.05 31.275 24.825Z" fill="white"/>
+                  <circle cx="24" cy="24" r="24" fill="#25D366"/>
+                  <path d="M24 11C17.373 11 12 16.373 12 23C12 25.387 12.676 27.617 13.84 29.514L12.07 36L18.74 34.262C20.568 35.35 22.71 36 25 36C31.627 36 37 30.627 37 24C37 17.373 31.627 12 25 12C24.665 12 24.332 12.013 24 12.04V11ZM24 13.04C24.332 13.013 24.665 13 25 13C30.514 13 35 17.486 35 23C35 28.514 30.514 33 25 33C22.919 33 20.99 32.371 19.38 31.29L19.02 31.06L15.1 32.06L16.12 28.24L15.87 27.86C14.693 26.163 14 24.163 14 22C14 16.486 18.486 12 24 12C24 12.347 24 12.693 24 13.04ZM19.5 17C19.223 17 18.795 17.1 18.438 17.5C18.08 17.9 17 18.87 17 20.844C17 22.817 18.469 24.726 18.656 24.969C18.844 25.213 21.437 29.375 25.5 31C26.567 31.43 27.393 31.687 28.031 31.875C29.101 32.19 30.073 32.147 30.844 32.031C31.701 31.902 33.27 31.031 33.594 30.063C33.918 29.094 33.918 28.268 33.813 28.094C33.707 27.92 33.469 27.813 33.094 27.625C32.719 27.437 30.744 26.462 30.406 26.344C30.069 26.225 29.832 26.157 29.563 26.5C29.293 26.843 28.512 27.813 28.281 28.063C28.051 28.313 27.812 28.344 27.438 28.156C27.063 27.969 25.858 27.564 24.438 26.313C23.327 25.332 22.568 24.12 22.344 23.75C22.12 23.38 22.32 23.176 22.5 23C22.663 22.838 22.875 22.563 23.063 22.344C23.25 22.125 23.313 21.969 23.438 21.719C23.563 21.469 23.5 21.25 23.406 21.063C23.313 20.875 22.568 18.906 22.25 18.063C21.955 17.267 21.65 17.293 21.438 17.281C21.22 17.27 20.984 17 20.719 17C20.22 17 19.777 17 19.5 17Z" fill="white"/>
                 </svg>
                 WhatsApp
               </a>
@@ -121,15 +133,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div style={{
-          borderTop: "0.5px solid #b0b0b0",
-          paddingTop: 20,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 8,
-        }}>
+        <div
+          style={{
+            borderTop: "0.5px solid #b0b0b0",
+            paddingTop: 20,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 8,
+          }}
+        >
           <span style={{ color: "#777", fontSize: 12 }}>
             © 2026 Audynia. Alle Rechte vorbehalten.
           </span>
