@@ -75,11 +75,11 @@ export default function ChatBar() {
       style={{
         position: "fixed",
         bottom: 24,
-        left: 20,
+        right: 20,
         zIndex: 9999,
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-start",
+        alignItems: "flex-end",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
@@ -100,7 +100,7 @@ export default function ChatBar() {
         .cb-panel   { animation: cb-slide-up 0.2s ease; }
         .cb-btn:hover { transform: scale(1.06); }
         @media (max-width: 480px) {
-          .cb-panel { width: 290px !important; left: 0 !important; }
+          .cb-panel { width: 290px !important; right: 0 !important; }
         }
       `}</style>
 
@@ -279,68 +279,70 @@ export default function ChatBar() {
         </div>
       )}
 
-      {/* ── welcome bubble ───────────────────────────────────────────────── */}
-      {showBubble && !panelVisible && (
-        <div
-          onClick={() => { setShowBubble(false); setPhase("open"); }}
-          style={{
-            marginBottom: 12,
-            background: "#fff",
-            borderRadius: 16,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.16)",
-            width: 280,
-            overflow: "hidden",
-            animation: "cb-slide-up 0.35s ease",
-            cursor: "pointer",
-          }}
-        >
-          {/* header — same as chat panel */}
-          <div style={{
-            background: "#1DB954",
-            padding: "10px 12px",
-            display: "flex",
-            alignItems: "center",
-            gap: 9,
-          }}>
-            <div style={{
-              width: 32, height: 32, borderRadius: "50%",
-              background: "rgba(255,255,255,0.22)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontWeight: 700, fontSize: 14, color: "#fff", flexShrink: 0,
-            }}>L</div>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: "#fff", fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>Lisa</div>
-              <div style={{ color: "rgba(255,255,255,0.82)", fontSize: 11 }}>● Online · antwortet sofort</div>
-            </div>
-            <button
-              onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
-              style={{
-                background: "none", border: "none", cursor: "pointer",
-                color: "rgba(255,255,255,0.75)", fontSize: 18, lineHeight: 1,
-                padding: "2px 4px",
-              }}
-            >×</button>
-          </div>
+      {/* ── bubble + button row ──────────────────────────────────────────── */}
+      <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", gap: 10 }}>
 
-          {/* message bubble */}
-          <div style={{ padding: "12px 14px 14px" }}>
+        {/* welcome bubble — links neben dem Button */}
+        {showBubble && !panelVisible && (
+          <div
+            onClick={() => { setShowBubble(false); setPhase("open"); }}
+            style={{
+              background: "#fff",
+              borderRadius: 16,
+              boxShadow: "0 8px 32px rgba(0,0,0,0.16)",
+              width: 240,
+              overflow: "hidden",
+              animation: "cb-slide-up 0.35s ease",
+              cursor: "pointer",
+            }}
+          >
+            {/* header */}
             <div style={{
-              display: "inline-block",
-              background: "#f1f0f0",
-              borderRadius: "4px 14px 14px 14px",
-              padding: "9px 13px",
-              fontSize: 13.5,
-              color: "#1a1a1a",
-              lineHeight: 1.5,
+              background: "#1DB954",
+              padding: "10px 12px",
+              display: "flex",
+              alignItems: "center",
+              gap: 9,
             }}>
-              Hey, lass uns deinen Song zusammen erstellen! 🎵
+              <div style={{
+                width: 32, height: 32, borderRadius: "50%",
+                background: "rgba(255,255,255,0.22)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontWeight: 700, fontSize: 14, color: "#fff", flexShrink: 0,
+              }}>L</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ color: "#fff", fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>Lisa</div>
+                <div style={{ color: "rgba(255,255,255,0.82)", fontSize: 11 }}>● Online · antwortet sofort</div>
+              </div>
+              <button
+                onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  color: "rgba(255,255,255,0.75)", fontSize: 18, lineHeight: 1,
+                  padding: "2px 4px",
+                }}
+              >×</button>
             </div>
-            <div style={{ fontSize: 11, color: "#aaa", marginTop: 5, textAlign: "right" }}>
-              Jetzt antworten →
+
+            {/* message */}
+            <div style={{ padding: "12px 14px 14px" }}>
+              <div style={{
+                display: "inline-block",
+                background: "#f1f0f0",
+                borderRadius: "4px 14px 14px 14px",
+                padding: "9px 13px",
+                fontSize: 13.5,
+                color: "#1a1a1a",
+                lineHeight: 1.5,
+              }}>
+                Hey, lass uns deinen Song zusammen erstellen! 🎵
+              </div>
+              <div style={{ fontSize: 11, color: "#aaa", marginTop: 5, textAlign: "right" }}>
+                Jetzt antworten →
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* ── floating logo (no frame) ──────────────────────────────────────── */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
@@ -419,6 +421,7 @@ export default function ChatBar() {
           </span>
         )}
       </div>
+      </div> {/* end bubble + button row */}
     </div>
   );
 }
