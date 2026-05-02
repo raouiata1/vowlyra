@@ -75,11 +75,11 @@ export default function ChatBar() {
       style={{
         position: "fixed",
         bottom: 24,
-        right: 20,
+        left: 20,
         zIndex: 9999,
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-end",
+        alignItems: "flex-start",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
@@ -100,7 +100,7 @@ export default function ChatBar() {
         .cb-panel   { animation: cb-slide-up 0.2s ease; }
         .cb-btn:hover { transform: scale(1.06); }
         @media (max-width: 480px) {
-          .cb-panel { width: 290px !important; right: 0 !important; }
+          .cb-panel { width: 290px !important; left: 0 !important; }
         }
       `}</style>
 
