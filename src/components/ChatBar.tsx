@@ -282,64 +282,54 @@ export default function ChatBar() {
       {/* ── bubble + button row ──────────────────────────────────────────── */}
       <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", gap: 10 }}>
 
-        {/* welcome bubble — links neben dem Button */}
+        {/* welcome bubble — kompakt, stylisch, links neben Button */}
         {showBubble && !panelVisible && (
           <div
             onClick={() => { setShowBubble(false); setPhase("open"); }}
             style={{
               background: "#fff",
-              borderRadius: 16,
-              boxShadow: "0 8px 32px rgba(0,0,0,0.16)",
-              width: 240,
-              overflow: "hidden",
+              borderRadius: 14,
+              boxShadow: "0 4px 20px rgba(0,0,0,0.13)",
+              border: "1px solid #efefef",
+              width: 210,
+              marginBottom: 8,
               animation: "cb-slide-up 0.35s ease",
               cursor: "pointer",
+              overflow: "hidden",
+              position: "relative",
             }}
           >
-            {/* header */}
+            {/* groene top-accent bar */}
+            <div style={{ height: 3, background: "#1DB954" }} />
+
+            {/* sender row */}
             <div style={{
-              background: "#1DB954",
-              padding: "10px 12px",
-              display: "flex",
-              alignItems: "center",
-              gap: 9,
+              display: "flex", alignItems: "center", gap: 8,
+              padding: "10px 12px 6px",
             }}>
               <div style={{
-                width: 32, height: 32, borderRadius: "50%",
-                background: "rgba(255,255,255,0.22)",
+                width: 28, height: 28, borderRadius: "50%",
+                background: "#1DB954",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontWeight: 700, fontSize: 14, color: "#fff", flexShrink: 0,
+                fontWeight: 700, fontSize: 12, color: "#fff", flexShrink: 0,
               }}>L</div>
-              <div style={{ flex: 1 }}>
-                <div style={{ color: "#fff", fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>Lisa</div>
-                <div style={{ color: "rgba(255,255,255,0.82)", fontSize: 11 }}>● Online · antwortet sofort</div>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 12.5, color: "#1a1a1a", lineHeight: 1.2 }}>Lisa</div>
+                <div style={{ fontSize: 10.5, color: "#1DB954", fontWeight: 600 }}>● Online</div>
               </div>
               <button
                 onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
                 style={{
-                  background: "none", border: "none", cursor: "pointer",
-                  color: "rgba(255,255,255,0.75)", fontSize: 18, lineHeight: 1,
+                  marginLeft: "auto", background: "none", border: "none",
+                  cursor: "pointer", color: "#bbb", fontSize: 16, lineHeight: 1,
                   padding: "2px 4px",
                 }}
               >×</button>
             </div>
 
-            {/* message */}
-            <div style={{ padding: "12px 14px 14px" }}>
-              <div style={{
-                display: "inline-block",
-                background: "#f1f0f0",
-                borderRadius: "4px 14px 14px 14px",
-                padding: "9px 13px",
-                fontSize: 13.5,
-                color: "#1a1a1a",
-                lineHeight: 1.5,
-              }}>
-                Hey, lass uns deinen Song zusammen erstellen! 🎵
-              </div>
-              <div style={{ fontSize: 11, color: "#aaa", marginTop: 5, textAlign: "right" }}>
-                Jetzt antworten →
-              </div>
+            {/* message text */}
+            <div style={{ padding: "0 12px 12px", fontSize: 13, color: "#1a1a1a", lineHeight: 1.55 }}>
+              Hey, lass uns deinen Song zusammen erstellen! 🎵
             </div>
           </div>
         )}
