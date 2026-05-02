@@ -85,8 +85,8 @@ export default function UGCCarousel() {
               style={{
                 position: "relative",
                 overflow: "hidden",
-                width: 180,
-                height: 320,
+                width: 220,
+                height: 390,
                 borderRadius: 16,
                 flexShrink: 0,
                 background: "#111",
@@ -272,7 +272,7 @@ export default function UGCCarousel() {
         .ugc-play-btn { opacity: 0; transition: opacity 0.2s; }
         .ugc-card:hover .ugc-play-btn { opacity: 1; }
         @media (max-width: 767px) {
-          .ugc-card { width: 150px !important; height: 267px !important; }
+          .ugc-card { width: 180px !important; height: 320px !important; }
         }
       `}</style>
     </section>
