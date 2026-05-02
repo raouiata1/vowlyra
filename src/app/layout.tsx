@@ -4,12 +4,12 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Audynia – Dein persönlicher Song in 5 Minuten",
+  title: "Audynia - Dein persönlicher Song in 5 Minuten",
   description:
     "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€.",
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/public/favicon.png',
+    apple: '/public/favicon.png',
   }
 };
 
