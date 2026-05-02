@@ -114,10 +114,11 @@ export default function Footer() {
                   background: "#25D366",
                   color: "#fff",
                   borderRadius: 500,
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 600,
-                  padding: "9px 16px 9px 11px",
+                  padding: "9px 14px 9px 10px",
                   textDecoration: "none",
+                  whiteSpace: "nowrap",
                   transition: "opacity 0.15s",
                 }}
               >

@@ -75,7 +75,7 @@ export default function ChatBar() {
       style={{
         position: "fixed",
         bottom: 24,
-        right: 20,
+        right: 16,
         zIndex: 9999,
         display: "flex",
         flexDirection: "column",
@@ -101,6 +101,8 @@ export default function ChatBar() {
         .cb-btn:hover { transform: scale(1.06); }
         @media (max-width: 480px) {
           .cb-panel { width: 290px !important; right: 0 !important; }
+          .cb-bubble { width: 160px !important; }
+          .cb-bubble .cb-msg { font-size: 12px !important; }
         }
       `}</style>
 
@@ -285,6 +287,7 @@ export default function ChatBar() {
         {/* welcome bubble — kompakt, stylisch, links neben Button */}
         {showBubble && !panelVisible && (
           <div
+            className="cb-bubble"
             onClick={() => { setShowBubble(false); setPhase("open"); }}
             style={{
               background: "#fff",
@@ -328,7 +331,7 @@ export default function ChatBar() {
             </div>
 
             {/* message text */}
-            <div style={{ padding: "0 12px 12px", fontSize: 13, color: "#1a1a1a", lineHeight: 1.55 }}>
+            <div className="cb-msg" style={{ padding: "0 12px 12px", fontSize: 13, color: "#1a1a1a", lineHeight: 1.55 }}>
               Hey, lass uns deinen Song zusammen erstellen! 🎵
             </div>
           </div>
