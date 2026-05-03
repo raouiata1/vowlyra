@@ -49,12 +49,27 @@ const ArrowRight = () => (
 export default function HowItWorks() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [visible, setVisible] = useState<boolean[]>([false, false, false]);
+  const [typedText, setTypedText] = useState("");
   const sectionRef = useRef<HTMLElement>(null);
+
+  const fullText = "In wenigen Minuten\nzum emotionalsten Geschenk deines Lebens.";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Typewriter effect
+          let idx = 0;
+          const type = () => {
+            if (idx <= fullText.length) {
+              setTypedText(fullText.slice(0, idx));
+              idx++;
+              setTimeout(type, 28);
+            }
+          };
+          type();
+
+          // Card animations
           steps.forEach((_, i) => {
             setTimeout(() => {
               setVisible((prev) => {
@@ -71,7 +86,7 @@ export default function HowItWorks() {
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [fullText]);
 
   return (
     <section
@@ -108,6 +123,16 @@ export default function HowItWorks() {
           .section-h2 { font-size: 28px !important; }
           .hiw-card-wrapper { flex: unset; }
         }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .hiw-cursor {
+          display: inline-block;
+          width: 2px;
+          height: 1em;
+          background: #fff;
+          margin-left: 3px;
+          vertical-align: middle;
+          animation: blink 0.8s step-start infinite;
+        }
       `}</style>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         {/* Header */}
@@ -134,9 +159,16 @@ export default function HowItWorks() {
               color: "#FFFFFF",
               letterSpacing: "-1px",
               margin: 0,
+              minHeight: "2.6em",
             }}
           >
-            In wenigen Minuten<br/>zum emotionalsten Geschenk deines Lebens.
+            {typedText.split("\n").map((line, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <br />}
+                {line}
+              </React.Fragment>
+            ))}
+            {typedText.length < fullText.length && <span className="hiw-cursor" />}
           </h2>
         </div>
 
