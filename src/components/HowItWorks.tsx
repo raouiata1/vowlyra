@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const steps = [
   {
@@ -48,10 +48,35 @@ const ArrowRight = () => (
 
 export default function HowItWorks() {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [visible, setVisible] = useState<boolean[]>([false, false, false]);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          steps.forEach((_, i) => {
+            setTimeout(() => {
+              setVisible((prev) => {
+                const next = [...prev];
+                next[i] = true;
+                return next;
+              });
+            }, i * 250);
+          });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
       id="so-funktionierts"
+      ref={sectionRef}
       className="hiw-section"
       style={{
         background: "#CCCCCC",
@@ -66,11 +91,22 @@ export default function HowItWorks() {
           gap: 0;
         }
         .hiw-connector { display: flex; align-items: center; padding: 0 12px; }
+        .hiw-card-wrapper {
+          flex: 1;
+          opacity: 0;
+          transform: translateX(-60px);
+          transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .hiw-card-wrapper.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
         @media (max-width: 767px) {
           .hiw-section { padding: 60px 20px !important; }
           .hiw-grid { flex-direction: column; gap: 16px; }
           .hiw-connector { display: none !important; }
           .section-h2 { font-size: 28px !important; }
+          .hiw-card-wrapper { flex: unset; }
         }
       `}</style>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -108,6 +144,7 @@ export default function HowItWorks() {
         <div className="hiw-grid">
           {steps.map((step, i) => (
             <React.Fragment key={step.number}>
+              <div className={`hiw-card-wrapper${visible[i] ? " visible" : ""}`}>
               <div
                 className="hiw-card"
                 onMouseEnter={() => setHovered(i)}
@@ -118,7 +155,7 @@ export default function HowItWorks() {
                   borderRadius: 16,
                   padding: "28px 24px",
                   textAlign: "center",
-                  flex: 1,
+                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -164,6 +201,7 @@ export default function HowItWorks() {
                 <p style={{ fontSize: 14, color: "#555", lineHeight: 1.7, margin: 0 }}>
                   {step.description}
                 </p>
+              </div>
               </div>
               {i < steps.length - 1 && (
                 <div className="hiw-connector" style={{ padding: "0 12px" }}>
