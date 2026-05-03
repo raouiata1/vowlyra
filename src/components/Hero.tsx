@@ -26,9 +26,7 @@ const slides = [
 
 function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
   const startInterval = () => {
     intervalRef.current = setInterval(() => {
@@ -43,18 +41,6 @@ function HeroSlider() {
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = sliderRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const cx = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
-    const cy = (e.clientY - rect.top) / rect.height - 0.5;
-    setMouseOffset({ x: cx * 10, y: cy * 8 }); // max ±5px x, ±4px y
-  };
-
-  const handleMouseLeave = () => {
-    setMouseOffset({ x: 0, y: 0 });
-  };
-
   const handleDotClick = (index: number) => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setCurrentIndex(index);
@@ -65,10 +51,7 @@ function HeroSlider() {
 
   return (
     <div
-      ref={sliderRef}
       className="hero-slider"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       style={{
         position: "relative",
         overflow: "hidden",
@@ -87,19 +70,18 @@ function HeroSlider() {
           alt={s.name}
           style={{
             position: "absolute",
-            inset: "-12px",
-            width: "calc(100% + 24px)",
-            height: "calc(100% + 24px)",
+            inset: 0,
+            width: "100%",
+            height: "100%",
             objectFit: "cover",
+            transition: "all 0.6s ease-in-out",
             opacity: i === currentIndex ? 1 : 0,
-            transform: i === currentIndex
-              ? `translateX(${mouseOffset.x}px) translateY(${mouseOffset.y}px)`
-              : i < currentIndex
-              ? "translateX(-100%)"
-              : "translateX(100%)",
-            transition: i === currentIndex
-              ? "opacity 0.6s ease-in-out, transform 0.15s ease-out"
-              : "opacity 0.6s ease-in-out, transform 0.6s ease-in-out",
+            transform:
+              i === currentIndex
+                ? "translateX(0)"
+                : i < currentIndex
+                ? "translateX(-100%)"
+                : "translateX(100%)",
           }}
         />
       ))}
