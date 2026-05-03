@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const cards = [
   { name: "Lena M.", occasion: "Geburtstag", src: "https://media.audynia.com/ugc-1.MOV", likes: "2.4K", comments: "183" },
@@ -19,6 +19,22 @@ type PopupCard = { src: string; name: string; occasion: string };
 
 export default function UGCCarousel() {
   const [popup, setPopup] = useState<PopupCard | null>(null);
+  const [titleVisible, setTitleVisible] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTitleVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (titleRef.current) observer.observe(titleRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
@@ -47,6 +63,7 @@ export default function UGCCarousel() {
           ECHTE REAKTIONEN VON KUNDEN
         </div>
         <h2
+          ref={titleRef}
           className="section-h2"
           style={{
             fontSize: 40,
@@ -54,6 +71,9 @@ export default function UGCCarousel() {
             color: "#FFFFFF",
             letterSpacing: "-1px",
             margin: 0,
+            opacity: titleVisible ? 1 : 0,
+            transform: titleVisible ? "translateY(0)" : "translateY(40px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
           }}
         >
           Der Moment – wenn sie den Song hören
