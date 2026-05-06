@@ -15,7 +15,7 @@ export default function ImpressumPage() {
           <p style={{ margin: "0 0 8px" }}>Deutschland</p>
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 32 }}>Kontakt</h2>
-          <p style={{ margin: "0 0 8px" }}>E-Mail: support@vowlyra.com</p>
+          <p style={{ margin: "0 0 8px" }}>E-Mail: support@audynia.com</p>
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 32 }}>Verantwortlich für den Inhalt</h2>
           <p style={{ margin: "0 0 8px" }}>[Vorname Nachname]</p>
@@ -23,7 +23,7 @@ export default function ImpressumPage() {
           <p style={{ margin: "0 0 8px" }}>[PLZ Ort]</p>
 
           <p style={{ color: "#444", fontSize: 13, marginTop: 48 }}>
-            Dieses Impressum gilt für vowlyra.com und alle zugehörigen Unterseiten.
+            Dieses Impressum gilt für audynia.com und alle zugehörigen Unterseiten.
           </p>
         </div>
       </div>

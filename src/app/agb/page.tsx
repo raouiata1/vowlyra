@@ -12,7 +12,7 @@ export default function AGBPage() {
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 36 }}>§ 1 Geltungsbereich</h2>
           <p style={{ margin: "0 0 16px" }}>
-            Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Audynia (nachfolgend „Anbieter") und dem Kunden über die Erstellung und Lieferung personalisierter KI-generierter Musikstücke über die Website vowlyra.com.
+            Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Audynia (nachfolgend „Anbieter") und dem Kunden über die Erstellung und Lieferung personalisierter KI-generierter Musikstücke über die Website audynia.com.
           </p>
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 36 }}>§ 2 Vertragsgegenstand</h2>
