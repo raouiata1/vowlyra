@@ -206,7 +206,7 @@ export default function Hero() {
             }}
           >
             Deine Geschichte als einzigartiger Song <br />
-            <span style={{ color: "#1DB954" }}>in wenigen Minuten</span>.
+            <span style={{ color: "#1a1a1a" }}>in wenigen Minuten</span>.
           </h1>
 
           <p
