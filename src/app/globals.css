@@ -92,6 +92,15 @@ main {
   .demo-subtitle {
     margin-bottom: 28px !important;
   }
+  .demo-left {
+    text-align: center;
+  }
+  .demo-left h2 {
+    text-align: center;
+  }
+  .demo-left p {
+    text-align: left;
+  }
 }
 
 /* HowItWorks: flex row with arrow connectors */

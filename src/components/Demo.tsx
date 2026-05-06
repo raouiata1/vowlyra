@@ -249,17 +249,6 @@ export default function Demo() {
           from { transform: scaleY(0.6); }
           to   { transform: scaleY(1.2); }
         }
-        @media (max-width: 767px) {
-          .demo-left {
-            text-align: center !important;
-          }
-          .demo-left p {
-            text-align: left !important;
-          }
-          .demo-left h2 {
-            text-align: center !important;
-          }
-        }
       `}</style>
     </section>
   );
