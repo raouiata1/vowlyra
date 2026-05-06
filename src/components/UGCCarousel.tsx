@@ -51,12 +51,12 @@ export default function UGCCarousel() {
         <div
           style={{
             display: "inline-block",
-            background: "#1a1a1a",
+            background: "#1DB95420",
             color: "#1DB954",
             borderRadius: 500,
             padding: "6px 16px",
             fontSize: 13,
-            fontWeight: 700,
+            fontWeight: 600,
             marginBottom: 8,
           }}
         >

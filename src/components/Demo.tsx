@@ -112,7 +112,7 @@ export default function Demo() {
       <div className="demo-grid" style={{ maxWidth: 1100, margin: "0 auto" }}>
 
         {/* Left: Text */}
-        <div>
+        <div className="demo-left">
           <div style={{ display: "inline-block", background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
             Echtzeit-Demo
           </div>
@@ -248,6 +248,17 @@ export default function Demo() {
         @keyframes wave {
           from { transform: scaleY(0.6); }
           to   { transform: scaleY(1.2); }
+        }
+        @media (max-width: 767px) {
+          .demo-left {
+            text-align: center !important;
+          }
+          .demo-left p {
+            text-align: left !important;
+          }
+          .demo-left h2 {
+            text-align: center !important;
+          }
         }
       `}</style>
     </section>
