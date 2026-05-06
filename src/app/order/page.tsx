@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { generateOrderId } from "@/lib/order";
@@ -130,17 +130,66 @@ export default function OrderPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [stepError, setStepError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState<'validating' | 'submitting' | null>(null);
 
   const stepRef = React.useRef(currentStep);
   stepRef.current = currentStep;
 
+  // Ref so the global keydown handler always has the latest handleNext
+  const handleNextRef = useRef<() => void>(() => {});
+
   const progress = ((currentStep + 1) / TOTAL_STEPS) * 100;
 
   function setAnswer(key: string, value: string) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
+    setStepError(null);
   }
+
+  // ── Validation ──────────────────────────────────────────────────────────────
+  function isStepValid(step: number): boolean {
+    switch (step) {
+      case 0: return !!answers.anlass;
+      case 1: return !!(answers.name ?? '').trim();
+      case 2: return !!(answers.empfaenger ?? '').trim();
+      case 3: return !!(answers.geschichte ?? '').trim();
+      case 4: return !!answers.klang;
+      case 5: return !!answers.stil;
+      case 6: return true; // optional
+      case 7: return !!(answers.email ?? '').trim() && !emailError;
+      default: return true;
+    }
+  }
+
+  function getStepErrorMsg(step: number): string {
+    switch (step) {
+      case 0: return "Bitte wähle einen Anlass aus.";
+      case 1: return "Bitte gib deinen Namen ein.";
+      case 2: return "Bitte gib den Namen der Person ein.";
+      case 3: return "Bitte erzähl uns kurz eure Geschichte.";
+      case 4: return "Bitte wähle einen Klangstil.";
+      case 5: return "Bitte wähle einen Musikstil.";
+      default: return "Bitte füll dieses Feld aus.";
+    }
+  }
+
+  // ── Navigation ──────────────────────────────────────────────────────────────
+  function handleNext() {
+    if (currentStep < TOTAL_STEPS - 1) {
+      if (!isStepValid(currentStep)) {
+        setStepError(getStepErrorMsg(currentStep));
+        return;
+      }
+      setStepError(null);
+      setCurrentStep((prev) => prev + 1);
+    } else {
+      handleSubmit();
+    }
+  }
+
+  // Always keep ref in sync so global keydown uses latest answers/state
+  handleNextRef.current = handleNext;
 
   const handleSubmit = async () => {
     const frontendError = validateEmailFrontend(answers.email)
@@ -150,21 +199,6 @@ export default function OrderPage() {
     }
 
     setLoading(true)
-
-    // ZeroBounce temporär deaktiviert
-    // setLoadingPhase('validating')
-    // const validateResponse = await fetch('/api/validate-email', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email: answers.email })
-    // })
-    // const validateData = await validateResponse.json()
-    // if (!validateData.valid) {
-    //   setEmailError('Diese E-Mail-Adresse existiert nicht. Bitte prüfe deine Eingabe.')
-    //   setLoading(false)
-    //   setLoadingPhase(null)
-    //   return
-    // }
 
     try {
       setLoadingPhase('submitting')
@@ -202,12 +236,15 @@ export default function OrderPage() {
     }
   }
 
+  // ── Global keyboard (for selection steps; inputs handle their own Enter) ────
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement).tagName;
+      // Textarea: never intercept (natural newlines)
+      // Input: the input's own onKeyDown handles Enter
       if (tag === "TEXTAREA" || tag === "INPUT") return;
       if (e.key === "Enter") {
-        if (stepRef.current < TOTAL_STEPS - 1) setCurrentStep((s) => s + 1);
+        handleNextRef.current();
       }
       if (e.key === "Escape") {
         if (stepRef.current > 0) setCurrentStep((s) => s - 1);
@@ -217,18 +254,26 @@ export default function OrderPage() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  // ── Shared input onKeyDown for mobile keyboard "Weiter" ─────────────────────
+  const inputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleNextRef.current();
+    }
+  };
+
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "#fff",
-    border: "2px solid #e0e0e0",
-    borderRadius: 12,
-    padding: "14px 16px",
-    fontSize: 15,
-    color: "#1a1a1a",
+    background: "rgba(0,0,0,0.3)",
+    border: "1.5px solid rgba(0,0,0,0.8)",
+    borderRadius: 8,
+    padding: "14px 18px",
+    fontSize: 16,
+    color: "#fff",
     outline: "none",
     fontFamily: "system-ui, -apple-system, sans-serif",
-    transition: "border-color 0.15s",
     boxSizing: "border-box",
+    transition: "border-color 0.15s",
   };
 
   function renderStep() {
@@ -254,22 +299,12 @@ export default function OrderPage() {
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
-                style={{
-                  width: "100%",
-                  background: "rgba(0,0,0,0.3)",
-                  border: "1.5px solid rgba(0,0,0,0.8)",
-                  borderRadius: 8,
-                  padding: "14px 18px",
-                  fontSize: 16,
-                  color: "#fff",
-                  outline: "none",
-                  fontFamily: "system-ui, -apple-system, sans-serif",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.15s",
-                }}
+                style={inputStyle}
                 placeholder="z.B. Max"
                 value={answers.name ?? ""}
                 onChange={(e) => setAnswer("name", e.target.value)}
+                onKeyDown={inputKeyDown}
+                enterKeyHint="next"
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
               />
@@ -285,22 +320,12 @@ export default function OrderPage() {
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
-                style={{
-                  width: "100%",
-                  background: "rgba(0,0,0,0.3)",
-                  border: "1.5px solid rgba(0,0,0,0.8)",
-                  borderRadius: 8,
-                  padding: "14px 18px",
-                  fontSize: 16,
-                  color: "#fff",
-                  outline: "none",
-                  fontFamily: "system-ui, -apple-system, sans-serif",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.15s",
-                }}
+                style={inputStyle}
                 placeholder="z.B. Mama, Jonas, Sarah"
                 value={answers.empfaenger ?? ""}
                 onChange={(e) => setAnswer("empfaenger", e.target.value)}
+                onKeyDown={inputKeyDown}
+                enterKeyHint="next"
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
               />
@@ -317,17 +342,7 @@ export default function OrderPage() {
               <textarea
                 className="dark-input"
                 style={{
-                  width: "100%",
-                  background: "rgba(0,0,0,0.3)",
-                  border: "1.5px solid rgba(0,0,0,0.8)",
-                  borderRadius: 8,
-                  padding: "14px 18px",
-                  fontSize: 16,
-                  color: "#fff",
-                  outline: "none",
-                  fontFamily: "system-ui, -apple-system, sans-serif",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.15s",
+                  ...inputStyle,
                   minHeight: 180,
                   resize: "none",
                 }}
@@ -375,22 +390,12 @@ export default function OrderPage() {
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
-                style={{
-                  width: "100%",
-                  background: "rgba(0,0,0,0.3)",
-                  border: "1.5px solid rgba(0,0,0,0.8)",
-                  borderRadius: 8,
-                  padding: "14px 18px",
-                  fontSize: 16,
-                  color: "#fff",
-                  outline: "none",
-                  fontFamily: "system-ui, -apple-system, sans-serif",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.15s",
-                }}
+                style={inputStyle}
                 placeholder={"z.B. 'Meine kleine Sonnenschein'..."}
                 value={answers.spezialzeile ?? ""}
                 onChange={(e) => setAnswer("spezialzeile", e.target.value)}
+                onKeyDown={inputKeyDown}
+                enterKeyHint="next"
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
               />
@@ -408,24 +413,23 @@ export default function OrderPage() {
                 type="email"
                 className="dark-input"
                 style={{
-                  width: "100%",
-                  background: "rgba(0,0,0,0.3)",
+                  ...inputStyle,
                   border: emailError ? "1.5px solid #e53e3e" : "1.5px solid rgba(0,0,0,0.8)",
-                  borderRadius: 8,
-                  padding: "14px 18px",
-                  fontSize: 16,
-                  color: "#fff",
-                  outline: "none",
-                  fontFamily: "system-ui, -apple-system, sans-serif",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.15s",
                 }}
                 placeholder="deine@email.de"
                 value={answers.email ?? ""}
+                enterKeyHint="done"
                 onChange={(e) => {
                   const newEmail = e.target.value
                   setAnswers({ ...answers, email: newEmail })
                   setEmailError(validateEmailFrontend(newEmail))
+                  setStepError(null)
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleNextRef.current();
+                  }
                 }}
                 onFocus={(e) => {
                   if (!emailError) e.currentTarget.style.borderColor = "#1DB954"
@@ -468,6 +472,8 @@ export default function OrderPage() {
     textAlign: "left",
   };
 
+  const isCurrentStepValid = isStepValid(currentStep);
+
   return (
     <div
       style={{
@@ -482,6 +488,13 @@ export default function OrderPage() {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
+        @keyframes shake {
+          0%,100% { transform: translateX(0); }
+          20%     { transform: translateX(-6px); }
+          40%     { transform: translateX(6px); }
+          60%     { transform: translateX(-4px); }
+          80%     { transform: translateX(4px); }
+        }
         .step-content {
           animation: fadeIn 0.3s ease forwards;
         }
@@ -491,6 +504,9 @@ export default function OrderPage() {
         }
         .order-back-link:hover {
           color: #1a1a1a !important;
+        }
+        .step-error-shake {
+          animation: shake 0.35s ease;
         }
         /* Option grid – Mobile: 1 Spalte */
         .option-grid {
@@ -566,7 +582,7 @@ export default function OrderPage() {
           </a>
           {currentStep > 0 && (
             <button
-              onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}
+              onClick={() => { setCurrentStep((prev) => Math.max(prev - 1, 0)); setStepError(null); }}
               className="order-back-link"
               style={{
                 background: "none",
@@ -596,14 +612,33 @@ export default function OrderPage() {
       >
         {renderStep()}
 
+        {/* Validation error */}
+        {stepError && (
+          <div
+            className="step-error-shake"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              background: "rgba(229,62,62,0.12)",
+              border: "1px solid rgba(229,62,62,0.4)",
+              borderRadius: 8,
+              padding: "10px 14px",
+              marginBottom: 8,
+              fontSize: 14,
+              color: "#c53030",
+              fontWeight: 500,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c53030" strokeWidth="2.5" strokeLinecap="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            {stepError}
+          </div>
+        )}
+
         <button
-          onClick={() => {
-            if (currentStep < TOTAL_STEPS - 1) {
-              setCurrentStep((prev) => prev + 1);
-            } else {
-              handleSubmit();
-            }
-          }}
+          onClick={handleNext}
           disabled={loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))}
           className="order-next-btn"
           style={{
@@ -619,7 +654,7 @@ export default function OrderPage() {
             opacity: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))) ? 0.5 : 1,
             transition: "opacity 0.15s, transform 0.15s",
             display: "block",
-            margin: "48px auto 0",
+            margin: "16px auto 0",
             position: "relative",
             zIndex: 10,
             touchAction: "manipulation",

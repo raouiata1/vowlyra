@@ -193,6 +193,28 @@ export default function Hero() {
       >
         {/* Left: Text */}
         <div>
+          {/* Delivery badge */}
+          <div style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 7,
+            background: "rgba(29,185,84,0.13)",
+            border: "1.5px solid rgba(29,185,84,0.35)",
+            borderRadius: 500,
+            padding: "7px 16px",
+            marginBottom: 20,
+            fontSize: 13,
+            fontWeight: 700,
+            color: "#1DB954",
+            letterSpacing: "0.2px",
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            Song fertig in ca. 1 Stunde
+          </div>
+
           <h1
             className="hero-h1"
             style={{
