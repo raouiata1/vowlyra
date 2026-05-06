@@ -113,8 +113,10 @@ export default function Demo() {
 
         {/* Left: Text */}
         <div className="demo-left">
-          <div style={{ display: "inline-block", background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
-            Echtzeit-Demo
+          <div className="demo-pill-center" style={{ marginBottom: 8 }}>
+            <div style={{ display: "inline-block", background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600 }}>
+              Echtzeit-Demo
+            </div>
           </div>
           <h2
             className="section-h2"

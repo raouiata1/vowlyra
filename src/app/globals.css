@@ -92,14 +92,9 @@ main {
   .demo-subtitle {
     margin-bottom: 28px !important;
   }
-  .demo-left {
-    text-align: center;
-  }
-  .demo-left h2 {
-    text-align: center;
-  }
-  .demo-left p {
-    text-align: left;
+  .demo-pill-center {
+    display: flex;
+    justify-content: center;
   }
 }
 
