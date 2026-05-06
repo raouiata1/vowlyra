@@ -205,8 +205,8 @@ export default function Hero() {
               letterSpacing: "-1.5px",
             }}
           >
-            Dein persönlicher Song –<br />
-            <span style={{ color: "#1DB954" }}>in ca. 1 Stunde fertig geliefert.</span>
+            Deine Geschichte als einzigartiger Song <br />
+            <span style={{ color: "#1DB954" }}>in wenigen Minuten</span>.
           </h1>
 
           <p
