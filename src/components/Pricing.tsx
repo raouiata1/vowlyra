@@ -24,6 +24,7 @@ export default function Pricing() {
               display: "inline-block",
               background: "#1a1a1a",
               color: "#1DB954",
+              border: "1.5px solid #1DB954",
               borderRadius: 500,
               padding: "6px 16px",
               fontSize: 13,
