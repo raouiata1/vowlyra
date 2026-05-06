@@ -276,12 +276,25 @@ export default function OrderPage() {
     transition: "border-color 0.15s",
   };
 
+  // ── Required / optional indicator ──────────────────────────────────────────
+  const Required = () => (
+    <p style={{ fontSize: 11, color: "#e53e3e", margin: "4px 0 18px", fontWeight: 600, letterSpacing: "0.3px", opacity: 0.85 }}>
+      * Pflichtfeld
+    </p>
+  );
+  const Optional = () => (
+    <p style={{ fontSize: 11, color: "#999", margin: "4px 0 18px", fontWeight: 500, letterSpacing: "0.3px" }}>
+      (Optional)
+    </p>
+  );
+
   function renderStep() {
     switch (currentStep) {
       case 0:
         return (
           <>
-            <h1 className="option-step-title" style={h1Style}>Was ist der Anlass?</h1>
+            <h1 className="option-step-title" style={h1Style}>Was ist der Anlass?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="option-step-subtitle" style={subtitleStyle}>Das bestimmt den emotionalen Ton deines Songs.</p>
             <VerticalOptionSelector
               options={occasions}
@@ -294,7 +307,8 @@ export default function OrderPage() {
       case 1:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Wie heißt du?</h1>
+            <h1 className="dark-input-title" style={h1Style}>Wie heißt du?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="dark-input-subtitle" style={subtitleStyle}>Wir verwenden deinen Namen im Song.</p>
             <div className="dark-input-wrapper">
               <input
@@ -315,7 +329,8 @@ export default function OrderPage() {
       case 2:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Wie heißt die Person?</h1>
+            <h1 className="dark-input-title" style={h1Style}>Wie heißt die Person?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="dark-input-subtitle" style={subtitleStyle}>Wir verwenden diesen Namen in den Lyrics.</p>
             <div className="dark-input-wrapper">
               <input
@@ -336,7 +351,8 @@ export default function OrderPage() {
       case 3:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Erzähl uns eure Geschichte</h1>
+            <h1 className="dark-input-title" style={h1Style}>Erzähl uns eure Geschichte<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="dark-input-subtitle" style={subtitleStyle}>Teile die Momente, die am meisten zählen. Wir verwandeln sie in Lyrics.</p>
             <div className="dark-input-wrapper">
               <textarea
@@ -359,7 +375,8 @@ export default function OrderPage() {
       case 4:
         return (
           <>
-            <h1 className="option-step-title" style={h1Style}>Wähle den emotionalen Klang</h1>
+            <h1 className="option-step-title" style={h1Style}>Wähle den emotionalen Klang<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="option-step-subtitle" style={subtitleStyle}>Das bestimmt den Produktionsstil deines Songs.</p>
             <VerticalOptionSelector
               options={styles}
@@ -372,7 +389,8 @@ export default function OrderPage() {
       case 5:
         return (
           <>
-            <h1 className="option-step-title" style={h1Style}>Wie soll es klingen?</h1>
+            <h1 className="option-step-title" style={h1Style}>Wie soll es klingen?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="option-step-subtitle" style={subtitleStyle}>Das bestimmt den Musikstil deines Songs.</p>
             <VerticalOptionSelector
               options={moods}
@@ -385,8 +403,9 @@ export default function OrderPage() {
       case 6:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Gibt es eine Zeile, die unbedingt vorkommen muss?</h1>
-            <p className="dark-input-subtitle" style={subtitleStyle}>Optional, aber kraftvoll.</p>
+            <h1 className="dark-input-title" style={h1Style}>Gibt es eine Zeile, die vorkommen muss?</h1>
+            <Optional />
+            <p className="dark-input-subtitle" style={subtitleStyle}>Nicht nötig – aber wenn ja, bauen wir sie ein.</p>
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
@@ -406,7 +425,8 @@ export default function OrderPage() {
       case 7:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Wohin schicken wir deinen exklusiven Song-Trailer?</h1>
+            <h1 className="dark-input-title" style={h1Style}>Wohin schicken wir deinen exklusiven Song-Trailer?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
             <p className="dark-input-subtitle" style={subtitleStyle}>Du erhältst einen exklusiven Trailer, bevor du deine Bestellung abschließt.</p>
             <div className="dark-input-wrapper">
               <input

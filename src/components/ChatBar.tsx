@@ -162,7 +162,7 @@ export default function ChatBar() {
         .cb-msg-user    { animation: cb-bounce-in 0.2s ease; }
         .cb-msg-agent   { animation: cb-bounce-in 0.2s ease; }
         @media (max-width: 480px) {
-          .cb-panel { width: calc(100vw - 32px) !important; right: 0 !important; }
+          .cb-panel { width: calc(100vw - 32px) !important; right: 0 !important; max-height: calc(100vh - 100px) !important; }
           .cb-bubble-card { width: 200px !important; }
         }
       `}</style>
@@ -180,7 +180,7 @@ export default function ChatBar() {
             overflow: "hidden",
             display: "flex",
             flexDirection: "column",
-            maxHeight: 480,
+            maxHeight: "calc(100vh - 130px)",
           }}
         >
           {/* header */}
@@ -250,6 +250,7 @@ export default function ChatBar() {
             style={{
               flex: 1,
               overflowY: "auto",
+              minHeight: 0,
               padding: "14px 14px 8px",
               display: "flex",
               flexDirection: "column",

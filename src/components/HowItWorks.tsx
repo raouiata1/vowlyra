@@ -183,7 +183,7 @@ export default function HowItWorks() {
                 onMouseLeave={() => setHovered(null)}
                 style={{
                   background: "#fff",
-                  border: hovered === i ? "1.5px solid #1DB954" : "1.5px solid #e0e0e0",
+                  border: "1.5px solid #1DB954",
                   borderRadius: 16,
                   padding: "28px 24px",
                   textAlign: "center",

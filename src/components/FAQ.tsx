@@ -78,10 +78,9 @@ export default function FAQ() {
                 key={i}
                 style={{
                   background: "#fff",
-                  border: isOpen ? "1.5px solid #1DB954" : "0.5px solid #e0e0e0",
+                  border: "1.5px solid #1DB954",
                   borderRadius: 14,
                   overflow: "hidden",
-                  transition: "border-color 0.2s",
                 }}
               >
                 <button
