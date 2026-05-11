@@ -76,7 +76,8 @@ export default function FullSongPage() {
     if (!songUrl) return;
     setDownloading(true);
     try {
-      const res = await fetch(songUrl);
+      const proxyUrl = `/api/download?url=${encodeURIComponent(songUrl)}`;
+      const res = await fetch(proxyUrl);
       const blob = await res.blob();
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement("a");
