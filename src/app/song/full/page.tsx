@@ -68,7 +68,25 @@ export default function FullSongPage() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  const [downloading, setDownloading] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  async function handleDownload() {
+    if (!songUrl) return;
+    setDownloading(true);
+    try {
+      const res = await fetch(songUrl);
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = `${songTitle}.mp3`;
+      a.click();
+      URL.revokeObjectURL(blobUrl);
+    } finally {
+      setDownloading(false);
+    }
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -265,23 +283,25 @@ export default function FullSongPage() {
             </div>
 
             {/* DOWNLOAD BUTTON */}
-            <a
-              href={songUrl}
-              download
+            <button
+              onClick={handleDownload}
+              disabled={downloading}
               className="fullsong-download"
               style={{
                 display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                 background: "#1e1e1e", color: "#fff",
                 border: "1px solid #333",
                 borderRadius: 500, padding: "16px 40px", fontSize: 15, fontWeight: 700,
-                textDecoration: "none", transition: "background 0.15s, border-color 0.15s", width: "100%",
+                cursor: downloading ? "wait" : "pointer",
+                opacity: downloading ? 0.7 : 1,
+                transition: "background 0.15s, border-color 0.15s", width: "100%",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "#2a2a2a"; e.currentTarget.style.borderColor = "#444"; }}
+              onMouseEnter={(e) => { if (!downloading) { e.currentTarget.style.background = "#2a2a2a"; e.currentTarget.style.borderColor = "#444"; } }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "#1e1e1e"; e.currentTarget.style.borderColor = "#333"; }}
             >
               <DownloadSVG />
-              <span>Song herunterladen</span>
-            </a>
+              <span>{downloading ? "Wird heruntergeladen..." : "Song herunterladen"}</span>
+            </button>
 
             <p style={{ color: "#444", fontSize: 12, marginTop: 14, marginBottom: 0 }}>
               Dein Song · Für immer · Kein Abo
