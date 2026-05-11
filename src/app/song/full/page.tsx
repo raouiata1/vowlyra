@@ -59,7 +59,8 @@ const DownloadSVG = () => (
 // ─── page component ───────────────────────────────────────────────────────────
 
 export default function FullSongPage() {
-  const [songUrl, setSongUrl] = useState<string | null>(null);
+  const DEMO_URL = "https://audio.audynia.com/order_10_full_v1.mp3";
+  const [songUrl, setSongUrl] = useState<string | null>(DEMO_URL);
   const [songTitle, setSongTitle] = useState<string>("Dein persönlicher Song");
   const [urlChecked, setUrlChecked] = useState(false);
 
@@ -90,7 +91,8 @@ export default function FullSongPage() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setSongUrl(params.get("song"));
+    const song = params.get("song");
+    if (song) setSongUrl(song);
     const title = params.get("title");
     if (title) setSongTitle(decodeURIComponent(title));
     setUrlChecked(true);
