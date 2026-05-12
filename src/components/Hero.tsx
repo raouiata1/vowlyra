@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 const slides = [
@@ -63,17 +64,11 @@ function HeroSlider() {
     >
       {/* Images */}
       {slides.map((s, i) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <div
           key={i}
-          src={s.src}
-          alt={s.name}
           style={{
             position: "absolute",
             inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
             transition: "all 0.6s ease-in-out",
             opacity: i === currentIndex ? 1 : 0,
             transform:
@@ -83,7 +78,16 @@ function HeroSlider() {
                 ? "translateX(-100%)"
                 : "translateX(100%)",
           }}
-        />
+        >
+          <Image
+            src={s.src}
+            alt={s.name}
+            fill
+            style={{ objectFit: "cover" }}
+            priority={i === 0}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
       ))}
 
       {/* Gradient Overlay */}
