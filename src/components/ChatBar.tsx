@@ -194,23 +194,18 @@ export default function ChatBar() {
               flexShrink: 0,
             }}
           >
-            <div
+            <img
+              src="/lisa.jpg"
+              alt="Lisa"
               style={{
                 width: 38,
                 height: 38,
                 borderRadius: "50%",
-                background: "rgba(255,255,255,0.22)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 700,
-                fontSize: 16,
-                color: "#fff",
+                objectFit: "cover",
                 flexShrink: 0,
+                border: "2px solid rgba(255,255,255,0.4)",
               }}
-            >
-              L
-            </div>
+            />
             <div style={{ flex: 1 }}>
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}>
                 Lisa · Audynia Support
@@ -261,12 +256,15 @@ export default function ChatBar() {
               msg.from === "agent" ? (
                 <div key={msg.id} className="cb-msg-agent" style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
                   {/* agent avatar */}
-                  <div style={{
-                    width: 26, height: 26, borderRadius: "50%",
-                    background: "linear-gradient(135deg, #1DB954, #0fa847)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0,
-                  }}>L</div>
+                  <img
+                    src="/lisa.jpg"
+                    alt="Lisa"
+                    style={{
+                      width: 26, height: 26, borderRadius: "50%",
+                      objectFit: "cover", flexShrink: 0,
+                      border: "1.5px solid #e0e0e0",
+                    }}
+                  />
                   <div
                     style={{
                       background: "#f1f0f0",
@@ -305,12 +303,15 @@ export default function ChatBar() {
             {/* typing indicator while sending */}
             {sending && (
               <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
-                <div style={{
-                  width: 26, height: 26, borderRadius: "50%",
-                  background: "linear-gradient(135deg, #1DB954, #0fa847)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontWeight: 700, fontSize: 11, color: "#fff", flexShrink: 0,
-                }}>L</div>
+                <img
+                  src="/lisa.jpg"
+                  alt="Lisa"
+                  style={{
+                    width: 26, height: 26, borderRadius: "50%",
+                    objectFit: "cover", flexShrink: 0,
+                    border: "1.5px solid #e0e0e0",
+                  }}
+                />
                 <div style={{
                   background: "#f1f0f0",
                   borderRadius: "4px 14px 14px 14px",
@@ -429,12 +430,15 @@ export default function ChatBar() {
           >
             <div style={{ height: 3, background: "linear-gradient(90deg, #1DB954, #0fa847)" }} />
             <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 12px 6px" }}>
-              <div style={{
-                width: 28, height: 28, borderRadius: "50%",
-                background: "linear-gradient(135deg, #1DB954, #0fa847)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontWeight: 700, fontSize: 12, color: "#fff", flexShrink: 0,
-              }}>L</div>
+              <img
+                src="/lisa.jpg"
+                alt="Lisa"
+                style={{
+                  width: 28, height: 28, borderRadius: "50%",
+                  objectFit: "cover", flexShrink: 0,
+                  border: "2px solid #e8e8e8",
+                }}
+              />
               <div>
                 <div style={{ fontWeight: 700, fontSize: 12.5, color: "#1a1a1a", lineHeight: 1.2 }}>Lisa</div>
                 <div style={{ fontSize: 10.5, color: "#1DB954", fontWeight: 600 }}>● Online</div>
