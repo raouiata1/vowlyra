@@ -71,6 +71,7 @@ export default function Footer() {
                 height={36}
                 alt="Audynia"
                 style={{ objectFit: "contain" }}
+                loading="lazy"
               />
             </a>
             <p style={{ color: "#555", fontSize: 14, lineHeight: 1.7, margin: "0 0 16px 0" }}>

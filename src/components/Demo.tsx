@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 const DEMO_AUDIO_URL = "https://media.audynia.com/demo_song_full.mp3";
 const WAVE_HEIGHTS = [18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28];
@@ -168,12 +169,13 @@ export default function Demo() {
 
           {/* Album Art + Track Info */}
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
-            <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
+              <Image
                 src="https://media.audynia.com/Vynil.jpg"
                 alt="Vinyl"
-                style={{ width: "80%", height: "80%", objectFit: "cover" }}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="60px"
               />
             </div>
             <div>
