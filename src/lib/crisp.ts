@@ -20,7 +20,7 @@ export function loadCrisp(): void {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
 
-  window.$crisp = [];
+  if (!window.$crisp) window.$crisp = [];
   window.CRISP_WEBSITE_ID = CRISP_WEBSITE_ID;
 
   // Hide the Crisp launcher — we show it only on explicit handoff
