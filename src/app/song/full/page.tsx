@@ -197,11 +197,6 @@ export default function FullSongPage() {
         >
           <div style={{ maxWidth: 580, margin: "0 auto", textAlign: "center", width: "100%" }}>
 
-            {/* Badge */}
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1DB95420", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 13, fontWeight: 600, marginBottom: 20 }}>
-              ✦ Vollständiger Song freigeschaltet
-            </div>
-
             {/* H1 */}
             <h1 className="fullsong-h1" style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1.1, letterSpacing: "-1.5px", margin: "0 0 14px" }}>
               Dein Song gehört{" "}
