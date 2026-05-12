@@ -29,11 +29,13 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
         {/* Left: Primary Logo or custom leftLogo */}
         {leftLogo ? (
           <a href="/" style={{ display: "flex" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={leftLogo}
               alt="Audynia"
-              style={{ height: 40, width: "auto", objectFit: "contain", display: "block" }}
+              height={40}
+              width={160}
+              style={{ height: 40, width: "auto", objectFit: "contain" }}
+              priority
             />
           </a>
         ) : !hideLogo ? (

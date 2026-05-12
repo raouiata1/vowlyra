@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import UGCCarousel from "@/components/UGCCarousel";
 
@@ -232,12 +233,13 @@ export default function SongPage() {
 
               {/* Track header */}
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
-                <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0 }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
+                  <Image
                     src="https://media.audynia.com/Vynil.jpg"
                     alt="Vinyl"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="60px"
                   />
                 </div>
 
