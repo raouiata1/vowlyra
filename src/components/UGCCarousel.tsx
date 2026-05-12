@@ -7,10 +7,6 @@ const cards = [
   { name: "Marco & Julia", occasion: "Hochzeit", src: "https://media.audynia.com/ugc-2.MOV", likes: "5.1K", comments: "342" },
   { name: "Familie Braun", occasion: "Weihnachten", src: "https://media.audynia.com/ugc-3.MOV", likes: "1.8K", comments: "97" },
   { name: "Nico R.", occasion: "Überraschung", src: "https://media.audynia.com/ugc-4.MOV", likes: "3.2K", comments: "218" },
-  { name: "Anna K.", occasion: "Jahrestag", src: "https://media.audynia.com/ugc-5.MOV", likes: "4.7K", comments: "291" },
-  { name: "Thomas H.", occasion: "Geburtstag", src: "https://media.audynia.com/ugc-6.MOV", likes: "1.1K", comments: "64" },
-  { name: "Sophie & Ben", occasion: "Hochzeit", src: "https://media.audynia.com/ugc-7.MOV", likes: "6.3K", comments: "415" },
-  { name: "Karin W.", occasion: "Valentinstag", src: "https://media.audynia.com/ugc-8.MOV", likes: "2.9K", comments: "176" },
 ];
 
 const allCards = [...cards, ...cards];
