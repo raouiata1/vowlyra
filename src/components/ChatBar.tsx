@@ -69,10 +69,10 @@ export default function ChatBar() {
 
   // ── auto-show welcome bubble once per session ────────────────────────────
   useEffect(() => {
-    if (sessionStorage.getItem("audynia_bubble_shown")) return;
+    if (sessionStorage.getItem("vowlyra_bubble_shown")) return;
     const t = setTimeout(() => {
       setShowBubble(true);
-      sessionStorage.setItem("audynia_bubble_shown", "1");
+      sessionStorage.setItem("vowlyra_bubble_shown", "1");
     }, 4_000);
     return () => clearTimeout(t);
   }, []);
@@ -208,7 +208,7 @@ export default function ChatBar() {
             />
             <div style={{ flex: 1 }}>
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}>
-                Lisa · Audynia Support
+                Lisa · Vowlyra Support
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 2 }}>
                 <span style={{

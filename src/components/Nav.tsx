@@ -31,7 +31,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
           <a href="/" style={{ display: "flex" }}>
             <Image
               src={leftLogo}
-              alt="Audynia"
+              alt="Vowlyra"
               height={40}
               width={160}
               style={{ height: 40, width: "auto", objectFit: "contain" }}
@@ -41,10 +41,10 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
         ) : !hideLogo ? (
           <a href="/" style={{ display: "flex" }}>
             <Image
-              src="https://media.audynia.com/Primary_Logo.png"
+              src="https://media.vowlyra.com/Primary_Logo.png"
               height={45}
               width={145}
-              alt="Audynia"
+              alt="Vowlyra"
               style={{ objectFit: "contain" }}
             />
           </a>

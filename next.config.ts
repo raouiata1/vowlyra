@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "media.audynia.com",
+        hostname: "media.vowlyra.com",
       },
     ],
   },

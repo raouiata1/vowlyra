@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams.get("url");
 
-  if (!url || !url.startsWith("https://audio.audynia.com/")) {
+  if (!url || !url.startsWith("https://audio.vowlyra.com/")) {
     return new NextResponse("Invalid URL", { status: 400 });
   }
 

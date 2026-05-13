@@ -66,10 +66,10 @@ export default function Footer() {
           <div className="footer-col1">
             <a href="/" style={{ display: "inline-block", marginBottom: 12 }}>
               <Image
-                src="https://media.audynia.com/Primary_Logo_with_Icon.png"
+                src="https://media.vowlyra.com/Primary_Logo_with_Icon.png"
                 width={140}
                 height={36}
-                alt="Audynia"
+                alt="Vowlyra"
                 style={{ objectFit: "contain" }}
                 loading="lazy"
               />
@@ -145,7 +145,7 @@ export default function Footer() {
           }}
         >
           <span style={{ color: "#777", fontSize: 12 }}>
-            © 2026 Audynia. Alle Rechte vorbehalten.
+            © 2026 Vowlyra. Alle Rechte vorbehalten.
           </span>
         </div>
       </div>

@@ -1,6 +1,6 @@
 {
-  "name": "Audynia",
-  "short_name": "Audynia",
+  "name": "Vowlyra",
+  "short_name": "Vowlyra",
   "description": "Dein persönlicher Song – in ca. 1 Stunde fertig geliefert.",
   "icons": [
     { "src": "/favicon.png",       "sizes": "any",     "type": "image/png", "purpose": "any" },
