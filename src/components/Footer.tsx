@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 export default function Footer() {
@@ -30,6 +32,7 @@ export default function Footer() {
       <style>{`
         .footer-outer { padding: 64px 40px 40px; }
         .footer-link:hover { color: #1a1a1a !important; }
+        .footer-crisp:hover { opacity: 0.85; }
         .footer-grid {
           display: grid;
           grid-template-columns: 2fr 3fr;
@@ -102,6 +105,30 @@ export default function Footer() {
               <p style={{ color: "#555", fontSize: 14, margin: "0 0 14px 0", lineHeight: 1.6 }}>
                 Fragen? Schreib uns direkt
               </p>
+              <button
+                onClick={() => (window as any).$crisp?.push(["do", "chat:open"])}
+                className="footer-crisp"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#1DB954",
+                  color: "#000",
+                  borderRadius: 500,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  padding: "9px 14px 9px 10px",
+                  border: "none",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "opacity 0.15s",
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="black" fillOpacity="0.85"/>
+                </svg>
+                Chat starten
+              </button>
             </div>
           </div>
         </div>
