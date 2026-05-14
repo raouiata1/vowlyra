@@ -61,9 +61,9 @@ const LockIcon = () => (
   </svg>
 );
 
-const occasions = ["Geburtstag", "Hochzeit", "Jahrestag", "Weihnachten", "Valentinstag", "Einfach so"];
-const styles = ["Tief & Romantisch", "Sanft & Emotional", "Fröhlich & Mitreißend", "Nostalgisch", "Filmreif & Kraftvoll", "Sonstiges"];
-const moods = ["Pop", "Klavier", "Acoustic", "R&B", "Filmmusik"];
+const occasions = ["🎂 Geburtstag", "💍 Hochzeit", "❤️ Jahrestag", "💝 Valentinstag", "🎵 Einfach so", "🎄 Weihnachten"];
+const styles = ["Sanft & Emotional", "Tief & Romantisch", "Fröhlich & Mitreißend", "Nostalgisch", "Filmreif & Kraftvoll", "Sonstiges"];
+const moods = ["Acoustic", "Pop", "Klavier", "R&B", "Filmmusik"];
 
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
 
@@ -133,6 +133,7 @@ export default function OrderPage() {
   const [stepError, setStepError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState<'validating' | 'submitting' | null>(null);
+  const [microFeedback, setMicroFeedback] = useState<string | null>(null);
 
   const stepRef = React.useRef(currentStep);
   stepRef.current = currentStep;
@@ -145,6 +146,44 @@ export default function OrderPage() {
   function setAnswer(key: string, value: string) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
     setStepError(null);
+  }
+
+  const occasionFeedback: Record<string, string> = {
+    "🎂 Geburtstag": "Perfekt — Geburtstagslieder lassen Menschen weinen vor Freude.",
+    "💍 Hochzeit": "Wunderschön — Hochzeitslieder sind unsere emotionalsten Songs.",
+    "❤️ Jahrestag": "So schön — ein Song, der mehr sagt als tausend Worte.",
+    "💝 Valentinstag": "Perfekt — das Geschenk, das Blumen nie sein können.",
+    "🎵 Einfach so": "Die besten Geschenke brauchen keinen besonderen Grund.",
+    "🎄 Weihnachten": "Magisch — Weihnachtslieder, die wirklich von euch handeln.",
+  };
+
+  function handleOptionAutoAdvance(key: string, value: string, nextStep: number) {
+    setAnswer(key, value);
+    if (key === "anlass") {
+      const fb = occasionFeedback[value];
+      if (fb) setMicroFeedback(fb);
+    }
+    setTimeout(() => {
+      setMicroFeedback(null);
+      setStepError(null);
+      setCurrentStep(nextStep);
+    }, 600);
+  }
+
+  function getCtaLabel(): string {
+    if (loadingPhase === "validating") return "E-Mail wird geprüft...";
+    if (loadingPhase === "submitting") return "Song wird erstellt...";
+    switch (currentStep) {
+      case 0: return "Anlass bestätigen →";
+      case 1: return "Namen eingeben →";
+      case 2: return "Weiter →";
+      case 3: return "Geschichte hinzufügen →";
+      case 4: return "Klang festlegen →";
+      case 5: return "Stil wählen →";
+      case 6: return "Moment festhalten →";
+      case 7: return "Kostenlosen Trailer anfordern →";
+      default: return "Weiter →";
+    }
   }
 
   // ── Validation ──────────────────────────────────────────────────────────────
@@ -294,13 +333,12 @@ export default function OrderPage() {
       case 0:
         return (
           <>
-            <h1 className="option-step-title" style={h1Style}>Was ist der Anlass?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
-            <Required />
-            <p className="option-step-subtitle" style={subtitleStyle}>Das bestimmt den emotionalen Ton deines Songs.</p>
+            <h1 className="option-step-title" style={h1Style}>Welcher Moment verdient einen Song?</h1>
+            <p className="option-step-subtitle" style={subtitleStyle}>Je nach Anlass wird der Song tiefer, fröhlicher oder romantischer.</p>
             <VerticalOptionSelector
               options={occasions}
               selected={answers.anlass ?? ""}
-              onSelect={(v) => setAnswer("anlass", v)}
+              onSelect={(v) => handleOptionAutoAdvance("anlass", v, 1)}
             />
           </>
         );
@@ -310,7 +348,7 @@ export default function OrderPage() {
           <>
             <h1 className="dark-input-title" style={h1Style}>Wie heißt du?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
             <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Wir verwenden deinen Namen im Song.</p>
+            <p className="dark-input-subtitle" style={subtitleStyle}>Dein Name macht den Song noch persönlicher.</p>
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
@@ -330,9 +368,9 @@ export default function OrderPage() {
       case 2:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Wie heißt die Person?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <h1 className="dark-input-title" style={h1Style}>Für wen ist dieser Song?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
             <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Wir verwenden diesen Namen in den Lyrics.</p>
+            <p className="dark-input-subtitle" style={subtitleStyle}>Ihr Name wird direkt in die Lyrics eingewoben.</p>
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
@@ -352,9 +390,11 @@ export default function OrderPage() {
       case 3:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Erzähl uns eure Geschichte<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <h1 className="dark-input-title" style={h1Style}>
+              Was verbindet dich mit {answers.empfaenger || "dieser Person"}?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup>
+            </h1>
             <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Teile die Momente, die am meisten zählen. Wir verwandeln sie in Lyrics.</p>
+            <p className="dark-input-subtitle" style={subtitleStyle}>Je mehr Details, desto tiefer geht der Song unter die Haut.</p>
             <div className="dark-input-wrapper">
               <textarea
                 className="dark-input"
@@ -363,7 +403,7 @@ export default function OrderPage() {
                   minHeight: 180,
                   resize: "none",
                 }}
-                placeholder={"z.B. Wir haben uns im Urlaub kennengelernt, sie liebt Rosen und tanzt immer in der Küche..."}
+                placeholder={`z.B. ${answers.empfaenger || "Sie"} tanzt immer in der Küche, liebt Rosen und hat mich gelehrt, was wirklich zählt...`}
                 value={answers.geschichte ?? ""}
                 onChange={(e) => setAnswer("geschichte", e.target.value)}
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
@@ -384,13 +424,14 @@ export default function OrderPage() {
       case 4:
         return (
           <>
-            <h1 className="option-step-title" style={h1Style}>Wähle den emotionalen Klang<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
-            <Required />
-            <p className="option-step-subtitle" style={subtitleStyle}>Das bestimmt den Produktionsstil deines Songs.</p>
+            <h1 className="option-step-title" style={h1Style}>
+              Wie soll sich {answers.empfaenger || "die Person"} fühlen?
+            </h1>
+            <p className="option-step-subtitle" style={subtitleStyle}>Das ist die Seele deines Songs — wähle, was sie am tiefsten berührt.</p>
             <VerticalOptionSelector
               options={styles}
               selected={answers.klang ?? ""}
-              onSelect={(v) => setAnswer("klang", v)}
+              onSelect={(v) => handleOptionAutoAdvance("klang", v, 5)}
             />
           </>
         );
@@ -398,13 +439,12 @@ export default function OrderPage() {
       case 5:
         return (
           <>
-            <h1 className="option-step-title" style={h1Style}>Wie soll es klingen?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
-            <Required />
-            <p className="option-step-subtitle" style={subtitleStyle}>Das bestimmt den Musikstil deines Songs.</p>
+            <h1 className="option-step-title" style={h1Style}>Welcher Sound passt am besten?</h1>
+            <p className="option-step-subtitle" style={subtitleStyle}>Der Stil macht deinen Song unverwechselbar — wähle was {answers.empfaenger || "die Person"} lieben wird.</p>
             <VerticalOptionSelector
               options={moods}
               selected={answers.stil ?? ""}
-              onSelect={(v) => setAnswer("stil", v)}
+              onSelect={(v) => handleOptionAutoAdvance("stil", v, 6)}
             />
           </>
         );
@@ -412,9 +452,9 @@ export default function OrderPage() {
       case 6:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Was macht diesen Moment unvergesslich?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <h1 className="dark-input-title" style={h1Style}>Was macht {answers.empfaenger || "diese Person"} einzigartig?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
             <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Ein Spitzname, ein Innenwitz, eine Erinnerung – was diese Person von allen anderen unterscheidet.</p>
+            <p className="dark-input-subtitle" style={subtitleStyle}>Ein Spitzname, ein Innenwitz, eine Eigenheit — das wird die Zeile, die sie nie vergessen.</p>
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
@@ -442,9 +482,11 @@ export default function OrderPage() {
       case 7:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Wohin schicken wir deinen exklusiven Song-Trailer?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <h1 className="dark-input-title" style={h1Style}>
+              Fast fertig{answers.name ? `, ${answers.name}` : ""}! Wohin schicken wir deinen Trailer?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup>
+            </h1>
             <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Du erhältst einen exklusiven Trailer, bevor du deine Bestellung abschließt.</p>
+            <p className="dark-input-subtitle" style={subtitleStyle}>In ~5 Minuten hörst du deinen kostenlosen Song-Trailer — du zahlst nur wenn er dir gefällt.</p>
             <div className="dark-input-wrapper">
               <input
                 type="email"
@@ -481,7 +523,21 @@ export default function OrderPage() {
                 </p>
               )}
               <div style={{ color: "#777", fontSize: 12, marginTop: 8 }}>
-                Nur für die Lieferung deines Trailers. Kein Spam.
+                Nur für deinen Trailer. Kein Spam, kein Abo.
+              </div>
+              {/* What happens next */}
+              <div style={{ marginTop: 24, borderTop: "1px solid rgba(0,0,0,0.12)", paddingTop: 20 }}>
+                <p style={{ fontSize: 11, color: "#555", margin: "0 0 12px 0", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px" }}>Was passiert als nächstes</p>
+                {[
+                  { icon: "🎵", text: `Song für ${answers.empfaenger || "sie"} wird erstellt (~5 Min.)` },
+                  { icon: "📧", text: "Kostenloser Trailer kommt in dein Postfach" },
+                  { icon: "✅", text: "Nur zahlen wenn er dich begeistert · 29,99€" },
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, fontSize: 13, color: "#1a1a1a" }}>
+                    <span style={{ fontSize: 16 }}>{item.icon}</span>
+                    <span>{item.text}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </>
@@ -619,7 +675,7 @@ export default function OrderPage() {
           </a>
           {currentStep > 0 && (
             <button
-              onClick={() => { setCurrentStep((prev) => Math.max(prev - 1, 0)); setStepError(null); }}
+              onClick={() => { setCurrentStep((prev) => Math.max(prev - 1, 0)); setStepError(null); setMicroFeedback(null); }}
               className="order-back-link"
               style={{
                 background: "none",
@@ -635,6 +691,9 @@ export default function OrderPage() {
             </button>
           )}
         </div>
+        <div style={{ fontSize: 12, color: "#777", fontWeight: 600 }}>
+          {currentStep + 1} / {TOTAL_STEPS}
+        </div>
       </div>
 
       {/* Step Content */}
@@ -648,6 +707,23 @@ export default function OrderPage() {
         }}
       >
         {renderStep()}
+
+        {/* Micro-feedback after option selection */}
+        {microFeedback && (
+          <div style={{
+            background: "rgba(29,185,84,0.12)",
+            border: "1px solid rgba(29,185,84,0.4)",
+            borderRadius: 8,
+            padding: "10px 14px",
+            marginBottom: 8,
+            fontSize: 14,
+            color: "#1a7a35",
+            fontWeight: 500,
+            animation: "fadeIn 0.3s ease",
+          }}>
+            {microFeedback}
+          </div>
+        )}
 
         {/* Validation error */}
         {stepError && (
@@ -697,14 +773,16 @@ export default function OrderPage() {
             touchAction: "manipulation",
           }}
         >
-          {loadingPhase === 'validating'
-            ? 'E-Mail wird geprüft...'
-            : loadingPhase === 'submitting'
-            ? 'Wird gesendet...'
-            : currentStep === TOTAL_STEPS - 1
-            ? 'Jetzt Song erstellen'
-            : 'Weiter →'}
+          {getCtaLabel()}
         </button>
+        {/* Trust element */}
+        <p style={{ textAlign: "center", fontSize: 12, color: "#888", marginTop: 10 }}>
+          {currentStep === 7
+            ? "Trailer kostenlos · 29,99€ nur wenn er dir gefällt"
+            : currentStep === 0
+            ? "Kein Abo · Kostenloser Trailer vorab"
+            : "Kein Abo · Nur zahlen wenn der Trailer gefällt"}
+        </p>
       </div>
     </div>
   );
