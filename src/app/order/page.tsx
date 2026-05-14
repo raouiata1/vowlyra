@@ -153,7 +153,7 @@ export default function OrderPage() {
       case 0: return !!answers.anlass;
       case 1: return !!(answers.name ?? '').trim();
       case 2: return !!(answers.empfaenger ?? '').trim();
-      case 3: return !!(answers.geschichte ?? '').trim();
+      case 3: return (answers.geschichte ?? '').trim().length >= 50;
       case 4: return !!answers.klang;
       case 5: return !!answers.stil;
       case 6: return true; // optional
@@ -167,7 +167,7 @@ export default function OrderPage() {
       case 0: return "Bitte wähle einen Anlass aus.";
       case 1: return "Bitte gib deinen Namen ein.";
       case 2: return "Bitte gib den Namen der Person ein.";
-      case 3: return "Bitte erzähl uns kurz eure Geschichte.";
+      case 3: return "Bitte schreib mindestens 50 Zeichen – je mehr Details, desto besser der Song.";
       case 4: return "Bitte wähle einen Klangstil.";
       case 5: return "Bitte wähle einen Musikstil.";
       default: return "Bitte füll dieses Feld aus.";
@@ -368,6 +368,14 @@ export default function OrderPage() {
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
               />
+              <div style={{
+                textAlign: "right",
+                fontSize: 12,
+                marginTop: 6,
+                color: (answers.geschichte ?? "").trim().length >= 50 ? "#1DB954" : "#999",
+              }}>
+                {(answers.geschichte ?? "").trim().length} / 50 Zeichen
+              </div>
             </div>
           </>
         );
