@@ -259,7 +259,7 @@ export default function HowItWorks() {
             {
               bg: "#fff", border: "#1DB954", textColor: "#1a1a1a",
               icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-              label: <><strong>Standard:</strong> Dein Song in 1 Stunde erstellt</>,
+              label: <><strong>Standard:</strong> Dein Song in 6 Stunden erstellt</>,
             },
             {
               bg: "#1a1a1a", border: "#1DB954", textColor: "#fff",

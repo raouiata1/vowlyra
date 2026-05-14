@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vowlyra – Dein persönlicher Song in ca. 1 Stunde",
+  title: "Vowlyra – Dein persönlicher Song in ca. 6 Stunden",
   description:
     "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€.",
   icons: {

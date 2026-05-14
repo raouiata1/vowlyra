@@ -27,7 +27,7 @@ export default function AGBPage() {
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 36 }}>§ 4 Lieferung</h2>
           <p style={{ margin: "0 0 16px" }}>
-            Der vollständige Song wird nach erfolgter Zahlung automatisch per E-Mail zugestellt. Die Lieferzeit beträgt in der Regel unter 5 Minuten, maximal 1 Stunde. Bei technischen Störungen kann die Lieferung länger dauern.
+            Der vollständige Song wird nach erfolgter Zahlung automatisch per E-Mail zugestellt. Die Lieferzeit beträgt in der Regel unter 5 Minuten, maximal 6 Stunden. Bei technischen Störungen kann die Lieferung länger dauern.
           </p>
 
           <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 36 }}>§ 5 Widerrufsrecht</h2>

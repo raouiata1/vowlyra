@@ -218,7 +218,7 @@ export default function SongPage() {
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                 </svg>
-                <span><strong style={{ color: "#fff" }}>Standard:</strong> 1 Stunde</span>
+                <span><strong style={{ color: "#fff" }}>Standard:</strong> 6 Stunden</span>
               </div>
               <div style={{ background: "rgba(29,185,84,0.1)", border: "1px solid rgba(29,185,84,0.25)", borderRadius: 20, padding: "6px 14px", fontSize: 12, color: "#ccc", display: "flex", alignItems: "center", gap: 6 }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

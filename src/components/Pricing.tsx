@@ -108,7 +108,7 @@ export default function Pricing() {
             }}>
               {[
                 "30-Sek. Trailer kostenlos vorab",
-                "Song in 1 Stunde erstellt",
+                "Song in 6 Stunden erstellt",
                 "Vollständiger Song (~3 Min.)",
                 "Personalisierte Lyrics",
                 "Dein Wunsch-Musikstil",
