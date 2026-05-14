@@ -6,19 +6,19 @@ import { useState, useEffect, useRef } from "react";
 
 const slides = [
   {
-    src: "/hero-1.jpg",
+    src: "https://media.vowlyra.com/hero-1.jpg",
     name: "Sarah & Tom",
     occasion: "Hochzeit",
     quote: "Wir haben beide geweint.",
   },
   {
-    src: "/hero-2.jpg",
+    src: "https://media.vowlyra.com/hero-2.jpg",
     name: "Lena & Mama",
     occasion: "Geburtstag",
     quote: "Sie hat sofort geweint.",
   },
   {
-    src: "/hero-3.jpg",
+    src: "https://media.vowlyra.com/hero-3.jpg",
     name: "Jonas & Mia",
     occasion: "Jahrestag",
     quote: "In 5 Min. das perfekte Geschenk.",
