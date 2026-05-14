@@ -497,7 +497,7 @@ export default function OrderPage() {
   return (
     <div
       style={{
-        background: "#FFFFFF",
+        background: "#CCCCCC",
         minHeight: "100vh",
         fontFamily: "system-ui, -apple-system, sans-serif",
         position: "relative",
@@ -592,7 +592,7 @@ export default function OrderPage() {
           display: "flex",
           alignItems: "center",
           padding: "32px 24px",
-          background: "#FFFFFF",
+          background: "#CCCCCC",
           zIndex: 99,
         }}
       >

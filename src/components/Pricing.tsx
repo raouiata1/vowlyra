@@ -11,7 +11,7 @@ export default function Pricing() {
       id="preise"
       className="pricing-section"
       style={{
-        background: "#FFFFFF",
+        background: "#CCCCCC",
         padding: "80px 40px",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}

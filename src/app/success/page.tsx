@@ -61,7 +61,7 @@ export default function SuccessPage() {
 
   return (
     <>
-    <div style={{ background: "#FFFFFF", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+    <div style={{ background: "#CCCCCC", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
       <style>{`
         @keyframes checkIn {
           0%   { transform: scale(0); }
@@ -98,7 +98,7 @@ export default function SuccessPage() {
       `}</style>
 
       {/* Header */}
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#FFFFFF", padding: "20px 24px", zIndex: 99 }}>
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#CCCCCC", padding: "20px 24px", zIndex: 99 }}>
         <Image src="https://media.vowlyra.com/Primary_Logo.png" width={120} height={38} alt="Vowlyra" style={{ objectFit: "contain" }} />
       </div>
 
