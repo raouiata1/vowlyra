@@ -156,7 +156,7 @@ export default function OrderPage() {
       case 3: return (answers.geschichte ?? '').trim().length >= 50;
       case 4: return !!answers.klang;
       case 5: return !!answers.stil;
-      case 6: return true; // optional
+      case 6: return (answers.spezialzeile ?? '').trim().length >= 10;
       case 7: return !!(answers.email ?? '').trim() && !emailError;
       default: return true;
     }
@@ -170,6 +170,7 @@ export default function OrderPage() {
       case 3: return "Bitte schreib mindestens 50 Zeichen – je mehr Details, desto besser der Song.";
       case 4: return "Bitte wähle einen Klangstil.";
       case 5: return "Bitte wähle einen Musikstil.";
+      case 6: return "Bitte beschreib kurz was diesen Moment einzigartig macht.";
       default: return "Bitte füll dieses Feld aus.";
     }
   }
@@ -411,14 +412,14 @@ export default function OrderPage() {
       case 6:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Gibt es eine Zeile, die vorkommen muss?</h1>
-            <Optional />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Nicht nötig – aber wenn ja, bauen wir sie ein.</p>
+            <h1 className="dark-input-title" style={h1Style}>Was macht diesen Moment unvergesslich?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
+            <Required />
+            <p className="dark-input-subtitle" style={subtitleStyle}>Ein Spitzname, ein Innenwitz, eine Erinnerung – was diese Person von allen anderen unterscheidet.</p>
             <div className="dark-input-wrapper">
               <input
                 className="dark-input"
                 style={inputStyle}
-                placeholder={"z.B. 'Meine kleine Sonnenschein'..."}
+                placeholder={"z.B. 'Sie lacht immer zu laut in Kinos'"}
                 value={answers.spezialzeile ?? ""}
                 onChange={(e) => setAnswer("spezialzeile", e.target.value)}
                 onKeyDown={inputKeyDown}
@@ -426,6 +427,14 @@ export default function OrderPage() {
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
               />
+              <div style={{
+                textAlign: "right",
+                fontSize: 12,
+                marginTop: 6,
+                color: (answers.spezialzeile ?? "").trim().length >= 10 ? "#1DB954" : "#999",
+              }}>
+                {(answers.spezialzeile ?? "").trim().length} / 10 Zeichen
+              </div>
             </div>
           </>
         );
