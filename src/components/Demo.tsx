@@ -103,7 +103,7 @@ export default function Demo() {
     >
       <audio
         ref={audioRef}
-        src={DEMO_AUDIO_URL}
+        src={"https://media.vowlyra.com/demo_song_full.mp3"}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}

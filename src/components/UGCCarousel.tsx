@@ -3,10 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 
 const cards = [
-  { name: "Lena M.", occasion: "Geburtstag", src: "https://media.vowlyra.com/ugc-1.MOV", likes: "2.4K", comments: "183" },
-  { name: "Marco & Julia", occasion: "Hochzeit", src: "https://media.vowlyra.com/ugc-2.MOV", likes: "5.1K", comments: "342" },
-  { name: "Familie Braun", occasion: "Weihnachten", src: "https://media.vowlyra.com/ugc-3.MOV", likes: "1.8K", comments: "97" },
-  { name: "Nico R.", occasion: "Überraschung", src: "https://media.vowlyra.com/ugc-4.MOV", likes: "3.2K", comments: "218" },
+  { name: "Lena M.", occasion: "Geburtstag", src: "https://media.vowlyra.com/ugc_1.mp4", likes: "2.4K", comments: "183" },
+  { name: "Marco & Julia", occasion: "Hochzeit", src: "https://media.vowlyra.com/ugc_2.mp4", likes: "5.1K", comments: "342" },
+  { name: "Familie Braun", occasion: "Weihnachten", src: "https://media.vowlyra.com/ugc_3.mp4", likes: "1.8K", comments: "97" },
+  { name: "Nico R.", occasion: "Überraschung", src: "https://media.vowlyra.com/ugc_4.mp4", likes: "3.2K", comments: "218" },
 ];
 
 const allCards = [...cards, ...cards];
