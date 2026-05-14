@@ -94,7 +94,7 @@ export default function HowItWorks() {
       ref={sectionRef}
       className="hiw-section"
       style={{
-        background: "#CCCCCC",
+        background: "#FFFFFF",
         padding: "80px 40px",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}

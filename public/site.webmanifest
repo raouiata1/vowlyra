@@ -6,7 +6,7 @@
     { "src": "/favicon.png", "sizes": "any", "type": "image/png", "purpose": "any maskable" }
   ],
   "theme_color": "#1DB954",
-  "background_color": "#CCCCCC",
+  "background_color": "#FFFFFF",
   "display": "standalone",
   "start_url": "/"
 }

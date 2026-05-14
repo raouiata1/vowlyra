@@ -183,7 +183,7 @@ export default function Hero() {
       id="song-erstellen"
       className="hero-section"
       style={{
-        background: "#CCCCCC",
+        background: "#FFFFFF",
         padding: "60px 24px 80px",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}

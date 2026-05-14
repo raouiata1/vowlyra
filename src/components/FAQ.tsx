@@ -33,7 +33,7 @@ export default function FAQ() {
       id="faq"
       className="faq-section"
       style={{
-        background: "#CCCCCC",
+        background: "#FFFFFF",
         padding: "80px 40px",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}

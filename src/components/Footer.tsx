@@ -23,7 +23,7 @@ export default function Footer() {
     <footer
       className="footer-outer"
       style={{
-        background: "#CCCCCC",
+        background: "#FFFFFF",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
