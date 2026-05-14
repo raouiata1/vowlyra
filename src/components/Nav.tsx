@@ -7,7 +7,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
   return (
     <nav
       style={{
-        background: dark ? "#121212" : "#FFFFFF",
+        background: dark ? "#121212" : "#CCCCCC",
         borderBottom: dark ? "1px solid #1e1e1e" : "none",
         position: "sticky",
         top: 0,
