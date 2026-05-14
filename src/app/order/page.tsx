@@ -61,7 +61,7 @@ const LockIcon = () => (
   </svg>
 );
 
-const occasions = ["🎂 Geburtstag", "💍 Hochzeit", "❤️ Jahrestag", "💝 Valentinstag", "🎵 Einfach so", "🎄 Weihnachten"];
+const occasions = ["Geburtstag", "Hochzeit", "Jahrestag", "Valentinstag", "Einfach so", "Weihnachten"];
 const styles = ["Sanft & Emotional", "Tief & Romantisch", "Fröhlich & Mitreißend", "Nostalgisch", "Filmreif & Kraftvoll", "Sonstiges"];
 const moods = ["Acoustic", "Pop", "Klavier", "R&B", "Filmmusik"];
 
@@ -149,12 +149,12 @@ export default function OrderPage() {
   }
 
   const occasionFeedback: Record<string, string> = {
-    "🎂 Geburtstag": "Perfekt — Geburtstagslieder lassen Menschen weinen vor Freude.",
-    "💍 Hochzeit": "Wunderschön — Hochzeitslieder sind unsere emotionalsten Songs.",
-    "❤️ Jahrestag": "So schön — ein Song, der mehr sagt als tausend Worte.",
-    "💝 Valentinstag": "Perfekt — das Geschenk, das Blumen nie sein können.",
-    "🎵 Einfach so": "Die besten Geschenke brauchen keinen besonderen Grund.",
-    "🎄 Weihnachten": "Magisch — Weihnachtslieder, die wirklich von euch handeln.",
+    "Geburtstag": "Perfekt — Geburtstagslieder lassen Menschen weinen vor Freude.",
+    "Hochzeit": "Wunderschön — Hochzeitslieder sind unsere emotionalsten Songs.",
+    "Jahrestag": "So schön — ein Song, der mehr sagt als tausend Worte.",
+    "Valentinstag": "Perfekt — das Geschenk, das Blumen nie sein können.",
+    "Einfach so": "Die besten Geschenke brauchen keinen besonderen Grund.",
+    "Weihnachten": "Magisch — Weihnachtslieder, die wirklich von euch handeln.",
   };
 
   function handleOptionAutoAdvance(key: string, value: string, nextStep: number) {
