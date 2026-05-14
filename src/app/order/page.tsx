@@ -529,13 +529,13 @@ export default function OrderPage() {
               <div style={{ marginTop: 24, borderTop: "1px solid rgba(0,0,0,0.12)", paddingTop: 20 }}>
                 <p style={{ fontSize: 11, color: "#555", margin: "0 0 12px 0", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px" }}>Was passiert als nächstes</p>
                 {[
-                  { icon: "🎵", text: `Song für ${answers.empfaenger || "sie"} wird erstellt (~5 Min.)` },
-                  { icon: "📧", text: "Kostenloser Trailer kommt in dein Postfach" },
-                  { icon: "✅", text: "Nur zahlen wenn er dich begeistert · 29,99€" },
-                ].map((item, i) => (
+                  `Kostenloser Trailer für ${answers.empfaenger || "sie"} wird in ~5 Min. erstellt`,
+                  "Kostenloser Trailer kommt in dein Postfach",
+                  "Nur zahlen wenn er dich begeistert",
+                ].map((text, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, fontSize: 13, color: "#1a1a1a" }}>
-                    <span style={{ fontSize: 16 }}>{item.icon}</span>
-                    <span>{item.text}</span>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1DB954", flexShrink: 0, display: "inline-block" }} />
+                    <span>{text}</span>
                   </div>
                 ))}
               </div>
@@ -778,9 +778,7 @@ export default function OrderPage() {
         </button>
         {/* Trust element */}
         <p style={{ textAlign: "center", fontSize: 12, color: "#888", marginTop: 10 }}>
-          {currentStep === 7
-            ? "Trailer kostenlos · 29,99€ nur wenn er dir gefällt"
-            : currentStep === 0
+          {currentStep === 0
             ? "Kein Abo · Kostenloser Trailer vorab"
             : "Kein Abo · Nur zahlen wenn der Trailer gefällt"}
         </p>
