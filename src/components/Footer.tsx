@@ -151,6 +151,24 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            {/* Col 4 – Policy */}
+            <div className="footer-policy-col">
+              <div style={colHeadingStyle}>Policy</div>
+              {[
+                { label: "Impressum", href: "/impressum" },
+                { label: "Widerrufsbelehrung", href: "/widerrufsbelehrung" },
+                { label: "Datenschutzerklärung", href: "/datenschutz" },
+                { label: "AGB", href: "/agb" },
+                { label: "Cookie-Richtlinie", href: "/cookies" },
+                { label: "Refund-Policy", href: "/refund" },
+                { label: "Nutzungsbedingungen", href: "/nutzungsbedingungen" },
+                { label: "Disclaimer", href: "/disclaimer" },
+              ].map((link) => (
+                <a key={link.label} href={link.href} className="footer-link" style={linkStyle}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
