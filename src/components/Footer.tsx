@@ -41,7 +41,7 @@ export default function Footer() {
         }
         .footer-links-grid {
           display: grid;
-          grid-template-columns: 1fr 1.5fr;
+          grid-template-columns: 1fr 1.5fr 1fr;
           gap: 40px;
         }
         .stars-row { display: flex; align-items: center; gap: 8px; }
@@ -56,6 +56,9 @@ export default function Footer() {
           .footer-links-grid {
             grid-template-columns: 1fr 1fr;
             gap: 24px;
+          }
+          .footer-policy-col {
+            grid-column: 1 / -1;
           }
           .footer-link { font-size: 13px !important; }
         }
@@ -129,6 +132,24 @@ export default function Footer() {
                 </svg>
                 Chat starten
               </button>
+            </div>
+            {/* Col 4 – Policy */}
+            <div className="footer-policy-col">
+              <div style={colHeadingStyle}>Policy</div>
+              {[
+                { label: "Impressum", href: "/impressum" },
+                { label: "Widerrufsbelehrung", href: "/widerrufsbelehrung" },
+                { label: "Datenschutzerklärung", href: "/datenschutz" },
+                { label: "AGB", href: "/agb" },
+                { label: "Cookie-Richtlinie", href: "/cookies" },
+                { label: "Refund-Policy", href: "/refund" },
+                { label: "Nutzungsbedingungen", href: "/nutzungsbedingungen" },
+                { label: "Disclaimer", href: "/disclaimer" },
+              ].map((link) => (
+                <a key={link.label} href={link.href} className="footer-link" style={linkStyle}>
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
