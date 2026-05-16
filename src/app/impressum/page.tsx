@@ -1,43 +1,93 @@
 export default function ImpressumPage() {
   return (
-    <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", padding: "80px 24px" }}>
-      <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <a href="/" style={{ color: "#555", fontSize: 13, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, marginBottom: 40 }}>
+    <main style={{ background: "#0e0e0e", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", padding: "80px 24px" }}>
+      <div style={{ maxWidth: 680, margin: "0 auto" }}>
+
+        <a href="/" style={{ color: "#555", fontSize: 13, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, marginBottom: 48 }}>
           ← Zurück
         </a>
-        <h1 style={{ color: "#fff", fontSize: 36, fontWeight: 800, marginBottom: 32, letterSpacing: "-1px" }}>Impressum</h1>
 
-        <div style={{ color: "#888", fontSize: 15, lineHeight: 1.8 }}>
-          <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 32 }}>Angaben</h2>
-          <p style={{ margin: "0 0 8px" }}>Vowlyra LLC</p>
-          <p style={{ margin: "0 0 8px" }}>30 N Gould St Ste 100</p>
-          <p style={{ margin: "0 0 8px" }}>Sheridan, WY 82801</p>
-          <p style={{ margin: "0 0 8px" }}>Vereinigte Staaten von Amerika</p>
+        <h1 style={{ color: "#fff", fontSize: 40, fontWeight: 800, marginBottom: 8, letterSpacing: "-1.5px" }}>
+          Impressum
+        </h1>
+        <p style={{ color: "#555", fontSize: 14, marginBottom: 56 }}>Rechtliche Angaben zu Vowlyra</p>
 
-          <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 32 }}>Kontakt</h2>
-          <p style={{ margin: "0 0 8px" }}>E-Mail: info@vowlyra.com</p>
-          <p style={{ margin: "0 0 8px" }}>Live-Chat: vowlyra.com</p>
+        {/* Kontakt */}
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
+            Kontakt
+          </h2>
+          <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px", display: "flex", flexDirection: "column", gap: 10 }}>
+            <Row label="E-Mail" value="info@vowlyra.com" link="mailto:info@vowlyra.com" />
+            <Row label="Live-Chat" value="vowlyra.com" link="https://vowlyra.com" />
+          </div>
+        </section>
 
-          <h2 style={{ color: "#ccc", fontSize: 18, fontWeight: 700, marginBottom: 8, marginTop: 32 }}>Zahlungsabwicklung</h2>
-          <p style={{ margin: "0 0 16px" }}>
+        {/* Zahlungsabwicklung */}
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
+            Zahlungsabwicklung
+          </h2>
+          <p style={{ color: "#666", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
             Zahlungen werden über folgende zertifizierte Zahlungsdienstleister abgewickelt:
           </p>
-          <p style={{ margin: "0 0 12px" }}>
-            <span style={{ color: "#ccc" }}>Paddle.com Market Limited</span> (Merchant of Record, primär) — 15 Lime Street, London, EC3M 7AP, Vereinigtes Königreich.{" "}
-            Für zahlungsbezogene Anfragen: paddle.net/support
-          </p>
-          <p style={{ margin: "0 0 12px" }}>
-            <span style={{ color: "#ccc" }}>Stripe Payments Europe Limited</span> (Zahlungsabwickler, Fallback) — 1 Grand Canal Street Lower, Dublin 2, Irland
-          </p>
-          <p style={{ margin: "0 0 12px" }}>
-            <span style={{ color: "#ccc" }}>PayPal (Europe) S.à r.l. et Cie, S.C.A.</span> (Zahlungsabwickler, direkt) — 22-24 Boulevard Royal, L-2449 Luxemburg
-          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <PaymentCard
+              name="Paddle.com Market Limited"
+              role="Merchant of Record · primär"
+              address="15 Lime Street, London, EC3M 7AP, Vereinigtes Königreich"
+              support="paddle.net/support"
+            />
+            <PaymentCard
+              name="Stripe Payments Europe Limited"
+              role="Zahlungsabwickler · Fallback"
+              address="1 Grand Canal Street Lower, Dublin 2, Irland"
+            />
+            <PaymentCard
+              name="PayPal (Europe) S.à r.l. et Cie, S.C.A."
+              role="Zahlungsabwickler · direkt"
+              address="22-24 Boulevard Royal, L-2449 Luxemburg"
+            />
+          </div>
+        </section>
 
-          <p style={{ color: "#444", fontSize: 13, marginTop: 48 }}>
-            Zuletzt aktualisiert: 15.05.2026
-          </p>
-        </div>
+        <p style={{ color: "#333", fontSize: 12, borderTop: "1px solid #1e1e1e", paddingTop: 24, marginTop: 16 }}>
+          Zuletzt aktualisiert: 15.05.2026
+        </p>
+
       </div>
     </main>
+  );
+}
+
+function Row({ label, value, link }: { label: string; value: string; link?: string }) {
+  return (
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
+      <span style={{ color: "#555", fontSize: 14 }}>{label}</span>
+      {link ? (
+        <a href={link} style={{ color: "#ccc", fontSize: 14, textDecoration: "none" }}>{value}</a>
+      ) : (
+        <span style={{ color: "#ccc", fontSize: 14 }}>{value}</span>
+      )}
+    </div>
+  );
+}
+
+function PaymentCard({ name, role, address, support }: { name: string; role: string; address: string; support?: string }) {
+  return (
+    <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "18px 24px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 8 }}>
+        <span style={{ color: "#e0e0e0", fontSize: 14, fontWeight: 600 }}>{name}</span>
+        <span style={{ color: "#1DB954", fontSize: 11, fontWeight: 600, background: "#1DB95415", border: "1px solid #1DB95430", borderRadius: 500, padding: "2px 10px", whiteSpace: "nowrap" }}>
+          {role}
+        </span>
+      </div>
+      <p style={{ color: "#555", fontSize: 13, margin: 0, lineHeight: 1.6 }}>{address}</p>
+      {support && (
+        <p style={{ color: "#444", fontSize: 12, margin: "8px 0 0" }}>
+          Support: <a href={`https://${support}`} style={{ color: "#555", textDecoration: "none" }}>{support}</a>
+        </p>
+      )}
+    </div>
   );
 }
