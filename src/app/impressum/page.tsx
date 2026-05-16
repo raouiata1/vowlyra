@@ -49,17 +49,20 @@ export default function ImpressumPage() {
               name="Paddle.com Market Limited"
               role="Merchant of Record · primär"
               address="15 Lime Street, London, EC3M 7AP, Vereinigtes Königreich"
-              support="paddle.net/support"
+              support="paddle.net"
+              note="Paddle agiert als Merchant of Record. Auf Ihrer Kontoabrechnung erscheint 'Paddle' oder 'Paddle.net'."
             />
             <PaymentCard
               name="Stripe Payments Europe Limited"
               role="Zahlungsabwickler · Fallback"
               address="1 Grand Canal Street Lower, Dublin 2, Irland"
+              note="Kontakt bei Stripe-Transaktionen: info@vowlyra.com"
             />
             <PaymentCard
               name="PayPal (Europe) S.à r.l. et Cie, S.C.A."
               role="Zahlungsabwickler · direkt"
               address="22-24 Boulevard Royal, L-2449 Luxemburg"
+              note="Kontakt vor Dispute-Eröffnung: info@vowlyra.com"
             />
           </div>
         </section>
@@ -86,7 +89,7 @@ function Row({ label, value, link }: { label: string; value: string; link?: stri
   );
 }
 
-function PaymentCard({ name, role, address, support }: { name: string; role: string; address: string; support?: string }) {
+function PaymentCard({ name, role, address, support, note }: { name: string; role: string; address: string; support?: string; note?: string }) {
   return (
     <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "18px 24px" }}>
       <div style={{ marginBottom: 8 }}>
@@ -97,6 +100,9 @@ function PaymentCard({ name, role, address, support }: { name: string; role: str
         <p style={{ color: "#444", fontSize: 12, margin: "8px 0 0" }}>
           Support: <a href={`https://${support}`} style={{ color: "#555", textDecoration: "none" }}>{support}</a>
         </p>
+      )}
+      {note && (
+        <p style={{ color: "#444", fontSize: 12, margin: "8px 0 0", lineHeight: 1.6 }}>{note}</p>
       )}
     </div>
   );
