@@ -75,9 +75,9 @@ export default function AGBPage() {
                 Auf Deutsch: Der Bestellprozess wird von unserem Online-Wiederverkäufer Paddle.com durchgeführt. Paddle.com ist der Merchant of Record für alle unsere Bestellungen. Paddle bearbeitet alle Kundendienstanfragen und Rücksendungen.
               </p>
             </InfoBox>
-            <NP n={1}>Vowlyra setzt für die Zahlungsabwicklung zwei zertifizierte Payment-Gateways ein. Je nach technischer Verfügbarkeit zum Zeitpunkt der Bestellung gilt folgendes:</NP>
+            <NP n={1}>Vowlyra setzt für die Zahlungsabwicklung zwei zertifizierte Payment-Gateways ein. Beide Gateways sind aktiv und werden parallel genutzt:</NP>
 
-            <SubHeading>2.1  Szenario A — Zahlung über Paddle (Primär)</SubHeading>
+            <SubHeading>2.1  Szenario A — Zahlung über Paddle</SubHeading>
             <NP n={1}>Wenn die Zahlung über Paddle.com Market Limited (nachfolgend &bdquo;Paddle&ldquo;) abgewickelt wird, fungiert Paddle als Merchant of Record. Das bedeutet:</NP>
             <BulletList items={[
               "Der Kaufvertrag für das digitale Produkt wird zwischen dem Kunden und Paddle geschlossen",
@@ -87,7 +87,7 @@ export default function AGBPage() {
               "Für Fragen zur Zahlung und Rechnungsstellung ist Paddle zuständig: paddle.com/legal/buyer-terms",
             ]} />
 
-            <SubHeading>2.2  Szenario B — Zahlung über Stripe (Fallback)</SubHeading>
+            <SubHeading>2.2  Szenario B — Zahlung über Stripe</SubHeading>
             <NP n={1}>Wenn die Zahlung über Stripe Payments Europe Limited (nachfolgend &bdquo;Stripe&ldquo;) abgewickelt wird, ist Vowlyra LLC der rechtliche Verkäufer und Vertragspartner des Kunden. Stripe fungiert ausschließlich als technischer Zahlungsabwickler.</NP>
 
             <SubHeading>2.3  Akzeptierte Zahlungsmethoden</SubHeading>
