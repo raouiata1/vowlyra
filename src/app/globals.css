@@ -37,31 +37,50 @@ main {
   }
 }
 
-/* Hero: single column on mobile */
+/* Hero: 2-column grid (desktop) with title, image, body as named areas */
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+  grid-template-areas:
+    "title image"
+    "body  image";
+  column-gap: 64px;
+  row-gap: 0;
 }
+.hero-title-col {
+  grid-area: title;
+  align-self: end;
+}
+.hero-image-grid {
+  grid-area: image;
+  align-self: center;
+}
+.hero-body-col {
+  grid-area: body;
+  align-self: start;
+}
+
+/* Mobile: Titel → Bild → Text */
 @media (max-width: 767px) {
   .hero-grid {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
-  /* Slider: auf Mobilgerät zuerst oben anzeigen */
+  .hero-title-col {
+    order: 1;
+  }
   .hero-image-grid {
     display: block !important;
-    order: -1;
+    order: 2;
     width: calc(100% - 40px);
     height: 260px;
     border-radius: 16px;
-    margin: 0 20px 24px;
+    margin: 16px 20px;
     overflow: hidden;
   }
-  .hero-text-col {
-    order: 0;
+  .hero-body-col {
+    order: 3;
   }
   .hero-section {
     padding: 40px 20px 48px !important;
@@ -69,6 +88,7 @@ main {
   .hero-h1 {
     font-size: 36px !important;
     letter-spacing: -0.8px !important;
+    margin-bottom: 0 !important;
   }
   .hero-ctas {
     flex-wrap: wrap;

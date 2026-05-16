@@ -195,8 +195,8 @@ export default function Hero() {
           margin: "0 auto",
         }}
       >
-        {/* Left: Text */}
-        <div className="hero-text-col">
+        {/* 1 — Title */}
+        <div className="hero-title-col">
           <h1
             className="hero-h1"
             style={{
@@ -212,7 +212,15 @@ export default function Hero() {
             Deine Geschichte als einzigartiger Song <br />
             <span style={{ color: "#1DB954" }}>in wenigen Minuten</span>.
           </h1>
+        </div>
 
+        {/* 2 — Image Slider */}
+        <div className="hero-image-grid">
+          <HeroSlider />
+        </div>
+
+        {/* 3 — Body (description, CTAs, proof) */}
+        <div className="hero-body-col">
           <p
             style={{
               fontSize: 18,
@@ -220,6 +228,7 @@ export default function Hero() {
               lineHeight: 1.6,
               marginBottom: 32,
               maxWidth: 460,
+              marginTop: 0,
             }}
           >
             Überrasche jemanden mit einem persönlichen Song, der verbindet, berührt und für immer in Erinnerung bleibt.{" "}
@@ -257,7 +266,6 @@ export default function Hero() {
                 textDecoration: "none",
                 border: "2px solid #1a1a1a",
                 transition: "all 0.2s ease",
-                flexWrap: "wrap",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "#1a1a1a";
@@ -284,24 +292,17 @@ export default function Hero() {
               fontWeight: 500,
             }}
           >
-            {/* Row 1: Rating */}
             <div style={{ display: "flex", alignItems: "center" }}>
               <span style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>4,9</span>
               <span style={{ color: "#FFB800", fontSize: 15, margin: "0 6px 0 8px", letterSpacing: "1px" }}>★★★★★</span>
               <span style={{ color: "#1a1a1a", fontSize: 12 }}>aus 2.400+ Songs</span>
             </div>
-            {/* Row 2: Delivery times */}
             <div style={{ display: "flex", alignItems: "center" }}>
               <span>Trailer ~30 Sek.</span>
               <Sep />
               <span>Song 2–4 Min.</span>
             </div>
           </div>
-        </div>
-
-        {/* Right: Image Slider */}
-        <div className="hero-image-grid">
-          <HeroSlider />
         </div>
       </div>
     </section>
