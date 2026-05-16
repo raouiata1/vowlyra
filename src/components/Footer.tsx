@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { loadCrisp } from "@/lib/crisp";
 
 export default function Footer() {
   const colHeadingStyle: React.CSSProperties = {
@@ -109,7 +110,11 @@ export default function Footer() {
                 Fragen? Schreib uns direkt
               </p>
               <button
-                onClick={() => (window as any).$crisp?.push(["do", "chat:open"])}
+                onClick={() => {
+                  loadCrisp();
+                  window.$crisp.push(["do", "chat:show"]);
+                  window.$crisp.push(["do", "chat:open"]);
+                }}
                 className="footer-crisp"
                 style={{
                   display: "inline-flex",

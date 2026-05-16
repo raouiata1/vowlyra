@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import ChatBar from "@/components/ChatBar";
+import Footer from "@/components/Footer";
 
 
 const TOTAL_SECONDS = 1200; // 20 minutes
@@ -227,6 +228,7 @@ export default function SuccessPage() {
 
       </div>
     </div>
+    <Footer />
     <ChatBar />
     </>
   );

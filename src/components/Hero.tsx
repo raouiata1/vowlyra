@@ -196,7 +196,7 @@ export default function Hero() {
         }}
       >
         {/* Left: Text */}
-        <div>
+        <div className="hero-text-col">
           <h1
             className="hero-h1"
             style={{

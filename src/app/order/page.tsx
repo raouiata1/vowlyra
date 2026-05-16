@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { generateOrderId } from "@/lib/order";
+import Footer from "@/components/Footer";
 
 const TOTAL_STEPS = 8;
 
@@ -568,6 +569,7 @@ export default function OrderPage() {
   const isCurrentStepValid = isStepValid(currentStep);
 
   return (
+    <>
     <div
       style={{
         background: "#CCCCCC",
@@ -784,5 +786,7 @@ export default function OrderPage() {
         </p>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

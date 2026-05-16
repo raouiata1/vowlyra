@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Nav from "@/components/Nav";
 import UGCCarousel from "@/components/UGCCarousel";
+import Footer from "@/components/Footer";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -422,28 +423,7 @@ export default function SongPage() {
           </p>
         </div>
 
-        {/* FOOTER */}
-        <footer style={{ background: "#0a0a0a", borderTop: "1px solid #1e1e1e", padding: "28px 40px" }}>
-          <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
-            <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center" }}>
-              <a href="/impressum" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
-              >Impressum</a>
-              <a href="/agb" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
-              >AGB</a>
-              <a href="/datenschutz" style={{ color: "#555", fontSize: 13, textDecoration: "none", fontFamily: "system-ui, -apple-system, sans-serif" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#888")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
-              >Datenschutzrichtlinien</a>
-            </div>
-            <p style={{ color: "#333", fontSize: 12, margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
-              © {new Date().getFullYear()} Vowlyra. Alle Rechte vorbehalten.
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </main>
 
       <style>{`

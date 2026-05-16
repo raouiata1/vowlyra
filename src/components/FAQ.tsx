@@ -23,6 +23,10 @@ const faqs = [
     q: "Wie lange dauert die Lieferung des vollständigen Songs?",
     a: "Der Trailer kommt in ~5 Minuten. Nach der Zahlung erhältst du den vollständigen Song (ca. 3 Minuten) innerhalb weniger Minuten per E-Mail – manchmal sogar schneller.",
   },
+  {
+    q: "Was ist eure Rückerstattungsrichtlinie?",
+    a: "Unser Grundsatz: Nur zahlen, wenn der Trailer gefällt. Du hörst zuerst kostenlos eine 30-Sekunden-Vorschau – zahlst du nicht, entstehen keine Kosten. Falls nach der Zahlung technische Probleme auftreten und wir keine Lösung finden, erstatten wir den vollen Betrag. Mehr Details findest du in unserer Refund-Policy.",
+  },
 ];
 
 export default function FAQ() {

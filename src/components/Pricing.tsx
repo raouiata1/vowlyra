@@ -74,20 +74,35 @@ export default function Pricing() {
               cursor: "default",
             }}
           >
-            <span style={{
-              display: "inline-block",
-              alignSelf: "flex-start",
-              background: "#e8f5e9",
-              color: "#1a7a35",
-              borderRadius: 500,
-              fontSize: 11,
-              fontWeight: 700,
-              padding: "4px 14px",
-              marginBottom: 20,
-            }}>Standard</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
+              <span style={{
+                display: "inline-block",
+                background: "#e8f5e9",
+                color: "#1a7a35",
+                borderRadius: 500,
+                fontSize: 11,
+                fontWeight: 700,
+                padding: "4px 14px",
+              }}>Standard</span>
+              <span style={{
+                display: "inline-block",
+                background: "#1DB954",
+                color: "#000",
+                borderRadius: 500,
+                fontSize: 11,
+                fontWeight: 800,
+                padding: "4px 12px",
+              }}>⭐ Beliebt</span>
+            </div>
 
-            <div style={{ fontSize: 32, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>
-              29,99 €
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+              <div style={{ fontSize: 32, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>
+                29,99 €
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ fontSize: 16, color: "#bbb", textDecoration: "line-through", fontWeight: 500 }}>59,99 €</span>
+                <span style={{ fontSize: 11, fontWeight: 800, background: "#fef3c7", color: "#92400e", borderRadius: 4, padding: "2px 6px" }}>–50%</span>
+              </div>
             </div>
 
             <div style={{ color: "#999", fontSize: 13, marginTop: 8, marginBottom: 20 }}>
@@ -187,8 +202,14 @@ export default function Pricing() {
               marginBottom: 20,
             }}>Express</span>
 
-            <div style={{ fontSize: 32, fontWeight: 800, color: "#fff", lineHeight: 1 }}>
-              34,99 €
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+              <div style={{ fontSize: 32, fontWeight: 800, color: "#fff", lineHeight: 1 }}>
+                34,99 €
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ fontSize: 16, color: "#555", textDecoration: "line-through", fontWeight: 500 }}>69,99 €</span>
+                <span style={{ fontSize: 11, fontWeight: 800, background: "#fef3c7", color: "#92400e", borderRadius: 4, padding: "2px 6px" }}>–50%</span>
+              </div>
             </div>
 
             <div style={{ color: "#b3b3b3", fontSize: 13, marginTop: 8, marginBottom: 20 }}>
