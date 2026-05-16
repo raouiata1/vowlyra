@@ -12,6 +12,19 @@ export default function ImpressumPage() {
         </h1>
         <p style={{ color: "#555", fontSize: 14, marginBottom: 56 }}>Rechtliche Angaben zu Vowlyra</p>
 
+        {/* Angaben */}
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
+            Angaben
+          </h2>
+          <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
+            <span style={{ color: "#e0e0e0", fontSize: 14, fontWeight: 600 }}>Vowlyra LLC</span>
+            <span style={{ color: "#666", fontSize: 14 }}>30 N Gould St Ste 100</span>
+            <span style={{ color: "#666", fontSize: 14 }}>Sheridan, WY 82801</span>
+            <span style={{ color: "#666", fontSize: 14 }}>Vereinigte Staaten von Amerika</span>
+          </div>
+        </section>
+
         {/* Kontakt */}
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
