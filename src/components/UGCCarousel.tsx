@@ -82,9 +82,9 @@ export default function UGCCarousel() {
           className="carousel-track"
           style={{
             display: "flex",
-            gap: 20,
             width: "max-content",
-            animation: popup ? "none" : "slide 40s linear infinite",
+            willChange: "transform",
+            animation: popup ? "none" : "ugc-slide 40s linear infinite",
           }}
           onMouseEnter={(e) => {
             if (!popup) (e.currentTarget as HTMLDivElement).style.animationPlayState = "paused";
@@ -107,6 +107,7 @@ export default function UGCCarousel() {
                 flexShrink: 0,
                 background: "#111",
                 cursor: "pointer",
+                marginRight: 20,
               }}
             >
               {/* VIDEO */}
@@ -281,14 +282,28 @@ export default function UGCCarousel() {
       )}
 
       <style>{`
-        @keyframes slide {
+        /*
+          Desktop: 4 cards × (220px + 20px margin) = 960px per set
+          -50% of max-content (8 × 240 = 1920px) = -960px ✓ exact loop point
+
+          Mobile:  4 cards × (160px + 16px margin) = 704px per set
+          -50% of max-content (8 × 176 = 1408px) = -704px ✓ exact loop point
+        */
+        @keyframes ugc-slide {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
         }
         .ugc-play-btn { opacity: 0; transition: opacity 0.2s; }
         .ugc-card:hover .ugc-play-btn { opacity: 1; }
         @media (max-width: 767px) {
-          .ugc-card { width: 180px !important; height: 320px !important; }
+          .ugc-card {
+            width: 160px !important;
+            height: 284px !important;
+            margin-right: 16px !important;
+          }
+          .carousel-track {
+            animation-duration: 32s !important;
+          }
         }
       `}</style>
     </section>
