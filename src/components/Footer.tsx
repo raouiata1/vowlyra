@@ -143,8 +143,6 @@ export default function Footer() {
                 { label: "AGB", href: "/agb" },
                 { label: "Cookie-Richtlinie", href: "/cookies" },
                 { label: "Refund-Policy", href: "/refund" },
-                { label: "Nutzungsbedingungen", href: "/nutzungsbedingungen" },
-                { label: "Disclaimer", href: "/disclaimer" },
               ].map((link) => (
                 <a key={link.label} href={link.href} className="footer-link" style={linkStyle}>
                   {link.label}
