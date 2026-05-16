@@ -10,7 +10,6 @@ export default function WiderrufsbelehrungPage() {
         <h1 style={{ color: "#fff", fontSize: 40, fontWeight: 800, marginBottom: 8, letterSpacing: "-1.5px" }}>
           Widerrufsbelehrung
         </h1>
-        <p style={{ color: "#555", fontSize: 14, marginBottom: 8 }}>Version 4.0 — Final</p>
         <p style={{ color: "#333", fontSize: 12, marginBottom: 56 }}>
           Gesetzliche Grundlage: § 312g BGB, § 355 BGB, § 356 Abs. 5 BGB, Art. 16 lit. m Verbraucherrechterichtlinie 2011/83/EU, EGBGB Anlage 1, Art. 246a § 1 Abs. 2 Nr. 1 EGBGB, Paddle Buyer Terms, Paddle Customer Handbook, Stripe Website Checklist, EU-Richtlinie 2023/2673
         </p>
