@@ -89,11 +89,8 @@ function Row({ label, value, link }: { label: string; value: string; link?: stri
 function PaymentCard({ name, role, address, support }: { name: string; role: string; address: string; support?: string }) {
   return (
     <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "18px 24px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 8 }}>
+      <div style={{ marginBottom: 8 }}>
         <span style={{ color: "#e0e0e0", fontSize: 14, fontWeight: 600 }}>{name}</span>
-        <span style={{ color: "#1DB954", fontSize: 11, fontWeight: 600, background: "#1DB95415", border: "1px solid #1DB95430", borderRadius: 500, padding: "2px 10px", whiteSpace: "nowrap" }}>
-          {role}
-        </span>
       </div>
       <p style={{ color: "#555", fontSize: 13, margin: 0, lineHeight: 1.6 }}>{address}</p>
       {support && (
