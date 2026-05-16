@@ -265,7 +265,8 @@ export default function OrderPage() {
 
       if (data.success) {
         sessionStorage.setItem('vowlyra_email', answers.email)
-        router.push('/success')
+        const ref = Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
+        router.push(`/success?ref=${ref}`)
       } else {
         alert('Fehler – bitte versuche es erneut')
       }
