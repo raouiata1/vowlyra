@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import CookieBanner from "@/components/CookieBanner";
+import ChatBar from "@/components/ChatBar";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="de" className="h-full">
       <body style={{ minHeight: "100%", margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
         {children}
+        <ChatBar />
         <CookieBanner />
         <SpeedInsights />
         <Analytics />

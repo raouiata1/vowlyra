@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import ChatBar from "@/components/ChatBar";
 import Footer from "@/components/Footer";
 
 
@@ -229,7 +228,6 @@ export default function SuccessPage() {
       </div>
     </div>
     <Footer />
-    <ChatBar />
     </>
   );
 }
