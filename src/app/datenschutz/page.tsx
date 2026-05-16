@@ -1,5 +1,7 @@
 export default function DatenschutzPage() {
   return (
+    <>
+    <style>{`.toc-link { color: #666; text-decoration: none; } .toc-link:hover { color: #1DB954; }`}</style>
     <main style={{ background: "#0e0e0e", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", padding: "80px 24px" }}>
       <div style={{ maxWidth: 760, margin: "0 auto" }}>
 
@@ -32,30 +34,34 @@ export default function DatenschutzPage() {
         <Section label="Inhaltsverzeichnis">
           <ol style={{ color: "#666", fontSize: 14, lineHeight: 2, paddingLeft: 20, margin: 0 }}>
             {[
-              "Verantwortlicher",
-              "EU- und UK-Vertreter",
-              "Geltungsbereich",
-              "Grundsätze der Datenverarbeitung",
-              "Erhobene Daten und Verarbeitungszwecke",
-              "Rechtsgrundlagen",
-              "Drittanbieter und Zahlungspartner",
-              "Internationale Datentransfers",
-              "Speicherfristen",
-              "Minderjährige",
-              "KI-generierte Inhalte und automatisierte Prozesse",
-              "Datensicherheit",
-              "Datenpannen",
-              "Cookies und Tracking",
-              "Ihre Rechte",
-              "Änderungen dieser Erklärung",
-            ].map((item, i) => (
-              <li key={i}>{item}</li>
+              ["sec-1", "Verantwortlicher"],
+              ["sec-2", "EU- und UK-Vertreter"],
+              ["sec-3", "Geltungsbereich"],
+              ["sec-4", "Grundsätze der Datenverarbeitung"],
+              ["sec-5", "Erhobene Daten und Verarbeitungszwecke"],
+              ["sec-6", "Rechtsgrundlagen"],
+              ["sec-7", "Drittanbieter und Zahlungspartner"],
+              ["sec-8", "Internationale Datentransfers"],
+              ["sec-9", "Speicherfristen"],
+              ["sec-10", "Minderjährige"],
+              ["sec-11", "KI-generierte Inhalte und automatisierte Prozesse"],
+              ["sec-12", "Datensicherheit"],
+              ["sec-13", "Datenpannen"],
+              ["sec-14", "Cookies und Tracking"],
+              ["sec-15", "Ihre Rechte"],
+              ["sec-16", "Änderungen dieser Erklärung"],
+            ].map(([id, label], i) => (
+              <li key={i}>
+                <a href={`#${id}`} className="toc-link">
+                  {label}
+                </a>
+              </li>
             ))}
           </ol>
         </Section>
 
         {/* 1. Verantwortlicher */}
-        <Section label="1. Verantwortlicher">
+        <Section id="sec-1" label="1. Verantwortlicher">
           <DataTable rows={[
             ["Unternehmen", "Vowlyra LLC"],
             ["Rechtsform", "Limited Liability Company (LLC), Wyoming, USA"],
@@ -69,7 +75,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 2. EU- und UK-Vertreter */}
-        <Section label="2. EU- und UK-Vertreter">
+        <Section id="sec-2" label="2. EU- und UK-Vertreter">
           <p style={pStyle}>
             Gemäß Art. 27 DSGVO und UK GDPR Art. 27 sind Verantwortliche mit Sitz außerhalb der EU bzw. des Vereinigten Königreichs, die personenbezogene Daten von Personen in diesen Regionen verarbeiten, zur Benennung eines Vertreters verpflichtet.
           </p>
@@ -89,14 +95,14 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 3. Geltungsbereich */}
-        <Section label="3. Geltungsbereich">
+        <Section id="sec-3" label="3. Geltungsbereich">
           <p style={pStyle}>
             Diese Datenschutzerklärung gilt für alle Personen, die vowlyra.com besuchen, den personalisierten Bestellprozess (Wizard) nutzen, einen Song erwerben, den Kundensupport kontaktieren oder Marketing-Kommunikation von Vowlyra erhalten. Die Erklärung gilt unabhängig vom Standort der betroffenen Person.
           </p>
         </Section>
 
         {/* 4. Grundsätze */}
-        <Section label="4. Grundsätze der Datenverarbeitung">
+        <Section id="sec-4" label="4. Grundsätze der Datenverarbeitung">
           <DataTable rows={[
             ["Zweckbindung", "Daten werden ausschließlich für klar definierte und offengelegte Zwecke verarbeitet."],
             ["Datensparsamkeit", "Es werden nur die Daten erhoben, die für die jeweilige Leistung tatsächlich erforderlich sind."],
@@ -109,7 +115,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 5. Erhobene Daten */}
-        <Section label="5. Erhobene Daten und Verarbeitungszwecke">
+        <Section id="sec-5" label="5. Erhobene Daten und Verarbeitungszwecke">
           <SubHeading>5.1 Daten im Bestellprozess (Wizard)</SubHeading>
           <DataTable headers={["Datenkategorie", "Konkrete Daten", "Zweck"]} rows={[
             ["Identifikationsdaten", "Name des Käufers", "Song-Personalisierung, Vertragserfüllung"],
@@ -150,7 +156,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 6. Rechtsgrundlagen */}
-        <Section label="6. Rechtsgrundlagen der Verarbeitung">
+        <Section id="sec-6" label="6. Rechtsgrundlagen der Verarbeitung">
           <DataTable headers={["Verarbeitungszweck", "EU / UK", "Kanada", "Australien", "Neuseeland"]} rows={[
             ["Song-Lieferung", "Art. 6(1)(b) DSGVO", "PIPEDA Prinzip 2", "APP 3", "IPP 2"],
             ["Liefernachweis", "Art. 6(1)(b)+(f) DSGVO", "PIPEDA Prinzip 2+5", "APP 3+11", "IPP 2+5"],
@@ -163,7 +169,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 7. Drittanbieter */}
-        <Section label="7. Drittanbieter und Zahlungspartner">
+        <Section id="sec-7" label="7. Drittanbieter und Zahlungspartner">
 
           <SubHeading>7.1 Hosting und Infrastruktur</SubHeading>
           <ProviderCard
@@ -286,7 +292,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 8. Internationale Datentransfers */}
-        <Section label="8. Internationale Datentransfers">
+        <Section id="sec-8" label="8. Internationale Datentransfers">
           <DataTable headers={["Anbieter", "Serverstandort", "Schutzmaßnahme"]} rows={[
             ["Vercel Inc.", "USA", "SCCs (EU Beschluss 2021/914)"],
             ["Cloudflare Inc.", "USA", "SCCs"],
@@ -310,7 +316,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 9. Speicherfristen */}
-        <Section label="9. Speicherfristen">
+        <Section id="sec-9" label="9. Speicherfristen">
           <DataTable headers={["Datenkategorie", "Speicherfrist", "Rechtsgrundlage"]} rows={[
             ["Bestelldaten (Name, E-Mail, Transaktions-ID)", "10 Jahre", "Steuerrechtliche Aufbewahrungspflicht"],
             ["Liefernachweisdaten (Zeitstempel, Download-Log)", "10 Jahre", "Rechtlicher Beweiszweck"],
@@ -325,7 +331,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 10. Minderjährige */}
-        <Section label="10. Minderjährige">
+        <Section id="sec-10" label="10. Minderjährige">
           <p style={pStyle}>
             Das Angebot von Vowlyra richtet sich ausschließlich an Personen, die das 18. Lebensjahr vollendet haben. Es werden wissentlich keine personenbezogenen Daten von Minderjährigen erhoben.
           </p>
@@ -335,7 +341,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 11. KI */}
-        <Section label="11. KI-generierte Inhalte und automatisierte Prozesse">
+        <Section id="sec-11" label="11. KI-generierte Inhalte und automatisierte Prozesse">
           <SubHeading>11.1 KI-Song-Produktion</SubHeading>
           <p style={pStyle}>
             Die personalisierten Songs sind vollständig KI-generierte Inhalte. Sie werden auf Basis der persönlichen Eingaben des Bestellers durch KI-Technologie (FAL.ai / Minimax Music) produziert. Alle Songs werden als KI-generierte Inhalte gekennzeichnet gemäß Art. 50 EU AI Act.
@@ -351,7 +357,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 12. Datensicherheit */}
-        <Section label="12. Datensicherheit">
+        <Section id="sec-12" label="12. Datensicherheit">
           <DataTable rows={[
             ["Verschlüsselung", "Alle Datenübertragungen erfolgen via HTTPS/TLS"],
             ["EU-Serverstandort", "Hauptdatenbank ausschließlich auf EU-Servern (Hetzner, Deutschland)"],
@@ -364,7 +370,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 13. Datenpannen */}
-        <Section label="13. Datenpannen">
+        <Section id="sec-13" label="13. Datenpannen">
           <p style={pStyle}>
             Im Falle einer Datenpanne werden sofortige Eindämmungsmaßnahmen eingeleitet, Umfang und betroffene Daten bewertet sowie alle Maßnahmen vollständig dokumentiert.
           </p>
@@ -385,7 +391,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 14. Cookies */}
-        <Section label="14. Cookies und Tracking">
+        <Section id="sec-14" label="14. Cookies und Tracking">
           <p style={pStyle}>
             Auf vowlyra.com werden Cookies und ähnliche Technologien verwendet. Technisch notwendige Cookies werden ohne Einwilligung gesetzt (§ 25 Abs. 2 TTDSG). Alle anderen Cookies – insbesondere das Meta Pixel – werden ausschließlich nach ausdrücklicher Einwilligung über den Cookie-Banner aktiviert.
           </p>
@@ -395,7 +401,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 15. Ihre Rechte */}
-        <Section label="15. Ihre Rechte">
+        <Section id="sec-15" label="15. Ihre Rechte">
           <SubHeading>15.1 Übersicht nach Jurisdiktion</SubHeading>
           <DataTable headers={["Recht", "EU / UK", "Kanada", "Australien", "Neuseeland"]} rows={[
             ["Auskunft", "Art. 15 DSGVO", "PIPEDA Prinzip 9", "APP 12", "IPP 6"],
@@ -431,7 +437,7 @@ export default function DatenschutzPage() {
         </Section>
 
         {/* 16. Änderungen */}
-        <Section label="16. Änderungen dieser Erklärung">
+        <Section id="sec-16" label="16. Änderungen dieser Erklärung">
           <p style={pStyle}>
             Diese Erklärung wird angepasst, wenn sich rechtliche Anforderungen ändern oder neue Dienste eingeführt werden. Bei wesentlichen Änderungen werden registrierte Nutzer per E-Mail informiert und das Datum oben in dieser Erklärung aktualisiert.
           </p>
@@ -446,14 +452,15 @@ export default function DatenschutzPage() {
 
       </div>
     </main>
+    </>
   );
 }
 
 const pStyle: React.CSSProperties = { color: "#666", fontSize: 14, lineHeight: 1.8, margin: "0 0 12px" };
 
-function Section({ label, children }: { label: string; children: React.ReactNode }) {
+function Section({ id, label, children }: { id?: string; label: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: 48 }}>
+    <section id={id} style={{ marginBottom: 48, scrollMarginTop: 80 }}>
       <h2 style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
         {label}
       </h2>
