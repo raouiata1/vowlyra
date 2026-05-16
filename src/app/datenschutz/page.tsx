@@ -32,7 +32,7 @@ export default function DatenschutzPage() {
 
         {/* Inhaltsverzeichnis */}
         <Section label="Inhaltsverzeichnis">
-          <ol style={{ color: "#666", fontSize: 14, lineHeight: 2, paddingLeft: 20, margin: 0 }}>
+          <ol style={{ color: "#666", fontSize: 14, lineHeight: 2, paddingLeft: 20, margin: 0, listStyleType: "decimal" }}>
             {[
               ["sec-1", "Verantwortlicher"],
               ["sec-2", "EU- und UK-Vertreter"],
