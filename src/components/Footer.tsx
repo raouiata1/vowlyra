@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { loadCrisp } from "@/lib/crisp";
 
 export default function Footer() {
   const colHeadingStyle: React.CSSProperties = {
@@ -111,9 +110,7 @@ export default function Footer() {
               </p>
               <button
                 onClick={() => {
-                  loadCrisp();
-                  window.$crisp.push(["do", "chat:show"]);
-                  window.$crisp.push(["do", "chat:open"]);
+                  window.dispatchEvent(new CustomEvent("vowlyra:openchat"));
                 }}
                 className="footer-crisp"
                 style={{

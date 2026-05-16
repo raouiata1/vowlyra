@@ -67,6 +67,13 @@ export default function ChatBar() {
     return () => clearTimeout(t);
   }, []);
 
+  // ── listen for footer "Chat starten" click ──────────────────────────────
+  useEffect(() => {
+    const handler = () => { setShowBubble(false); setIsOpen(true); };
+    window.addEventListener("vowlyra:openchat", handler);
+    return () => window.removeEventListener("vowlyra:openchat", handler);
+  }, []);
+
   // ── auto-show welcome bubble once per session ────────────────────────────
   useEffect(() => {
     if (sessionStorage.getItem("vowlyra_bubble_shown")) return;
