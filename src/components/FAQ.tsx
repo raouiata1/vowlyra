@@ -24,8 +24,20 @@ const faqs = [
     a: "Der Trailer kommt in ~5 Minuten. Nach der Zahlung erhältst du den vollständigen Song (ca. 3 Minuten) innerhalb weniger Minuten per E-Mail – manchmal sogar schneller.",
   },
   {
-    q: "Was ist eure Rückerstattungsrichtlinie?",
-    a: "Unser Grundsatz: Nur zahlen, wenn der Trailer gefällt. Du hörst zuerst kostenlos eine 30-Sekunden-Vorschau – zahlst du nicht, entstehen keine Kosten. Falls nach der Zahlung technische Probleme auftreten und wir keine Lösung finden, erstatten wir den vollen Betrag. Mehr Details findest du in unserer Refund-Policy.",
+    q: "In welchen Fällen bekomme ich eine vollständige Erstattung?",
+    a: "Wir erstatten in 4 klaren Fällen: (1) Der vollständige Song entspricht inhaltlich nicht der Vorschau (anderer Stil, anderer Ton). (2) Deine persönlichen Angaben wurden im Song nicht korrekt umgesetzt (falscher Name, falscher Anlass). (3) Du hast bezahlt, ohne zuvor eine kostenlose Vorschau erhalten zu haben. (4) Du kannst die gelieferte MP3-Datei technisch nicht herunterladen und wir lösen das Problem nicht innerhalb von 48 Stunden.",
+  },
+  {
+    q: "Wann gibt es keine Erstattung?",
+    a: "Keine Erstattung wenn: der Song korrekt produziert wurde, aber dir persönlich nicht gefällt (deshalb gibt es die kostenlose Vorschau zuerst), du selbst fehlerhafte Angaben im Bestellprozess gemacht hast, die Anfrage mehr als 30 Tage nach der Zahlung eingeht, oder du den Song bereits heruntergeladen und geteilt hast ohne einen der 4 Erstattungsgründe zu haben.",
+  },
+  {
+    q: "Wie beantrage ich eine Erstattung und wie lange dauert sie?",
+    a: "Schreibe eine E-Mail an info@audynia.com mit dem Betreff: \"Erstattungsantrag - [deine E-Mail-Adresse]\" und nenne deinen Erstattungsgrund (Fall 1–4). Wir antworten innerhalb von 24 Stunden und bearbeiten den Antrag in 5 Werktagen. Die Rückzahlung erfolgt über dieselbe Zahlungsmethode und dauert je nach Anbieter 3–10 Werktage.",
+  },
+  {
+    q: "Kann ich kostenlos eine neue Vorschau anfordern, bevor ich zahle?",
+    a: "Ja. Wenn dir die 30-Sekunden-Vorschau nicht gefällt, kannst du einmalig pro Bestellung eine kostenlose neue Demo anfordern. Schreib uns einfach vor der Zahlung an info@audynia.com und erkläre, was dir nicht gefallen hat und was du dir anders vorstellst. Dieses Recht besteht unabhängig von der Erstattungsgarantie.",
   },
 ];
 
