@@ -171,7 +171,7 @@ export default function Demo() {
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
             <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
               <Image
-                src="https://media.vowlyra.com/Vynil.jpg"
+                src="/Vynil.jpg"
                 alt="Vinyl"
                 fill
                 style={{ objectFit: "cover" }}
@@ -180,7 +180,7 @@ export default function Demo() {
             </div>
             <div>
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Für dich, Irene ❤️</div>
-              <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Jahrestag · erstellt von Vowlyra</div>
+              <div style={{ color: "#999", fontSize: 13, marginTop: 3 }}>Jahrestag · erstellt von Audynia</div>
             </div>
           </div>
 
