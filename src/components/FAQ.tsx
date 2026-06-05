@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const faqs = [
+const faqs: { q: string; a: string; link?: { label: string; href: string } }[] = [
   {
     q: "Wie persönlich wird der Song wirklich?",
     a: "Sehr persönlich. Du gibst Namen, Erinnerungen, besondere Momente und den Anlass ein – unsere KI verarbeitet all das zu individuellen Lyrics und einer passenden Melodie. Kein Song klingt wie ein anderer.",
@@ -26,14 +26,17 @@ const faqs = [
   {
     q: "In welchen Fällen bekomme ich eine vollständige Erstattung?",
     a: "Wir erstatten in 4 klaren Fällen: (1) Der vollständige Song entspricht inhaltlich nicht der Vorschau (anderer Stil, anderer Ton). (2) Deine persönlichen Angaben wurden im Song nicht korrekt umgesetzt (falscher Name, falscher Anlass). (3) Du hast bezahlt, ohne zuvor eine kostenlose Vorschau erhalten zu haben. (4) Du kannst die gelieferte MP3-Datei technisch nicht herunterladen und wir lösen das Problem nicht innerhalb von 48 Stunden.",
+    link: { label: "Vollständige Refund-Policy lesen →", href: "/refund" },
   },
   {
     q: "Wann gibt es keine Erstattung?",
     a: "Keine Erstattung wenn: der Song korrekt produziert wurde, aber dir persönlich nicht gefällt (deshalb gibt es die kostenlose Vorschau zuerst), du selbst fehlerhafte Angaben im Bestellprozess gemacht hast, die Anfrage mehr als 30 Tage nach der Zahlung eingeht, oder du den Song bereits heruntergeladen und geteilt hast ohne einen der 4 Erstattungsgründe zu haben.",
+    link: { label: "Alle Ausschlussgründe in der Refund-Policy →", href: "/refund" },
   },
   {
     q: "Wie beantrage ich eine Erstattung und wie lange dauert sie?",
     a: "Schreibe eine E-Mail an info@audynia.com mit dem Betreff: \"Erstattungsantrag - [deine E-Mail-Adresse]\" und nenne deinen Erstattungsgrund (Fall 1–4). Wir antworten innerhalb von 24 Stunden und bearbeiten den Antrag in 5 Werktagen. Die Rückzahlung erfolgt über dieselbe Zahlungsmethode und dauert je nach Anbieter 3–10 Werktage.",
+    link: { label: "Refund-Prozess Schritt für Schritt →", href: "/refund#sec-6" },
   },
   {
     q: "Kann ich kostenlos eine neue Vorschau anfordern, bevor ich zahle?",
@@ -145,18 +148,33 @@ export default function FAQ() {
                     transition: "max-height 0.3s ease",
                   }}
                 >
-                  <p
-                    style={{
-                      margin: 0,
-                      padding: "0 24px 20px",
-                      fontSize: 14,
-                      color: "#555",
-                      lineHeight: 1.7,
-                      fontFamily: "system-ui, -apple-system, sans-serif",
-                    }}
-                  >
-                    {faq.a}
-                  </p>
+                  <div style={{ padding: "0 24px 20px" }}>
+                    <p
+                      style={{
+                        margin: 0,
+                        marginBottom: faq.link ? 10 : 0,
+                        fontSize: 14,
+                        color: "#555",
+                        lineHeight: 1.7,
+                        fontFamily: "system-ui, -apple-system, sans-serif",
+                      }}
+                    >
+                      {faq.a}
+                    </p>
+                    {faq.link && (
+                      <a
+                        href={faq.link.href}
+                        style={{
+                          color: "#1DB954",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          textDecoration: "none",
+                        }}
+                      >
+                        {faq.link.label}
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             );
