@@ -1,6 +1,6 @@
-# Vowlyra – Projekt-Kontext für Claude Code
+# Audynia – Projekt-Kontext für Claude Code
 
-## Was ist Vowlyra?
+## Was ist Audynia?
 Ein digitales Produkt: KI-personalisierte Songs für Kunden.
 Der Kunde gibt Informationen an (Anlass, Namen, Erinnerungen, Stil),
 daraus wird automatisch ein einzigartiger Song erstellt und geliefert.
@@ -49,7 +49,7 @@ Lieferzeit: ~5 Minuten. Trailer kostenlos vorab, Song nach Zahlung.
 ## Seitenstruktur (optimiert für Conversion)
 Reihenfolge ist bewusst gewählt – nicht ändern ohne Absprache:
 
-1. **Nav** – sticky, Logo "Vowlyra" (yra in #1DB954), Links: Demo, Preise, FAQ, CTA "Song erstellen"
+1. **Nav** – sticky, Logo "Audynia" (yra in #1DB954), Links: Demo, Preise, FAQ, CTA "Song erstellen"
 2. **Hero** – zweispaltig: links Text + Badges + CTAs + Proof-Bar, rechts Kunden-Bildgrid
 3. **Demo** – schwarzer Hintergrund, Spotify-Player, funktioniert (Play/Pause, Seek, Waveform)
 4. **How it works** – 3 Schritte als Cards
@@ -60,7 +60,7 @@ Reihenfolge ist bewusst gewählt – nicht ändern ohne Absprache:
 
 ## Komponenten-Struktur
 ```
-vowlyra/
+audynia/
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx          ← importiert alle Sektions-Komponenten
@@ -95,7 +95,7 @@ vowlyra/
 - Hintergrund #121212, 2-spaltig: links Erklärtext, rechts Player-Card
 - Player-Card (#181818, border #282828, border-radius 16px)
 - Album-Art: grüner Kreis mit Musik-Icon
-- Track: "Für dich, Mama" · Vowlyra · Geburtstagsbeispiel
+- Track: "Für dich, Mama" · Audynia · Geburtstagsbeispiel
 - Progress-Bar: klickbar (seek), zeigt Zeit
 - Play/Pause Toggle mit Icon-Wechsel
 - Waveform: 18 Bars, animieren nur wenn playing (CSS @keyframes)
