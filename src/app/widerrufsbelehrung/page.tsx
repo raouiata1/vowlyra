@@ -174,7 +174,7 @@ export default function WiderrufsbelehrungPage() {
         </Section>
 
         <p style={{ color: "#333", fontSize: 12, borderTop: "1px solid #1e1e1e", paddingTop: 24, marginTop: 16 }}>
-          Zuletzt aktualisiert: 15.05.2026
+          Zuletzt aktualisiert: 06.06.2026
         </p>
 
       </div>

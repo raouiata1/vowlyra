@@ -19,7 +19,7 @@ export default function AGBPage() {
             Gültig für: Deutschland und alle EU-Länder · Vereinigtes Königreich · Kanada · Australien · Neuseeland
           </p>
           <p style={{ color: "#555", fontSize: 13, marginBottom: 4 }}>Rechtsform: Audynia · Wyoming, USA · Version 2.0</p>
-          <p style={{ color: "#555", fontSize: 13, marginBottom: 48 }}>Zuletzt aktualisiert: 15.05.2026</p>
+          <p style={{ color: "#555", fontSize: 13, marginBottom: 48 }}>Zuletzt aktualisiert: 06.06.2026</p>
 
           {/* Inhaltsverzeichnis */}
           <Section label="Inhaltsverzeichnis">
@@ -268,7 +268,7 @@ export default function AGBPage() {
           </Section>
 
           <p style={{ color: "#333", fontSize: 12, borderTop: "1px solid #1e1e1e", paddingTop: 24, marginTop: 16 }}>
-            Audynia · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@audynia.com · Version 2.0 · 15.05.2026
+            Audynia · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@audynia.com · Version 2.0 · 06.06.2026
           </p>
 
         </div>

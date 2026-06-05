@@ -17,7 +17,7 @@ export default function RefundPage() {
           </h1>
           <p style={{ color: "#555", fontSize: 13, marginBottom: 4 }}>Gültig für: Weltweit · EU/EWR, UK, Kanada, Australien, Neuseeland und alle weiteren Märkte</p>
           <p style={{ color: "#555", fontSize: 13, marginBottom: 4 }}>Konform mit: Paddle Seller Agreement · Stripe Services Agreement · PayPal User Agreement · EU Verbraucherrechterichtlinie 2011/83/EU</p>
-          <p style={{ color: "#555", fontSize: 13, marginBottom: 48 }}>Zuletzt aktualisiert: 15.05.2026 · Version 1.0</p>
+          <p style={{ color: "#555", fontSize: 13, marginBottom: 48 }}>Zuletzt aktualisiert: 06.06.2026 · Version 1.0</p>
 
           {/* Prinzip-Box */}
           <div style={{ background: "#0d1f0d", border: "1px solid #1a3a1a", borderRadius: 12, padding: "20px 24px", marginBottom: 48 }}>
@@ -245,7 +245,7 @@ export default function RefundPage() {
           </Section>
 
           <p style={{ color: "#333", fontSize: 12, borderTop: "1px solid #1e1e1e", paddingTop: 24, marginTop: 16 }}>
-            Audynia · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@audynia.com · Version 1.0 · 15.05.2026
+            Audynia · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@audynia.com · Version 1.0 · 06.06.2026
           </p>
 
         </div>
