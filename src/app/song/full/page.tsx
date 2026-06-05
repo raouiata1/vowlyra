@@ -151,7 +151,7 @@ export default function FullSongPage() {
   if (!songUrl) {
     return (
       <>
-        <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo.png" ctaLabel="Song erstellen" />
+        <Nav dark leftLogo="/logo-secondary.png" ctaLabel="Song erstellen" />
         <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ textAlign: "center", padding: "40px 24px", maxWidth: 480 }}>
             <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(29,185,84,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: "#1DB954" }}>
@@ -175,7 +175,7 @@ export default function FullSongPage() {
   // ─── MAIN PAGE ────────────────────────────────────────────────────────────
   return (
     <>
-      <Nav dark leftLogo="https://media.vowlyra.com/Secondary_Logo_with_Icon.png" ctaLabel="Song erstellen" />
+      <Nav dark leftLogo="/logo-secondary-icon.png" ctaLabel="Song erstellen" />
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
           ref={audioRef}
@@ -216,7 +216,7 @@ export default function FullSongPage() {
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
                 <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
                   <Image
-                    src="https://media.vowlyra.com/Vynil.jpg"
+                    src="/Vynil.jpg"
                     alt="Vinyl"
                     fill
                     style={{ objectFit: "cover" }}
@@ -229,7 +229,7 @@ export default function FullSongPage() {
                     {songTitle}
                   </div>
                   <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>
-                    Vowlyra · Vollständiger Song
+                    Audynia · Vollständiger Song
                   </div>
                 </div>
 

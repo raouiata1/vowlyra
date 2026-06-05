@@ -675,7 +675,7 @@ export default function OrderPage() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           <a href="/" style={{ display: "flex" }}>
-            <Image src="https://media.vowlyra.com/Primary_Logo.png" width={160} height={44} alt="Vowlyra" style={{ objectFit: "contain" }} />
+            <Image src="/logo.png" width={160} height={44} alt="Audynia" style={{ objectFit: "contain" }} />
           </a>
           {currentStep > 0 && (
             <button
