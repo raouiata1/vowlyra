@@ -22,12 +22,12 @@ export default function DatenschutzPage() {
         <div style={{ background: "#141414", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px", marginBottom: 48 }}>
           <p style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 10px" }}>Zusammenfassung</p>
           <p style={{ color: "#ccc", fontSize: 14, lineHeight: 1.8, margin: "0 0 10px" }}>
-            Vowlyra erstellt personalisierte, KI-generierte Songs als digitale Geschenke. Für die Erstellung des Songs benötigen wir persönliche Angaben wie den Namen des Käufers, die E-Mail-Adresse und die Geschichte hinter dem Geschenk. Diese Daten werden ausschließlich für die Song-Erstellung und -Lieferung verwendet.
+            Audynia erstellt personalisierte, KI-generierte Songs als digitale Geschenke. Für die Erstellung des Songs benötigen wir persönliche Angaben wie den Namen des Käufers, die E-Mail-Adresse und die Geschichte hinter dem Geschenk. Diese Daten werden ausschließlich für die Song-Erstellung und -Lieferung verwendet.
           </p>
           <p style={{ color: "#ccc", fontSize: 14, lineHeight: 1.8, margin: "0 0 10px" }}>
             Wir verkaufen keine personenbezogenen Daten. Wir verwenden Ihre Daten nicht für das Training von KI-Modellen. Sie haben jederzeit das Recht, Ihre Daten einzusehen, zu berichtigen oder löschen zu lassen.
           </p>
-          <p style={{ color: "#888", fontSize: 13, margin: 0 }}>Datenschutz-Kontakt: <a href="mailto:info@vowlyra.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@vowlyra.com</a> · Antwortfrist: 30 Tage</p>
+          <p style={{ color: "#888", fontSize: 13, margin: 0 }}>Datenschutz-Kontakt: <a href="mailto:info@audynia.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@audynia.com</a> · Antwortfrist: 30 Tage</p>
         </div>
 
         {/* Inhaltsverzeichnis */}
@@ -63,14 +63,14 @@ export default function DatenschutzPage() {
         {/* 1. Verantwortlicher */}
         <Section id="sec-1" label="1. Verantwortlicher">
           <DataTable rows={[
-            ["Unternehmen", "Vowlyra LLC"],
+            ["Unternehmen", "Audynia"],
             ["Rechtsform", "Limited Liability Company (LLC), Wyoming, USA"],
             ["Geschäftsadresse", "30 N Gould St Ste 100, Sheridan, WY 82801, USA"],
             ["Registrierung", "Wyoming Secretary of State"],
-            ["E-Mail", "info@vowlyra.com"],
-            ["Website", "www.vowlyra.com"],
-            ["Datenschutz-Kontakt", "info@vowlyra.com"],
-            ["Datenschutzbeauftragter", "Nicht verpflichtend (Art. 37 DSGVO). Anfragen an: info@vowlyra.com"],
+            ["E-Mail", "info@audynia.com"],
+            ["Website", "www.audynia.com"],
+            ["Datenschutz-Kontakt", "info@audynia.com"],
+            ["Datenschutzbeauftragter", "Nicht verpflichtend (Art. 37 DSGVO). Anfragen an: info@audynia.com"],
           ]} />
         </Section>
 
@@ -83,7 +83,7 @@ export default function DatenschutzPage() {
             Zum Zeitpunkt der Veröffentlichung dieser Erklärung ist die Benennung eines formellen EU-Vertreters und UK-Vertreters in Bearbeitung. Diese Erklärung wird unverzüglich aktualisiert, sobald die Benennung abgeschlossen ist.
           </p>
           <p style={{ ...pStyle, marginBottom: 16 }}>
-            Bis zur Benennung können EU- und UK-Nutzer Datenschutzanfragen direkt an <a href="mailto:info@vowlyra.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@vowlyra.com</a> richten.
+            Bis zur Benennung können EU- und UK-Nutzer Datenschutzanfragen direkt an <a href="mailto:info@audynia.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@audynia.com</a> richten.
           </p>
           <DataTable rows={[
             ["EU-Aufsichtsbehörde (DE)", "BfDI, Graurheindorfer Str. 153, 53117 Bonn | bfdi.bund.de"],
@@ -97,7 +97,7 @@ export default function DatenschutzPage() {
         {/* 3. Geltungsbereich */}
         <Section id="sec-3" label="3. Geltungsbereich">
           <p style={pStyle}>
-            Diese Datenschutzerklärung gilt für alle Personen, die vowlyra.com besuchen, den personalisierten Bestellprozess (Wizard) nutzen, einen Song erwerben, den Kundensupport kontaktieren oder Marketing-Kommunikation von Vowlyra erhalten. Die Erklärung gilt unabhängig vom Standort der betroffenen Person.
+            Diese Datenschutzerklärung gilt für alle Personen, die audynia.com besuchen, den personalisierten Bestellprozess (Wizard) nutzen, einen Song erwerben, den Kundensupport kontaktieren oder Marketing-Kommunikation von Audynia erhalten. Die Erklärung gilt unabhängig vom Standort der betroffenen Person.
           </p>
         </Section>
 
@@ -134,7 +134,7 @@ export default function DatenschutzPage() {
 
           <SubHeading>5.2 Technische Daten (automatisch erhoben)</SubHeading>
           <p style={pStyle}>
-            Beim Aufruf von vowlyra.com werden automatisch erhoben: IP-Adresse (anonymisiert nach 7 Tagen), Browsertyp und -version, Betriebssystem, Referrer-URL sowie Datum und Uhrzeit des Zugriffs.
+            Beim Aufruf von audynia.com werden automatisch erhoben: IP-Adresse (anonymisiert nach 7 Tagen), Browsertyp und -version, Betriebssystem, Referrer-URL sowie Datum und Uhrzeit des Zugriffs.
           </p>
           <p style={pStyle}>Zweck: Sicherer Betrieb der Website, Fehlerbehebung, Betrugsprävention.</p>
 
@@ -146,7 +146,7 @@ export default function DatenschutzPage() {
 
           <SubHeading>5.4 Zahlungsdaten</SubHeading>
           <p style={pStyle}>
-            Vollständige Zahlungsdaten werden ausschließlich von den zertifizierten Zahlungspartnern Paddle und Stripe verarbeitet. Vowlyra LLC hat zu keinem Zeitpunkt Zugriff auf vollständige Zahlungsdaten. Gespeichert werden ausschließlich Transaktions-IDs und Zahlungsstatus.
+            Vollständige Zahlungsdaten werden ausschließlich von den zertifizierten Zahlungspartnern Paddle und Stripe verarbeitet. Audynia hat zu keinem Zeitpunkt Zugriff auf vollständige Zahlungsdaten. Gespeichert werden ausschließlich Transaktions-IDs und Zahlungsstatus.
           </p>
 
           <SubHeading>5.5 Support-Daten</SubHeading>
@@ -213,7 +213,7 @@ export default function DatenschutzPage() {
             role="Eigenständiger Verantwortlicher (Controller)"
             transfer="UK und USA (Paddle.com Inc.) – SCCs"
             privacy="paddle.com/legal/privacy"
-            note="Weitergabe an Vowlyra: Name, E-Mail, Bestelldetails – ausschließlich für Auftragserfüllung, Betrugsprävention und Support. Marketing-Daten nur mit ausdrücklicher Einwilligung."
+            note="Weitergabe an Audynia: Name, E-Mail, Bestelldetails – ausschließlich für Auftragserfüllung, Betrugsprävention und Support. Marketing-Daten nur mit ausdrücklicher Einwilligung."
           />
           <ProviderCard
             name="Stripe Payments Europe Limited"
@@ -333,10 +333,10 @@ export default function DatenschutzPage() {
         {/* 10. Minderjährige */}
         <Section id="sec-10" label="10. Minderjährige">
           <p style={pStyle}>
-            Das Angebot von Vowlyra richtet sich ausschließlich an Personen, die das 18. Lebensjahr vollendet haben. Es werden wissentlich keine personenbezogenen Daten von Minderjährigen erhoben.
+            Das Angebot von Audynia richtet sich ausschließlich an Personen, die das 18. Lebensjahr vollendet haben. Es werden wissentlich keine personenbezogenen Daten von Minderjährigen erhoben.
           </p>
           <p style={pStyle}>
-            Sollten Daten einer minderjährigen Person irrtümlich gespeichert worden sein, bitten wir um sofortige Kontaktaufnahme unter <a href="mailto:info@vowlyra.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@vowlyra.com</a>. Diese Daten werden unverzüglich gelöscht.
+            Sollten Daten einer minderjährigen Person irrtümlich gespeichert worden sein, bitten wir um sofortige Kontaktaufnahme unter <a href="mailto:info@audynia.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@audynia.com</a>. Diese Daten werden unverzüglich gelöscht.
           </p>
         </Section>
 
@@ -393,10 +393,10 @@ export default function DatenschutzPage() {
         {/* 14. Cookies */}
         <Section id="sec-14" label="14. Cookies und Tracking">
           <p style={pStyle}>
-            Auf vowlyra.com werden Cookies und ähnliche Technologien verwendet. Technisch notwendige Cookies werden ohne Einwilligung gesetzt (§ 25 Abs. 2 TTDSG). Alle anderen Cookies – insbesondere das Meta Pixel – werden ausschließlich nach ausdrücklicher Einwilligung über den Cookie-Banner aktiviert.
+            Auf audynia.com werden Cookies und ähnliche Technologien verwendet. Technisch notwendige Cookies werden ohne Einwilligung gesetzt (§ 25 Abs. 2 TTDSG). Alle anderen Cookies – insbesondere das Meta Pixel – werden ausschließlich nach ausdrücklicher Einwilligung über den Cookie-Banner aktiviert.
           </p>
           <p style={pStyle}>
-            Cookie-Richtlinie: <a href="/cookies" style={{ color: "#1DB954", textDecoration: "none" }}>vowlyra.com/cookies</a>
+            Cookie-Richtlinie: <a href="/cookies" style={{ color: "#1DB954", textDecoration: "none" }}>audynia.com/cookies</a>
           </p>
         </Section>
 
@@ -425,14 +425,14 @@ export default function DatenschutzPage() {
 
           <SubHeading>15.3 So üben Sie Ihre Rechte aus</SubHeading>
           <div style={{ background: "#141414", border: "1px solid #282828", borderRadius: 10, padding: "16px 20px", marginBottom: 12 }}>
-            <p style={{ color: "#ccc", fontSize: 14, margin: "0 0 6px" }}>E-Mail: <a href="mailto:info@vowlyra.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@vowlyra.com</a></p>
+            <p style={{ color: "#ccc", fontSize: 14, margin: "0 0 6px" }}>E-Mail: <a href="mailto:info@audynia.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@audynia.com</a></p>
             <p style={{ color: "#ccc", fontSize: 14, margin: "0 0 6px" }}>Betreff: <span style={{ color: "#888" }}>Datenschutzanfrage – [Art des Rechts]</span></p>
             <p style={{ color: "#666", fontSize: 13, margin: 0 }}>Bitte angeben: Bei der Bestellung verwendete E-Mail-Adresse und Art der Anfrage. Eine Identitätsverifikation kann vor Auskunftserteilung erforderlich sein.</p>
           </div>
 
           <SubHeading>15.4 Marketing-Einwilligung widerrufen</SubHeading>
           <p style={pStyle}>
-            Per E-Mail an <a href="mailto:info@vowlyra.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@vowlyra.com</a> (Betreff: Marketing abmelden) oder per Klick auf den Abmelde-Link in jeder Marketing-E-Mail. Der Widerruf gilt mit sofortiger Wirkung für die Zukunft.
+            Per E-Mail an <a href="mailto:info@audynia.com" style={{ color: "#1DB954", textDecoration: "none" }}>info@audynia.com</a> (Betreff: Marketing abmelden) oder per Klick auf den Abmelde-Link in jeder Marketing-E-Mail. Der Widerruf gilt mit sofortiger Wirkung für die Zukunft.
           </p>
         </Section>
 
@@ -442,12 +442,12 @@ export default function DatenschutzPage() {
             Diese Erklärung wird angepasst, wenn sich rechtliche Anforderungen ändern oder neue Dienste eingeführt werden. Bei wesentlichen Änderungen werden registrierte Nutzer per E-Mail informiert und das Datum oben in dieser Erklärung aktualisiert.
           </p>
           <p style={pStyle}>
-            Aktuelle Version: <a href="/datenschutz" style={{ color: "#1DB954", textDecoration: "none" }}>vowlyra.com/datenschutz</a>
+            Aktuelle Version: <a href="/datenschutz" style={{ color: "#1DB954", textDecoration: "none" }}>audynia.com/datenschutz</a>
           </p>
         </Section>
 
         <p style={{ color: "#333", fontSize: 12, borderTop: "1px solid #1e1e1e", paddingTop: 24, marginTop: 16 }}>
-          Vowlyra LLC · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@vowlyra.com · Version 5.0 · 15.05.2026
+          Audynia · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@audynia.com · Version 5.0 · 15.05.2026
         </p>
 
       </div>

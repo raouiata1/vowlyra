@@ -10,7 +10,7 @@ export default function ImpressumPage() {
         <h1 style={{ color: "#fff", fontSize: 40, fontWeight: 800, marginBottom: 8, letterSpacing: "-1.5px" }}>
           Impressum
         </h1>
-        <p style={{ color: "#555", fontSize: 14, marginBottom: 56 }}>Rechtliche Angaben zu Vowlyra</p>
+        <p style={{ color: "#555", fontSize: 14, marginBottom: 56 }}>Rechtliche Angaben zu Audynia</p>
 
         {/* Angaben */}
         <section style={{ marginBottom: 40 }}>
@@ -18,7 +18,7 @@ export default function ImpressumPage() {
             Angaben
           </h2>
           <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
-            <span style={{ color: "#e0e0e0", fontSize: 14, fontWeight: 600 }}>Vowlyra LLC</span>
+            <span style={{ color: "#e0e0e0", fontSize: 14, fontWeight: 600 }}>Audynia</span>
             <span style={{ color: "#666", fontSize: 14 }}>30 N Gould St Ste 100</span>
             <span style={{ color: "#666", fontSize: 14 }}>Sheridan, WY 82801</span>
             <span style={{ color: "#666", fontSize: 14 }}>Vereinigte Staaten von Amerika</span>
@@ -31,8 +31,8 @@ export default function ImpressumPage() {
             Kontakt
           </h2>
           <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px", display: "flex", flexDirection: "column", gap: 10 }}>
-            <Row label="E-Mail" value="info@vowlyra.com" link="mailto:info@vowlyra.com" />
-            <Row label="Live-Chat" value="vowlyra.com" link="https://vowlyra.com" />
+            <Row label="E-Mail" value="info@audynia.com" link="mailto:info@audynia.com" />
+            <Row label="Live-Chat" value="audynia.com" link="https://audynia.com" />
           </div>
         </section>
 
@@ -56,13 +56,13 @@ export default function ImpressumPage() {
               name="Stripe Payments Europe Limited"
               role="Zahlungsabwickler · Fallback"
               address="1 Grand Canal Street Lower, Dublin 2, Irland"
-              note="Kontakt bei Stripe-Transaktionen: info@vowlyra.com"
+              note="Kontakt bei Stripe-Transaktionen: info@audynia.com"
             />
             <PaymentCard
               name="PayPal (Europe) S.à r.l. et Cie, S.C.A."
               role="Zahlungsabwickler · direkt"
               address="22-24 Boulevard Royal, L-2449 Luxemburg"
-              note="Kontakt vor Dispute-Eröffnung: info@vowlyra.com"
+              note="Kontakt vor Dispute-Eröffnung: info@audynia.com"
             />
           </div>
         </section>

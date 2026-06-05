@@ -71,10 +71,10 @@ export default function Footer() {
           <div className="footer-col1">
             <a href="/" style={{ display: "inline-block", marginBottom: 12 }}>
               <Image
-                src="https://media.vowlyra.com/Primary_Logo_with_Icon.png"
+                src="https://media.audynia.com/Primary_Logo_with_Icon.png"
                 width={140}
                 height={36}
-                alt="Vowlyra"
+                alt="Audynia"
                 style={{ objectFit: "contain" }}
                 loading="lazy"
               />
@@ -110,7 +110,7 @@ export default function Footer() {
               </p>
               <button
                 onClick={() => {
-                  window.dispatchEvent(new CustomEvent("vowlyra:openchat"));
+                  window.dispatchEvent(new CustomEvent("audynia:openchat"));
                 }}
                 className="footer-crisp"
                 style={{
@@ -134,22 +134,6 @@ export default function Footer() {
                 </svg>
                 Chat starten
               </button>
-            </div>
-            {/* Col 4 – Policy */}
-            <div className="footer-policy-col">
-              <div style={colHeadingStyle}>Policy</div>
-              {[
-                { label: "Impressum", href: "/impressum" },
-                { label: "Widerrufsbelehrung", href: "/widerrufsbelehrung" },
-                { label: "Datenschutzerklärung", href: "/datenschutz" },
-                { label: "AGB", href: "/agb" },
-                { label: "Cookie-Richtlinie", href: "/cookies" },
-                { label: "Refund-Policy", href: "/refund" },
-              ].map((link) => (
-                <a key={link.label} href={link.href} className="footer-link" style={linkStyle}>
-                  {link.label}
-                </a>
-              ))}
             </div>
             {/* Col 4 – Policy */}
             <div className="footer-policy-col">
@@ -185,7 +169,7 @@ export default function Footer() {
           }}
         >
           <span style={{ color: "#777", fontSize: 12 }}>
-            © 2026 Vowlyra. Alle Rechte vorbehalten.
+            © 2026 Audynia. Alle Rechte vorbehalten.
           </span>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default function WiderrufsbelehrungPage() {
         <Section label="1. Widerrufsrecht">
           <P>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.</P>
           <P>Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.</P>
-          <P>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns per E-Mail an <Link href="mailto:info@vowlyra.com">info@vowlyra.com</Link> mittels einer eindeutigen Erklärung über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.</P>
+          <P>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns per E-Mail an <Link href="mailto:info@audynia.com">info@audynia.com</Link> mittels einer eindeutigen Erklärung über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.</P>
           <P>Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.</P>
         </Section>
 
@@ -40,7 +40,7 @@ export default function WiderrufsbelehrungPage() {
                 {[
                   ["Kreditkarte via Paddle", "Paddle — paddle.net", "5–10 Werktage", "Paddle ist MoR — Rückzahlung läuft über Paddle"],
                   ["Kreditkarte via Stripe", "Ursprüngliche Karte", "5–10 Werktage", "Stripe leitet Erstattung direkt an Kartenanbieter"],
-                  ["PayPal", "PayPal-Konto", "3–14 Werktage", "Bitte zuerst info@vowlyra.com kontaktieren — vor Dispute-Eröffnung"],
+                  ["PayPal", "PayPal-Konto", "3–14 Werktage", "Bitte zuerst info@audynia.com kontaktieren — vor Dispute-Eröffnung"],
                   ["SEPA via Paddle", "Paddle — paddle.net", "5–10 Werktage", "Abgewickelt durch Paddle als MoR"],
                   ["SEPA via Stripe", "Ursprüngliches Bankkonto", "5–10 Werktage", "Direkte Bankerstattung über SEPA-Netzwerk"],
                 ].map((row, i) => (
@@ -65,13 +65,13 @@ export default function WiderrufsbelehrungPage() {
           </ul>
           <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "16px 20px", marginBottom: 16 }}>
             <p style={{ color: "#ccc", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-              <span style={{ color: "#1DB954", fontWeight: 600 }}>Im Klartext für Vowlyra-Kunden:</span> Sobald Sie nach erfolgter Zahlung die Produktion Ihres personalisierten Songs bestätigen und der vollständige Song auf der Seite /song/full für Sie bereitgestellt wird, erlischt Ihr Widerrufsrecht. Dies gilt ausschließlich dann, wenn Sie vor der Zahlung durch Anklicken der entsprechenden Checkbox ausdrücklich zugestimmt haben, dass die Lieferung sofort beginnt und Sie Ihr Widerrufsrecht mit Beginn der Lieferung verlieren.
+              <span style={{ color: "#1DB954", fontWeight: 600 }}>Im Klartext für Audynia-Kunden:</span> Sobald Sie nach erfolgter Zahlung die Produktion Ihres personalisierten Songs bestätigen und der vollständige Song auf der Seite /song/full für Sie bereitgestellt wird, erlischt Ihr Widerrufsrecht. Dies gilt ausschließlich dann, wenn Sie vor der Zahlung durch Anklicken der entsprechenden Checkbox ausdrücklich zugestimmt haben, dass die Lieferung sofort beginnt und Sie Ihr Widerrufsrecht mit Beginn der Lieferung verlieren.
             </p>
           </div>
           <P>Ohne diese ausdrückliche Bestätigung vor der Zahlung bleibt Ihr Widerrufsrecht für 14 Tage ab Vertragsabschluss bestehen.</P>
           <Subheading>Pflichtcheckboxen im Checkout — beide müssen aktiv angehakt werden:</Subheading>
           <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 12 }}>
-            <CheckboxItem text="Ich stimme ausdrücklich zu, dass Vowlyra LLC mit der Ausführung des Vertrags unmittelbar nach meiner Zahlung beginnt. Mir ist bekannt, dass ich dadurch mein Widerrufsrecht verliere, sobald der Song vollständig bereitgestellt wurde." />
+            <CheckboxItem text="Ich stimme ausdrücklich zu, dass Audynia mit der Ausführung des Vertrags unmittelbar nach meiner Zahlung beginnt. Mir ist bekannt, dass ich dadurch mein Widerrufsrecht verliere, sobald der Song vollständig bereitgestellt wurde." />
             <CheckboxItem text="Ich habe die AGB und die Widerrufsbelehrung gelesen und akzeptiere diese." />
           </div>
         </Section>
@@ -83,40 +83,40 @@ export default function WiderrufsbelehrungPage() {
           <P>Wenn Ihre Zahlung über Paddle.com Market Limited als Merchant of Record abgewickelt wird, gelten zusätzlich folgende Bedingungen:</P>
           <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 20 }}>
             <InfoCard title="(a) 30-Tage-Rückgabegarantie (Paddle-Pflichtstandard)">
-              Gemäß den Paddle Seller-Anforderungen gewährt Vowlyra LLC bei Paddle-Transaktionen eine freiwillige 30-Tage-Rückgabegarantie — über die gesetzlichen 14 Tage hinaus — in den in Abschnitt 5 definierten Erstattungsfällen.
+              Gemäß den Paddle Seller-Anforderungen gewährt Audynia bei Paddle-Transaktionen eine freiwillige 30-Tage-Rückgabegarantie — über die gesetzlichen 14 Tage hinaus — in den in Abschnitt 5 definierten Erstattungsfällen.
             </InfoCard>
             <InfoCard title="(b) Erstattungsabwicklung über Paddle">
-              Bei Paddle-Transaktionen wird die Erstattung technisch von Paddle verarbeitet. Genehmigte Erstattungen werden innerhalb von 14 Tagen nach Genehmigung bearbeitet. Auf Ihrer Kontoabrechnung erscheint die Rückzahlung unter &quot;Paddle&quot; oder &quot;Paddle.net&quot;. Sie können Erstattungsanfragen einreichen über: info@vowlyra.com (empfohlen), paddle.net → &quot;Request refund&quot;, oder über Ihre Transaktionsbestätigungs-E-Mail.
+              Bei Paddle-Transaktionen wird die Erstattung technisch von Paddle verarbeitet. Genehmigte Erstattungen werden innerhalb von 14 Tagen nach Genehmigung bearbeitet. Auf Ihrer Kontoabrechnung erscheint die Rückzahlung unter &quot;Paddle&quot; oder &quot;Paddle.net&quot;. Sie können Erstattungsanfragen einreichen über: info@audynia.com (empfohlen), paddle.net → &quot;Request refund&quot;, oder über Ihre Transaktionsbestätigungs-E-Mail.
             </InfoCard>
             <InfoCard title="(c) Paddle Buyer Terms">
               Als Käufer über Paddle unterliegen Sie ergänzend den Paddle Buyer Terms and Conditions (paddle.com/legal/buyer-terms). Bei Widersprüchen gelten die für Sie als Verbraucher günstigeren Regelungen.
             </InfoCard>
             <InfoCard title="(d) Wichtiger Hinweis zu Chargebacks bei Paddle">
-              Vowlyra LLC und Paddle bitten Sie dringend, uns vor Einleitung einer Rückbuchung (Chargeback) bei Ihrer Bank direkt zu kontaktieren. Ungerechtfertigte Chargebacks können zur Sperrung Ihres Zugangs zu vowlyra.com führen.
+              Audynia und Paddle bitten Sie dringend, uns vor Einleitung einer Rückbuchung (Chargeback) bei Ihrer Bank direkt zu kontaktieren. Ungerechtfertigte Chargebacks können zur Sperrung Ihres Zugangs zu audynia.com führen.
             </InfoCard>
           </div>
 
           <Subheading>4.2 Stripe als Zahlungsabwickler (Fallback)</Subheading>
-          <P>Wenn Ihre Zahlung über Stripe Payments Europe Limited abgewickelt wird, ist Vowlyra LLC der rechtliche Verkäufer und wickelt die Erstattung direkt ab:</P>
+          <P>Wenn Ihre Zahlung über Stripe Payments Europe Limited abgewickelt wird, ist Audynia der rechtliche Verkäufer und wickelt die Erstattung direkt ab:</P>
           <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 20 }}>
             <InfoCard title="(a) Rückzahlung via gleiche Zahlungsmethode">
               Stripe-Erstattungen werden ausschließlich über dieselbe Zahlungsmethode zurückgezahlt. Ist Ihre Karte abgelaufen, leitet das Kartennetzwerk die Erstattung trotzdem an das korrekte Konto weiter.
             </InfoCard>
             <InfoCard title="(b) Keine zusätzlichen Gebühren für Sie">
-              Vowlyra LLC erstattet Ihnen stets den vollen Kaufpreis. Etwaige interne Bearbeitungsgebühren werden von Vowlyra getragen.
+              Audynia erstattet Ihnen stets den vollen Kaufpreis. Etwaige interne Bearbeitungsgebühren werden von Audynia getragen.
             </InfoCard>
             <InfoCard title="(c) Kontakt bei Stripe-Transaktionen">
-              Alle Erstattungsanfragen bei Stripe-Transaktionen richten Sie bitte ausschließlich an: info@vowlyra.com. Wir veranlassen die Erstattung direkt über das Stripe-Dashboard.
+              Alle Erstattungsanfragen bei Stripe-Transaktionen richten Sie bitte ausschließlich an: info@audynia.com. Wir veranlassen die Erstattung direkt über das Stripe-Dashboard.
             </InfoCard>
           </div>
 
           <Subheading>4.3 PayPal als Zahlungsmethode</Subheading>
           <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 8 }}>
             <InfoCard title="(a) Bitte zuerst uns kontaktieren">
-              Wenn Sie mit Ihrer PayPal-Zahlung unzufrieden sind, kontaktieren Sie uns bitte zuerst unter info@vowlyra.com — bevor Sie eine Dispute-Anfrage bei PayPal eröffnen. Wir lösen Probleme schnell, oft noch am selben Werktag.
+              Wenn Sie mit Ihrer PayPal-Zahlung unzufrieden sind, kontaktieren Sie uns bitte zuerst unter info@audynia.com — bevor Sie eine Dispute-Anfrage bei PayPal eröffnen. Wir lösen Probleme schnell, oft noch am selben Werktag.
             </InfoCard>
             <InfoCard title="(b) Liefernachweis">
-              Vowlyra LLC speichert für jede Bestellung einen vollständigen digitalen Liefernachweis (Zeitstempel, E-Mail-Bestätigung, Download-Log) der als Beweismittel bei PayPal-Disputes eingereicht werden kann.
+              Audynia speichert für jede Bestellung einen vollständigen digitalen Liefernachweis (Zeitstempel, E-Mail-Bestätigung, Download-Log) der als Beweismittel bei PayPal-Disputes eingereicht werden kann.
             </InfoCard>
             <InfoCard title="(c) Erstattung bei PayPal">
               Genehmigte Erstattungen werden direkt auf Ihr PayPal-Konto zurückgezahlt. Bearbeitungszeit: 3–14 Werktage. Bitte beachten Sie, dass PayPal-Disputes bis zu 180 Tage nach der ursprünglichen Transaktion eröffnet werden können.
@@ -125,14 +125,14 @@ export default function WiderrufsbelehrungPage() {
         </Section>
 
         {/* 5. Freiwillige Erstattungsgarantie */}
-        <Section label="5. Freiwillige Erstattungsgarantie von Vowlyra">
-          <P>Unabhängig vom gesetzlichen Widerrufsrecht gewährt Vowlyra LLC eine freiwillige vollständige Erstattung in folgenden abschließend definierten Fällen:</P>
+        <Section label="5. Freiwillige Erstattungsgarantie von Audynia">
+          <P>Unabhängig vom gesetzlichen Widerrufsrecht gewährt Audynia eine freiwillige vollständige Erstattung in folgenden abschließend definierten Fällen:</P>
           <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
             {[
               ["Fall 1 — Abweichung von der Preview", "Der final gelieferte vollständige Song stimmt inhaltlich nicht mit der zuvor zugeschickten 30-sekündigen Vorschau überein."],
               ["Fall 2 — Fehlerhafte Personalisierung", "Der gelieferte Song spiegelt die im Wizard eingegebenen persönlichen Angaben — insbesondere Namen, Anlass, persönliche Geschichte, emotionaler Klang oder Musikstil — nicht korrekt wider."],
               ["Fall 3 — Zahlung ohne Preview", "Der Kunde hat einen Zahlungslink erhalten ohne zuvor eine kostenlose 30-sekündige Vorschau erhalten zu haben."],
-              ["Fall 4 — Technisches Lieferproblem", "Der Kunde ist technisch nicht in der Lage die gelieferte MP3-Datei herunterzuladen oder zu speichern und Vowlyra kann das Problem nicht innerhalb von 48 Stunden beheben."],
+              ["Fall 4 — Technisches Lieferproblem", "Der Kunde ist technisch nicht in der Lage die gelieferte MP3-Datei herunterzuladen oder zu speichern und Audynia kann das Problem nicht innerhalb von 48 Stunden beheben."],
             ].map(([title, text]) => (
               <InfoCard key={title} title={title}>{text}</InfoCard>
             ))}
@@ -144,7 +144,7 @@ export default function WiderrufsbelehrungPage() {
               <li>Bei Stripe-Transaktionen: innerhalb von 30 Tagen nach Zahlung</li>
             </ul>
             <p style={{ color: "#666", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-              Erstattungsanfragen richten Sie per E-Mail an <span style={{ color: "#ccc" }}>info@vowlyra.com</span> mit dem Betreff: <span style={{ color: "#ccc" }}>&quot;Erstattungsantrag — [Ihre E-Mail-Adresse]&quot;</span>. Bitte geben Sie die bei der Bestellung verwendete E-Mail-Adresse, den Erstattungsgrund sowie den ungefähren Bestellzeitpunkt an. Wir bearbeiten Ihren Antrag innerhalb von 5 Werktagen.
+              Erstattungsanfragen richten Sie per E-Mail an <span style={{ color: "#ccc" }}>info@audynia.com</span> mit dem Betreff: <span style={{ color: "#ccc" }}>&quot;Erstattungsantrag — [Ihre E-Mail-Adresse]&quot;</span>. Bitte geben Sie die bei der Bestellung verwendete E-Mail-Adresse, den Erstattungsgrund sowie den ungefähren Bestellzeitpunkt an. Wir bearbeiten Ihren Antrag innerhalb von 5 Werktagen.
             </p>
           </div>
         </Section>
@@ -155,10 +155,10 @@ export default function WiderrufsbelehrungPage() {
           <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px" }}>
             <p style={{ color: "#ccc", fontSize: 13, fontWeight: 600, marginBottom: 16 }}>An:</p>
             <p style={{ color: "#666", fontSize: 13, lineHeight: 1.8, margin: "0 0 20px" }}>
-              Vowlyra LLC<br />
+              Audynia<br />
               30 N Gould St Ste 100<br />
               Sheridan, WY 82801, USA<br />
-              E-Mail: <Link href="mailto:info@vowlyra.com">info@vowlyra.com</Link>
+              E-Mail: <Link href="mailto:info@audynia.com">info@audynia.com</Link>
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <FormField label="Hiermit widerrufe(n) ich/wir den Vertrag über den Kauf folgender digitaler Inhalte." />

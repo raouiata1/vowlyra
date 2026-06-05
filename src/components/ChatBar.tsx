@@ -70,16 +70,16 @@ export default function ChatBar() {
   // ── listen for footer "Chat starten" click ──────────────────────────────
   useEffect(() => {
     const handler = () => { setShowBubble(false); setIsOpen(true); };
-    window.addEventListener("vowlyra:openchat", handler);
-    return () => window.removeEventListener("vowlyra:openchat", handler);
+    window.addEventListener("audynia:openchat", handler);
+    return () => window.removeEventListener("audynia:openchat", handler);
   }, []);
 
   // ── auto-show welcome bubble once per session ────────────────────────────
   useEffect(() => {
-    if (sessionStorage.getItem("vowlyra_bubble_shown")) return;
+    if (sessionStorage.getItem("audynia_bubble_shown")) return;
     const t = setTimeout(() => {
       setShowBubble(true);
-      sessionStorage.setItem("vowlyra_bubble_shown", "1");
+      sessionStorage.setItem("audynia_bubble_shown", "1");
     }, 4_000);
     return () => clearTimeout(t);
   }, []);
@@ -215,7 +215,7 @@ export default function ChatBar() {
             />
             <div style={{ flex: 1 }}>
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}>
-                Lisa · Vowlyra Support
+                Lisa · Audynia Support
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 2 }}>
                 <span style={{

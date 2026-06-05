@@ -27,7 +27,7 @@ export default function CookiesPage() {
           <div style={{ background: "#141414", border: "1px solid #282828", borderRadius: 12, padding: "20px 24px", marginBottom: 48 }}>
             <p style={{ color: "#1DB954", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 10px" }}>Zusammenfassung</p>
             <p style={{ color: "#ccc", fontSize: 14, lineHeight: 1.8, margin: "0 0 8px" }}>
-              vowlyra.com verwendet technisch notwendige Cookies (Stripe, Paddle, PayPal) sowie optionale Cookies für Chat (Crisp) und Werbemessung (Meta Pixel). Technisch notwendige Cookies werden ohne Einwilligung gesetzt. Alle anderen Cookies werden nur nach deiner ausdrücklichen Einwilligung aktiviert.
+              audynia.com verwendet technisch notwendige Cookies (Stripe, Paddle, PayPal) sowie optionale Cookies für Chat (Crisp) und Werbemessung (Meta Pixel). Technisch notwendige Cookies werden ohne Einwilligung gesetzt. Alle anderen Cookies werden nur nach deiner ausdrücklichen Einwilligung aktiviert.
             </p>
             <p style={{ color: "#888", fontSize: 13, margin: 0 }}>
               Einstellungen jederzeit anpassbar · Widerruf durch Browser-Cookie-Löschung
@@ -64,7 +64,7 @@ export default function CookiesPage() {
               Cookies enthalten ausschließlich Text — keinen ausführbaren Code. Sie können dein Gerät nicht beschädigen oder darauf zugreifen.
             </p>
             <DataTable headers={["Begriff", "Bedeutung"]} rows={[
-              ["First-Party Cookie",  "Wird von vowlyra.com selbst gesetzt"],
+              ["First-Party Cookie",  "Wird von audynia.com selbst gesetzt"],
               ["Third-Party Cookie",  "Wird von einem Drittanbieter gesetzt (z.B. Stripe, Meta)"],
               ["Session Cookie",      "Wird gelöscht wenn du den Browser schließt"],
               ["Persistentes Cookie", "Bleibt für eine definierte Zeitspanne gespeichert"],
@@ -89,9 +89,9 @@ export default function CookiesPage() {
               Diese Cookies sind für den Betrieb der Website unbedingt erforderlich. Sie werden ohne Einwilligung gesetzt (§ 25 Abs. 2 Nr. 2 TTDSG, Art. 5 Abs. 3 ePrivacy-Richtlinie).
             </p>
 
-            <SubHeading>Vowlyra eigene Cookies</SubHeading>
+            <SubHeading>Audynia eigene Cookies</SubHeading>
             <CookieTable rows={[
-              ["vowlyra_consent", "vowlyra.com", "First-Party", "365 Tage", "Speichert deine Cookie-Einwilligung (Consent-State als JSON)"],
+              ["audynia_consent", "audynia.com", "First-Party", "365 Tage", "Speichert deine Cookie-Einwilligung (Consent-State als JSON)"],
             ]} />
 
             <SubHeading>Stripe — Zahlungsabwicklung und Betrugsprävention</SubHeading>
@@ -138,7 +138,7 @@ export default function CookiesPage() {
 
             <SubHeading>Wise und Payoneer — Interne Business-Konten</SubHeading>
             <p style={pStyle}>
-              Wise und Payoneer sind interne Geschäftskonten von Vowlyra LLC und werden nicht für Endkunden-Transaktionen eingesetzt. Sie setzen keine Cookies auf vowlyra.com.
+              Wise und Payoneer sind interne Geschäftskonten von Audynia und werden nicht für Endkunden-Transaktionen eingesetzt. Sie setzen keine Cookies auf audynia.com.
             </p>
           </Section>
 
@@ -185,24 +185,24 @@ export default function CookiesPage() {
           {/* 6 */}
           <Section id="sec-6" label="6. Zahlungsanbieter-Cookies im Detail">
             <p style={pStyle}>
-              Alle Zahlungsanbieter auf vowlyra.com sind PCI-DSS-zertifiziert. Ihre Cookies dienen ausschließlich der sicheren Zahlungsabwicklung und Betrugsprävention — nicht zu Werbezwecken auf vowlyra.com.
+              Alle Zahlungsanbieter auf audynia.com sind PCI-DSS-zertifiziert. Ihre Cookies dienen ausschließlich der sicheren Zahlungsabwicklung und Betrugsprävention — nicht zu Werbezwecken auf audynia.com.
             </p>
             <DataTable headers={["Anbieter", "Rolle", "Cookies für Werbung?", "Datentransfer"]} rows={[
               ["Stripe",   "Auftragsverarbeiter",         "Nein",      "EU + USA (SCCs)"],
               ["Paddle",   "Merchant of Record (MoR)",    "Nein",      "UK + USA (SCCs)"],
               ["PayPal",   "Unabhängiger Controller",      "Ja (eigene)", "EU + USA (SCCs)"],
-              ["Wise",     "Internes Business-Konto",     "Nein",      "Nicht auf vowlyra.com"],
-              ["Payoneer", "Internes Business-Konto",     "Nein",      "Nicht auf vowlyra.com"],
+              ["Wise",     "Internes Business-Konto",     "Nein",      "Nicht auf audynia.com"],
+              ["Payoneer", "Internes Business-Konto",     "Nein",      "Nicht auf audynia.com"],
             ]} />
             <p style={pStyle}>
-              Hinweis zu PayPal: PayPal kann als unabhängiger Verantwortlicher eigene Marketing-Cookies setzen wenn du dich mit deinem PayPal-Konto anmeldest. Dies liegt außerhalb der Kontrolle von Vowlyra. Bitte beachte die Datenschutzerklärung von PayPal.
+              Hinweis zu PayPal: PayPal kann als unabhängiger Verantwortlicher eigene Marketing-Cookies setzen wenn du dich mit deinem PayPal-Konto anmeldest. Dies liegt außerhalb der Kontrolle von Audynia. Bitte beachte die Datenschutzerklärung von PayPal.
             </p>
           </Section>
 
           {/* 7 */}
           <Section id="sec-7" label="7. Einwilligung und Widerruf">
             <p style={pStyle}>
-              Beim ersten Besuch von vowlyra.com erscheint ein Cookie-Banner. Du kannst einzeln auswählen welche Cookies du erlaubst. Deine Auswahl wird als Cookie <code style={{ background: "#1a1a1a", padding: "1px 6px", borderRadius: 4, color: "#ccc", fontSize: 12 }}>vowlyra_consent</code> für 365 Tage gespeichert.
+              Beim ersten Besuch von audynia.com erscheint ein Cookie-Banner. Du kannst einzeln auswählen welche Cookies du erlaubst. Deine Auswahl wird als Cookie <code style={{ background: "#1a1a1a", padding: "1px 6px", borderRadius: 4, color: "#ccc", fontSize: 12 }}>audynia_consent</code> für 365 Tage gespeichert.
             </p>
             <DataTable headers={["Aktion", "Ergebnis"]} rows={[
               ["Alle akzeptieren",      "Stripe, Paddle, PayPal, Crisp und Meta Pixel aktiv"],
@@ -210,7 +210,7 @@ export default function CookiesPage() {
               ["Einstellungen anpassen", "Einzelne Dienste per Toggle aktivieren oder deaktivieren"],
             ]} />
             <p style={pStyle}>
-              <strong style={{ color: "#aaa" }}>Widerruf:</strong> Lösche das Cookie <code style={{ background: "#1a1a1a", padding: "1px 6px", borderRadius: 4, color: "#ccc", fontSize: 12 }}>vowlyra_consent</code> in deinen Browser-Einstellungen — beim nächsten Besuch erscheint der Banner erneut und du kannst deine Auswahl neu treffen.
+              <strong style={{ color: "#aaa" }}>Widerruf:</strong> Lösche das Cookie <code style={{ background: "#1a1a1a", padding: "1px 6px", borderRadius: 4, color: "#ccc", fontSize: 12 }}>audynia_consent</code> in deinen Browser-Einstellungen — beim nächsten Besuch erscheint der Banner erneut und du kannst deine Auswahl neu treffen.
             </p>
           </Section>
 
@@ -233,7 +233,7 @@ export default function CookiesPage() {
               ))}
             </div>
             <p style={pStyle}>
-              Hinweis: Das Deaktivieren technisch notwendiger Cookies kann die Funktionalität von vowlyra.com einschränken — insbesondere den Checkout-Prozess.
+              Hinweis: Das Deaktivieren technisch notwendiger Cookies kann die Funktionalität von audynia.com einschränken — insbesondere den Checkout-Prozess.
             </p>
           </Section>
 
@@ -266,7 +266,7 @@ export default function CookiesPage() {
               Diese Cookie-Richtlinie wird aktualisiert wenn wir neue Dienste einsetzen, bestehende ändern oder rechtliche Anforderungen sich ändern. Bei wesentlichen Änderungen erscheint beim nächsten Besuch erneut der Cookie-Banner zur Bestätigung deiner Einwilligung.
             </p>
             <p style={pStyle}>
-              Die aktuelle Version ist immer unter <a href="/cookies" style={{ color: "#1DB954", textDecoration: "none" }}>vowlyra.com/cookies</a> abrufbar.
+              Die aktuelle Version ist immer unter <a href="/cookies" style={{ color: "#1DB954", textDecoration: "none" }}>audynia.com/cookies</a> abrufbar.
             </p>
           </Section>
 
@@ -274,15 +274,15 @@ export default function CookiesPage() {
           <Section id="sec-11" label="11. Kontakt">
             <div style={{ background: "#141414", border: "1px solid #252525", borderRadius: 10, overflow: "hidden", marginBottom: 16 }}>
               {([
-                ["E-Mail",            "info@vowlyra.com"],
+                ["E-Mail",            "info@audynia.com"],
                 ["Betreff",           "Cookie-Anfrage / Datenschutzanfrage"],
                 ["Antwortfrist",      "30 Tage"],
-                ["Datenschutz",       "vowlyra.com/datenschutz"],
+                ["Datenschutz",       "audynia.com/datenschutz"],
               ] as [string, string][]).map(([label, value], i) => (
                 <div key={i} style={{ display: "grid", gridTemplateColumns: "160px 1fr", padding: "12px 16px", borderTop: i === 0 ? "none" : "1px solid #1e1e1e" }}>
                   <span style={{ color: "#888", fontSize: 13, fontWeight: 600 }}>{label}</span>
                   <span style={{ color: "#555", fontSize: 13 }}>
-                    {label === "E-Mail" ? <a href="mailto:info@vowlyra.com" style={{ color: "#1DB954", textDecoration: "none" }}>{value}</a> :
+                    {label === "E-Mail" ? <a href="mailto:info@audynia.com" style={{ color: "#1DB954", textDecoration: "none" }}>{value}</a> :
                      label === "Datenschutz" ? <a href="/datenschutz" style={{ color: "#1DB954", textDecoration: "none" }}>{value}</a> :
                      value}
                   </span>
@@ -292,7 +292,7 @@ export default function CookiesPage() {
           </Section>
 
           <p style={{ color: "#333", fontSize: 12, borderTop: "1px solid #1e1e1e", paddingTop: 24, marginTop: 16 }}>
-            Vowlyra LLC · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@vowlyra.com · Version 1.0 · 15.05.2026
+            Audynia · 30 N Gould St Ste 100, Sheridan, WY 82801, USA · info@audynia.com · Version 1.0 · 15.05.2026
           </p>
 
         </div>
