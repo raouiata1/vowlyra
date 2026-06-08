@@ -31,7 +31,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
           <a href="/" style={{ display: "flex" }}>
             <Image
               src={leftLogo}
-              alt="Vowlyra"
+              alt="Audynia"
               height={40}
               width={160}
               style={{ height: 40, width: "auto", objectFit: "contain" }}
