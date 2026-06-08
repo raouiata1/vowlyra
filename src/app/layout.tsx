@@ -6,9 +6,9 @@ import ChatBar from "@/components/ChatBar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Audynia – Dein persönlicher Song in wenigen Minuten",
+  title: "Audynia – Dein persönlicher Song in ca. 1 Stunde",
   description:
-    "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 14,99€.",
+    "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€.",
   icons: {
     icon: [{ url: '/favicon.png', type: 'image/png' }],
     apple: [{ url: '/favicon.png', type: 'image/png' }],
