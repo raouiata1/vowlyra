@@ -86,10 +86,10 @@ export function hashUserData(raw: {
 
 export async function sendCAPIEvent(events: CAPIEvent[]): Promise<{ success: boolean; error?: string }> {
   try {
-    const body = {
-      data: events,
-      test_event_code: process.env.META_TEST_EVENT_CODE, // remove in production
-    };
+    const body: Record<string, unknown> = { data: events };
+    if (process.env.META_TEST_EVENT_CODE) {
+      body.test_event_code = process.env.META_TEST_EVENT_CODE;
+    }
 
     const res = await fetch(CAPI_URL, {
       method: "POST",

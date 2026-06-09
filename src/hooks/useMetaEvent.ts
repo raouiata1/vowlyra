@@ -11,6 +11,17 @@ function getCookie(name: string): string | undefined {
     ?.split("=")[1];
 }
 
+function hasMetaConsent(): boolean {
+  const raw = getCookie("vowlyra_consent");
+  if (!raw) return false;
+  try {
+    const consent = JSON.parse(decodeURIComponent(raw));
+    return consent.meta === true;
+  } catch {
+    return false;
+  }
+}
+
 function firePixel(eventName: string, eventId: string, customData?: Record<string, unknown>) {
   if (typeof window === "undefined" || !window.fbq) return;
   window.fbq("track", eventName, customData ?? {}, { eventID: eventId });
@@ -44,6 +55,8 @@ interface SendEventOptions {
 
 export function useMetaEvent() {
   const sendEvent = useCallback(async (options: SendEventOptions) => {
+    if (!hasMetaConsent()) return;
+
     const { eventName, url = window.location.href, user, customData } = options;
     const eventId = uuidv4();
     firePixel(eventName, eventId, customData as Record<string, unknown>);

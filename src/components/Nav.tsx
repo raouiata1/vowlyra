@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useMetaEvent } from "@/hooks/useMetaEvent";
 
 export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel, ctaHref }: { hideLogo?: boolean; dark?: boolean; leftLogo?: string; ctaLabel?: string; ctaHref?: string }) {
+  const { sendEvent } = useMetaEvent();
   return (
     <nav
       style={{
@@ -62,6 +64,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
           {/* CTA always visible */}
           <Link
             href={ctaHref ?? "/order"}
+            onClick={() => sendEvent({ eventName: "InitiateCheckout" })}
             style={{
               background: "linear-gradient(135deg, #1DB954, #17a349)",
               color: "#000",

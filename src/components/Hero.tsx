@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { useMetaEvent } from "@/hooks/useMetaEvent";
 
 const slides = [
   {
@@ -178,6 +179,7 @@ function HeroSlider() {
 }
 
 export default function Hero() {
+  const { sendEvent } = useMetaEvent();
   return (
     <section
       id="song-erstellen"
@@ -239,6 +241,7 @@ export default function Hero() {
           <div className="hero-ctas" style={{ display: "flex", gap: 12, marginBottom: 36, flexWrap: "wrap" }}>
             <Link
               href="/order"
+              onClick={() => sendEvent({ eventName: "InitiateCheckout" })}
               style={{
                 background: "#1a1a1a",
                 color: "#fff",

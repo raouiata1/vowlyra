@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useMetaEvent } from "@/hooks/useMetaEvent";
 
 const standardFeatures = [
   "Trailer kostenlos vorab anhören",
@@ -21,6 +22,7 @@ const expressFeatures = [
 
 export default function Pricing() {
   const [hovered, setHovered] = useState<"standard" | "express" | null>(null);
+  const { sendEvent } = useMetaEvent();
 
   return (
     <section
@@ -150,6 +152,7 @@ export default function Pricing() {
             {/* CTA */}
             <Link
               href="/order"
+              onClick={() => sendEvent({ eventName: "InitiateCheckout", customData: { content_name: "Standard", value: 14.99, currency: "EUR" } })}
               style={{
                 display: "block",
                 textAlign: "center",
@@ -233,6 +236,7 @@ export default function Pricing() {
             {/* CTA */}
             <Link
               href="/order"
+              onClick={() => sendEvent({ eventName: "InitiateCheckout", customData: { content_name: "Express", value: 34.99, currency: "EUR" } })}
               style={{
                 display: "block",
                 textAlign: "center",

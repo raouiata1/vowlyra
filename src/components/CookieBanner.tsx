@@ -34,6 +34,7 @@ function loadMetaPixel() {
   t.src = "https://connect.facebook.net/en_US/fbevents.js";
   const s = b.getElementsByTagName(n)[0];
   s.parentNode!.insertBefore(t, s);
+  fbq("set", "autoConfig", false, pixelId);
   fbq("init", pixelId);
   fbq("track", "PageView");
 }

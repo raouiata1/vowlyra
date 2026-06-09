@@ -4,7 +4,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import CookieBanner from "@/components/CookieBanner";
 import ChatBar from "@/components/ChatBar";
-import { MetaPixel } from "@/components/MetaPixel";
 import { MetaPageViewTracker } from "@/components/MetaPageViewTracker";
 import "./globals.css";
 
@@ -28,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="de" className="h-full">
       <body style={{ minHeight: "100%", margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
-        <MetaPixel />
         <Suspense fallback={null}>
           <MetaPageViewTracker />
         </Suspense>
