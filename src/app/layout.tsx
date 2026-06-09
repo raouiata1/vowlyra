@@ -12,9 +12,13 @@ export const metadata: Metadata = {
   description:
     "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€.",
   icons: {
-    icon: [{ url: '/favicon.png', type: 'image/png' }],
-    apple: [{ url: '/favicon.png', type: 'image/png' }],
-    shortcut: '/favicon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/icon-512.png', type: 'image/png', sizes: '512x512' }],
+    shortcut: '/favicon.ico',
   },
   manifest: '/site.webmanifest',
 };
