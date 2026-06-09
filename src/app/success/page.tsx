@@ -25,6 +25,12 @@ function getRandomCount() {
   return Math.floor(Math.random() * 4) + 2;
 }
 
+function getNextCount(current: number): number {
+  // drift by ±1, stay between 2 and 8
+  const delta = Math.random() < 0.5 ? -1 : 1;
+  return Math.min(8, Math.max(2, current + delta));
+}
+
 function fadeIn(delay: string): React.CSSProperties {
   return { animation: "fadeUp 0.5s ease forwards", animationDelay: delay, opacity: 0 };
 }
@@ -41,14 +47,31 @@ export default function SuccessPage() {
   const [email, setEmail]         = useState("");
   const [labelKey, setLabelKey]   = useState(0);
 
-
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
     if (stored) setEmail(stored);
 
-    const timer   = setInterval(() => setElapsed((e) => Math.min(e + 1, TOTAL_SECONDS)), 1000);
-    const counter = setInterval(() => setLiveCount(getRandomCount()), 8000);
-    return () => { clearInterval(timer); clearInterval(counter); };
+    // Use wall-clock start time so the timer stays accurate even when the tab is hidden
+    const startTime = Date.now();
+
+    const timer = setInterval(() => {
+      const wallElapsed = Math.floor((Date.now() - startTime) / 1000);
+      setElapsed(Math.min(wallElapsed, TOTAL_SECONDS));
+    }, 1000);
+
+    // Drift ±1 every 5–10 s for a realistic live feel
+    let counterTimeout: ReturnType<typeof setTimeout>;
+    const scheduleNext = (current: number) => {
+      const delay = 5000 + Math.random() * 5000;
+      counterTimeout = setTimeout(() => {
+        const next = getNextCount(current);
+        setLiveCount(next);
+        scheduleNext(next);
+      }, delay);
+    };
+    scheduleNext(liveCount);
+
+    return () => { clearInterval(timer); clearTimeout(counterTimeout); };
   }, []);
 
   const remaining    = TOTAL_SECONDS - elapsed;
