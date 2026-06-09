@@ -358,6 +358,7 @@ export default function ChatBar() {
               onKeyDown={handleKeyDown}
               placeholder="Nachricht schreiben…"
               disabled={sending}
+              data-fb-disable-autotrack="true"
               style={{
                 flex: 1,
                 border: "1.5px solid #e6e6e6",

@@ -493,6 +493,7 @@ export default function OrderPage() {
               <input
                 type="email"
                 className="dark-input"
+                data-fb-disable-autotrack="true"
                 style={{
                   ...inputStyle,
                   border: emailError ? "1.5px solid #e53e3e" : "1.5px solid rgba(0,0,0,0.8)",
