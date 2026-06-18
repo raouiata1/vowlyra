@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { loadCrisp } from "@/lib/crisp";
 
 // ─── types ───────────────────────────────────────────────────────────────────
@@ -13,18 +14,43 @@ type Message = {
 
 // ─── component ───────────────────────────────────────────────────────────────
 
+const STORAGE_KEY = "audynia_chat_messages";
+const DEFAULT_MESSAGES: Message[] = [
+  { id: 0, from: "agent", text: "Hi! Wie kann ich dir helfen?\nSchreib mir einfach 😊" },
+];
+
+function loadMessages(): Message[] {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored) as Message[];
+  } catch {}
+  return DEFAULT_MESSAGES;
+}
+
 export default function ChatBar() {
+  const pathname = usePathname();
+  const isLandingOrWizard = pathname === "/" || pathname?.startsWith("/order");
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { id: 0, from: "agent", text: "Hi! Wie kann ich dir helfen?\nSchreib mir einfach 😊" },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(DEFAULT_MESSAGES);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const listenerSetRef = useRef(false);
+
+  // ── Nachrichten aus localStorage laden ──────────────────────────────────
+  useEffect(() => {
+    setMessages(loadMessages());
+  }, []);
+
+  // ── Nachrichten in localStorage speichern ───────────────────────────────
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {}
+  }, [messages]);
 
   // ── lazily pre-load Crisp + set up message listener ─────────────────────
   useEffect(() => {
@@ -132,6 +158,7 @@ export default function ChatBar() {
   // ── render ───────────────────────────────────────────────────────────────
   return (
     <div
+      className="cb-root"
       style={{
         position: "fixed",
         bottom: 24,
@@ -168,9 +195,10 @@ export default function ChatBar() {
         .cb-fab:active  { transform: scale(0.96) !important; }
         .cb-msg-user    { animation: cb-bounce-in 0.2s ease; }
         .cb-msg-agent   { animation: cb-bounce-in 0.2s ease; }
-        @media (max-width: 480px) {
+        @media (max-width: 767px) {
           .cb-panel { width: calc(100vw - 32px) !important; right: 0 !important; max-height: calc(100vh - 100px) !important; }
           .cb-bubble-card { width: 200px !important; }
+          .cb-root { bottom: ${isLandingOrWizard ? "70px" : "110px"} !important; }
         }
       `}</style>
 

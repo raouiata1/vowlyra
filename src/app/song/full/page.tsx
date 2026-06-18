@@ -61,10 +61,11 @@ const DownloadSVG = () => (
 // ─── page component ───────────────────────────────────────────────────────────
 
 export default function FullSongPage() {
-  const DEMO_URL = "https://audio.vowlyra.com/order_10_full_v1.mp3";
-  const [songUrl, setSongUrl] = useState<string | null>(DEMO_URL);
+  const [songUrl, setSongUrl] = useState<string | null>(null);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [songTitle, setSongTitle] = useState<string>("Dein persönlicher Song");
   const [urlChecked, setUrlChecked] = useState(false);
+  const [audioLoading, setAudioLoading] = useState(false);
 
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -73,12 +74,13 @@ export default function FullSongPage() {
 
   const [downloading, setDownloading] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const blobUrlRef = useRef<string | null>(null);
 
   async function handleDownload() {
-    if (!songUrl) return;
+    if (!downloadUrl) return;
     setDownloading(true);
     try {
-      const proxyUrl = `/api/download?url=${encodeURIComponent(songUrl)}`;
+      const proxyUrl = `/api/download?url=${encodeURIComponent(downloadUrl)}`;
       const res = await fetch(proxyUrl);
       const blob = await res.blob();
       const blobUrl = URL.createObjectURL(blob);
@@ -95,10 +97,27 @@ export default function FullSongPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const song = params.get("song");
-    if (song) setSongUrl(song);
     const title = params.get("title");
     if (title) setSongTitle(decodeURIComponent(title));
     setUrlChecked(true);
+
+    if (!song) return;
+    setDownloadUrl(song);
+    setAudioLoading(true);
+
+    const proxyUrl = `/api/stream?url=${encodeURIComponent(song)}`;
+    fetch(proxyUrl)
+      .then(r => r.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        blobUrlRef.current = url;
+        setSongUrl(url);
+      })
+      .finally(() => setAudioLoading(false));
+
+    return () => {
+      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -147,6 +166,31 @@ export default function FullSongPage() {
 
   if (!urlChecked) return null;
 
+  // ─── LOADING ──────────────────────────────────────────────────────────────
+  if (audioLoading) {
+    return (
+      <>
+        <Nav dark leftLogo="/logo-secondary.png" ctaLabel="Song erstellen" />
+        <main style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ textAlign: "center", padding: "40px 24px", maxWidth: 480 }}>
+            <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(29,185,84,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: "#1DB954" }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeLinecap="round" style={{ animation: "spin 1s linear infinite" }}>
+                <path d="M12 2a10 10 0 0 1 10 10" />
+              </svg>
+            </div>
+            <h1 style={{ color: "#fff", fontSize: 24, fontWeight: 800, marginBottom: 10, fontFamily: "system-ui, -apple-system, sans-serif" }}>
+              Song wird geladen…
+            </h1>
+            <p style={{ color: "#777", fontSize: 15, lineHeight: 1.7, fontFamily: "system-ui, -apple-system, sans-serif" }}>
+              Einen Moment – dein persönlicher Song wird vorbereitet.
+            </p>
+          </div>
+          <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+        </main>
+      </>
+    );
+  }
+
   // ─── FALLBACK ─────────────────────────────────────────────────────────────
   if (!songUrl) {
     return (
@@ -178,12 +222,13 @@ export default function FullSongPage() {
       <Nav dark leftLogo="/logo-secondary-icon.png" ctaLabel="Song erstellen" />
       <main style={{ background: "#121212", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <audio
+          key={songUrl}
           ref={audioRef}
-          src={songUrl}
+          src={songUrl ?? undefined}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={handleEnded}
-          preload="metadata"
+          preload="auto"
         />
 
         {/* HERO + PLAYER */}
@@ -263,9 +308,9 @@ export default function FullSongPage() {
                 </button>
 
                 <button
-                  onClick={() => setPlaying((p) => !p)}
+                  onClick={() => !audioLoading && setPlaying((p) => !p)}
                   style={{
-                    width: 56, height: 56, borderRadius: "50%", background: "#1DB954", border: "none", cursor: "pointer", fontSize: 22,
+                    width: 56, height: 56, borderRadius: "50%", background: "#1DB954", border: "none", cursor: audioLoading ? "wait" : "pointer", fontSize: 22,
                     display: "flex", alignItems: "center", justifyContent: "center", color: "#000",
                     transition: "transform 0.1s, box-shadow 0.2s",
                     boxShadow: playing ? "0 0 24px rgba(29,185,84,0.65)" : "0 4px 16px rgba(29,185,84,0.4)",
@@ -274,7 +319,11 @@ export default function FullSongPage() {
                   onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
                   onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                 >
-                  {playing ? <PauseSVG /> : <PlaySVG />}
+                  {audioLoading ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" style={{ animation: "spin 1s linear infinite" }}>
+                      <path d="M12 2a10 10 0 0 1 10 10" />
+                    </svg>
+                  ) : playing ? <PauseSVG /> : <PlaySVG />}
                 </button>
 
                 <button onClick={() => skipBy(10)} style={ctrlBtn} title="10s vor">
@@ -314,6 +363,10 @@ export default function FullSongPage() {
       </main>
 
       <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
         @keyframes wave {
           from { transform: scaleY(0.6); }
           to   { transform: scaleY(1.2); }
