@@ -242,6 +242,25 @@ export default function OrderPage() {
     setLoading(true)
 
     try {
+      // ── ZeroBounce server-side check ────────────────────────────────────
+      setLoadingPhase('validating')
+      try {
+        const zbRes = await fetch('/api/validate-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: answers.email }),
+        })
+        const zbData = await zbRes.json()
+        if (!zbData.valid) {
+          setEmailError('Diese E-Mail-Adresse scheint ungültig zu sein. Bitte prüfe sie.')
+          setLoading(false)
+          setLoadingPhase(null)
+          return
+        }
+      } catch {
+        // ZeroBounce nicht erreichbar → trotzdem weiter (fail open)
+      }
+
       setLoadingPhase('submitting')
 
       const orderId = generateOrderId()
