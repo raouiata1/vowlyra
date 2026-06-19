@@ -7,6 +7,9 @@ const cards = [
   { name: "Marco & Julia", occasion: "Hochzeit", src: "https://media.vowlyra.com/ugc_2.mp4", likes: "5.1K", comments: "342" },
   { name: "Familie Braun", occasion: "Weihnachten", src: "https://media.vowlyra.com/ugc_3.mp4", likes: "1.8K", comments: "97" },
   { name: "Nico R.", occasion: "Überraschung", src: "https://media.vowlyra.com/ugc_4.mp4", likes: "3.2K", comments: "218" },
+  { name: "Sarah K.", occasion: "Valentinstag", src: "https://media.vowlyra.com/ugc_2.mp4", likes: "4.7K", comments: "295" },
+  { name: "Tim & Marie", occasion: "Jahrestag", src: "https://media.vowlyra.com/ugc_1.mp4", likes: "2.9K", comments: "156" },
+  { name: "Emma L.", occasion: "Geburtstag", src: "https://media.vowlyra.com/ugc_3.mp4", likes: "6.2K", comments: "411" },
 ];
 
 const allCards = [...cards, ...cards];
@@ -282,11 +285,11 @@ export default function UGCCarousel() {
 
       <style>{`
         /*
-          Desktop: 4 cards × (220px + 20px margin) = 960px per set
-          -50% of max-content (8 × 240 = 1920px) = -960px ✓ exact loop point
+          Desktop: 7 cards × (220px + 20px margin) = 1680px per set > 1440px viewport
+          -50% of max-content (14 × 240 = 3360px) = -1680px ✓ exact loop point
 
-          Mobile:  4 cards × (160px + 16px margin) = 704px per set
-          -50% of max-content (8 × 176 = 1408px) = -704px ✓ exact loop point
+          Mobile:  7 cards × (160px + 16px margin) = 1232px per set
+          -50% of max-content (14 × 176 = 2464px) = -1232px ✓ exact loop point
         */
         @keyframes ugc-slide {
           from { transform: translateX(0); }
