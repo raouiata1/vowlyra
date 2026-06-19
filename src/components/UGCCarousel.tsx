@@ -75,7 +75,7 @@ export default function UGCCarousel() {
             >
               <video
                 src={card.src}
-                muted loop playsInline preload="none"
+                autoPlay muted loop playsInline preload="metadata"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", position: "absolute", inset: 0 }}
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 40%, transparent 100%)" }} />
