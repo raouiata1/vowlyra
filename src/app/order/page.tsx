@@ -196,7 +196,7 @@ export default function OrderPage() {
       case 3: return !!(answers.geschichte ?? '').trim();
       case 4: return !!answers.klang;
       case 5: return !!answers.stil;
-      case 6: return (answers.spezialzeile ?? '').trim().length >= 10;
+      case 6: return !!(answers.spezialzeile ?? '').trim();
       case 7: return !!(answers.email ?? '').trim() && !emailError;
       default: return true;
     }
@@ -480,14 +480,6 @@ export default function OrderPage() {
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
                 onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
               />
-              <div style={{
-                textAlign: "right",
-                fontSize: 12,
-                marginTop: 6,
-                color: (answers.spezialzeile ?? "").trim().length >= 10 ? "#1DB954" : "#999",
-              }}>
-                {(answers.spezialzeile ?? "").trim().length} / 10 Zeichen
-              </div>
             </div>
           </>
         );
