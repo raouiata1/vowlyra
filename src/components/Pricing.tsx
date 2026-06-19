@@ -38,7 +38,7 @@ export default function Pricing() {
             <div style={{ fontSize: 12, fontWeight: 700, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 18 }}>{t("standard_name")}</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 4 }}>
               <span style={{ fontSize: 46, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-2px", lineHeight: 1 }}>{t("standard_price")}</span>
-              <span style={{ fontSize: 15, color: "#ccc", textDecoration: "line-through", fontWeight: 400 }}>{t("standard_old_price")}</span>
+              <span style={{ fontSize: 22, color: "#ccc", textDecoration: "line-through", fontWeight: 400 }}>{t("standard_old_price")}</span>
             </div>
             <div style={{ fontSize: 13, color: "#1DB954", fontWeight: 600, marginBottom: 6 }}>{t("standard_save")}</div>
             <div style={{ fontSize: 13, color: "#bbb", marginBottom: 26 }}>{t("standard_billing")}</div>
@@ -66,7 +66,7 @@ export default function Pricing() {
             <div style={{ fontSize: 12, fontWeight: 700, color: "#555", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 18 }}>{t("express_name")}</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 4 }}>
               <span style={{ fontSize: 46, fontWeight: 800, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>{t("express_price")}</span>
-              <span style={{ fontSize: 15, color: "#3a3a3a", textDecoration: "line-through", fontWeight: 400 }}>{t("express_old_price")}</span>
+              <span style={{ fontSize: 22, color: "#555", textDecoration: "line-through", fontWeight: 400 }}>{t("express_old_price")}</span>
             </div>
             <div style={{ fontSize: 13, color: "#1DB954", fontWeight: 600, marginBottom: 6 }}>{t("express_save")}</div>
             <div style={{ fontSize: 13, color: "#555", marginBottom: 26 }}>{t("express_billing")}</div>
