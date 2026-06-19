@@ -4,21 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMetaEvent } from "@/hooks/useMetaEvent";
 import { useTranslations, useLocale } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
 
 export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel, ctaHref }: { hideLogo?: boolean; dark?: boolean; leftLogo?: string; ctaLabel?: string; ctaHref?: string }) {
   const { sendEvent } = useMetaEvent();
   const t = useTranslations("nav");
   const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  function switchLocale(next: string) {
-    // Replace current locale prefix with the new one
-    const segments = pathname.split("/");
-    segments[1] = next;
-    router.push(segments.join("/") || "/");
-  }
 
   return (
     <nav
@@ -66,38 +56,13 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
           </a>
         ) : null}
 
-        {/* Right: Links + CTA + Language Switcher */}
+        {/* Right: Links + CTA */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
           {/* Nav links */}
           <div className="nav-links" style={{ alignItems: "center", gap: 32 }}>
             <a href="#demo" style={linkStyle}>{t("demo")}</a>
             <a href="#preise" style={linkStyle}>{t("prices")}</a>
             <a href="#faq" style={linkStyle}>{t("faq")}</a>
-          </div>
-
-          {/* Language Switcher */}
-          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-            {(["de", "en"] as const).map((l) => (
-              <button
-                key={l}
-                onClick={() => switchLocale(l)}
-                style={{
-                  background: locale === l ? "#1a1a1a" : "transparent",
-                  color: locale === l ? "#fff" : "#555",
-                  border: "1px solid " + (locale === l ? "#1a1a1a" : "#ccc"),
-                  borderRadius: 6,
-                  padding: "4px 10px",
-                  fontSize: 12,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  transition: "all 0.15s",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                {l}
-              </button>
-            ))}
           </div>
 
           {/* CTA */}
