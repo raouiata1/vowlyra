@@ -3,6 +3,16 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 
+const FALLBACK_GRADIENTS = [
+  "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+  "linear-gradient(135deg, #2d1b69 0%, #11998e 100%)",
+  "linear-gradient(135deg, #1a1a1a 0%, #1DB954 100%)",
+  "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+  "linear-gradient(135deg, #141e30 0%, #243b55 100%)",
+  "linear-gradient(135deg, #200122 0%, #6f0000 100%)",
+  "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)",
+];
+
 const cards = [
   { name: "Lena M.", occasion: "Geburtstag", src: "https://media.vowlyra.com/ugc_1.mp4", likes: "2.4K", comments: "183" },
   { name: "Marco & Julia", occasion: "Hochzeit", src: "https://media.vowlyra.com/ugc_2.mp4", likes: "5.1K", comments: "342" },
@@ -61,13 +71,12 @@ export default function UGCCarousel() {
               key={i}
               className="ugc-card"
               onClick={() => setPopup({ src: card.src, name: card.name, occasion: card.occasion })}
-              style={{ position: "relative", overflow: "hidden", width: 220, height: 390, borderRadius: 16, flexShrink: 0, background: "#111", cursor: "pointer", marginRight: 20 }}
+              style={{ position: "relative", overflow: "hidden", width: 220, height: 390, borderRadius: 16, flexShrink: 0, background: FALLBACK_GRADIENTS[i % FALLBACK_GRADIENTS.length], cursor: "pointer", marginRight: 20 }}
             >
               <video
                 src={card.src}
                 muted loop playsInline preload="none"
-                onError={(e) => { const el = e.currentTarget.closest(".ugc-card") as HTMLElement | null; if (el) el.style.display = "none"; }}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", position: "absolute", inset: 0 }}
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 40%, transparent 100%)" }} />
               <div className="ugc-play-btn" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 44, height: 44, borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center" }}>
