@@ -1,11 +1,13 @@
+import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import UGCCarousel from "@/components/UGCCarousel";
-import Demo from "@/components/Demo";
-import HowItWorks from "@/components/HowItWorks";
-import Pricing from "@/components/Pricing";
-import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
+
+const UGCCarousel = dynamic(() => import("@/components/UGCCarousel"));
+const Demo = dynamic(() => import("@/components/Demo"));
+const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
+const Pricing = dynamic(() => import("@/components/Pricing"));
+const FAQ = dynamic(() => import("@/components/FAQ"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (

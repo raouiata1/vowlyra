@@ -30,6 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className="h-full">
+      <head>
+        <link rel="preconnect" href="https://media.vowlyra.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://media.audynia.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://js.stripe.com" />
+      </head>
       <body style={{ minHeight: "100%", margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <Suspense fallback={null}>
           <MetaPageViewTracker />

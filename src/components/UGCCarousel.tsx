@@ -110,10 +110,9 @@ export default function UGCCarousel() {
                 marginRight: 20,
               }}
             >
-              {/* VIDEO */}
+              {/* VIDEO – kein autoPlay im Karussell, nur im Popup */}
               <video
                 src={card.src}
-                autoPlay
                 muted
                 loop
                 playsInline
