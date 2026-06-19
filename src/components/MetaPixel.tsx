@@ -8,7 +8,7 @@ const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID!;
 export function MetaPixel() {
   return (
     <>
-      <Script id="meta-pixel" strategy="afterInteractive">
+      <Script id="meta-pixel" strategy="beforeInteractive">
         {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

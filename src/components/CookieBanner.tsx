@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { loadCrisp } from "@/lib/crisp";
 
-const COOKIE_NAME = "vowlyra_consent";
+const COOKIE_NAME = "audynia_consent";
 const EXPIRES = 365;
 
 type ConsentState = {

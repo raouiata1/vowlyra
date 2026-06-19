@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "demo": "Demo",
+    "prices": "Preise",
+    "faq": "FAQ",
+    "cta": "Song erstellen"
+  },
+  "hero": {
+    "h1": "Deine Geschichte als einzigartiger Song",
+    "h1_green": "in wenigen Minuten",
+    "description": "Überrasche jemanden mit einem persönlichen Song, der verbindet, berührt und für immer in Erinnerung bleibt. Perfekt für Geburtstag, Hochzeit oder einfach, um Danke zu sagen.",
+    "cta_primary": "Jetzt persönlichen Song erstellen",
+    "cta_secondary": "Demo anhören",
+    "proof_rating": "aus 2.400+ Songs",
+    "proof_trailer": "Trailer ~30 Sek.",
+    "proof_song": "Song 2–4 Min.",
+    "slides": {
+      "s0_name": "Sarah & Tom",
+      "s0_occasion": "Hochzeit",
+      "s0_quote": "Wir haben beide geweint.",
+      "s1_name": "Lena & Mama",
+      "s1_occasion": "Geburtstag",
+      "s1_quote": "Sie hat sofort geweint.",
+      "s2_name": "Jonas & Mia",
+      "s2_occasion": "Jahrestag",
+      "s2_quote": "In 5 Min. das perfekte Geschenk."
+    }
+  },
+  "ugc": {
+    "pill": "ECHTE REAKTIONEN VON KUNDEN",
+    "title": "Der Moment – wenn sie den Song hören"
+  },
+  "demo": {
+    "pill": "Echtzeit-Demo",
+    "title": "ECHTER SONG\nECHTE GESCHICHTE\nSo klingt ein Geschenk, das sie nie vergessen wird.",
+    "subtitle": "Basierend auf echten Erinnerungen,\nOrten und Momenten.\nJeder Song erzählt eure persönliche Geschichte.",
+    "delivery_title": "Lieferzeiten",
+    "standard_label": "Standard:",
+    "standard_value": "Song in 6 Stunden erstellt",
+    "express_label": "Express:",
+    "express_value": "Song in weniger als 20 Minuten",
+    "check1": "Jeder Song ist 100% einzigartig",
+    "check2": "Trailer in ~3 Minuten in deiner Inbox",
+    "check3": "Nur zahlen, wenn der Trailer gefällt",
+    "track_name": "Für dich, Irene ❤️",
+    "track_sub": "Jahrestag · erstellt von Audynia"
+  },
+  "hiw": {
+    "pill": "SO EINFACH GEHT'S",
+    "typewriter": "In wenigen Minuten\nzum emotionalsten Geschenk deines Lebens.",
+    "step1_title": "Erzähl uns eure Geschichte",
+    "step1_desc": "Ein paar Stichpunkte reichen – wir verwandeln eure Erinnerungen in einen Song, der echte Gefühle auslöst.",
+    "step2_title": "Erhalte deinen kostenlosen Gänsehaut-Trailer",
+    "step2_desc": "In wenigen Minuten bekommst du einen ersten Vorgeschmack. Gefällt er dir? Dann entscheidest du selbst.",
+    "step3_title": "Überrasche einen besonderen Menschen mit dem fertigen Song",
+    "step3_desc": "Bezahle nur, wenn du überzeugt bist – und erlebe ihre Reaktion, wenn sie ihn hört.",
+    "standard_label": "Standard:",
+    "standard_value": "Dein Song in 6 Stunden erstellt",
+    "express_label": "Express:",
+    "express_value": "Dein Song in weniger als 20 Minuten"
+  },
+  "pricing": {
+    "pill": "Preis & Lieferung",
+    "title": "Einfach. Transparent. Fair.",
+    "badge": "Meistgewählt",
+    "standard_name": "Standard",
+    "standard_price": "29,99 €",
+    "standard_old_price": "59,99 €",
+    "standard_save": "Du sparst 30,00 €",
+    "standard_billing": "Einmalig · Kein Abo",
+    "standard_cta": "Jetzt Song erstellen",
+    "standard_note": "Kostenloser Trailer · Kein Risiko",
+    "express_name": "Express",
+    "express_price": "34,99 €",
+    "express_old_price": "69,99 €",
+    "express_save": "Du sparst 35,00 €",
+    "express_billing": "Einmalig · Priorität · Sofort",
+    "express_cta": "Express Song erstellen",
+    "express_note": "In unter 20 Min. fertig · Last-Minute",
+    "standard_features": [
+      "Trailer kostenlos vorab anhören",
+      "Nur zahlen wenn du begeistert bist",
+      "Vollständiger Song in ~6 Stunden",
+      "Personalisierte Lyrics — deine Geschichte",
+      "Dein Wunsch-Musikstil",
+      "Lieferung als MP3 per E-Mail"
+    ],
+    "express_features": [
+      "Alles aus Standard — plus Priorität",
+      "Song fertig in unter 20 Minuten",
+      "Erste Stelle in der Warteschlange",
+      "Persönliche Qualitätskontrolle"
+    ]
+  },
+  "faq": {
+    "pill": "Häufige Fragen",
+    "title": "Alles, was du wissen musst",
+    "items": [
+      {
+        "q": "Wie persönlich wird der Song wirklich?",
+        "a": "Sehr persönlich. Du gibst Namen, Erinnerungen, besondere Momente und den Anlass ein – unsere KI verarbeitet all das zu individuellen Lyrics und einer passenden Melodie. Kein Song klingt wie ein anderer."
+      },
+      {
+        "q": "Was ist der Trailer und warum ist er kostenlos?",
+        "a": "Der Trailer ist eine 30-Sekunden-Vorschau deines Songs – kostenlos per E-Mail geliefert. Wir glauben so stark an die Qualität unserer Songs, dass wir dir erst überzeugen wollen, bevor du einen Cent ausgibst."
+      },
+      {
+        "q": "Kann ich den Musikstil selbst wählen?",
+        "a": "Ja! Du kannst aus verschiedenen Stilen wählen: Pop, Akustik, R&B, Klassisch, HipHop und mehr. Gib einfach an, was deiner beschenkten Person gefällt."
+      },
+      {
+        "q": "Was passiert, wenn mir der Trailer nicht gefällt?",
+        "a": "Dann passiert gar nichts – du zahlst nichts. Du kannst uns Feedback geben und wir erstellen kostenlos einen neuen Trailer. Deine Zufriedenheit ist unsere Priorität."
+      },
+      {
+        "q": "Wie lange dauert die Lieferung des vollständigen Songs?",
+        "a": "Der Trailer kommt in ~5 Minuten. Nach der Zahlung erhältst du den vollständigen Song (ca. 3 Minuten) innerhalb weniger Minuten per E-Mail – manchmal sogar schneller."
+      },
+      {
+        "q": "In welchen Fällen bekomme ich eine vollständige Erstattung?",
+        "a": "Wir erstatten in 4 klaren Fällen: (1) Der vollständige Song entspricht inhaltlich nicht der Vorschau (anderer Stil, anderer Ton). (2) Deine persönlichen Angaben wurden im Song nicht korrekt umgesetzt (falscher Name, falscher Anlass). (3) Du hast bezahlt, ohne zuvor eine kostenlose Vorschau erhalten zu haben. (4) Du kannst die gelieferte MP3-Datei technisch nicht herunterladen und wir lösen das Problem nicht innerhalb von 48 Stunden.",
+        "link_label": "Vollständige Refund-Policy lesen →",
+        "link_href": "/refund"
+      },
+      {
+        "q": "Wann gibt es keine Erstattung?",
+        "a": "Keine Erstattung wenn: der Song korrekt produziert wurde, aber dir persönlich nicht gefällt (deshalb gibt es die kostenlose Vorschau zuerst), du selbst fehlerhafte Angaben im Bestellprozess gemacht hast, die Anfrage mehr als 30 Tage nach der Zahlung eingeht, oder du den Song bereits heruntergeladen und geteilt hast ohne einen der 4 Erstattungsgründe zu haben.",
+        "link_label": "Alle Ausschlussgründe in der Refund-Policy →",
+        "link_href": "/refund"
+      },
+      {
+        "q": "Wie beantrage ich eine Erstattung und wie lange dauert sie?",
+        "a": "Schreibe eine E-Mail an info@audynia.com mit dem Betreff: \"Erstattungsantrag - [deine E-Mail-Adresse]\" und nenne deinen Erstattungsgrund (Fall 1–4). Wir antworten innerhalb von 24 Stunden und bearbeiten den Antrag in 5 Werktagen. Die Rückzahlung erfolgt über dieselbe Zahlungsmethode und dauert je nach Anbieter 3–10 Werktage.",
+        "link_label": "Refund-Prozess Schritt für Schritt →",
+        "link_href": "/refund#sec-6"
+      },
+      {
+        "q": "Kann ich kostenlos eine neue Vorschau anfordern, bevor ich zahle?",
+        "a": "Ja. Wenn dir die 30-Sekunden-Vorschau nicht gefällt, kannst du einmalig pro Bestellung eine kostenlose neue Demo anfordern. Schreib uns einfach vor der Zahlung an info@audynia.com und erkläre, was dir nicht gefallen hat und was du dir anders vorstellst. Dieses Recht besteht unabhängig von der Erstattungsgarantie."
+      }
+    ]
+  },
+  "order": {
+    "occasions": ["Geburtstag", "Hochzeit", "Jahrestag", "Valentinstag", "Einfach so", "Weihnachten"],
+    "styles": ["Sanft & Emotional", "Tief & Romantisch", "Fröhlich & Mitreißend", "Nostalgisch", "Filmreif & Kraftvoll", "Sonstiges"],
+    "moods": ["Acoustic", "Pop", "Klavier", "R&B", "Filmmusik"],
+    "required": "* Pflichtfeld",
+    "optional": "(Optional)",
+    "back": "← Zurück",
+    "trust_step0": "Kein Abo · Kostenloser Trailer vorab",
+    "trust_other": "Kein Abo · Nur zahlen wenn der Trailer gefällt",
+    "step0_title": "Welcher Moment verdient einen Song?",
+    "step0_sub": "Je nach Anlass wird der Song tiefer, fröhlicher oder romantischer.",
+    "step1_title": "Wie heißt du?",
+    "step1_sub": "Dein Name macht den Song noch persönlicher.",
+    "step1_placeholder": "z.B. Max",
+    "step2_title": "Für wen ist dieser Song?",
+    "step2_sub": "Ihr Name wird direkt in die Lyrics eingewoben.",
+    "step2_placeholder": "z.B. Mama, Jonas, Sarah",
+    "step3_title": "Was verbindet dich mit {name}?",
+    "step3_sub": "Je mehr Details, desto tiefer geht der Song unter die Haut.",
+    "step3_placeholder": "{name} tanzt immer in der Küche, liebt Rosen und hat mich gelehrt, was wirklich zählt...",
+    "step4_title": "Wie soll sich {name} fühlen?",
+    "step4_sub": "Das ist die Seele deines Songs — wähle, was sie am tiefsten berührt.",
+    "step5_title": "Welcher Sound passt am besten?",
+    "step5_sub": "Der Stil macht deinen Song unverwechselbar — wähle was {name} lieben wird.",
+    "step6_title": "Was macht {name} einzigartig?",
+    "step6_sub": "Ein Spitzname, ein Innenwitz, eine Eigenheit — das wird die Zeile, die sie nie vergessen.",
+    "step6_placeholder": "z.B. 'Sie lacht immer zu laut in Kinos'",
+    "step7_title": "Fast fertig{name}! Wohin schicken wir deinen Trailer?",
+    "step7_sub": "In ~5 Minuten hörst du deinen kostenlosen Song-Trailer — du zahlst nur wenn er dir gefällt.",
+    "step7_email_placeholder": "deine@email.de",
+    "step7_no_spam": "Nur für deinen Trailer. Kein Spam, kein Abo.",
+    "step7_next_title": "Was passiert als nächstes",
+    "step7_next1": "Kostenloser Trailer für {name} wird in ~5 Min. erstellt",
+    "step7_next2": "Kostenloser Trailer kommt in dein Postfach",
+    "step7_next3": "Nur zahlen wenn er dich begeistert",
+    "cta0": "Anlass bestätigen →",
+    "cta1": "Namen eingeben →",
+    "cta2": "Weiter →",
+    "cta3": "Geschichte hinzufügen →",
+    "cta4": "Klang festlegen →",
+    "cta5": "Stil wählen →",
+    "cta6": "Moment festhalten →",
+    "cta7": "Kostenlosen Trailer anfordern →",
+    "cta_validating": "E-Mail wird geprüft...",
+    "cta_submitting": "Song wird erstellt...",
+    "err0": "Bitte wähle einen Anlass aus.",
+    "err1": "Bitte gib deinen Namen ein.",
+    "err2": "Bitte gib den Namen der Person ein.",
+    "err3": "Bitte schreib etwas über die Person.",
+    "err4": "Bitte wähle einen Klangstil.",
+    "err5": "Bitte wähle einen Musikstil.",
+    "err6": "Bitte beschreib kurz was diesen Moment einzigartig macht.",
+    "err_default": "Bitte füll dieses Feld aus.",
+    "email_err_empty": "Bitte gib deine E-Mail-Adresse ein.",
+    "email_err_invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "email_err_fake": "Bitte verwende eine echte E-Mail-Adresse.",
+    "email_err_zerobounce": "Diese E-Mail-Adresse scheint ungültig zu sein. Bitte prüfe sie.",
+    "server_err": "Fehler – bitte versuche es erneut",
+    "connection_err": "Verbindungsfehler",
+    "occasion_fb_birthday": "Perfekt — Geburtstagslieder lassen Menschen weinen vor Freude.",
+    "occasion_fb_wedding": "Wunderschön — Hochzeitslieder sind unsere emotionalsten Songs.",
+    "occasion_fb_anniversary": "So schön — ein Song, der mehr sagt als tausend Worte.",
+    "occasion_fb_valentine": "Perfekt — das Geschenk, das Blumen nie sein können.",
+    "occasion_fb_justso": "Die besten Geschenke brauchen keinen besonderen Grund.",
+    "occasion_fb_christmas": "Magisch — Weihnachtslieder, die wirklich von euch handeln."
+  },
+  "meta": {
+    "title": "Audynia – Dein persönlicher Song in ca. 1 Stunde",
+    "description": "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€."
+  }
+}

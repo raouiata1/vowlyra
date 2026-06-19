@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "demo": "Demo",
+    "prices": "Pricing",
+    "faq": "FAQ",
+    "cta": "Create Song"
+  },
+  "hero": {
+    "h1": "Your story as a unique song",
+    "h1_green": "in just minutes",
+    "description": "Surprise someone with a personal song that connects, touches, and stays in memory forever. Perfect for birthdays, weddings, or simply to say thank you.",
+    "cta_primary": "Create your personal song now",
+    "cta_secondary": "Listen to demo",
+    "proof_rating": "from 2,400+ songs",
+    "proof_trailer": "Trailer ~30 sec.",
+    "proof_song": "Song 2–4 min.",
+    "slides": {
+      "s0_name": "Sarah & Tom",
+      "s0_occasion": "Wedding",
+      "s0_quote": "We both cried.",
+      "s1_name": "Lena & Mom",
+      "s1_occasion": "Birthday",
+      "s1_quote": "She cried immediately.",
+      "s2_name": "Jonas & Mia",
+      "s2_occasion": "Anniversary",
+      "s2_quote": "The perfect gift in 5 min."
+    }
+  },
+  "ugc": {
+    "pill": "REAL CUSTOMER REACTIONS",
+    "title": "The moment – when they hear the song"
+  },
+  "demo": {
+    "pill": "Live Demo",
+    "title": "A REAL SONG\nA REAL STORY\nThis is what a gift sounds like that she'll never forget.",
+    "subtitle": "Based on real memories,\nplaces and moments.\nEvery song tells your personal story.",
+    "delivery_title": "Delivery times",
+    "standard_label": "Standard:",
+    "standard_value": "Song ready in 6 hours",
+    "express_label": "Express:",
+    "express_value": "Song ready in under 20 minutes",
+    "check1": "Every song is 100% unique",
+    "check2": "Trailer in your inbox in ~3 minutes",
+    "check3": "Only pay if you love the trailer",
+    "track_name": "For you, Irene ❤️",
+    "track_sub": "Anniversary · created by Audynia"
+  },
+  "hiw": {
+    "pill": "HOW IT WORKS",
+    "typewriter": "In just minutes\nto the most emotional gift of your life.",
+    "step1_title": "Tell us your story",
+    "step1_desc": "A few bullet points are enough – we turn your memories into a song that triggers real emotions.",
+    "step2_title": "Receive your free goosebump trailer",
+    "step2_desc": "Within minutes you get a first preview. Like it? Then you decide.",
+    "step3_title": "Surprise a special person with the finished song",
+    "step3_desc": "Only pay when you're convinced – and experience their reaction when they hear it.",
+    "standard_label": "Standard:",
+    "standard_value": "Your song ready in 6 hours",
+    "express_label": "Express:",
+    "express_value": "Your song ready in under 20 minutes"
+  },
+  "pricing": {
+    "pill": "Price & Delivery",
+    "title": "Simple. Transparent. Fair.",
+    "badge": "Most popular",
+    "standard_name": "Standard",
+    "standard_price": "€29.99",
+    "standard_old_price": "€59.99",
+    "standard_save": "You save €30.00",
+    "standard_billing": "One-time · No subscription",
+    "standard_cta": "Create song now",
+    "standard_note": "Free trailer · No risk",
+    "express_name": "Express",
+    "express_price": "€34.99",
+    "express_old_price": "€69.99",
+    "express_save": "You save €35.00",
+    "express_billing": "One-time · Priority · Instant",
+    "express_cta": "Create express song",
+    "express_note": "Ready in under 20 min · Last-minute",
+    "standard_features": [
+      "Listen to free trailer first",
+      "Only pay if you're amazed",
+      "Full song in ~6 hours",
+      "Personalized lyrics — your story",
+      "Your preferred music style",
+      "Delivered as MP3 via email"
+    ],
+    "express_features": [
+      "Everything in Standard — plus priority",
+      "Song ready in under 20 minutes",
+      "First in the queue",
+      "Personal quality check"
+    ]
+  },
+  "faq": {
+    "pill": "Frequently asked questions",
+    "title": "Everything you need to know",
+    "items": [
+      {
+        "q": "How personal does the song actually get?",
+        "a": "Very personal. You provide names, memories, special moments and the occasion – our AI processes all of it into unique lyrics and a fitting melody. No song sounds like another."
+      },
+      {
+        "q": "What is the trailer and why is it free?",
+        "a": "The trailer is a 30-second preview of your song – delivered free via email. We believe so strongly in the quality of our songs that we want to convince you first before you spend a cent."
+      },
+      {
+        "q": "Can I choose the music style myself?",
+        "a": "Yes! You can choose from various styles: Pop, Acoustic, R&B, Classical, HipHop and more. Just specify what the recipient enjoys."
+      },
+      {
+        "q": "What happens if I don't like the trailer?",
+        "a": "Nothing happens – you pay nothing. You can give us feedback and we'll create a new trailer for free. Your satisfaction is our priority."
+      },
+      {
+        "q": "How long does delivery of the full song take?",
+        "a": "The trailer arrives in ~5 minutes. After payment you'll receive the full song (approx. 3 minutes) within minutes via email – sometimes even faster."
+      },
+      {
+        "q": "In which cases do I get a full refund?",
+        "a": "We refund in 4 clear cases: (1) The full song doesn't match the preview (different style, different tone). (2) Your personal details were not correctly incorporated (wrong name, wrong occasion). (3) You paid without first receiving a free preview. (4) You technically cannot download the delivered MP3 and we don't resolve the issue within 48 hours.",
+        "link_label": "Read full refund policy →",
+        "link_href": "/refund"
+      },
+      {
+        "q": "When is there no refund?",
+        "a": "No refund when: the song was produced correctly but you personally don't like it (that's why the free preview exists), you yourself provided incorrect information, the request comes more than 30 days after payment, or you've already downloaded and shared the song without one of the 4 refund reasons.",
+        "link_label": "All exclusions in the refund policy →",
+        "link_href": "/refund"
+      },
+      {
+        "q": "How do I request a refund and how long does it take?",
+        "a": "Send an email to info@audynia.com with subject: \"Refund request - [your email address]\" and state your refund reason (case 1–4). We respond within 24 hours and process the request in 5 business days. The refund is made via the same payment method and takes 3–10 business days depending on the provider.",
+        "link_label": "Refund process step by step →",
+        "link_href": "/refund#sec-6"
+      },
+      {
+        "q": "Can I request a free new preview before paying?",
+        "a": "Yes. If you don't like the 30-second preview, you can request one free new demo per order. Just write to us before payment at info@audynia.com and explain what you didn't like and what you'd prefer differently. This right exists independently of the refund guarantee."
+      }
+    ]
+  },
+  "order": {
+    "occasions": ["Birthday", "Wedding", "Anniversary", "Valentine's Day", "Just because", "Christmas"],
+    "styles": ["Soft & Emotional", "Deep & Romantic", "Joyful & Uplifting", "Nostalgic", "Cinematic & Powerful", "Other"],
+    "moods": ["Acoustic", "Pop", "Piano", "R&B", "Film Score"],
+    "required": "* Required",
+    "optional": "(Optional)",
+    "back": "← Back",
+    "trust_step0": "No subscription · Free trailer first",
+    "trust_other": "No subscription · Only pay if you love the trailer",
+    "step0_title": "Which moment deserves a song?",
+    "step0_sub": "Depending on the occasion, the song will be deeper, happier or more romantic.",
+    "step1_title": "What's your name?",
+    "step1_sub": "Your name makes the song even more personal.",
+    "step1_placeholder": "e.g. Max",
+    "step2_title": "Who is this song for?",
+    "step2_sub": "Their name will be woven directly into the lyrics.",
+    "step2_placeholder": "e.g. Mom, Jonas, Sarah",
+    "step3_title": "What connects you with {name}?",
+    "step3_sub": "The more details, the deeper the song will touch the heart.",
+    "step3_placeholder": "{name} always dances in the kitchen, loves roses and taught me what really matters...",
+    "step4_title": "How should {name} feel?",
+    "step4_sub": "This is the soul of your song — choose what will touch them most deeply.",
+    "step5_title": "Which sound fits best?",
+    "step5_sub": "The style makes your song unique — choose what {name} will love.",
+    "step6_title": "What makes {name} unique?",
+    "step6_sub": "A nickname, an inside joke, a quirk — this will be the line they'll never forget.",
+    "step6_placeholder": "e.g. 'She always laughs too loud at the movies'",
+    "step7_title": "Almost done{name}! Where should we send your trailer?",
+    "step7_sub": "In ~5 minutes you'll hear your free song trailer — you only pay if you love it.",
+    "step7_email_placeholder": "your@email.com",
+    "step7_no_spam": "Only for your trailer. No spam, no subscription.",
+    "step7_next_title": "What happens next",
+    "step7_next1": "Free trailer for {name} will be created in ~5 min.",
+    "step7_next2": "Free trailer lands in your inbox",
+    "step7_next3": "Only pay if you're amazed",
+    "cta0": "Confirm occasion →",
+    "cta1": "Enter name →",
+    "cta2": "Continue →",
+    "cta3": "Add story →",
+    "cta4": "Set mood →",
+    "cta5": "Choose style →",
+    "cta6": "Capture moment →",
+    "cta7": "Request free trailer →",
+    "cta_validating": "Validating email...",
+    "cta_submitting": "Creating song...",
+    "err0": "Please select an occasion.",
+    "err1": "Please enter your name.",
+    "err2": "Please enter the recipient's name.",
+    "err3": "Please write something about the person.",
+    "err4": "Please select a mood.",
+    "err5": "Please select a music style.",
+    "err6": "Please briefly describe what makes this moment unique.",
+    "err_default": "Please fill out this field.",
+    "email_err_empty": "Please enter your email address.",
+    "email_err_invalid": "Please enter a valid email address.",
+    "email_err_fake": "Please use a real email address.",
+    "email_err_zerobounce": "This email address seems invalid. Please check it.",
+    "server_err": "Error – please try again",
+    "connection_err": "Connection error",
+    "occasion_fb_birthday": "Perfect — birthday songs make people cry with joy.",
+    "occasion_fb_wedding": "Beautiful — wedding songs are our most emotional songs.",
+    "occasion_fb_anniversary": "So lovely — a song that says more than a thousand words.",
+    "occasion_fb_valentine": "Perfect — the gift that flowers can never be.",
+    "occasion_fb_justso": "The best gifts don't need a special reason.",
+    "occasion_fb_christmas": "Magical — Christmas songs that are really about you."
+  },
+  "meta": {
+    "title": "Audynia – Your personal song in about 1 hour",
+    "description": "Personalized songs for every occasion. Free trailer first – only pay if you love it. From just €29.99."
+  }
+}

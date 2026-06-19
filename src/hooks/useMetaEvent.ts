@@ -12,7 +12,7 @@ function getCookie(name: string): string | undefined {
 }
 
 function hasMetaConsent(): boolean {
-  const raw = getCookie("vowlyra_consent");
+  const raw = getCookie("audynia_consent");
   if (!raw) return false;
   try {
     const consent = JSON.parse(decodeURIComponent(raw));

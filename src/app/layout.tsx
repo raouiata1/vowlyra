@@ -1,50 +1,7 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import CookieBanner from "@/components/CookieBanner";
-import ChatBar from "@/components/ChatBar";
-import { MetaPageViewTracker } from "@/components/MetaPageViewTracker";
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "Audynia – Dein persönlicher Song in ca. 1 Stunde",
-  description:
-    "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€.",
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
-      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
-    ],
-    apple: [{ url: '/icon-512.png', type: 'image/png', sizes: '512x512' }],
-    shortcut: '/favicon.ico',
-  },
-  manifest: '/site.webmanifest',
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="de" className="h-full">
-      <head>
-        <link rel="preconnect" href="https://media.vowlyra.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://media.audynia.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://js.stripe.com" />
-      </head>
-      <body style={{ minHeight: "100%", margin: 0, fontFamily: "system-ui, -apple-system, sans-serif" }}>
-        <Suspense fallback={null}>
-          <MetaPageViewTracker />
-        </Suspense>
-        {children}
-        <ChatBar />
-        <CookieBanner />
-        <SpeedInsights />
-        <Analytics />
-      </body>
-    </html>
-  );
+}) {
+  return children;
 }

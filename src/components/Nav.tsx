@@ -3,9 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMetaEvent } from "@/hooks/useMetaEvent";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel, ctaHref }: { hideLogo?: boolean; dark?: boolean; leftLogo?: string; ctaLabel?: string; ctaHref?: string }) {
   const { sendEvent } = useMetaEvent();
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  function switchLocale(next: string) {
+    // Replace current locale prefix with the new one
+    const segments = pathname.split("/");
+    segments[1] = next;
+    router.push(segments.join("/") || "/");
+  }
+
   return (
     <nav
       style={{
@@ -28,9 +42,9 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
           justifyContent: (hideLogo && !leftLogo) ? "flex-end" : "space-between",
         }}
       >
-        {/* Left: Primary Logo or custom leftLogo */}
+        {/* Left: Logo */}
         {leftLogo ? (
-          <a href="/" style={{ display: "flex" }}>
+          <a href={`/${locale}`} style={{ display: "flex" }}>
             <Image
               src={leftLogo}
               alt="Audynia"
@@ -41,7 +55,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
             />
           </a>
         ) : !hideLogo ? (
-          <a href="/" style={{ display: "flex" }}>
+          <a href={`/${locale}`} style={{ display: "flex" }}>
             <Image
               src="/logo.png"
               height={45}
@@ -52,18 +66,43 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
           </a>
         ) : null}
 
-        {/* Right: Links + CTA */}
+        {/* Right: Links + CTA + Language Switcher */}
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-          {/* Nav links – hidden on mobile via .nav-links class */}
+          {/* Nav links */}
           <div className="nav-links" style={{ alignItems: "center", gap: 32 }}>
-            <a href="#demo" style={linkStyle}>Demo</a>
-            <a href="#preise" style={linkStyle}>Preise</a>
-            <a href="#faq" style={linkStyle}>FAQ</a>
+            <a href="#demo" style={linkStyle}>{t("demo")}</a>
+            <a href="#preise" style={linkStyle}>{t("prices")}</a>
+            <a href="#faq" style={linkStyle}>{t("faq")}</a>
           </div>
 
-          {/* CTA always visible */}
+          {/* Language Switcher */}
+          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            {(["de", "en"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => switchLocale(l)}
+                style={{
+                  background: locale === l ? "#1a1a1a" : "transparent",
+                  color: locale === l ? "#fff" : "#555",
+                  border: "1px solid " + (locale === l ? "#1a1a1a" : "#ccc"),
+                  borderRadius: 6,
+                  padding: "4px 10px",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  textTransform: "uppercase",
+                  transition: "all 0.15s",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+
+          {/* CTA */}
           <Link
-            href={ctaHref ?? "/order"}
+            href={ctaHref ?? `/${locale}/order`}
             onClick={() => sendEvent({ eventName: "InitiateCheckout" })}
             style={{
               background: "linear-gradient(135deg, #1DB954, #17a349)",
@@ -88,7 +127,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
               e.currentTarget.style.boxShadow = "0 4px 15px rgba(29,185,84,0.4)";
             }}
           >
-            {ctaLabel ?? "Song erstellen"}
+            {ctaLabel ?? t("cta")}
           </Link>
         </div>
       </div>

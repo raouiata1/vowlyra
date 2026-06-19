@@ -1,0 +1,256 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Footer from "@/components/Footer";
+
+
+const TOTAL_SECONDS = 1200; // 20 minutes
+const CIRCUMFERENCE = 340;
+
+const STATUS_LABELS = [
+  { until: 300,  text: "Lyrics werden generiert..." },
+  { until: 600,  text: "Musik wird komponiert..." },
+  { until: 900,  text: "Song wird gemischt..." },
+  { until: 1200, text: "Trailer wird vorbereitet..." },
+];
+
+const TIMELINE = [
+  { active: true,  title: "Trailer wird erstellt",  sub: "In ~2 Minuten in deinem Postfach" },
+  { active: false, title: "Trailer anhören",         sub: "Kostenlos & unverbindlich" },
+  { active: false, title: "Song freischalten",       sub: "Nur wenn du begeistert bist · 29,99€" },
+];
+
+function getRandomCount() {
+  return Math.floor(Math.random() * 4) + 2;
+}
+
+function getNextCount(current: number): number {
+  // drift by ±1, stay between 2 and 8
+  const delta = Math.random() < 0.5 ? -1 : 1;
+  return Math.min(8, Math.max(2, current + delta));
+}
+
+function fadeIn(delay: string): React.CSSProperties {
+  return { animation: "fadeUp 0.5s ease forwards", animationDelay: delay, opacity: 0 };
+}
+
+function formatTime(secs: number) {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+export default function SuccessPage() {
+  const [elapsed, setElapsed]     = useState(0);
+  const [liveCount, setLiveCount] = useState(getRandomCount());
+  const [email, setEmail]         = useState("");
+  const [labelKey, setLabelKey]   = useState(0);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("vowlyra_email");
+    if (stored) setEmail(stored);
+
+    // Use wall-clock start time so the timer stays accurate even when the tab is hidden
+    const startTime = Date.now();
+
+    const timer = setInterval(() => {
+      const wallElapsed = Math.floor((Date.now() - startTime) / 1000);
+      setElapsed(Math.min(wallElapsed, TOTAL_SECONDS));
+    }, 1000);
+
+    // Drift ±1 every 5–10 s for a realistic live feel
+    let counterTimeout: ReturnType<typeof setTimeout>;
+    const scheduleNext = (current: number) => {
+      const delay = 5000 + Math.random() * 5000;
+      counterTimeout = setTimeout(() => {
+        const next = getNextCount(current);
+        setLiveCount(next);
+        scheduleNext(next);
+      }, delay);
+    };
+    scheduleNext(liveCount);
+
+    return () => { clearInterval(timer); clearTimeout(counterTimeout); };
+  }, []);
+
+  const remaining    = TOTAL_SECONDS - elapsed;
+  const done         = remaining === 0;
+  const dashOffset   = done ? 0 : CIRCUMFERENCE * (1 - elapsed / TOTAL_SECONDS);
+  const currentLabel = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? "Trailer wird vorbereitet...";
+
+  // trigger label fade on change
+  useEffect(() => { setLabelKey((k) => k + 1); }, [currentLabel]);
+
+  return (
+    <>
+    <div style={{ background: "#CCCCCC", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+      <style>{`
+        @keyframes checkIn {
+          0%   { transform: scale(0); }
+          70%  { transform: scale(1.1); }
+          100% { transform: scale(1); }
+        }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes activePulse {
+          0%, 100% { transform: scale(1); opacity: 0.5; }
+          50%       { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes confettiRise {
+          0%   { transform: translateY(0) scale(1); opacity: 1; }
+          100% { transform: translateY(-60px) scale(0.5); opacity: 0; }
+        }
+        .status-label {
+          animation: fadeIn 0.5s ease forwards;
+        }
+        .confetti-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #1DB954;
+          position: absolute;
+          animation: confettiRise 1.2s ease-out forwards;
+        }
+      `}</style>
+
+      {/* Header */}
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#CCCCCC", padding: "20px 24px", zIndex: 99 }}>
+        <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+      </div>
+
+      {/* Main Content */}
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 24px 80px" }}>
+
+        {/* Live Counter Pill */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.1)", border: "0.5px solid #1DB954", borderRadius: 500, padding: "6px 14px", fontSize: 12, color: "#1a7a35", marginBottom: 32, ...fadeIn("0s") }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1DB954", display: "inline-block", animation: "activePulse 1.5s infinite" }} />
+          {liveCount} Songs werden gerade erstellt
+        </div>
+
+        {/* Checkmark Circle */}
+        <div style={{ width: 80, height: 80, borderRadius: "50%", background: "#1DB954", display: "flex", alignItems: "center", justifyContent: "center", animation: "checkIn 0.5s ease-out forwards" }}>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+
+        {/* Title */}
+        <h1 style={{ fontSize: 32, fontWeight: 800, color: "#1a1a1a", marginTop: 24, marginBottom: 0, textAlign: "center", lineHeight: 1.2, ...fadeIn("0.2s") }}>
+          Dein Song wird erstellt
+        </h1>
+
+        {/* Subtitle */}
+        <p style={{ fontSize: 16, color: "#777", textAlign: "center", maxWidth: 480, lineHeight: 1.6, marginTop: 12, marginBottom: 0, ...fadeIn("0.4s") }}>
+          Das Audynia-Team arbeitet gerade an deinem persönlichen Song. Du erhältst deinen exklusiven Trailer in wenigen Minuten per E-Mail.
+        </p>
+
+        {/* Circle Timer */}
+        <div style={{ marginTop: 32, display: "flex", flexDirection: "column", alignItems: "center", ...fadeIn("0.6s") }}>
+          <p style={{ fontSize: 13, color: "#777", textAlign: "center", marginBottom: 16, margin: "0 0 16px" }}>
+            Dein persönlicher Song wird gerade erstellt
+          </p>
+
+          {/* SVG Circle */}
+          <div style={{ position: "relative", width: 120, height: 120 }}>
+            <svg width="120" height="120" viewBox="0 0 120 120" style={{ transform: "rotate(-90deg)" }}>
+              <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" strokeWidth="6" />
+              <circle
+                cx="60" cy="60" r="54"
+                fill="none"
+                stroke="#1DB954"
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeDasharray={CIRCUMFERENCE}
+                strokeDashoffset={dashOffset}
+                style={{ transition: "stroke-dashoffset 1s linear" }}
+              />
+            </svg>
+            {/* Center text */}
+            <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              {done ? (
+                <span style={{ fontSize: 22, fontWeight: 800, color: "#1DB954" }}>Fertig!</span>
+              ) : (
+                <>
+                  <span style={{ fontSize: 22, fontWeight: 800, color: "#1a1a1a", lineHeight: 1 }}>
+                    {formatTime(remaining)}
+                  </span>
+                  <span style={{ fontSize: 10, color: "#777", marginTop: 3 }}>verbleibend</span>
+                </>
+              )}
+            </div>
+            {/* Confetti on done */}
+            {done && (
+              <>
+                <div className="confetti-dot" style={{ left: 20, top: 30, animationDelay: "0s" }} />
+                <div className="confetti-dot" style={{ left: 50, top: 10, animationDelay: "0.15s", background: "#25D366" }} />
+                <div className="confetti-dot" style={{ left: 80, top: 25, animationDelay: "0.3s" }} />
+                <div className="confetti-dot" style={{ left: 65, top: 15, animationDelay: "0.1s", background: "#81C784" }} />
+              </>
+            )}
+          </div>
+
+          {/* Status text */}
+          <div key={labelKey} className="status-label" style={{ marginTop: 16, textAlign: "center" }}>
+            <div style={{ fontSize: 14, color: "#1DB954", fontWeight: 600 }}>
+              {done ? "Dein Trailer ist in deinem Postfach!" : currentLabel}
+            </div>
+            {!done && (
+              <div style={{ fontSize: 12, color: "#999", marginTop: 4 }}>
+                Wir geben unser Bestes für deinen Song
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div style={{ width: "100%", maxWidth: 400, marginTop: 32, ...fadeIn("0.8s") }}>
+          {TIMELINE.map((step, i) => (
+            <div key={i} style={{ display: "flex", gap: 16 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{ position: "relative", width: 24, height: 24, borderRadius: "50%", background: step.active ? "#1DB954" : "#ddd", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  {step.active && <span style={{ position: "absolute", width: 24, height: 24, borderRadius: "50%", background: "#1DB954", animation: "activePulse 1.5s infinite" }} />}
+                  {step.active ? (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative", zIndex: 1 }}>
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  ) : (
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#bbb" }} />
+                  )}
+                </div>
+                {i < TIMELINE.length - 1 && <div style={{ width: 2, flex: 1, background: "#ddd", minHeight: 32, margin: "4px 0" }} />}
+              </div>
+              <div style={{ paddingBottom: i < TIMELINE.length - 1 ? 28 : 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: step.active ? "#1a1a1a" : "#aaa" }}>{step.title}</div>
+                <div style={{ fontSize: 13, color: step.active ? "#555" : "#bbb", marginTop: 2 }}>{step.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Email Card */}
+        {email && (
+          <div style={{ background: "#fff", borderRadius: 12, padding: "16px 20px", marginTop: 24, maxWidth: 400, width: "100%", border: "1.5px solid #1DB954", display: "flex", alignItems: "center", gap: 12, ...fadeIn("1s") }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>Schau in dein Postfach!</div>
+              <div style={{ fontSize: 13, color: "#555", marginTop: 2 }}>Dein Trailer kommt an: {email}</div>
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+    <Footer />
+    </>
+  );
+}
