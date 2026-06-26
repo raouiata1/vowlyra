@@ -12,6 +12,21 @@ type Message = {
   text: string;
 };
 
+const AUTO_REPLY = `Danke für deine Nachricht! 🎵
+
+Unser Team erhält gerade viele Anfragen — aber keine Sorge, wir sind für dich da!
+
+So erstellst du deinen Song in wenigen Schritten:
+1️⃣ Klicke auf „Jetzt Song erstellen"
+2️⃣ Wähle den Anlass (z. B. Geburtstag, Hochzeit, Überraschung)
+3️⃣ Gib uns persönliche Details (Namen, Erinnerungen, Wünsche)
+4️⃣ Wähle deinen Musikstil
+5️⃣ Gib deine E-Mail ein — du erhältst deinen kostenlosen Trailer in ca. 5 Minuten!
+
+Du kannst auch gerne hier im Chat warten — sobald einer aus unserem Team frei ist, antworten wir dir persönlich. 😊
+
+Für dringende Anliegen erreichst du uns direkt per E-Mail: info@audynia.com`;
+
 // ─── component ───────────────────────────────────────────────────────────────
 
 const STORAGE_KEY = "audynia_chat_messages";
@@ -147,8 +162,16 @@ export default function ChatBar() {
       } catch (_) {
         // ignore if Crisp isn't ready yet
       }
-      setSending(false);
     }, 400);
+
+    // Auto-reply after 2 s (typing indicator stays visible until then)
+    setTimeout(() => {
+      setSending(false);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now(), from: "agent", text: AUTO_REPLY },
+      ]);
+    }, 2000);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
