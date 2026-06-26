@@ -55,6 +55,9 @@ export default function ChatBar() {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const listenerSetRef = useRef(false);
+  const autoRepliedRef = useRef(
+    typeof window !== "undefined" && !!localStorage.getItem("audynia_auto_replied")
+  );
 
   // ── Nachrichten aus localStorage laden ──────────────────────────────────
   useEffect(() => {
@@ -166,19 +169,25 @@ export default function ChatBar() {
       setSending(false);
     }, 400);
 
-    // After 2 s: show typing indicator
-    setTimeout(() => {
-      setShowTyping(true);
-    }, 2000);
+    // Auto-reply only on the first message ever
+    if (!autoRepliedRef.current) {
+      autoRepliedRef.current = true;
+      localStorage.setItem("audynia_auto_replied", "1");
 
-    // After 4 s: hide typing indicator, show auto-reply
-    setTimeout(() => {
-      setShowTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        { id: Date.now(), from: "agent", text: AUTO_REPLY },
-      ]);
-    }, 4000);
+      // After 2 s: show typing indicator
+      setTimeout(() => {
+        setShowTyping(true);
+      }, 2000);
+
+      // After 4 s: hide typing indicator, show auto-reply
+      setTimeout(() => {
+        setShowTyping(false);
+        setMessages((prev) => [
+          ...prev,
+          { id: Date.now(), from: "agent", text: AUTO_REPLY },
+        ]);
+      }, 4000);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
