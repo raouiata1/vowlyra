@@ -48,6 +48,7 @@ export default function ChatBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
+  const [showTyping, setShowTyping] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   const [messages, setMessages] = useState<Message[]>(DEFAULT_MESSAGES);
 
@@ -162,16 +163,22 @@ export default function ChatBar() {
       } catch (_) {
         // ignore if Crisp isn't ready yet
       }
+      setSending(false);
     }, 400);
 
-    // Auto-reply after 2 s (typing indicator stays visible until then)
+    // After 2 s: show typing indicator
     setTimeout(() => {
-      setSending(false);
+      setShowTyping(true);
+    }, 2000);
+
+    // After 4 s: hide typing indicator, show auto-reply
+    setTimeout(() => {
+      setShowTyping(false);
       setMessages((prev) => [
         ...prev,
         { id: Date.now(), from: "agent", text: AUTO_REPLY },
       ]);
-    }, 2000);
+    }, 4000);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -358,8 +365,8 @@ export default function ChatBar() {
               )
             )}
 
-            {/* typing indicator while sending */}
-            {sending && (
+            {/* typing indicator — appears 2 s after user sends, disappears at 4 s */}
+            {showTyping && (
               <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
                 <img
                   src="/lisa.jpg"
