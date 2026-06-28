@@ -77,49 +77,55 @@ export default function SuccessPage() {
     }, 5000);
 
     let pollInterval: ReturnType<typeof setInterval>;
+    let pollDelay: ReturnType<typeof setTimeout>;
+
+    const doPoll = async () => {
+      if (!oid) return;
+      try {
+        const res = await fetch(`/api/preview-status?order_id=${encodeURIComponent(oid)}`);
+        const data = await res.json();
+        if (data.ready && data.preview_url) {
+          clearInterval(pollInterval);
+          triggerTransition(data.preview_url);
+        }
+      } catch {
+        // ignore, keep polling
+      }
+    };
+
+    const startPolling = (intervalMs: number) => {
+      clearInterval(pollInterval);
+      doPoll(); // immediate check when starting
+      pollInterval = setInterval(doPoll, intervalMs);
+    };
+
     if (oid) {
-      const startPolling = () => {
-        pollInterval = setInterval(async () => {
-          try {
-            const res = await fetch(`/api/preview-status?order_id=${encodeURIComponent(oid)}`);
-            const data = await res.json();
-            if (data.ready && data.preview_url) {
-              clearInterval(pollInterval);
-              redirectUrl.current = data.preview_url;
-              triggerTransition(data.preview_url);
-            }
-          } catch {
-            // ignore, keep polling
-          }
-        }, 5000);
-      };
-      // Start polling after 1 minute
-      const pollDelay = setTimeout(startPolling, 60000);
-      return () => {
-        clearInterval(timer);
-        clearTimeout(counterTimeout);
-        clearInterval(reviewTimer);
-        clearTimeout(pollDelay);
-        if (pollInterval) clearInterval(pollInterval);
-      };
+      // Start polling after 1 minute (every 5s)
+      pollDelay = setTimeout(() => startPolling(5000), 60000);
+
+      // After 3 minutes: switch to faster polling every 2s
+      setTimeout(() => startPolling(2000), TOTAL_SECONDS * 1000);
     }
 
     return () => {
       clearInterval(timer);
       clearTimeout(counterTimeout);
       clearInterval(reviewTimer);
-      if (pollInterval) clearInterval(pollInterval);
+      clearTimeout(pollDelay);
+      clearInterval(pollInterval);
     };
   }, []);
 
   function triggerTransition(url: string) {
+    redirectUrl.current = url;
     setPreviewReady(true);
-    setTimeout(() => setShowConfetti(true), 300);
-    setTimeout(() => setFadingOut(true), 2000);
-    setTimeout(() => { window.location.href = url; }, 2500);
+    // Bar animates to 100% over 1.5s, then confetti, then redirect
+    setTimeout(() => setShowConfetti(true), 800);
+    setTimeout(() => setFadingOut(true), 2200);
+    setTimeout(() => { window.location.href = url; }, 2700);
   }
 
-  const percent      = previewReady ? 100 : Math.min(Math.round((elapsed / TOTAL_SECONDS) * 100), 99);
+  const percent = previewReady ? 100 : Math.round((elapsed / TOTAL_SECONDS) * 100);
   const done         = elapsed >= TOTAL_SECONDS;
   const currentLabel = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? t("status_trailer");
   const review       = REVIEWS[reviewIndex];
@@ -216,7 +222,7 @@ export default function SuccessPage() {
             <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>{percent}%</div>
           </div>
           <div style={{ height: 10, background: "#e0e0e0", borderRadius: 500, overflow: "hidden" }}>
-            <div className="progress-bar" style={{ height: "100%", width: `${percent}%`, borderRadius: 500, transition: previewReady ? "width 0.5s ease" : "width 1s linear" }} />
+            <div className="progress-bar" style={{ height: "100%", width: `${percent}%`, borderRadius: 500, transition: previewReady ? "width 1.5s ease-in-out" : "width 1s linear" }} />
           </div>
           <p style={{ fontSize: 12, color: "#999", marginTop: 8, textAlign: "center" }}>
             {previewReady ? t("progress_redirect") : done ? t("progress_done") : t("progress_sub")}
