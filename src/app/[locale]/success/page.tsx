@@ -225,40 +225,23 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        {/* YouTube video — Hero loading section */}
-        <div style={{ width: "100%", maxWidth: 640, marginBottom: 32, ...fadeIn("0.2s") }}>
-
-          {/* Player container — always in DOM so YT API can initialize and autoplay */}
-          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.18)" }}>
-
-            {/* YouTube player — always rendered and visible */}
-            <div id="yt-player-success" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
-
-            {/* Loading overlay — sits on top until player fires onReady */}
-            {!videoLoaded && (
-              <div style={{
-                position: "absolute", inset: 0, zIndex: 2,
-                background: "linear-gradient(135deg, #1a1a1a 0%, #111 100%)",
-                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20,
-                pointerEvents: "none",
-              }}>
-                {/* Animated play icon */}
-                <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <div style={{ position: "absolute", width: 80, height: 80, borderRadius: "50%", border: "2px solid rgba(29,185,84,0.2)", animation: "activePulse 1.5s ease-out infinite" }} />
-                  <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(29,185,84,0.12)", border: "1.5px solid rgba(29,185,84,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                  </div>
-                </div>
-                {/* Spinner + text */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 28, height: 28, border: "2.5px solid rgba(29,185,84,0.2)", borderTop: "2.5px solid #1DB954", borderRadius: "50%", animation: "cb-spin 0.8s linear infinite" }} />
-                  <div style={{ fontSize: 14, color: "#aaa", fontWeight: 600 }}>Video wird geladen…</div>
-                  <div style={{ fontSize: 12, color: "#555" }}>Gleich geht es los</div>
-                </div>
+        {/* Loading indicator — shown directly before video, disappears when ready */}
+        {!videoLoaded && (
+          <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "0.5px solid #e0e0e0", borderRadius: 14, padding: "20px", marginBottom: 16, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.2s") }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 28, height: 28, border: "2.5px solid rgba(29,185,84,0.2)", borderTop: "2.5px solid #1DB954", borderRadius: "50%", flexShrink: 0, animation: "cb-spin 0.8s linear infinite" }} />
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>Video wird geladen…</div>
+                <div style={{ fontSize: 12, color: "#999", marginTop: 2 }}>Gleich geht es los</div>
               </div>
-            )}
+            </div>
+          </div>
+        )}
+
+        {/* YouTube video — always in DOM so autoplay works */}
+        <div style={{ width: "100%", maxWidth: 640, marginBottom: 32, ...fadeIn("0.2s") }}>
+          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.18)" }}>
+            <div id="yt-player-success" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
           </div>
         </div>
 
