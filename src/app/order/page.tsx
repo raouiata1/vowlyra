@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { generateOrderId } from "@/lib/order";
+;
 import Footer from "@/components/Footer";
 
 const TOTAL_STEPS = 8;
@@ -263,12 +263,10 @@ export default function OrderPage() {
 
       setLoadingPhase('submitting')
 
-      const orderId = generateOrderId()
       const response = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          order_id: orderId,
           customer_name: answers.name,
           customer_email: answers.email,
           anlass: answers.anlass,
@@ -284,8 +282,7 @@ export default function OrderPage() {
 
       if (data.success) {
         sessionStorage.setItem('vowlyra_email', answers.email)
-        const ref = Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
-        router.push(`/success?ref=${ref}`)
+        router.push(`/success?order_id=${data.order_id}`)
       } else {
         alert('Fehler – bitte versuche es erneut')
       }
