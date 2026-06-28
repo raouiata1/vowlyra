@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { generateOrderId } from "@/lib/order";
 import Footer from "@/components/Footer";
 import { useTranslations, useLocale } from "next-intl";
 
@@ -143,17 +142,15 @@ export default function OrderPage() {
         if (!zbData.valid) { setEmailError(t("email_err_zerobounce")); setLoading(false); setLoadingPhase(null); return; }
       } catch { /* fail open */ }
       setLoadingPhase("submitting");
-      const orderId = generateOrderId();
       const response = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ order_id: orderId, customer_name: answers.name, customer_email: answers.email, anlass: answers.anlass, empfaenger: answers.empfaenger, geschichte: answers.geschichte, klang: answers.klang, stil: answers.stil, spezialzeile: answers.spezialzeile || "" }),
+        body: JSON.stringify({ customer_name: answers.name, customer_email: answers.email, anlass: answers.anlass, empfaenger: answers.empfaenger, geschichte: answers.geschichte, klang: answers.klang, stil: answers.stil, spezialzeile: answers.spezialzeile || "" }),
       });
       const data = await response.json();
       if (data.success) {
         sessionStorage.setItem("vowlyra_email", answers.email);
-        const ref = Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
-        router.push(`/${locale}/success?ref=${ref}`);
+        router.push(`/${locale}/success?order_id=${data.order_id}`);
       } else {
         alert(t("server_err"));
       }

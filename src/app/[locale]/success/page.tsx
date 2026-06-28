@@ -5,7 +5,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { useTranslations } from "next-intl";
 
-const TOTAL_SECONDS = 240; // 4 minutes
+const TOTAL_SECONDS = 180; // 3 minutes
 
 function getRandomCount() {
   return Math.floor(Math.random() * 4) + 2;
@@ -78,19 +78,30 @@ export default function SuccessPage() {
 
     let pollInterval: ReturnType<typeof setInterval>;
     if (oid) {
-      pollInterval = setInterval(async () => {
-        try {
-          const res = await fetch(`/api/preview-status?order_id=${encodeURIComponent(oid)}`);
-          const data = await res.json();
-          if (data.ready && data.preview_url) {
-            clearInterval(pollInterval);
-            redirectUrl.current = data.preview_url;
-            triggerTransition(data.preview_url);
+      const startPolling = () => {
+        pollInterval = setInterval(async () => {
+          try {
+            const res = await fetch(`/api/preview-status?order_id=${encodeURIComponent(oid)}`);
+            const data = await res.json();
+            if (data.ready && data.preview_url) {
+              clearInterval(pollInterval);
+              redirectUrl.current = data.preview_url;
+              triggerTransition(data.preview_url);
+            }
+          } catch {
+            // ignore, keep polling
           }
-        } catch {
-          // ignore, keep polling
-        }
-      }, 5000);
+        }, 5000);
+      };
+      // Start polling after 1 minute
+      const pollDelay = setTimeout(startPolling, 60000);
+      return () => {
+        clearInterval(timer);
+        clearTimeout(counterTimeout);
+        clearInterval(reviewTimer);
+        clearTimeout(pollDelay);
+        if (pollInterval) clearInterval(pollInterval);
+      };
     }
 
     return () => {
