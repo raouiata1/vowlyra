@@ -42,6 +42,7 @@ export default function SuccessPage() {
   const [previewReady, setPreviewReady]   = useState(false);
   const [showConfetti, setShowConfetti]   = useState(false);
   const [fadingOut, setFadingOut]         = useState(false);
+  const [videoLoaded, setVideoLoaded]     = useState(false);
   const redirectUrl                       = useRef<string>("");
 
   useEffect(() => {
@@ -148,6 +149,7 @@ export default function SuccessPage() {
         @keyframes dot1 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
         @keyframes dot2 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
         @keyframes dot3 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+        @keyframes cb-spin { to { transform: rotate(360deg); } }
         .status-label{animation:fadeIn 0.5s ease forwards}
         .review-card{transition:opacity 0.4s ease}
         .progress-bar{background:linear-gradient(90deg,#1DB954,#25D366,#1DB954);background-size:200% auto;animation:progressShimmer 2s linear infinite}
@@ -167,7 +169,7 @@ export default function SuccessPage() {
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 24px 80px" }}>
 
         {/* Song preview generation message */}
-        <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 14, padding: "18px 20px", marginBottom: 28, boxShadow: "0 4px 20px rgba(29,185,84,0.12)", ...fadeIn("0s") }}>
+        <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 14, padding: "18px 20px", marginBottom: 16, boxShadow: "0 4px 20px rgba(29,185,84,0.12)", ...fadeIn("0s") }}>
           <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
             <div style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(29,185,84,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -185,14 +187,38 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        {/* YouTube video */}
-        <div style={{ width: "100%", maxWidth: 400, marginBottom: 32, borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 24px rgba(0,0,0,0.10)", ...fadeIn("0.1s") }}>
-          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" /* 16:9 */ }}>
+        {/* Title — moved above the video */}
+        <h1 style={{ fontSize: 30, fontWeight: 800, color: "#1a1a1a", marginTop: 8, marginBottom: 16, textAlign: "center", lineHeight: 1.2, ...fadeIn("0.1s") }}>
+          {previewReady ? t("title_ready") : t("title_creating")}
+        </h1>
+
+        {/* YouTube video with loading indicator */}
+        <div style={{ width: "100%", maxWidth: 400, marginBottom: 32, borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 24px rgba(0,0,0,0.10)", position: "relative", ...fadeIn("0.2s") }}>
+          {/* Loading placeholder — visible until iframe fires onLoad */}
+          {!videoLoaded && (
+            <div style={{
+              position: "absolute", inset: 0, zIndex: 2,
+              background: "#1a1a1a",
+              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
+              borderRadius: 14,
+            }}>
+              <div style={{
+                width: 44, height: 44,
+                border: "3px solid rgba(29,185,84,0.25)",
+                borderTop: "3px solid #1DB954",
+                borderRadius: "50%",
+                animation: "cb-spin 0.8s linear infinite",
+              }} />
+              <div style={{ fontSize: 13, color: "#aaa", fontWeight: 600 }}>Video wird geladen…</div>
+            </div>
+          )}
+          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" }}>
             <iframe
-              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0"
+              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0"
               title="Audynia Song Preview"
               allow="autoplay; encrypted-media; picture-in-picture"
               allowFullScreen
+              onLoad={() => setVideoLoaded(true)}
               style={{
                 position: "absolute",
                 top: 0, left: 0,
@@ -229,10 +255,6 @@ export default function SuccessPage() {
           )}
         </div>
 
-        {/* Title */}
-        <h1 style={{ fontSize: 30, fontWeight: 800, color: "#1a1a1a", marginTop: 20, marginBottom: 0, textAlign: "center", lineHeight: 1.2, ...fadeIn("0.2s") }}>
-          {previewReady ? t("title_ready") : t("title_creating")}
-        </h1>
 
         {/* Hint / Ready Card */}
         {previewReady ? (
