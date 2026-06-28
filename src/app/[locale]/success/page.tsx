@@ -166,6 +166,44 @@ export default function SuccessPage() {
 
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 24px 80px" }}>
 
+        {/* Song preview generation message */}
+        <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 14, padding: "18px 20px", marginBottom: 28, boxShadow: "0 4px 20px rgba(29,185,84,0.12)", ...fadeIn("0s") }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+            <div style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(29,185,84,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: "#1a1a1a", marginBottom: 4 }}>
+                Deine Song-Vorschau wird gerade erstellt
+              </div>
+              <div style={{ fontSize: 13, color: "#555", lineHeight: 1.55 }}>
+                Sie erscheint <strong style={{ color: "#1DB954" }}>automatisch auf dieser Seite</strong> — bitte lass den Tab offen und warte einfach.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* YouTube video */}
+        <div style={{ width: "100%", maxWidth: 400, marginBottom: 32, borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 24px rgba(0,0,0,0.10)", ...fadeIn("0.1s") }}>
+          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" /* 16:9 */ }}>
+            <iframe
+              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0"
+              title="Audynia Song Preview"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0, left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none",
+              }}
+            />
+          </div>
+        </div>
+
         {/* Live Counter */}
         <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.1)", border: "0.5px solid #1DB954", borderRadius: 500, padding: "6px 14px", fontSize: 12, color: "#1a7a35", marginBottom: 28, ...fadeIn("0s") }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1DB954", display: "inline-block", animation: "activePulse 1.5s infinite" }} />
