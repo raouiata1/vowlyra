@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
-const TOTAL_SECONDS = 240; // 4 minutes
+const TOTAL_SECONDS = 180; // 3 minutes
 
 const STATUS_LABELS = [
-  { until: 60,  text: "Lyrics werden generiert..." },
-  { until: 120, text: "Musik wird komponiert..." },
-  { until: 180, text: "Song wird gemischt..." },
-  { until: 240, text: "Trailer wird vorbereitet..." },
+  { until: 45,  text: "Lyrics werden generiert..." },
+  { until: 90,  text: "Musik wird komponiert..." },
+  { until: 135, text: "Song wird gemischt..." },
+  { until: 180, text: "Trailer wird vorbereitet..." },
 ];
 
 const REVIEWS = [
