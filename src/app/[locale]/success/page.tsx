@@ -5,7 +5,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { useTranslations } from "next-intl";
 
-const TOTAL_SECONDS = 392; // 6 minutes 32 seconds
+const TOTAL_SECONDS = 180; // 3 minutes
 
 function getRandomCount() {
   return Math.floor(Math.random() * 4) + 2;
@@ -24,10 +24,10 @@ export default function SuccessPage() {
   const t = useTranslations("success");
 
   const STATUS_LABELS = [
-    { until: 98,  text: t("status_lyrics") },
-    { until: 196, text: t("status_music") },
-    { until: 294, text: t("status_mixing") },
-    { until: 392, text: t("status_trailer") },
+    { until: 45,  text: t("status_lyrics") },
+    { until: 90,  text: t("status_music") },
+    { until: 135, text: t("status_mixing") },
+    { until: 180, text: t("status_trailer") },
   ];
 
   const REVIEWS = (t.raw("reviews") as { name: string; occasion: string; text: string }[]);
