@@ -5,18 +5,18 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 
 
-const TOTAL_SECONDS = 1200; // 20 minutes
+const TOTAL_SECONDS = 300; // 5 minutes
 const CIRCUMFERENCE = 340;
 
 const STATUS_LABELS = [
-  { until: 300,  text: "Lyrics werden generiert..." },
-  { until: 600,  text: "Musik wird komponiert..." },
-  { until: 900,  text: "Song wird gemischt..." },
-  { until: 1200, text: "Trailer wird vorbereitet..." },
+  { until: 75,  text: "Lyrics werden generiert..." },
+  { until: 150, text: "Musik wird komponiert..." },
+  { until: 225, text: "Song wird gemischt..." },
+  { until: 300, text: "Trailer wird vorbereitet..." },
 ];
 
 const TIMELINE = [
-  { active: true,  title: "Trailer wird erstellt",  sub: "In ~2 Minuten in deinem Postfach" },
+  { active: true,  title: "Trailer wird erstellt",  sub: "In ~2 Minuten fertig" },
   { active: false, title: "Trailer anhören",         sub: "Kostenlos & unverbindlich" },
   { active: false, title: "Song freischalten",       sub: "Nur wenn du begeistert bist · 29,99€" },
 ];
