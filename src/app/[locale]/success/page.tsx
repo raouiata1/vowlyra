@@ -3,23 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import { useTranslations } from "next-intl";
 
 const TOTAL_SECONDS = 240; // 4 minutes
-
-const STATUS_LABELS = [
-  { until: 60,  text: "Lyrics werden generiert..." },
-  { until: 120, text: "Musik wird komponiert..." },
-  { until: 180, text: "Song wird gemischt..." },
-  { until: 240, text: "Trailer wird vorbereitet..." },
-];
-
-const REVIEWS = [
-  { name: "Sarah M.", anlass: "Hochzeit", text: "Wir haben beide geweint als wir den Song gehört haben. Einfach perfekt." },
-  { name: "Jonas K.", anlass: "Geburtstag", text: "Meine Mutter war sprachlos. Der beste Geburtstagsgeschenk seit Jahren." },
-  { name: "Lena & Tom", anlass: "Jahrestag", text: "Er hat unsere ganze Geschichte in 3 Minuten eingefangen. Unglaublich." },
-  { name: "Markus R.", anlass: "Überraschung", text: "In 5 Minuten fertig und klingt wie ein echter Profi-Song. Mega!" },
-  { name: "Julia W.", anlass: "Valentinstag", text: "Mein Freund hat es sofort auf repeat gehört. Danke Audynia!" },
-];
 
 function getRandomCount() {
   return Math.floor(Math.random() * 4) + 2;
@@ -35,15 +21,24 @@ function fadeIn(delay: string): React.CSSProperties {
 }
 
 export default function SuccessPage() {
+  const t = useTranslations("success");
+
+  const STATUS_LABELS = [
+    { until: 60,  text: t("status_lyrics") },
+    { until: 120, text: t("status_music") },
+    { until: 180, text: t("status_mixing") },
+    { until: 240, text: t("status_trailer") },
+  ];
+
+  const REVIEWS = (t.raw("reviews") as { name: string; occasion: string; text: string }[]);
+
   const [elapsed, setElapsed]             = useState(0);
   const [liveCount, setLiveCount]         = useState(getRandomCount());
   const [email, setEmail]                 = useState("");
   const [labelKey, setLabelKey]           = useState(0);
-  const [orderId, setOrderId]             = useState("");
   const [reviewIndex, setReviewIndex]     = useState(0);
   const [reviewVisible, setReviewVisible] = useState(true);
 
-  // Transition states
   const [previewReady, setPreviewReady]   = useState(false);
   const [showConfetti, setShowConfetti]   = useState(false);
   const [fadingOut, setFadingOut]         = useState(false);
@@ -55,7 +50,6 @@ export default function SuccessPage() {
 
     const params = new URLSearchParams(window.location.search);
     const oid = params.get("order_id") ?? "";
-    setOrderId(oid);
 
     const startTime = Date.now();
     const timer = setInterval(() => {
@@ -63,7 +57,6 @@ export default function SuccessPage() {
       setElapsed(Math.min(wallElapsed, TOTAL_SECONDS));
     }, 1000);
 
-    // Live counter drift
     let counterTimeout: ReturnType<typeof setTimeout>;
     const scheduleNext = (current: number) => {
       const delay = 5000 + Math.random() * 5000;
@@ -75,7 +68,6 @@ export default function SuccessPage() {
     };
     scheduleNext(liveCount);
 
-    // Rotate reviews every 5s with fade
     const reviewTimer = setInterval(() => {
       setReviewVisible(false);
       setTimeout(() => {
@@ -84,7 +76,6 @@ export default function SuccessPage() {
       }, 400);
     }, 5000);
 
-    // Poll for preview_url every 5 seconds
     let pollInterval: ReturnType<typeof setInterval>;
     if (oid) {
       pollInterval = setInterval(async () => {
@@ -111,138 +102,85 @@ export default function SuccessPage() {
   }, []);
 
   function triggerTransition(url: string) {
-    // Step 1: bar → 100%, label changes (instant)
     setPreviewReady(true);
-
-    // Step 2: confetti after 300ms
     setTimeout(() => setShowConfetti(true), 300);
-
-    // Step 3: fade out after 2s
     setTimeout(() => setFadingOut(true), 2000);
-
-    // Step 4: redirect after fade (2.5s total)
     setTimeout(() => { window.location.href = url; }, 2500);
   }
 
   const percent      = previewReady ? 100 : Math.min(Math.round((elapsed / TOTAL_SECONDS) * 100), 99);
   const done         = elapsed >= TOTAL_SECONDS;
-  const currentLabel = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? "Trailer wird vorbereitet...";
+  const currentLabel = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? t("status_trailer");
   const review       = REVIEWS[reviewIndex];
 
   useEffect(() => { setLabelKey((k) => k + 1); }, [currentLabel, previewReady]);
 
   return (
     <>
-    {/* Full-page fade-out overlay */}
-    <div style={{
-      position: "fixed", inset: 0, background: "#fff", zIndex: 9999,
-      opacity: fadingOut ? 1 : 0,
-      pointerEvents: fadingOut ? "all" : "none",
-      transition: "opacity 0.5s ease",
-    }} />
+    <div style={{ position: "fixed", inset: 0, background: "#fff", zIndex: 9999, opacity: fadingOut ? 1 : 0, pointerEvents: fadingOut ? "all" : "none", transition: "opacity 0.5s ease" }} />
 
-    <div style={{
-      background: "#F5F5F7", minHeight: "100vh",
-      fontFamily: "system-ui, -apple-system, sans-serif",
-      transition: "opacity 0.3s ease",
-      opacity: fadingOut ? 0 : 1,
-    }}>
+    <div style={{ background: "#F5F5F7", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", transition: "opacity 0.3s ease", opacity: fadingOut ? 0 : 1 }}>
       <style>{`
-        @keyframes checkIn {
-          0%   { transform: scale(0); }
-          70%  { transform: scale(1.1); }
-          100% { transform: scale(1); }
-        }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to   { opacity: 1; }
-        }
-        @keyframes activePulse {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50%       { transform: scale(1.5); opacity: 0; }
-        }
-        @keyframes progressShimmer {
-          0%   { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        @keyframes confettiRise {
-          0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-          100% { transform: translateY(-80px) scale(0.4) rotate(45deg); opacity: 0; }
-        }
-        @keyframes readyPop {
-          0%   { transform: scale(0.8); opacity: 0; }
-          60%  { transform: scale(1.04); }
-          100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes dot1 { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
-        @keyframes dot2 { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
-        @keyframes dot3 { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
-        .status-label  { animation: fadeIn 0.5s ease forwards; }
-        .review-card   { transition: opacity 0.4s ease; }
-        .progress-bar  {
-          background: linear-gradient(90deg, #1DB954, #25D366, #1DB954);
-          background-size: 200% auto;
-          animation: progressShimmer 2s linear infinite;
-        }
-        .ready-card    { animation: readyPop 0.5s ease forwards; }
-        .confetti-dot  { position: absolute; border-radius: 50%; animation: confettiRise 1s ease-out forwards; }
-        .dot-1 { animation: dot1 1.2s ease-in-out infinite; }
-        .dot-2 { animation: dot2 1.2s ease-in-out 0.2s infinite; }
-        .dot-3 { animation: dot3 1.2s ease-in-out 0.4s infinite; }
+        @keyframes checkIn { 0%{transform:scale(0)} 70%{transform:scale(1.1)} 100%{transform:scale(1)} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        @keyframes activePulse { 0%,100%{transform:scale(1);opacity:0.5} 50%{transform:scale(1.5);opacity:0} }
+        @keyframes progressShimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+        @keyframes confettiRise { 0%{transform:translateY(0) scale(1) rotate(0deg);opacity:1} 100%{transform:translateY(-80px) scale(0.4) rotate(45deg);opacity:0} }
+        @keyframes readyPop { 0%{transform:scale(0.8);opacity:0} 60%{transform:scale(1.04)} 100%{transform:scale(1);opacity:1} }
+        @keyframes dot1 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+        @keyframes dot2 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+        @keyframes dot3 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+        .status-label{animation:fadeIn 0.5s ease forwards}
+        .review-card{transition:opacity 0.4s ease}
+        .progress-bar{background:linear-gradient(90deg,#1DB954,#25D366,#1DB954);background-size:200% auto;animation:progressShimmer 2s linear infinite}
+        .ready-card{animation:readyPop 0.5s ease forwards}
+        .confetti-dot{position:absolute;border-radius:50%;animation:confettiRise 1s ease-out forwards}
+        .dot-1{animation:dot1 1.2s ease-in-out infinite}
+        .dot-2{animation:dot2 1.2s ease-in-out 0.2s infinite}
+        .dot-3{animation:dot3 1.2s ease-in-out 0.4s infinite}
       `}</style>
 
-      {/* Header */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#F5F5F7", padding: "20px 24px", zIndex: 99, borderBottom: "0.5px solid #e0e0e0" }}>
         <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
       </div>
 
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 24px 80px" }}>
 
-        {/* Live Counter Pill */}
+        {/* Live Counter */}
         <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.1)", border: "0.5px solid #1DB954", borderRadius: 500, padding: "6px 14px", fontSize: 12, color: "#1a7a35", marginBottom: 28, ...fadeIn("0s") }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1DB954", display: "inline-block", animation: "activePulse 1.5s infinite" }} />
-          {liveCount} Songs werden gerade erstellt
+          {t("live_counter", { count: liveCount })}
         </div>
 
-        {/* Checkmark with pulse ring when ready */}
+        {/* Checkmark */}
         <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          {previewReady && (
-            <div style={{
-              position: "absolute", width: 100, height: 100, borderRadius: "50%",
-              border: "3px solid #1DB954", animation: "activePulse 1s ease-out infinite",
-            }} />
-          )}
+          {previewReady && <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "3px solid #1DB954", animation: "activePulse 1s ease-out infinite" }} />}
           <div style={{ width: 72, height: 72, borderRadius: "50%", background: "#1DB954", display: "flex", alignItems: "center", justifyContent: "center", animation: "checkIn 0.5s ease-out forwards", boxShadow: previewReady ? "0 0 32px rgba(29,185,84,0.6)" : "0 8px 24px rgba(29,185,84,0.3)", transition: "box-shadow 0.5s ease" }}>
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
-
-          {/* Confetti dots */}
           {showConfetti && (
             <>
-              <div className="confetti-dot" style={{ width: 10, height: 10, background: "#1DB954",   left: -20, top: 10,  animationDelay: "0s" }} />
-              <div className="confetti-dot" style={{ width: 8,  height: 8,  background: "#25D366",   left: 10,  top: -15, animationDelay: "0.1s" }} />
-              <div className="confetti-dot" style={{ width: 10, height: 10, background: "#81C784",   right: -15,top: 5,   animationDelay: "0.15s" }} />
-              <div className="confetti-dot" style={{ width: 7,  height: 7,  background: "#1DB954",   right: 5,  top: -20, animationDelay: "0.05s" }} />
-              <div className="confetti-dot" style={{ width: 9,  height: 9,  background: "#25D366",   left: -10, top: -10, animationDelay: "0.2s" }} />
+              <div className="confetti-dot" style={{ width: 10, height: 10, background: "#1DB954", left: -20, top: 10, animationDelay: "0s" }} />
+              <div className="confetti-dot" style={{ width: 8, height: 8, background: "#25D366", left: 10, top: -15, animationDelay: "0.1s" }} />
+              <div className="confetti-dot" style={{ width: 10, height: 10, background: "#81C784", right: -15, top: 5, animationDelay: "0.15s" }} />
+              <div className="confetti-dot" style={{ width: 7, height: 7, background: "#1DB954", right: 5, top: -20, animationDelay: "0.05s" }} />
+              <div className="confetti-dot" style={{ width: 9, height: 9, background: "#25D366", left: -10, top: -10, animationDelay: "0.2s" }} />
             </>
           )}
         </div>
 
         {/* Title */}
         <h1 style={{ fontSize: 30, fontWeight: 800, color: "#1a1a1a", marginTop: 20, marginBottom: 0, textAlign: "center", lineHeight: 1.2, ...fadeIn("0.2s") }}>
-          {previewReady ? "Dein Song ist fertig! 🎉" : "Dein Song wird erstellt"}
+          {previewReady ? t("title_ready") : t("title_creating")}
         </h1>
 
-        {/* Auto-redirect hint OR ready card */}
+        {/* Hint / Ready Card */}
         {previewReady ? (
           <div className="ready-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "#1DB954", borderRadius: 14, padding: "16px 24px", marginTop: 16, maxWidth: 400, width: "100%" }}>
-            <div style={{ fontSize: 15, fontWeight: 800, color: "#000" }}>Song wird geöffnet...</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#000" }}>{t("ready_card")}</div>
             <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
               <div className="dot-1" style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(0,0,0,0.5)" }} />
               <div className="dot-2" style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(0,0,0,0.5)" }} />
@@ -253,7 +191,7 @@ export default function SuccessPage() {
           <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 10, padding: "10px 16px", marginTop: 16, maxWidth: 400, width: "100%", ...fadeIn("0.3s") }}>
             <span style={{ fontSize: 18 }}>🎵</span>
             <p style={{ margin: 0, fontSize: 13, color: "#1a1a1a", lineHeight: 1.5 }}>
-              <strong>Diese Seite öffnet deinen Song automatisch</strong> — kein Tab schließen, einfach warten.
+              <strong>{t("hint").split("—")[0].trim()}</strong> — {t("hint").split("—")[1]?.trim()}
             </p>
           </div>
         )}
@@ -262,25 +200,15 @@ export default function SuccessPage() {
         <div style={{ width: "100%", maxWidth: 400, marginTop: 32, ...fadeIn("0.5s") }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
             <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
-              {previewReady ? "🎉 Dein Song ist fertig!" : currentLabel}
+              {previewReady ? t("status_ready") : currentLabel}
             </div>
             <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>{percent}%</div>
           </div>
-
           <div style={{ height: 10, background: "#e0e0e0", borderRadius: 500, overflow: "hidden" }}>
-            <div
-              className="progress-bar"
-              style={{
-                height: "100%",
-                width: `${percent}%`,
-                borderRadius: 500,
-                transition: previewReady ? "width 0.5s ease" : "width 1s linear",
-              }}
-            />
+            <div className="progress-bar" style={{ height: "100%", width: `${percent}%`, borderRadius: 500, transition: previewReady ? "width 0.5s ease" : "width 1s linear" }} />
           </div>
-
           <p style={{ fontSize: 12, color: "#999", marginTop: 8, textAlign: "center" }}>
-            {previewReady ? "Weiterleitung läuft..." : done ? "Dein Trailer ist fast fertig..." : "Wir geben unser Bestes für deinen Song"}
+            {previewReady ? t("progress_redirect") : done ? t("progress_done") : t("progress_sub")}
           </p>
         </div>
 
@@ -292,18 +220,15 @@ export default function SuccessPage() {
               <polyline points="22,6 12,13 2,6"/>
             </svg>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#1a1a1a" }}>Backup per E-Mail</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#1a1a1a" }}>{t("email_backup")}</div>
               <div style={{ fontSize: 12, color: "#777", marginTop: 1 }}>{email}</div>
             </div>
           </div>
         )}
 
-        {/* Rotating Review — hidden when ready */}
+        {/* Rotating Review */}
         {!previewReady && (
-          <div
-            className="review-card"
-            style={{ opacity: reviewVisible ? 1 : 0, background: "#fff", borderRadius: 14, padding: "18px 20px", marginTop: 24, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.9s") }}
-          >
+          <div className="review-card" style={{ opacity: reviewVisible ? 1 : 0, background: "#fff", borderRadius: 14, padding: "18px 20px", marginTop: 24, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.9s") }}>
             <div style={{ display: "flex", gap: 2, marginBottom: 10 }}>
               {[...Array(5)].map((_, i) => (
                 <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#1DB954">
@@ -320,19 +245,19 @@ export default function SuccessPage() {
               </div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>{review.name}</div>
-                <div style={{ fontSize: 11, color: "#999" }}>{review.anlass}</div>
+                <div style={{ fontSize: 11, color: "#999" }}>{review.occasion}</div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Timeline — hidden when ready */}
+        {/* Timeline */}
         {!previewReady && (
           <div style={{ width: "100%", maxWidth: 400, marginTop: 28, ...fadeIn("1s") }}>
             {[
-              { active: true,  title: "Trailer wird erstellt",  sub: "Öffnet sich hier automatisch" },
-              { active: false, title: "Trailer anhören",         sub: "Kostenlos & unverbindlich" },
-              { active: false, title: "Song freischalten",       sub: "Nur wenn du begeistert bist · 29,99€" },
+              { active: true,  title: t("timeline_step1_title"), sub: t("timeline_step1_sub") },
+              { active: false, title: t("timeline_step2_title"), sub: t("timeline_step2_sub") },
+              { active: false, title: t("timeline_step3_title"), sub: t("timeline_step3_sub") },
             ].map((step, i) => (
               <div key={i} style={{ display: "flex", gap: 16 }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

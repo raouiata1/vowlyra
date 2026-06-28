@@ -206,8 +206,45 @@
     "occasion_fb_justso": "The best gifts don't need a special reason.",
     "occasion_fb_christmas": "Magical — Christmas songs that are really about you."
   },
+  "chatbar": {
+    "online_status": "Online · replies instantly",
+    "placeholder": "Write a message…",
+    "bubble_text": "Hey! Questions about your song? I'm happy to help 🎵",
+    "fab_label": "Ask us",
+    "greeting": "Hi! How can I help you?\nJust write to me 😊",
+    "auto_reply": "Thank you for your message! 🎵\n\nOur team is currently handling many requests — but don't worry, we're here for you!\n\nHere's how to create your song in a few steps:\n1️⃣ Click on \"Create Song Now\"\n2️⃣ Choose the occasion (e.g. Birthday, Wedding, Surprise)\n3️⃣ Give us personal details (names, memories, wishes)\n4️⃣ Choose your music style\n5️⃣ Enter your email — you'll receive your free trailer in about 5 minutes!\n\nYou're also welcome to wait here in the chat — as soon as one of our team members is free, we'll reply personally. 😊\n\nFor urgent matters you can reach us directly by email: info@audynia.com"
+  },
   "meta": {
     "title": "Audynia – Your personal song in about 1 hour",
     "description": "Personalized songs for every occasion. Free trailer first – only pay if you love it. From just €29.99."
+  },
+  "success": {
+    "live_counter": "{count} songs are being created right now",
+    "title_creating": "Your song is being created",
+    "title_ready": "Your song is ready! 🎉",
+    "hint": "This page opens your song automatically — don't close the tab, just wait.",
+    "ready_card": "Opening your song...",
+    "status_lyrics": "Generating lyrics...",
+    "status_music": "Composing music...",
+    "status_mixing": "Mixing song...",
+    "status_trailer": "Preparing trailer...",
+    "status_ready": "🎉 Your song is ready!",
+    "progress_sub": "We're giving our best for your song",
+    "progress_done": "Your trailer is almost ready...",
+    "progress_redirect": "Redirecting...",
+    "email_backup": "Backup via email",
+    "timeline_step1_title": "Trailer is being created",
+    "timeline_step1_sub": "Opens here automatically",
+    "timeline_step2_title": "Listen to trailer",
+    "timeline_step2_sub": "Free & no commitment",
+    "timeline_step3_title": "Unlock full song",
+    "timeline_step3_sub": "Only if you're excited · €29.99",
+    "reviews": [
+      { "name": "Sarah M.", "occasion": "Wedding", "text": "We both cried when we heard the song. Simply perfect." },
+      { "name": "Jonas K.", "occasion": "Birthday", "text": "My mom was speechless. The best birthday gift in years." },
+      { "name": "Lena & Tom", "occasion": "Anniversary", "text": "It captured our whole story in 3 minutes. Unbelievable." },
+      { "name": "Markus R.", "occasion": "Surprise", "text": "Ready in 5 minutes and sounds like a real pro song. Amazing!" },
+      { "name": "Julia W.", "occasion": "Valentine's Day", "text": "My boyfriend immediately put it on repeat. Thank you Audynia!" }
+    ]
   }
 }

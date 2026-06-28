@@ -206,8 +206,45 @@
     "occasion_fb_justso": "Die besten Geschenke brauchen keinen besonderen Grund.",
     "occasion_fb_christmas": "Magisch — Weihnachtslieder, die wirklich von euch handeln."
   },
+  "chatbar": {
+    "online_status": "Online · antwortet sofort",
+    "placeholder": "Nachricht schreiben…",
+    "bubble_text": "Hey! Fragen zu deinem Song? Ich helfe dir gerne 🎵",
+    "fab_label": "Frag uns",
+    "greeting": "Hi! Wie kann ich dir helfen?\nSchreib mir einfach 😊",
+    "auto_reply": "Danke für deine Nachricht! 🎵\n\nUnser Team erhält gerade viele Anfragen — aber keine Sorge, wir sind für dich da!\n\nSo erstellst du deinen Song in wenigen Schritten:\n1️⃣ Klicke auf 'Jetzt Song erstellen'\n2️⃣ Wähle den Anlass (z. B. Geburtstag, Hochzeit, Überraschung)\n3️⃣ Gib uns persönliche Details (Namen, Erinnerungen, Wünsche)\n4️⃣ Wähle deinen Musikstil\n5️⃣ Gib deine E-Mail ein — du erhältst deinen kostenlosen Trailer in ca. 5 Minuten!\n\nDu kannst auch gerne hier im Chat warten — sobald einer aus unserem Team frei ist, antworten wir dir persönlich. 😊\n\nFür dringende Anliegen erreichst du uns direkt per E-Mail: info@audynia.com"
+  },
   "meta": {
     "title": "Audynia – Dein persönlicher Song in ca. 1 Stunde",
     "description": "Personalisierte Songs für jeden Anlass. Trailer kostenlos vorab – nur zahlen wenn er gefällt. Ab nur 29,99€."
+  },
+  "success": {
+    "live_counter": "{count} Songs werden gerade erstellt",
+    "title_creating": "Dein Song wird erstellt",
+    "title_ready": "Dein Song ist fertig! 🎉",
+    "hint": "Diese Seite öffnet deinen Song automatisch — kein Tab schließen, einfach warten.",
+    "ready_card": "Song wird geöffnet...",
+    "status_lyrics": "Lyrics werden generiert...",
+    "status_music": "Musik wird komponiert...",
+    "status_mixing": "Song wird gemischt...",
+    "status_trailer": "Trailer wird vorbereitet...",
+    "status_ready": "🎉 Dein Song ist fertig!",
+    "progress_sub": "Wir geben unser Bestes für deinen Song",
+    "progress_done": "Dein Trailer ist fast fertig...",
+    "progress_redirect": "Weiterleitung läuft...",
+    "email_backup": "Backup per E-Mail",
+    "timeline_step1_title": "Trailer wird erstellt",
+    "timeline_step1_sub": "Öffnet sich hier automatisch",
+    "timeline_step2_title": "Trailer anhören",
+    "timeline_step2_sub": "Kostenlos & unverbindlich",
+    "timeline_step3_title": "Song freischalten",
+    "timeline_step3_sub": "Nur wenn du begeistert bist · 29,99€",
+    "reviews": [
+      { "name": "Sarah M.", "occasion": "Hochzeit", "text": "Wir haben beide geweint als wir den Song gehört haben. Einfach perfekt." },
+      { "name": "Jonas K.", "occasion": "Geburtstag", "text": "Meine Mutter war sprachlos. Der beste Geburtstagsgeschenk seit Jahren." },
+      { "name": "Lena & Tom", "occasion": "Jahrestag", "text": "Er hat unsere ganze Geschichte in 3 Minuten eingefangen. Unglaublich." },
+      { "name": "Markus R.", "occasion": "Überraschung", "text": "In 5 Minuten fertig und klingt wie ein echter Profi-Song. Mega!" },
+      { "name": "Julia W.", "occasion": "Valentinstag", "text": "Mein Freund hat es sofort auf repeat gehört. Danke Audynia!" }
+    ]
   }
 }
