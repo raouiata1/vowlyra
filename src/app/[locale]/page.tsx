@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 const UGCCarousel = dynamic(() => import("@/components/UGCCarousel"));
 const Demo = dynamic(() => import("@/components/Demo"));
@@ -12,7 +13,8 @@ const Footer = dynamic(() => import("@/components/Footer"));
 export default function Home() {
   return (
     <>
-      <Nav />
+      <AnnouncementBar />
+      <Nav wiggle />
       <main>
         <Hero />
         <UGCCarousel />

@@ -67,6 +67,16 @@ function HeroSlider() {
       <style>{`
         .hero-dot { width: 6px; height: 6px; border-radius: 500px; background: rgba(255,255,255,0.5); border: none; padding: 0; cursor: pointer; transition: width 0.3s ease, background 0.3s ease; }
         .hero-dot-active { width: 20px; background: #1DB954; }
+        @keyframes heroBtnWiggle {
+          0%,55%,100% { transform: scale(1) rotate(0deg); }
+          57%          { transform: scale(1.06) rotate(-2deg); }
+          59%          { transform: scale(1.06) rotate(2deg); }
+          61%          { transform: scale(1.06) rotate(-2deg); }
+          63%          { transform: scale(1.06) rotate(2deg); }
+          65%          { transform: scale(1) rotate(0deg); }
+        }
+        .hero-cta-wiggle { animation: heroBtnWiggle 5s ease-in-out infinite; }
+        .hero-cta-wiggle:hover { animation: none; opacity: 0.85; }
         @media (max-width: 767px) {
           .hero-slider { width: 100% !important; height: 100% !important; border-radius: 16px !important; }
           .hero-dot { width: 8px !important; height: 8px !important; }
@@ -116,9 +126,10 @@ export default function Hero() {
             <Link
               href={`/${locale}/order`}
               onClick={() => sendEvent({ eventName: "InitiateCheckout" })}
-              style={{ background: "#1a1a1a", color: "#fff", borderRadius: 500, padding: "14px 28px", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "opacity 0.15s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              className="hero-cta-wiggle"
+              style={{ background: "#1a1a1a", color: "#fff", borderRadius: 500, padding: "14px 28px", fontSize: 15, fontWeight: 700, textDecoration: "none", display: "inline-block" }}
+              onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.85"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
             >
               {t("cta_primary")}
             </Link>
