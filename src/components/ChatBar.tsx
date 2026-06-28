@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { loadCrisp } from "@/lib/crisp";
 
 // ─── types ───────────────────────────────────────────────────────────────────
@@ -12,45 +13,36 @@ type Message = {
   text: string;
 };
 
-const AUTO_REPLY = `Danke für deine Nachricht! 🎵
-
-Unser Team erhält gerade viele Anfragen — aber keine Sorge, wir sind für dich da!
-
-So erstellst du deinen Song in wenigen Schritten:
-1️⃣ Klicke auf „Jetzt Song erstellen"
-2️⃣ Wähle den Anlass (z. B. Geburtstag, Hochzeit, Überraschung)
-3️⃣ Gib uns persönliche Details (Namen, Erinnerungen, Wünsche)
-4️⃣ Wähle deinen Musikstil
-5️⃣ Gib deine E-Mail ein — du erhältst deinen kostenlosen Trailer in ca. 5 Minuten!
-
-Du kannst auch gerne hier im Chat warten — sobald einer aus unserem Team frei ist, antworten wir dir persönlich. 😊
-
-Für dringende Anliegen erreichst du uns direkt per E-Mail: info@audynia.com`;
-
 // ─── component ───────────────────────────────────────────────────────────────
 
-const STORAGE_KEY = "audynia_chat_messages";
-const DEFAULT_MESSAGES: Message[] = [
-  { id: 0, from: "agent", text: "Hi! Wie kann ich dir helfen?\nSchreib mir einfach 😊" },
-];
-
-function loadMessages(): Message[] {
+function loadMessages(key: string, defaultMessages: Message[]): Message[] {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(key);
     if (stored) return JSON.parse(stored) as Message[];
   } catch {}
-  return DEFAULT_MESSAGES;
+  return defaultMessages;
 }
 
 export default function ChatBar() {
+  const t = useTranslations("chatbar");
+  const locale = useLocale();
+  const STORAGE_KEY = `audynia_chat_messages_${locale}`;
   const pathname = usePathname();
   const isLandingOrWizard = pathname === "/" || pathname?.startsWith("/order");
+  const isWizard  = pathname?.includes("/order");
+  const isSuccess = pathname?.includes("/success");
+  const autoReplyKey = isWizard ? "auto_reply_wizard" : isSuccess ? "auto_reply_success" : "auto_reply";
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [showTyping, setShowTyping] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
-  const [messages, setMessages] = useState<Message[]>(DEFAULT_MESSAGES);
+
+  const defaultMessages: Message[] = [
+    { id: 0, from: "agent", text: t("greeting") },
+  ];
+
+  const [messages, setMessages] = useState<Message[]>(defaultMessages);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -61,7 +53,7 @@ export default function ChatBar() {
 
   // ── Nachrichten aus localStorage laden ──────────────────────────────────
   useEffect(() => {
-    setMessages(loadMessages());
+    setMessages(loadMessages(STORAGE_KEY, defaultMessages));
   }, []);
 
   // ── Nachrichten in localStorage speichern ───────────────────────────────
@@ -69,7 +61,7 @@ export default function ChatBar() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
     } catch {}
-  }, [messages]);
+  }, [messages, STORAGE_KEY]);
 
   // ── lazily pre-load Crisp + set up message listener ─────────────────────
   useEffect(() => {
@@ -184,7 +176,7 @@ export default function ChatBar() {
         setShowTyping(false);
         setMessages((prev) => [
           ...prev,
-          { id: Date.now(), from: "agent", text: AUTO_REPLY },
+          { id: Date.now(), from: "agent", text: t(autoReplyKey) },
         ]);
       }, 4000);
     }
@@ -291,7 +283,7 @@ export default function ChatBar() {
                   boxShadow: "0 0 0 2px rgba(255,255,255,0.35)",
                 }} />
                 <span style={{ color: "rgba(255,255,255,0.88)", fontSize: 11.5 }}>
-                  Online · antwortet sofort
+                  {t("online_status")}
                 </span>
               </div>
             </div>
@@ -423,7 +415,7 @@ export default function ChatBar() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Nachricht schreiben…"
+              placeholder={t("placeholder")}
               disabled={sending}
               data-fb-disable-autotrack="true"
               style={{
@@ -528,7 +520,7 @@ export default function ChatBar() {
               >×</button>
             </div>
             <div style={{ padding: "0 12px 12px", fontSize: 13, color: "#1a1a1a", lineHeight: 1.55 }}>
-              Hey! Fragen zu deinem Song? Ich helfe dir gerne 🎵
+              {t("bubble_text")}
             </div>
           </div>
         )}
@@ -612,7 +604,7 @@ export default function ChatBar() {
               whiteSpace: "nowrap",
               letterSpacing: "0.3px",
             }}>
-              Frag uns
+              {t("fab_label")}
             </span>
           )}
         </div>

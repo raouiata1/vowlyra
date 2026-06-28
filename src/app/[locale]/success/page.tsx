@@ -159,7 +159,9 @@ export default function SuccessPage() {
       `}</style>
 
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#F5F5F7", padding: "20px 24px", zIndex: 99, borderBottom: "0.5px solid #e0e0e0" }}>
-        <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+        <a href="/" style={{ display: "inline-flex" }}>
+          <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+        </a>
       </div>
 
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 24px 80px" }}>

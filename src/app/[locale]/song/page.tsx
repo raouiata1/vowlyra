@@ -336,7 +336,7 @@ export default function SongPage() {
               {/* Express */}
               <a
                 href={payUrlExpress}
-                className="song-cta-primary"
+                className="song-cta-primary cta-vibrate"
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                   background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
@@ -434,6 +434,7 @@ export default function SongPage() {
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginTop: 48 }}>
               <a
                 href={payUrlExpress}
+                className="cta-vibrate"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
                   background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
@@ -509,6 +510,18 @@ export default function SongPage() {
           from { transform: scaleY(0.6); }
           to   { transform: scaleY(1.2); }
         }
+        @keyframes vibrate {
+          0%, 16%, 100% { transform: translateX(0) rotate(0deg); }
+          2%  { transform: translateX(-3px) rotate(-1.5deg); }
+          4%  { transform: translateX(3px)  rotate(1.5deg); }
+          6%  { transform: translateX(-3px) rotate(-1.5deg); }
+          8%  { transform: translateX(3px)  rotate(1.5deg); }
+          10% { transform: translateX(-2px) rotate(0deg); }
+          12% { transform: translateX(2px)  rotate(0deg); }
+          14% { transform: translateX(0)    rotate(0deg); }
+        }
+        .cta-vibrate        { animation: vibrate 4s ease-in-out infinite; }
+        .cta-vibrate:hover  { animation: none; transform: scale(1.02); }
 
         .song-sticky {
           display: none;

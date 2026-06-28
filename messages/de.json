@@ -141,9 +141,29 @@
     ]
   },
   "order": {
-    "occasions": ["Geburtstag", "Hochzeit", "Jahrestag", "Valentinstag", "Einfach so", "Weihnachten"],
-    "styles": ["Sanft & Emotional", "Tief & Romantisch", "Fröhlich & Mitreißend", "Nostalgisch", "Filmreif & Kraftvoll", "Sonstiges"],
-    "moods": ["Acoustic", "Pop", "Klavier", "R&B", "Filmmusik"],
+    "occasions": [
+      "Geburtstag",
+      "Hochzeit",
+      "Jahrestag",
+      "Valentinstag",
+      "Einfach so",
+      "Weihnachten"
+    ],
+    "styles": [
+      "Sanft & Emotional",
+      "Tief & Romantisch",
+      "Fröhlich & Mitreißend",
+      "Nostalgisch",
+      "Filmreif & Kraftvoll",
+      "Sonstiges"
+    ],
+    "moods": [
+      "Acoustic",
+      "Pop",
+      "Klavier",
+      "R&B",
+      "Filmmusik"
+    ],
     "required": "* Pflichtfeld",
     "optional": "(Optional)",
     "back": "← Zurück",
@@ -212,7 +232,9 @@
     "bubble_text": "Hey! Fragen zu deinem Song? Ich helfe dir gerne 🎵",
     "fab_label": "Frag uns",
     "greeting": "Hi! Wie kann ich dir helfen?\nSchreib mir einfach 😊",
-    "auto_reply": "Danke für deine Nachricht! 🎵\n\nUnser Team erhält gerade viele Anfragen — aber keine Sorge, wir sind für dich da!\n\nSo erstellst du deinen Song in wenigen Schritten:\n1️⃣ Klicke auf 'Jetzt Song erstellen'\n2️⃣ Wähle den Anlass (z. B. Geburtstag, Hochzeit, Überraschung)\n3️⃣ Gib uns persönliche Details (Namen, Erinnerungen, Wünsche)\n4️⃣ Wähle deinen Musikstil\n5️⃣ Gib deine E-Mail ein — du erhältst deinen kostenlosen Trailer in ca. 5 Minuten!\n\nDu kannst auch gerne hier im Chat warten — sobald einer aus unserem Team frei ist, antworten wir dir persönlich. 😊\n\nFür dringende Anliegen erreichst du uns direkt per E-Mail: info@audynia.com"
+    "auto_reply": "Danke für deine Nachricht! 🎵\n\nUnser Team erhält gerade viele Anfragen — aber keine Sorge, wir sind für dich da!\n\nSo erstellst du deinen Song in wenigen Schritten:\n1️⃣ Klicke auf 'Jetzt Song erstellen'\n2️⃣ Wähle den Anlass (z. B. Geburtstag, Hochzeit, Überraschung)\n3️⃣ Gib uns persönliche Details (Namen, Erinnerungen, Wünsche)\n4️⃣ Wähle deinen Musikstil\n5️⃣ Gib deine E-Mail ein — du erhältst deinen kostenlosen Trailer in ca. 5 Minuten!\n\nDu kannst auch gerne hier im Chat warten — sobald einer aus unserem Team frei ist, antworten wir dir persönlich. 😊\n\nFür dringende Anliegen erreichst du uns direkt per E-Mail: info@audynia.com",
+    "auto_reply_wizard": "Danke für deine Nachricht! 🎵\n\nDu bist gerade dabei, deinen persönlichen Song zu erstellen — das wird etwas ganz Besonderes!\n\nFalls du eine Frage zu einem Schritt hast:\n• Füll jedes Feld so detailreich wie möglich aus — jedes Detail macht deinen Song einzigartiger\n• Bei der E-Mail: Bitte eine echte Adresse angeben, damit wir den Trailer zustellen können\n• Du zahlst erst, wenn du den Trailer gehört hast und begeistert bist\n\nNoch Fragen? Schreib uns einfach:\ninfo@audynia.com 😊",
+    "auto_reply_success": "Danke für deine Nachricht! 🎵\n\nDein Song wird gerade für dich erstellt — noch einen Moment Geduld!\n\nWas jetzt passiert:\n⏳ Dein Trailer ist in ~3 Minuten fertig\n📱 Diese Seite öffnet ihn automatisch — lass den Tab unbedingt offen!\n🎵 Du hörst den Trailer gratis — zahlen nur wenn du begeistert bist\n\nFalls du nach 10 Minuten noch nichts siehst:\ninfo@audynia.com\n\nWir sind gleich für dich da! 😊"
   },
   "meta": {
     "title": "Audynia – Dein persönlicher Song in ca. 1 Stunde",
@@ -240,11 +262,31 @@
     "timeline_step3_title": "Song freischalten",
     "timeline_step3_sub": "Nur wenn du begeistert bist · 29,99€",
     "reviews": [
-      { "name": "Sarah M.", "occasion": "Hochzeit", "text": "Wir haben beide geweint als wir den Song gehört haben. Einfach perfekt." },
-      { "name": "Jonas K.", "occasion": "Geburtstag", "text": "Meine Mutter war sprachlos. Der beste Geburtstagsgeschenk seit Jahren." },
-      { "name": "Lena & Tom", "occasion": "Jahrestag", "text": "Er hat unsere ganze Geschichte in 3 Minuten eingefangen. Unglaublich." },
-      { "name": "Markus R.", "occasion": "Überraschung", "text": "In 5 Minuten fertig und klingt wie ein echter Profi-Song. Mega!" },
-      { "name": "Julia W.", "occasion": "Valentinstag", "text": "Mein Freund hat es sofort auf repeat gehört. Danke Audynia!" }
+      {
+        "name": "Sarah M.",
+        "occasion": "Hochzeit",
+        "text": "Wir haben beide geweint als wir den Song gehört haben. Einfach perfekt."
+      },
+      {
+        "name": "Jonas K.",
+        "occasion": "Geburtstag",
+        "text": "Meine Mutter war sprachlos. Der beste Geburtstagsgeschenk seit Jahren."
+      },
+      {
+        "name": "Lena & Tom",
+        "occasion": "Jahrestag",
+        "text": "Er hat unsere ganze Geschichte in 3 Minuten eingefangen. Unglaublich."
+      },
+      {
+        "name": "Markus R.",
+        "occasion": "Überraschung",
+        "text": "In 5 Minuten fertig und klingt wie ein echter Profi-Song. Mega!"
+      },
+      {
+        "name": "Julia W.",
+        "occasion": "Valentinstag",
+        "text": "Mein Freund hat es sofort auf repeat gehört. Danke Audynia!"
+      }
     ]
   }
 }

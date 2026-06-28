@@ -1,11 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
 function fadeIn(delay: string): React.CSSProperties {
   return { animation: "fadeUp 0.5s ease forwards", animationDelay: delay, opacity: 0 };
+}
+
+function PurchaseEvent() {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("purchase_fired")) return;
+
+    const order_id = searchParams.get("order_id") ?? undefined;
+    const plan = searchParams.get("plan") ?? "standard";
+    const value = plan === "express" ? 34.99 : 29.99;
+
+    fetch("/api/capi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventName: "Purchase",
+        eventId: crypto.randomUUID(),
+        url: window.location.href,
+        customData: { value, currency: "EUR", content_type: "product", order_id },
+      }),
+    });
+
+    sessionStorage.setItem("purchase_fired", "1");
+  }, [searchParams]);
+
+  return null;
 }
 
 export default function DankePage() {
@@ -18,6 +46,7 @@ export default function DankePage() {
 
   return (
     <>
+      <Suspense fallback={null}><PurchaseEvent /></Suspense>
       <div style={{ background: "#F5F5F7", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <style>{`
           @keyframes checkIn {
@@ -37,7 +66,9 @@ export default function DankePage() {
 
         {/* Header */}
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#F5F5F7", padding: "20px 24px", zIndex: 99, borderBottom: "0.5px solid #e0e0e0" }}>
-          <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+          <a href="/" style={{ display: "inline-flex" }}>
+            <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+          </a>
         </div>
 
         {/* Main */}
