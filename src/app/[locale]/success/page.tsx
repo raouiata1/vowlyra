@@ -192,41 +192,73 @@ export default function SuccessPage() {
           {previewReady ? t("title_ready") : t("title_creating")}
         </h1>
 
-        {/* YouTube video with loading indicator */}
-        <div style={{ width: "100%", maxWidth: 400, marginBottom: 32, borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 24px rgba(0,0,0,0.10)", position: "relative", ...fadeIn("0.2s") }}>
-          {/* Loading placeholder — visible until iframe fires onLoad */}
+        {/* YouTube video — Hero loading section */}
+        <div style={{ width: "100%", maxWidth: 640, marginBottom: 32, ...fadeIn("0.2s") }}>
+
+          {/* Hero loading state — shown while iframe loads */}
           {!videoLoaded && (
             <div style={{
-              position: "absolute", inset: 0, zIndex: 2,
-              background: "#1a1a1a",
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
-              borderRadius: 14,
+              width: "100%", height: 260,
+              background: "linear-gradient(135deg, #1a1a1a 0%, #111 100%)",
+              borderRadius: 18,
+              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20,
+              boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
+              marginBottom: 0,
             }}>
-              <div style={{
-                width: 44, height: 44,
-                border: "3px solid rgba(29,185,84,0.25)",
-                borderTop: "3px solid #1DB954",
-                borderRadius: "50%",
-                animation: "cb-spin 0.8s linear infinite",
-              }} />
-              <div style={{ fontSize: 13, color: "#aaa", fontWeight: 600 }}>Video wird geladen…</div>
+              {/* Animated music icon */}
+              <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{
+                  position: "absolute",
+                  width: 80, height: 80, borderRadius: "50%",
+                  border: "2px solid rgba(29,185,84,0.2)",
+                  animation: "activePulse 1.5s ease-out infinite",
+                }} />
+                <div style={{
+                  width: 64, height: 64, borderRadius: "50%",
+                  background: "rgba(29,185,84,0.12)",
+                  border: "1.5px solid rgba(29,185,84,0.3)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                </div>
+              </div>
+              {/* Spinner + text */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+                <div style={{
+                  width: 28, height: 28,
+                  border: "2.5px solid rgba(29,185,84,0.2)",
+                  borderTop: "2.5px solid #1DB954",
+                  borderRadius: "50%",
+                  animation: "cb-spin 0.8s linear infinite",
+                }} />
+                <div style={{ fontSize: 14, color: "#aaa", fontWeight: 600, letterSpacing: "0.2px" }}>
+                  Video wird geladen…
+                </div>
+                <div style={{ fontSize: 12, color: "#555" }}>
+                  Gleich geht es los
+                </div>
+              </div>
             </div>
           )}
-          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" }}>
-            <iframe
-              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0"
-              title="Audynia Song Preview"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              onLoad={() => setVideoLoaded(true)}
-              style={{
-                position: "absolute",
-                top: 0, left: 0,
-                width: "100%",
-                height: "100%",
-                border: "none",
-              }}
-            />
+
+          {/* Actual iframe — hidden until loaded, then revealed */}
+          <div style={{
+            display: videoLoaded ? "block" : "none",
+            borderRadius: 18, overflow: "hidden",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
+          }}>
+            <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" }}>
+              <iframe
+                src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0"
+                title="Audynia Song Preview"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                onLoad={() => setVideoLoaded(true)}
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+              />
+            </div>
           </div>
         </div>
 
