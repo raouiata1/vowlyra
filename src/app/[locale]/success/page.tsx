@@ -198,10 +198,16 @@ export default function SuccessPage() {
         </a>
       </div>
 
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 24px 80px" }}>
+      {/* Page top padding = fixed header height (78px) */}
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "96px 24px 80px" }}>
+
+        {/* Title — very first element, directly below logo */}
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: "#1a1a1a", marginTop: 0, marginBottom: 16, textAlign: "center", lineHeight: 1.2, width: "100%", maxWidth: 400, ...fadeIn("0s") }}>
+          {previewReady ? t("title_ready") : t("title_creating")}
+        </h1>
 
         {/* Song preview generation message */}
-        <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 14, padding: "18px 20px", marginBottom: 16, boxShadow: "0 4px 20px rgba(29,185,84,0.12)", ...fadeIn("0s") }}>
+        <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 14, padding: "18px 20px", marginBottom: 20, boxShadow: "0 4px 20px rgba(29,185,84,0.12)", ...fadeIn("0.1s") }}>
           <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
             <div style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(29,185,84,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -219,18 +225,15 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        {/* Title — moved above the video */}
-        <h1 style={{ fontSize: 30, fontWeight: 800, color: "#1a1a1a", marginTop: 8, marginBottom: 16, textAlign: "center", lineHeight: 1.2, ...fadeIn("0.1s") }}>
-          {previewReady ? t("title_ready") : t("title_creating")}
-        </h1>
-
         {/* YouTube video — Hero loading section */}
         <div style={{ width: "100%", maxWidth: 640, marginBottom: 32, ...fadeIn("0.2s") }}>
 
           {/* Hero loading state — shown while iframe loads */}
           {!videoLoaded && (
             <div style={{
-              width: "100%", height: 260,
+              width: "100%",
+              minHeight: 200,
+              aspectRatio: "16/9",
               background: "linear-gradient(135deg, #1a1a1a 0%, #111 100%)",
               borderRadius: 18,
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20,
