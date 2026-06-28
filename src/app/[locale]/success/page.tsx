@@ -5,7 +5,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { useTranslations } from "next-intl";
 
-const TOTAL_SECONDS = 180; // 3 minutes
+const TOTAL_SECONDS = 392; // 6 minutes 32 seconds
 
 function getRandomCount() {
   return Math.floor(Math.random() * 4) + 2;
@@ -24,10 +24,10 @@ export default function SuccessPage() {
   const t = useTranslations("success");
 
   const STATUS_LABELS = [
-    { until: 45,  text: t("status_lyrics") },
-    { until: 90,  text: t("status_music") },
-    { until: 135, text: t("status_mixing") },
-    { until: 180, text: t("status_trailer") },
+    { until: 98,  text: t("status_lyrics") },
+    { until: 196, text: t("status_music") },
+    { until: 294, text: t("status_mixing") },
+    { until: 392, text: t("status_trailer") },
   ];
 
   const REVIEWS = (t.raw("reviews") as { name: string; occasion: string; text: string }[]);
@@ -225,18 +225,21 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        {/* Loading indicator — shown directly before video, disappears when ready */}
-        {!videoLoaded && (
-          <div style={{ width: "100%", maxWidth: 400, background: "#fff", border: "0.5px solid #e0e0e0", borderRadius: 14, padding: "20px", marginBottom: 16, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.2s") }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 28, height: 28, border: "2.5px solid rgba(29,185,84,0.2)", borderTop: "2.5px solid #1DB954", borderRadius: "50%", flexShrink: 0, animation: "cb-spin 0.8s linear infinite" }} />
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>Video wird geladen…</div>
-                <div style={{ fontSize: 12, color: "#999", marginTop: 2 }}>Gleich geht es los</div>
-              </div>
+        {/* Progress Bar — directly before video */}
+        <div style={{ width: "100%", maxWidth: 400, marginBottom: 20, ...fadeIn("0.2s") }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+            <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
+              {previewReady ? t("status_ready") : currentLabel}
             </div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>{percent}%</div>
           </div>
-        )}
+          <div style={{ height: 10, background: "#e0e0e0", borderRadius: 500, overflow: "hidden" }}>
+            <div className="progress-bar" style={{ height: "100%", width: `${percent}%`, borderRadius: 500, transition: previewReady ? "width 1.5s ease-in-out" : "width 1s linear" }} />
+          </div>
+          <p style={{ fontSize: 12, color: "#999", marginTop: 8, textAlign: "center" }}>
+            {previewReady ? t("progress_redirect") : done ? t("progress_done") : t("progress_sub")}
+          </p>
+        </div>
 
         {/* YouTube video — always in DOM so autoplay works */}
         <div style={{ width: "100%", maxWidth: 640, marginBottom: 32, ...fadeIn("0.2s") }}>
@@ -290,21 +293,6 @@ export default function SuccessPage() {
           </div>
         )}
 
-        {/* Progress Bar */}
-        <div style={{ width: "100%", maxWidth: 400, marginTop: 32, ...fadeIn("0.5s") }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-            <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
-              {previewReady ? t("status_ready") : currentLabel}
-            </div>
-            <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>{percent}%</div>
-          </div>
-          <div style={{ height: 10, background: "#e0e0e0", borderRadius: 500, overflow: "hidden" }}>
-            <div className="progress-bar" style={{ height: "100%", width: `${percent}%`, borderRadius: 500, transition: previewReady ? "width 1.5s ease-in-out" : "width 1s linear" }} />
-          </div>
-          <p style={{ fontSize: 12, color: "#999", marginTop: 8, textAlign: "center" }}>
-            {previewReady ? t("progress_redirect") : done ? t("progress_done") : t("progress_sub")}
-          </p>
-        </div>
 
         {/* Email Card */}
         {email && !previewReady && (
