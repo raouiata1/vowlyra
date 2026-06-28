@@ -46,10 +46,15 @@ export default function SuccessPage() {
   const [liveCount, setLiveCount] = useState(getRandomCount());
   const [email, setEmail]         = useState("");
   const [labelKey, setLabelKey]   = useState(0);
+  const [orderId, setOrderId]     = useState("");
 
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
     if (stored) setEmail(stored);
+
+    const params = new URLSearchParams(window.location.search);
+    const oid = params.get("order_id") ?? "";
+    setOrderId(oid);
 
     // Use wall-clock start time so the timer stays accurate even when the tab is hidden
     const startTime = Date.now();
@@ -71,7 +76,24 @@ export default function SuccessPage() {
     };
     scheduleNext(liveCount);
 
-    return () => { clearInterval(timer); clearTimeout(counterTimeout); };
+    // Poll for preview_url every 5 seconds
+    let pollInterval: ReturnType<typeof setInterval>;
+    if (oid) {
+      pollInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`/api/preview-status?order_id=${encodeURIComponent(oid)}`);
+          const data = await res.json();
+          if (data.ready && data.preview_url) {
+            clearInterval(pollInterval);
+            window.location.href = data.preview_url;
+          }
+        } catch {
+          // ignore network errors, keep polling
+        }
+      }, 5000);
+    }
+
+    return () => { clearInterval(timer); clearTimeout(counterTimeout); if (pollInterval) clearInterval(pollInterval); };
   }, []);
 
   const remaining    = TOTAL_SECONDS - elapsed;
