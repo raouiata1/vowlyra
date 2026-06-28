@@ -45,47 +45,21 @@ export default function SuccessPage() {
   const [videoLoaded, setVideoLoaded]     = useState(false);
   const redirectUrl                       = useRef<string>("");
 
-  // YouTube IFrame API — autoplay with voice
-  useEffect(() => {
-    const loadPlayer = () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      new (window as any).YT.Player("yt-player-success", {
-        videoId: "6RbWFfsnI2s",
-        playerVars: { autoplay: 1, mute: 1, loop: 1, playlist: "6RbWFfsnI2s", controls: 1, modestbranding: 1, rel: 0 },
-        events: {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onReady: (e: any) => {
-            e.target.playVideo();
-            e.target.unMute();
-            e.target.setVolume(100);
-            setVideoLoaded(true);
-          },
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onStateChange: (e: any) => {
-            // State 1 = playing — ensure unmuted as soon as playback starts
-            if (e.data === 1) {
-              e.target.unMute();
-              e.target.setVolume(100);
-              setVideoLoaded(true);
-            }
-          },
-        },
-      });
-    };
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((window as any).YT?.Player) {
-      loadPlayer();
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).onYouTubeIframeAPIReady = loadPlayer;
-      if (!document.querySelector('script[src*="iframe_api"]')) {
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
-      }
-    }
-  }, []);
+  // Unmute via postMessage once iframe has loaded
+  const handleVideoLoad = () => {
+    setVideoLoaded(true);
+    // Give the player a moment to initialise, then unmute
+    setTimeout(() => {
+      iframeRef.current?.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func: "unMute", args: [] }), "*"
+      );
+      iframeRef.current?.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func: "setVolume", args: [100] }), "*"
+      );
+    }, 500);
+  };
 
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
@@ -251,10 +225,17 @@ export default function SuccessPage() {
           </p>
         </div>
 
-        {/* YouTube video — always in DOM so autoplay works */}
+        {/* YouTube video */}
         <div style={{ width: "100%", maxWidth: 640, marginBottom: 32, ...fadeIn("0.2s") }}>
           <div style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.18)" }}>
-            <div id="yt-player-success" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
+            <iframe
+              ref={iframeRef}
+              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0&enablejsapi=1"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              onLoad={handleVideoLoad}
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+            />
           </div>
         </div>
 
