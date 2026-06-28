@@ -45,6 +45,38 @@ export default function SuccessPage() {
   const [videoLoaded, setVideoLoaded]     = useState(false);
   const redirectUrl                       = useRef<string>("");
 
+  // YouTube IFrame API — autoplay then immediately unmute
+  useEffect(() => {
+    const loadPlayer = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      new (window as any).YT.Player("yt-player-success", {
+        videoId: "6RbWFfsnI2s",
+        playerVars: { autoplay: 1, mute: 1, loop: 1, playlist: "6RbWFfsnI2s", controls: 1, modestbranding: 1, rel: 0 },
+        events: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onReady: (e: any) => {
+            e.target.unMute();
+            e.target.setVolume(100);
+            setVideoLoaded(true);
+          },
+        },
+      });
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((window as any).YT?.Player) {
+      loadPlayer();
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).onYouTubeIframeAPIReady = loadPlayer;
+      if (!document.querySelector('script[src*="iframe_api"]')) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
     if (stored) setEmail(stored);
@@ -243,21 +275,14 @@ export default function SuccessPage() {
             </div>
           )}
 
-          {/* Actual iframe — hidden until loaded, then revealed */}
+          {/* YouTube IFrame API player — always mounted, revealed when ready */}
           <div style={{
             display: videoLoaded ? "block" : "none",
             borderRadius: 18, overflow: "hidden",
             boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
           }}>
             <div style={{ position: "relative", width: "100%", paddingTop: "56.25%" }}>
-              <iframe
-                src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0"
-                title="Audynia Song Preview"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-                onLoad={() => setVideoLoaded(true)}
-                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-              />
+              <div id="yt-player-success" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
             </div>
           </div>
         </div>
