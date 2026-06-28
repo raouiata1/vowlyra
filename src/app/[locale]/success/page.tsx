@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
@@ -35,13 +35,19 @@ function fadeIn(delay: string): React.CSSProperties {
 }
 
 export default function SuccessPage() {
-  const [elapsed, setElapsed]         = useState(0);
-  const [liveCount, setLiveCount]     = useState(getRandomCount());
-  const [email, setEmail]             = useState("");
-  const [labelKey, setLabelKey]       = useState(0);
-  const [orderId, setOrderId]         = useState("");
-  const [reviewIndex, setReviewIndex] = useState(0);
+  const [elapsed, setElapsed]             = useState(0);
+  const [liveCount, setLiveCount]         = useState(getRandomCount());
+  const [email, setEmail]                 = useState("");
+  const [labelKey, setLabelKey]           = useState(0);
+  const [orderId, setOrderId]             = useState("");
+  const [reviewIndex, setReviewIndex]     = useState(0);
   const [reviewVisible, setReviewVisible] = useState(true);
+
+  // Transition states
+  const [previewReady, setPreviewReady]   = useState(false);
+  const [showConfetti, setShowConfetti]   = useState(false);
+  const [fadingOut, setFadingOut]         = useState(false);
+  const redirectUrl                       = useRef<string>("");
 
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
@@ -87,7 +93,8 @@ export default function SuccessPage() {
           const data = await res.json();
           if (data.ready && data.preview_url) {
             clearInterval(pollInterval);
-            window.location.href = data.preview_url;
+            redirectUrl.current = data.preview_url;
+            triggerTransition(data.preview_url);
           }
         } catch {
           // ignore, keep polling
@@ -103,16 +110,43 @@ export default function SuccessPage() {
     };
   }, []);
 
-  const percent      = Math.min(Math.round((elapsed / TOTAL_SECONDS) * 100), 99);
+  function triggerTransition(url: string) {
+    // Step 1: bar → 100%, label changes (instant)
+    setPreviewReady(true);
+
+    // Step 2: confetti after 300ms
+    setTimeout(() => setShowConfetti(true), 300);
+
+    // Step 3: fade out after 2s
+    setTimeout(() => setFadingOut(true), 2000);
+
+    // Step 4: redirect after fade (2.5s total)
+    setTimeout(() => { window.location.href = url; }, 2500);
+  }
+
+  const percent      = previewReady ? 100 : Math.min(Math.round((elapsed / TOTAL_SECONDS) * 100), 99);
   const done         = elapsed >= TOTAL_SECONDS;
   const currentLabel = STATUS_LABELS.find((l) => elapsed < l.until)?.text ?? "Trailer wird vorbereitet...";
   const review       = REVIEWS[reviewIndex];
 
-  useEffect(() => { setLabelKey((k) => k + 1); }, [currentLabel]);
+  useEffect(() => { setLabelKey((k) => k + 1); }, [currentLabel, previewReady]);
 
   return (
     <>
-    <div style={{ background: "#F5F5F7", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+    {/* Full-page fade-out overlay */}
+    <div style={{
+      position: "fixed", inset: 0, background: "#fff", zIndex: 9999,
+      opacity: fadingOut ? 1 : 0,
+      pointerEvents: fadingOut ? "all" : "none",
+      transition: "opacity 0.5s ease",
+    }} />
+
+    <div style={{
+      background: "#F5F5F7", minHeight: "100vh",
+      fontFamily: "system-ui, -apple-system, sans-serif",
+      transition: "opacity 0.3s ease",
+      opacity: fadingOut ? 0 : 1,
+    }}>
       <style>{`
         @keyframes checkIn {
           0%   { transform: scale(0); }
@@ -135,13 +169,30 @@ export default function SuccessPage() {
           0%   { background-position: -200% center; }
           100% { background-position: 200% center; }
         }
-        .status-label { animation: fadeIn 0.5s ease forwards; }
-        .review-card  { transition: opacity 0.4s ease; }
-        .progress-bar {
+        @keyframes confettiRise {
+          0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(-80px) scale(0.4) rotate(45deg); opacity: 0; }
+        }
+        @keyframes readyPop {
+          0%   { transform: scale(0.8); opacity: 0; }
+          60%  { transform: scale(1.04); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes dot1 { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
+        @keyframes dot2 { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
+        @keyframes dot3 { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
+        .status-label  { animation: fadeIn 0.5s ease forwards; }
+        .review-card   { transition: opacity 0.4s ease; }
+        .progress-bar  {
           background: linear-gradient(90deg, #1DB954, #25D366, #1DB954);
           background-size: 200% auto;
           animation: progressShimmer 2s linear infinite;
         }
+        .ready-card    { animation: readyPop 0.5s ease forwards; }
+        .confetti-dot  { position: absolute; border-radius: 50%; animation: confettiRise 1s ease-out forwards; }
+        .dot-1 { animation: dot1 1.2s ease-in-out infinite; }
+        .dot-2 { animation: dot2 1.2s ease-in-out 0.2s infinite; }
+        .dot-3 { animation: dot3 1.2s ease-in-out 0.4s infinite; }
       `}</style>
 
       {/* Header */}
@@ -157,60 +208,84 @@ export default function SuccessPage() {
           {liveCount} Songs werden gerade erstellt
         </div>
 
-        {/* Checkmark */}
-        <div style={{ width: 72, height: 72, borderRadius: "50%", background: "#1DB954", display: "flex", alignItems: "center", justifyContent: "center", animation: "checkIn 0.5s ease-out forwards", boxShadow: "0 8px 24px rgba(29,185,84,0.3)" }}>
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
+        {/* Checkmark with pulse ring when ready */}
+        <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {previewReady && (
+            <div style={{
+              position: "absolute", width: 100, height: 100, borderRadius: "50%",
+              border: "3px solid #1DB954", animation: "activePulse 1s ease-out infinite",
+            }} />
+          )}
+          <div style={{ width: 72, height: 72, borderRadius: "50%", background: "#1DB954", display: "flex", alignItems: "center", justifyContent: "center", animation: "checkIn 0.5s ease-out forwards", boxShadow: previewReady ? "0 0 32px rgba(29,185,84,0.6)" : "0 8px 24px rgba(29,185,84,0.3)", transition: "box-shadow 0.5s ease" }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+
+          {/* Confetti dots */}
+          {showConfetti && (
+            <>
+              <div className="confetti-dot" style={{ width: 10, height: 10, background: "#1DB954",   left: -20, top: 10,  animationDelay: "0s" }} />
+              <div className="confetti-dot" style={{ width: 8,  height: 8,  background: "#25D366",   left: 10,  top: -15, animationDelay: "0.1s" }} />
+              <div className="confetti-dot" style={{ width: 10, height: 10, background: "#81C784",   right: -15,top: 5,   animationDelay: "0.15s" }} />
+              <div className="confetti-dot" style={{ width: 7,  height: 7,  background: "#1DB954",   right: 5,  top: -20, animationDelay: "0.05s" }} />
+              <div className="confetti-dot" style={{ width: 9,  height: 9,  background: "#25D366",   left: -10, top: -10, animationDelay: "0.2s" }} />
+            </>
+          )}
         </div>
 
         {/* Title */}
         <h1 style={{ fontSize: 30, fontWeight: 800, color: "#1a1a1a", marginTop: 20, marginBottom: 0, textAlign: "center", lineHeight: 1.2, ...fadeIn("0.2s") }}>
-          Dein Song wird erstellt
+          {previewReady ? "Dein Song ist fertig! 🎉" : "Dein Song wird erstellt"}
         </h1>
 
-        {/* Auto-redirect hint — KEY MESSAGE */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 10, padding: "10px 16px", marginTop: 16, maxWidth: 400, width: "100%", ...fadeIn("0.3s") }}>
-          <span style={{ fontSize: 18 }}>🎵</span>
-          <p style={{ margin: 0, fontSize: 13, color: "#1a1a1a", lineHeight: 1.5 }}>
-            <strong>Diese Seite öffnet deinen Song automatisch</strong> — kein Tab schließen, einfach warten.
-          </p>
-        </div>
+        {/* Auto-redirect hint OR ready card */}
+        {previewReady ? (
+          <div className="ready-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "#1DB954", borderRadius: 14, padding: "16px 24px", marginTop: 16, maxWidth: 400, width: "100%" }}>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#000" }}>Song wird geöffnet...</div>
+            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <div className="dot-1" style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(0,0,0,0.5)" }} />
+              <div className="dot-2" style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(0,0,0,0.5)" }} />
+              <div className="dot-3" style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(0,0,0,0.5)" }} />
+            </div>
+          </div>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 10, padding: "10px 16px", marginTop: 16, maxWidth: 400, width: "100%", ...fadeIn("0.3s") }}>
+            <span style={{ fontSize: 18 }}>🎵</span>
+            <p style={{ margin: 0, fontSize: 13, color: "#1a1a1a", lineHeight: 1.5 }}>
+              <strong>Diese Seite öffnet deinen Song automatisch</strong> — kein Tab schließen, einfach warten.
+            </p>
+          </div>
+        )}
 
         {/* Progress Bar */}
         <div style={{ width: "100%", maxWidth: 400, marginTop: 32, ...fadeIn("0.5s") }}>
-
-          {/* Header row */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
             <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
-              {done ? "Gleich geht's los!" : currentLabel}
+              {previewReady ? "🎉 Dein Song ist fertig!" : currentLabel}
             </div>
-            <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>
-              {done ? "99%" : `${percent}%`}
-            </div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>{percent}%</div>
           </div>
 
-          {/* Bar track */}
           <div style={{ height: 10, background: "#e0e0e0", borderRadius: 500, overflow: "hidden" }}>
             <div
               className="progress-bar"
               style={{
                 height: "100%",
-                width: `${done ? 99 : percent}%`,
+                width: `${percent}%`,
                 borderRadius: 500,
-                transition: "width 1s linear",
+                transition: previewReady ? "width 0.5s ease" : "width 1s linear",
               }}
             />
           </div>
 
-          {/* Sub text */}
           <p style={{ fontSize: 12, color: "#999", marginTop: 8, textAlign: "center" }}>
-            {done ? "Dein Trailer ist fast fertig..." : "Wir geben unser Bestes für deinen Song"}
+            {previewReady ? "Weiterleitung läuft..." : done ? "Dein Trailer ist fast fertig..." : "Wir geben unser Bestes für deinen Song"}
           </p>
         </div>
 
         {/* Email Card */}
-        {email && (
+        {email && !previewReady && (
           <div style={{ background: "#fff", borderRadius: 12, padding: "14px 18px", marginTop: 20, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", display: "flex", alignItems: "center", gap: 12, ...fadeIn("0.7s") }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -223,63 +298,64 @@ export default function SuccessPage() {
           </div>
         )}
 
-        {/* Rotating Review */}
-        <div
-          className="review-card"
-          style={{ opacity: reviewVisible ? 1 : 0, background: "#fff", borderRadius: 14, padding: "18px 20px", marginTop: 24, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.9s") }}
-        >
-          {/* Stars */}
-          <div style={{ display: "flex", gap: 2, marginBottom: 10 }}>
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#1DB954">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
+        {/* Rotating Review — hidden when ready */}
+        {!previewReady && (
+          <div
+            className="review-card"
+            style={{ opacity: reviewVisible ? 1 : 0, background: "#fff", borderRadius: 14, padding: "18px 20px", marginTop: 24, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.9s") }}
+          >
+            <div style={{ display: "flex", gap: 2, marginBottom: 10 }}>
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#1DB954">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              ))}
+            </div>
+            <p style={{ margin: 0, fontSize: 14, color: "#1a1a1a", lineHeight: 1.6, fontStyle: "italic" }}>
+              "{review.text}"
+            </p>
+            <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 30, height: 30, borderRadius: "50%", background: "#1DB95420", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: "#1DB954" }}>
+                {review.name[0]}
+              </div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>{review.name}</div>
+                <div style={{ fontSize: 11, color: "#999" }}>{review.anlass}</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Timeline — hidden when ready */}
+        {!previewReady && (
+          <div style={{ width: "100%", maxWidth: 400, marginTop: 28, ...fadeIn("1s") }}>
+            {[
+              { active: true,  title: "Trailer wird erstellt",  sub: "Öffnet sich hier automatisch" },
+              { active: false, title: "Trailer anhören",         sub: "Kostenlos & unverbindlich" },
+              { active: false, title: "Song freischalten",       sub: "Nur wenn du begeistert bist · 29,99€" },
+            ].map((step, i) => (
+              <div key={i} style={{ display: "flex", gap: 16 }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <div style={{ position: "relative", width: 24, height: 24, borderRadius: "50%", background: step.active ? "#1DB954" : "#ddd", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    {step.active && <span style={{ position: "absolute", width: 24, height: 24, borderRadius: "50%", background: "#1DB954", animation: "activePulse 1.5s infinite" }} />}
+                    {step.active ? (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative", zIndex: 1 }}>
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    ) : (
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#bbb" }} />
+                    )}
+                  </div>
+                  {i < 2 && <div style={{ width: 2, flex: 1, background: "#ddd", minHeight: 32, margin: "4px 0" }} />}
+                </div>
+                <div style={{ paddingBottom: i < 2 ? 28 : 0 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: step.active ? "#1a1a1a" : "#aaa" }}>{step.title}</div>
+                  <div style={{ fontSize: 13, color: step.active ? "#1DB954" : "#bbb", marginTop: 2, fontWeight: step.active ? 600 : 400 }}>{step.sub}</div>
+                </div>
+              </div>
             ))}
           </div>
-          {/* Quote */}
-          <p style={{ margin: 0, fontSize: 14, color: "#1a1a1a", lineHeight: 1.6, fontStyle: "italic" }}>
-            "{review.text}"
-          </p>
-          {/* Author */}
-          <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 30, height: 30, borderRadius: "50%", background: "#1DB95420", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: "#1DB954" }}>
-              {review.name[0]}
-            </div>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>{review.name}</div>
-              <div style={{ fontSize: 11, color: "#999" }}>{review.anlass}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Timeline */}
-        <div style={{ width: "100%", maxWidth: 400, marginTop: 28, ...fadeIn("1s") }}>
-          {[
-            { active: true,  title: "Trailer wird erstellt",  sub: "Öffnet sich hier automatisch" },
-            { active: false, title: "Trailer anhören",         sub: "Kostenlos & unverbindlich" },
-            { active: false, title: "Song freischalten",       sub: "Nur wenn du begeistert bist · 29,99€" },
-          ].map((step, i) => (
-            <div key={i} style={{ display: "flex", gap: 16 }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <div style={{ position: "relative", width: 24, height: 24, borderRadius: "50%", background: step.active ? "#1DB954" : "#ddd", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  {step.active && <span style={{ position: "absolute", width: 24, height: 24, borderRadius: "50%", background: "#1DB954", animation: "activePulse 1.5s infinite" }} />}
-                  {step.active ? (
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative", zIndex: 1 }}>
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  ) : (
-                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#bbb" }} />
-                  )}
-                </div>
-                {i < 2 && <div style={{ width: 2, flex: 1, background: "#ddd", minHeight: 32, margin: "4px 0" }} />}
-              </div>
-              <div style={{ paddingBottom: i < 2 ? 28 : 0 }}>
-                <div style={{ fontSize: 14, fontWeight: 700, color: step.active ? "#1a1a1a" : "#aaa" }}>{step.title}</div>
-                <div style={{ fontSize: 13, color: step.active ? "#1DB954" : "#bbb", marginTop: 2, fontWeight: step.active ? 600 : 400 }}>{step.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        )}
 
       </div>
     </div>
