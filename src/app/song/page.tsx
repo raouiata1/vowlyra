@@ -79,6 +79,8 @@ const MusicSVG = () => (
 
 // ─── page component ───────────────────────────────────────────────────────────
 
+declare global { interface Window { fbq: (...args: unknown[]) => void; } }
+
 function getCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
   return document.cookie
@@ -184,20 +186,27 @@ export default function SongPage() {
 
   function handleCheckout(plan: "standard" | "express", url: string) {
     const value = plan === "express" ? 34.99 : 29.99;
+    const eventId = crypto.randomUUID();
+    const customData = { value, currency: "EUR", content_type: "product", num_items: 1 };
+
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "InitiateCheckout", customData, { eventID: eventId });
+    }
+
     fetch("/api/capi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       keepalive: true,
       body: JSON.stringify({
         eventName: "InitiateCheckout",
-        eventId: crypto.randomUUID(),
+        eventId,
         url: window.location.href,
         user: {
           email: email || undefined,
           fbc: getCookie("_fbc"),
           fbp: getCookie("_fbp"),
         },
-        customData: { value, currency: "EUR", content_type: "product", num_items: 1 },
+        customData,
       }),
     }).catch(() => {});
     window.location.href = url;

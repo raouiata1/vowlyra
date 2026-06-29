@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
+declare global { interface Window { fbq: (...args: unknown[]) => void; } }
+
 function fadeIn(delay: string): React.CSSProperties {
   return { animation: "fadeUp 0.5s ease forwards", animationDelay: delay, opacity: 0 };
 }
@@ -35,19 +37,26 @@ function PurchaseEvent() {
         email = json.email ?? undefined;
       }
 
+      const eventId = crypto.randomUUID();
+      const customData = { value, currency: "EUR", content_type: "product", order_id };
+
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "Purchase", customData, { eventID: eventId });
+      }
+
       await fetch("/api/capi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           eventName: "Purchase",
-          eventId: crypto.randomUUID(),
+          eventId,
           url: window.location.href,
           user: {
             email,
             fbc: getCookie("_fbc"),
             fbp: getCookie("_fbp"),
           },
-          customData: { value, currency: "EUR", content_type: "product", order_id },
+          customData,
         }),
       });
 
