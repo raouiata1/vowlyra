@@ -18,7 +18,7 @@ export interface UserData {
   ct?: string;        // city
   st?: string;        // state
   zp?: string;        // zip
-  country?: string;   // 2-letter country code
+  cn?: string;        // 2-letter country code (ISO)
   external_id?: string;
   client_ip_address?: string;
   client_user_agent?: string;
@@ -77,7 +77,7 @@ export function hashUserData(raw: {
     ...(raw.city && { ct: hash(raw.city) }),
     ...(raw.state && { st: hash(raw.state) }),
     ...(raw.zip && { zp: hash(raw.zip) }),
-    ...(raw.country && { country: hash(raw.country) }),
+    ...(raw.country && { cn: hash(raw.country) }),
     ...(raw.externalId && { external_id: hash(raw.externalId) }),
   };
 }

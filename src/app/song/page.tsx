@@ -79,12 +79,21 @@ const MusicSVG = () => (
 
 // ─── page component ───────────────────────────────────────────────────────────
 
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name + "="))
+    ?.split("=")[1];
+}
+
 export default function SongPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [payUrlStandard, setPayUrlStandard] = useState<string>("/order");
   const [payUrlExpress, setPayUrlExpress]   = useState<string>("/order");
   const [urlChecked, setUrlChecked] = useState(false);
   const [stripeReady, setStripeReady] = useState(false);
+  const [email, setEmail] = useState<string>("");
 
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -100,8 +109,9 @@ export default function SongPage() {
     setPreviewUrl(params.get("preview"));
 
     const order_id = params.get("order_id");
-    const email    = params.get("email") ?? "";
-    const emailQ   = email ? `&email=${encodeURIComponent(email)}` : "";
+    const emailParam = params.get("email") ?? "";
+    setEmail(emailParam);
+    const emailQ = emailParam ? `&email=${encodeURIComponent(emailParam)}` : "";
 
     if (order_id) {
       const baseStandard = `/api/checkout?order_id=${encodeURIComponent(order_id)}&plan=standard${emailQ}`;
@@ -170,6 +180,27 @@ export default function SongPage() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.currentTime = Math.max(0, Math.min(audio.duration || 0, audio.currentTime + secs));
+  }
+
+  function handleCheckout(plan: "standard" | "express", url: string) {
+    const value = plan === "express" ? 34.99 : 29.99;
+    fetch("/api/capi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({
+        eventName: "InitiateCheckout",
+        eventId: crypto.randomUUID(),
+        url: window.location.href,
+        user: {
+          email: email || undefined,
+          fbc: getCookie("_fbc"),
+          fbp: getCookie("_fbp"),
+        },
+        customData: { value, currency: "EUR", content_type: "product", num_items: 1 },
+      }),
+    }).catch(() => {});
+    window.location.href = url;
   }
 
   if (!urlChecked) return null;
@@ -336,6 +367,7 @@ export default function SongPage() {
               {/* Express */}
               <a
                 href={payUrlExpress}
+                onClick={(e) => { e.preventDefault(); handleCheckout("express", payUrlExpress); }}
                 className="song-cta-primary"
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
@@ -354,6 +386,7 @@ export default function SongPage() {
               {/* Standard */}
               <a
                 href={payUrlStandard}
+                onClick={(e) => { e.preventDefault(); handleCheckout("standard", payUrlStandard); }}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                   background: "transparent", color: "#ccc",
@@ -434,6 +467,7 @@ export default function SongPage() {
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginTop: 48 }}>
               <a
                 href={payUrlExpress}
+                onClick={(e) => { e.preventDefault(); handleCheckout("express", payUrlExpress); }}
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
                   background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
@@ -448,6 +482,7 @@ export default function SongPage() {
               </a>
               <a
                 href={payUrlStandard}
+                onClick={(e) => { e.preventDefault(); handleCheckout("standard", payUrlStandard); }}
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
                   background: "transparent", color: "#888",
@@ -472,6 +507,7 @@ export default function SongPage() {
           <div style={{ display: "flex", gap: 8 }}>
             <a
               href={payUrlExpress}
+              onClick={(e) => { e.preventDefault(); handleCheckout("express", payUrlExpress); }}
               style={{
                 flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
                 background: "linear-gradient(135deg, #1DB954, #17a349)", color: "#000",
@@ -484,6 +520,7 @@ export default function SongPage() {
             </a>
             <a
               href={payUrlStandard}
+              onClick={(e) => { e.preventDefault(); handleCheckout("standard", payUrlStandard); }}
               style={{
                 flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
                 background: "transparent", color: "#ccc",
