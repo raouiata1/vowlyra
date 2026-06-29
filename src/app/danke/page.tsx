@@ -1,11 +1,63 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
 function fadeIn(delay: string): React.CSSProperties {
   return { animation: "fadeUp 0.5s ease forwards", animationDelay: delay, opacity: 0 };
+}
+
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name + "="))
+    ?.split("=")[1];
+}
+
+function PurchaseEvent() {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("purchase_fired")) return;
+
+    const order_id = searchParams.get("order_id") ?? undefined;
+    const plan = searchParams.get("plan") ?? "standard";
+    const value = plan === "express" ? 34.99 : 29.99;
+
+    const firePurchase = async () => {
+      let email: string | undefined;
+      if (order_id) {
+        const res = await fetch(`/api/order-email?order_id=${order_id}`);
+        const json = await res.json();
+        email = json.email ?? undefined;
+      }
+
+      await fetch("/api/capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventName: "Purchase",
+          eventId: crypto.randomUUID(),
+          url: window.location.href,
+          user: {
+            email,
+            fbc: getCookie("_fbc"),
+            fbp: getCookie("_fbp"),
+          },
+          customData: { value, currency: "EUR", content_type: "product", order_id },
+        }),
+      });
+
+      sessionStorage.setItem("purchase_fired", "1");
+    };
+
+    firePurchase();
+  }, [searchParams]);
+
+  return null;
 }
 
 export default function DankePage() {
@@ -18,6 +70,7 @@ export default function DankePage() {
 
   return (
     <>
+      <Suspense fallback={null}><PurchaseEvent /></Suspense>
       <div style={{ background: "#F5F5F7", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif" }}>
         <style>{`
           @keyframes checkIn {
