@@ -12,9 +12,12 @@ export async function GET(req: NextRequest) {
 
   const { data } = await supabase
     .from("leads")
-    .select("customer_email")
+    .select("customer_email, customer_phone")
     .eq("order_id", order_id)
     .single();
 
-  return NextResponse.json({ email: data?.customer_email ?? null });
+  return NextResponse.json({
+    email: data?.customer_email ?? null,
+    phone: data?.customer_phone ?? null,
+  });
 }

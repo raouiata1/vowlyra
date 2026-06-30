@@ -19,7 +19,8 @@ export function MetaPageViewTracker() {
       eventName: "PageView",
       url,
     });
-  }, [pathname, searchParams]); // fires on every route change
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, searchParams, sendEvent]); // fires on every route change
 
   return null; // renders nothing
 }

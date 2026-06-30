@@ -96,6 +96,7 @@ export default function SongPage() {
   const [urlChecked, setUrlChecked] = useState(false);
   const [stripeReady, setStripeReady] = useState(false);
   const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
 
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -116,6 +117,11 @@ export default function SongPage() {
     const emailQ = emailParam ? `&email=${encodeURIComponent(emailParam)}` : "";
 
     if (order_id) {
+      fetch(`/api/order-email?order_id=${encodeURIComponent(order_id)}`)
+        .then(r => r.json())
+        .then(json => { if (json.phone) setPhone(json.phone); })
+        .catch(() => {});
+
       const baseStandard = `/api/checkout?order_id=${encodeURIComponent(order_id)}&plan=standard${emailQ}`;
       const baseExpress  = `/api/checkout?order_id=${encodeURIComponent(order_id)}&plan=express${emailQ}`;
 
@@ -203,6 +209,7 @@ export default function SongPage() {
         url: window.location.href,
         user: {
           email: email || undefined,
+          phone: phone || undefined,
           fbc: getCookie("_fbc"),
           fbp: getCookie("_fbp"),
         },

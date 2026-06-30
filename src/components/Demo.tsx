@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useMetaEvent } from "@/hooks/useMetaEvent";
 
 const DEMO_AUDIO_URL = "https://media.vowlyra.com/demo_song_full.mp3";
 const WAVE_HEIGHTS = [18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28];
@@ -37,6 +38,8 @@ const PauseSVG = () => (
 
 export default function Demo() {
   const t = useTranslations("demo");
+  const { sendEvent } = useMetaEvent();
+  const hasFiredDemo = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -147,7 +150,18 @@ export default function Demo() {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 28 }}>
             <button onClick={() => skipBy(-10)} style={controlBtn}><SkipBackSVG /></button>
             <button
-              onClick={() => setPlaying((p) => !p)}
+              onClick={() => {
+                setPlaying((p) => {
+                  if (!p && !hasFiredDemo.current) {
+                    hasFiredDemo.current = true;
+                    sendEvent({
+                      eventName: "ViewContent",
+                      customData: { content_name: "Demo Song", content_category: "Music" },
+                    });
+                  }
+                  return !p;
+                });
+              }}
               style={{ width: 52, height: 52, borderRadius: "50%", background: "#1DB954", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#000", transition: "transform 0.1s", boxShadow: playing ? "0 0 20px rgba(29,185,84,0.6)" : "0 4px 14px rgba(29,185,84,0.4)" }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}

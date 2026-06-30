@@ -59,7 +59,7 @@ export default function Nav({ hideLogo = false, dark = false, leftLogo, ctaLabel
 
           <Link
             href={ctaHref ?? `/${locale}/order`}
-            onClick={() => sendEvent({ eventName: "InitiateCheckout" })}
+            onClick={() => sendEvent({ eventName: "ViewContent", customData: { content_name: "Song erstellen", content_category: "Music" } })}
             className={wiggle ? "nav-cta-wiggle" : ""}
             style={{
               background: "linear-gradient(135deg, #1DB954, #17a349)",

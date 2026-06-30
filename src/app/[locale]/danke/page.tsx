@@ -9,6 +9,14 @@ function fadeIn(delay: string): React.CSSProperties {
   return { animation: "fadeUp 0.5s ease forwards", animationDelay: delay, opacity: 0 };
 }
 
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name + "="))
+    ?.split("=")[1];
+}
+
 function PurchaseEvent() {
   const searchParams = useSearchParams();
 
@@ -19,18 +27,46 @@ function PurchaseEvent() {
     const plan = searchParams.get("plan") ?? "standard";
     const value = plan === "express" ? 34.99 : 29.99;
 
-    fetch("/api/capi", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        eventName: "Purchase",
-        eventId: crypto.randomUUID(),
-        url: window.location.href,
-        customData: { value, currency: "EUR", content_type: "product", order_id },
-      }),
-    });
+    const firePurchase = async () => {
+      let email: string | undefined;
+      let phone: string | undefined;
+      if (order_id) {
+        const res = await fetch(`/api/order-email?order_id=${order_id}`);
+        const json = await res.json();
+        email = json.email ?? undefined;
+        phone = json.phone ?? undefined;
+      }
 
-    sessionStorage.setItem("purchase_fired", "1");
+      const eventId = crypto.randomUUID();
+      const customData = { value, currency: "EUR", content_type: "product", order_id };
+
+      // Pixel
+      if (typeof window !== "undefined" && (window as typeof window & { fbq?: Function }).fbq) {
+        (window as typeof window & { fbq: Function }).fbq("track", "Purchase", customData, { eventID: eventId });
+      }
+
+      // CAPI
+      await fetch("/api/capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventName: "Purchase",
+          eventId,
+          url: window.location.href,
+          user: {
+            email,
+            phone,
+            fbc: getCookie("_fbc"),
+            fbp: getCookie("_fbp"),
+          },
+          customData,
+        }),
+      });
+
+      sessionStorage.setItem("purchase_fired", "1");
+    };
+
+    firePurchase();
   }, [searchParams]);
 
   return null;

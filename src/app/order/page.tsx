@@ -6,6 +6,16 @@ import { useRouter } from "next/navigation";
 ;
 import Footer from "@/components/Footer";
 
+declare global { interface Window { fbq: (...args: unknown[]) => void; } }
+
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name + "="))
+    ?.split("=")[1];
+}
+
 const TOTAL_STEPS = 7;
 
 const validateEmailFrontend = (email: string): string | null => {
@@ -284,14 +294,37 @@ export default function OrderPage() {
           empfaenger: answers.empfaenger,
           geschichte: answers.geschichte,
           klang: answers.klang,
-          stil: answers.stil,
-          spezialzeile: answers.spezialzeile || ''
+          stil: answers.stil
         })
       })
 
       const data = await response.json()
 
       if (data.success) {
+        const eventId = crypto.randomUUID();
+
+        // Pixel
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
+
+        // CAPI
+        fetch("/api/capi", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            eventName: "Lead",
+            eventId,
+            url: window.location.href,
+            user: {
+              email: answers.email,
+              phone: answers.phone,
+              fbc: getCookie("_fbc"),
+              fbp: getCookie("_fbp"),
+            },
+          }),
+        }).catch(() => {});
+
         sessionStorage.setItem('vowlyra_email', answers.email)
         router.push(`/success?order_id=${data.order_id}`)
       } else {

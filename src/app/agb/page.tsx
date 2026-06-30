@@ -149,7 +149,7 @@ export default function AGBPage() {
 
           {/* § 6 */}
           <Section id="sec-6" label="§ 6  Kostenlose Vorschau und Bestellprozess">
-            <NP n={1}>Audynia bietet vor jeder kostenpflichtigen Bestellung eine kostenlose ca. 30-sekündige Song-Vorschau (Preview) an. Der Trailer wird innerhalb von 3–5 Minuten nach Eingabe der Bestelldaten per E-Mail zugestellt.</NP>
+            <NP n={1}>Audynia bietet vor jeder kostenpflichtigen Bestellung eine kostenlose ca. 30-sekündige Song-Vorschau (Preview) an. Der Trailer wird innerhalb von ca. 3 Minuten nach Eingabe der Bestelldaten per E-Mail zugestellt.</NP>
             <NP n={2}>Die Bereitstellung der kostenlosen Preview begründet keinen Kaufvertrag und verpflichtet den Kunden zu nichts. Der Kunde entscheidet frei ob er nach Anhören der Preview den vollständigen Song erwerben möchte.</NP>
             <NP n={3}>Gefällt dem Kunden die erhaltene Preview nicht, hat er das Recht auf Anfrage eine kostenlose neue Demo zu erhalten. Dieser Anspruch besteht einmalig pro Bestellung und ist per E-Mail an info@audynia.com geltend zu machen.</NP>
           </Section>

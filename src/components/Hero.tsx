@@ -125,7 +125,7 @@ export default function Hero() {
           <div className="hero-ctas" style={{ display: "flex", gap: 12, marginBottom: 36, flexWrap: "wrap" }}>
             <Link
               href={`/${locale}/order`}
-              onClick={() => sendEvent({ eventName: "InitiateCheckout" })}
+              onClick={() => sendEvent({ eventName: "ViewContent", customData: { content_name: "Song erstellen", content_category: "Music" } })}
               className="hero-cta-wiggle"
               style={{ background: "#1a1a1a", color: "#fff", borderRadius: 500, padding: "14px 28px", fontSize: 15, fontWeight: 700, textDecoration: "none", display: "inline-block" }}
               onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.85"; }}

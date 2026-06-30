@@ -31,10 +31,12 @@ function PurchaseEvent() {
 
     const firePurchase = async () => {
       let email: string | undefined;
+      let phone: string | undefined;
       if (order_id) {
         const res = await fetch(`/api/order-email?order_id=${order_id}`);
         const json = await res.json();
         email = json.email ?? undefined;
+        phone = json.phone ?? undefined;
       }
 
       const eventId = crypto.randomUUID();
@@ -53,6 +55,7 @@ function PurchaseEvent() {
           url: window.location.href,
           user: {
             email,
+            phone,
             fbc: getCookie("_fbc"),
             fbp: getCookie("_fbp"),
           },

@@ -4,10 +4,10 @@
 Ein digitales Produkt: KI-personalisierte Songs für Kunden.
 Der Kunde gibt Informationen an (Anlass, Namen, Erinnerungen, Stil),
 daraus wird automatisch ein einzigartiger Song erstellt und geliefert.
-Lieferzeit: ~5 Minuten. Trailer kostenlos vorab, Song nach Zahlung.
+Lieferzeit Trailer: ~3 Minuten. Trailer kostenlos vorab, Song nach Zahlung.
 
 ## Geschäftsmodell
-- Preis: 14,99 € pro Song (einmalig, kein Abo)
+- Preis: 29,99 € (Standard) / 34,99 € (Express) pro Song (einmalig, kein Abo)
 - Trailer (30 Sek.) wird kostenlos per E-Mail geschickt
 - Kunde zahlt nur wenn Trailer gefällt → dann Full Song per Mail
 - Song-Generierung: Suno AI Pro ($10/Monat, 500 Songs/Monat)

@@ -28,12 +28,14 @@ export async function POST(req: NextRequest) {
     });
 
     // Enrich with server-side signals
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    const ua = req.headers.get("user-agent");
     const userData = {
       ...hashedUser,
-      client_ip_address: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "",
-      client_user_agent: req.headers.get("user-agent") ?? "",
-      fbc: user?.fbc,   // from _fbc cookie
-      fbp: user?.fbp,   // from _fbp cookie
+      ...(ip && { client_ip_address: ip }),
+      ...(ua && { client_user_agent: ua }),
+      ...(user?.fbc && { fbc: user.fbc }),
+      ...(user?.fbp && { fbp: user.fbp }),
     };
 
     const event = buildEvent(eventName, url, userData, customData, eventId);

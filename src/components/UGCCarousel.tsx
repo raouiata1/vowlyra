@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { useMetaEvent } from "@/hooks/useMetaEvent";
 
 const FALLBACK_GRADIENTS = [
   "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
@@ -29,6 +30,8 @@ type PopupCard = { src: string; name: string; occasion: string };
 
 export default function UGCCarousel() {
   const t = useTranslations("ugc");
+  const { sendEvent } = useMetaEvent();
+  const hasFiredUGC = useRef(false);
   const [popup, setPopup] = useState<PopupCard | null>(null);
   const [titleVisible, setTitleVisible] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -70,7 +73,16 @@ export default function UGCCarousel() {
             <div
               key={i}
               className="ugc-card"
-              onClick={() => setPopup({ src: card.src, name: card.name, occasion: card.occasion })}
+              onClick={() => {
+                if (!hasFiredUGC.current) {
+                  hasFiredUGC.current = true;
+                  sendEvent({
+                    eventName: "ViewContent",
+                    customData: { content_name: `UGC Video – ${card.occasion}`, content_category: "Social Proof" },
+                  });
+                }
+                setPopup({ src: card.src, name: card.name, occasion: card.occasion });
+              }}
               style={{ position: "relative", overflow: "hidden", width: 220, height: 390, borderRadius: 16, flexShrink: 0, background: FALLBACK_GRADIENTS[i % FALLBACK_GRADIENTS.length], cursor: "pointer", marginRight: 20 }}
             >
               <video

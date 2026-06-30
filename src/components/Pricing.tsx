@@ -51,7 +51,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link href={`/${locale}/order`} onClick={() => sendEvent({ eventName: "InitiateCheckout", customData: { content_name: "Standard", value: 29.99, currency: "EUR" } })}
+            <Link href={`/${locale}/order`} onClick={() => sendEvent({ eventName: "ViewContent", customData: { content_name: "Standard", value: 29.99, currency: "EUR", content_category: "Music" } })}
               style={{ display: "block", textAlign: "center", background: "#1a1a1a", color: "#fff", borderRadius: 500, padding: "16px 24px", fontSize: 15, fontWeight: 700, textDecoration: "none", boxSizing: "border-box", transition: "background 0.18s, color 0.18s", letterSpacing: "-0.2px" }}
               onMouseEnter={(e) => { e.currentTarget.style.background = "#1DB954"; e.currentTarget.style.color = "#000"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "#1a1a1a"; e.currentTarget.style.color = "#fff"; }}
@@ -79,7 +79,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link href={`/${locale}/order`} onClick={() => sendEvent({ eventName: "InitiateCheckout", customData: { content_name: "Express", value: 34.99, currency: "EUR" } })}
+            <Link href={`/${locale}/order`} onClick={() => sendEvent({ eventName: "ViewContent", customData: { content_name: "Express", value: 34.99, currency: "EUR", content_category: "Music" } })}
               style={{ display: "block", textAlign: "center", background: "#1DB954", color: "#000", borderRadius: 500, padding: "16px 24px", fontSize: 15, fontWeight: 700, textDecoration: "none", boxSizing: "border-box", transition: "opacity 0.18s, transform 0.18s", letterSpacing: "-0.2px" }}
               onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.86"; e.currentTarget.style.transform = "scale(1.02)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "scale(1)"; }}
