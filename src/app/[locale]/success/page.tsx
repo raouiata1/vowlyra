@@ -200,8 +200,8 @@ export default function SuccessPage() {
           .success-wrap { padding: 76px 16px 60px !important; }
           .success-h1 { font-size: 20px !important; margin-bottom: 6px !important; }
           .success-subtitle { display: none !important; }
-          .success-video-wrap { margin-bottom: 12px !important; }
-          .success-video-inner { padding-top: 0 !important; height: 200px !important; }
+          .success-video-wrap { margin-bottom: 10px !important; }
+          .success-video-el { height: 160px !important; }
           .success-progress { margin-bottom: 12px !important; }
           .success-pill { font-size: 11px !important; padding: 6px 14px !important; }
           .success-player { padding: 16px !important; margin-bottom: 16px !important; }
@@ -253,9 +253,9 @@ export default function SuccessPage() {
         </div>
 
         {/* UGC Video — Kundenstimme während Song lädt */}
-        <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
-          <div style={{ borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)", background: "#000", position: "relative" }}>
-            <div style={{ position: "absolute", top: 12, left: 14, zIndex: 2, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", borderRadius: 500, padding: "4px 12px", fontSize: 11, color: "#fff", fontWeight: 600 }}>
+        <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 16, ...fadeIn("0.2s") }}>
+          <div style={{ borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", background: "#000", position: "relative" }}>
+            <div style={{ position: "absolute", top: 10, left: 12, zIndex: 2, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", borderRadius: 500, padding: "3px 10px", fontSize: 11, color: "#fff", fontWeight: 600 }}>
               ★★★★★ Echte Kundenstimme
             </div>
             <video
@@ -264,7 +264,8 @@ export default function SuccessPage() {
               muted
               loop
               playsInline
-              style={{ width: "100%", maxHeight: 360, objectFit: "cover", display: "block" }}
+              className="success-video-el"
+              style={{ width: "100%", height: 200, objectFit: "cover", display: "block" }}
             />
           </div>
         </div>
