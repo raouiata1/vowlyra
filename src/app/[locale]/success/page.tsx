@@ -196,6 +196,23 @@ export default function SuccessPage() {
         .dot-3{animation:dot3 1.2s ease-in-out 0.4s infinite}
         .skeleton-pulse{animation:skeletonPulse 1.8s ease-in-out infinite}
         .pill-vibrate { animation: pillVibrate 3.5s ease-in-out infinite, pillGlow 3.5s ease-in-out infinite; }
+        @media (max-width: 767px) {
+          .success-wrap { padding: 76px 16px 60px !important; }
+          .success-h1 { font-size: 20px !important; margin-bottom: 6px !important; }
+          .success-subtitle { display: none !important; }
+          .success-video-wrap { margin-bottom: 12px !important; }
+          .success-video-inner { padding-top: 0 !important; height: 200px !important; }
+          .success-progress { margin-bottom: 12px !important; }
+          .success-pill { font-size: 11px !important; padding: 6px 14px !important; }
+          .success-player { padding: 16px !important; margin-bottom: 16px !important; }
+          .success-track-title { font-size: 14px !important; }
+          .success-track-sub { font-size: 12px !important; }
+          .success-vinyl { width: 44px !important; height: 44px !important; }
+          .success-vinyl svg { width: 44px !important; height: 44px !important; }
+          .success-waveform { height: 32px !important; margin-bottom: 10px !important; }
+          .success-controls { gap: 20px !important; }
+          .success-play-btn { width: 44px !important; height: 44px !important; }
+        }
       `}</style>
 
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#121212", padding: "16px 24px", zIndex: 99, borderBottom: "1px solid #1e1e1e" }}>
@@ -205,23 +222,23 @@ export default function SuccessPage() {
       </div>
 
       {/* Page top padding = fixed header height (78px) */}
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "96px 24px 80px" }}>
+      <div className="success-wrap" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "96px 24px 80px" }}>
 
         {/* Title */}
-        <h1 style={{ fontSize: 30, fontWeight: 800, color: "#fff", marginTop: 0, marginBottom: 8, textAlign: "center", lineHeight: 1.2, width: "100%", maxWidth: 640, ...fadeIn("0s") }}>
+        <h1 className="success-h1" style={{ fontSize: 30, fontWeight: 800, color: "#fff", marginTop: 0, marginBottom: 8, textAlign: "center", lineHeight: 1.2, width: "100%", maxWidth: 640, ...fadeIn("0s") }}>
           {previewReady ? t("title_ready") : t("title_creating")}
         </h1>
 
-        {/* Subtitle */}
+        {/* Subtitle — hidden on mobile */}
         {!previewReady && (
-          <p style={{ fontSize: 15, color: "#666", textAlign: "center", marginBottom: 20, marginTop: 0, maxWidth: 520, lineHeight: 1.7, ...fadeIn("0.05s") }}>
+          <p className="success-subtitle" style={{ fontSize: 15, color: "#666", textAlign: "center", marginBottom: 20, marginTop: 0, maxWidth: 520, lineHeight: 1.7, ...fadeIn("0.05s") }}>
             Unsere KI komponiert gerade deinen persönlichen Song. Das dauert ca. <strong style={{ color: "#fff" }}>3–5 Minuten</strong>. Der Player unten aktiviert sich <strong style={{ color: "#1DB954" }}>automatisch</strong> — bitte lass diesen Tab offen.
           </p>
         )}
 
         {/* YouTube video — TOP */}
-        <div style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.1s") }}>
-          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
+        <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.1s") }}>
+          <div className="success-video-inner" style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
             <iframe
               ref={iframeRef}
               src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0&enablejsapi=1"
@@ -234,7 +251,7 @@ export default function SuccessPage() {
         </div>
 
         {/* Progress Bar */}
-        <div style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
+        <div className="success-progress" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
             <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
               {previewReady ? t("status_ready") : currentLabel}
@@ -254,21 +271,21 @@ export default function SuccessPage() {
           <div style={{ width: "100%", maxWidth: 640, marginBottom: 28, ...fadeIn("0.25s") }}>
 
             {/* Loading pill — vibriert um Aufmerksamkeit zu ziehen */}
-            <div style={{ textAlign: "center", marginBottom: 16 }}>
-              <span className="pill-vibrate" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.15)", color: "#1DB954", borderRadius: 500, padding: "8px 20px", fontSize: 13, fontWeight: 700, border: "1px solid rgba(29,185,84,0.3)", cursor: "default" }}>
+            <div style={{ textAlign: "center", marginBottom: 12 }}>
+              <span className="pill-vibrate success-pill" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.15)", color: "#1DB954", borderRadius: 500, padding: "8px 20px", fontSize: 13, fontWeight: 700, border: "1px solid rgba(29,185,84,0.3)", cursor: "default" }}>
                 <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1DB954", display: "inline-block", flexShrink: 0, animation: "activePulse 1.2s infinite" }} />
                 🎵 Dein Song wird gerade erstellt — erscheint hier automatisch
               </span>
             </div>
 
             {/* Player card — identical structure to song page */}
-            <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 20, padding: "28px 28px 24px", textAlign: "left" }}>
+            <div className="success-player" style={{ background: "#181818", border: "1px solid #282828", borderRadius: 20, padding: "28px 28px 24px", textAlign: "left" }}>
 
               {/* Track header */}
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
 
                 {/* Vinyl with spinning animation + Suno-style loading ring */}
-                <div style={{ position: "relative", width: 60, height: 60, flexShrink: 0 }}>
+                <div className="success-vinyl" style={{ position: "relative", width: 60, height: 60, flexShrink: 0 }}>
                   {/* Spinning loading ring (SVG) */}
                   <svg width="60" height="60" viewBox="0 0 60 60" style={{ position: "absolute", inset: 0, zIndex: 2 }}>
                     <circle cx="30" cy="30" r="28" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeDasharray="176" strokeDashoffset="176" strokeLinecap="round"
@@ -282,8 +299,8 @@ export default function SuccessPage() {
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Dein persönlicher Song</div>
-                  <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>Audynia · wird erstellt...</div>
+                  <div className="success-track-title" style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Dein persönlicher Song</div>
+                  <div className="success-track-sub" style={{ color: "#777", fontSize: 13, marginTop: 3 }}>Audynia · wird erstellt...</div>
                 </div>
                 <div style={{ background: "#1DB95415", color: "#1DB954", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95430" }}>
                   30s Preview
@@ -291,7 +308,7 @@ export default function SuccessPage() {
               </div>
 
               {/* Waveform skeleton */}
-              <div style={{ display: "flex", alignItems: "center", gap: 3, height: 44, marginBottom: 14 }}>
+              <div className="success-waveform" style={{ display: "flex", alignItems: "center", gap: 3, height: 44, marginBottom: 14 }}>
                 {[18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28].map((h, i) => (
                   <div key={i} className="skeleton-pulse" style={{ flex: 1, height: h, background: "#333", borderRadius: 3, animationDelay: `${i * 0.05}s` }} />
                 ))}
@@ -304,7 +321,7 @@ export default function SuccessPage() {
               </div>
 
               {/* Controls — exact icons from song page, greyed out */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 32 }}>
+              <div className="success-controls" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 32 }}>
                 {/* Skip back */}
                 <div style={{ color: "#444", padding: 8, display: "flex", alignItems: "center" }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -312,7 +329,7 @@ export default function SuccessPage() {
                   </svg>
                 </div>
                 {/* Play button */}
-                <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="success-play-btn" style={{ width: 56, height: 56, borderRadius: "50%", background: "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="#444" style={{ marginLeft: 2 }}>
                     <polygon points="5 3 19 12 5 21 5 3"/>
                   </svg>
