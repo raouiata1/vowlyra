@@ -151,9 +151,9 @@ export default function SuccessPage() {
 
   return (
     <>
-    <div style={{ position: "fixed", inset: 0, background: "#fff", zIndex: 9999, opacity: fadingOut ? 1 : 0, pointerEvents: fadingOut ? "all" : "none", transition: "opacity 0.5s ease" }} />
+    <div style={{ position: "fixed", inset: 0, background: "#121212", zIndex: 9999, opacity: fadingOut ? 1 : 0, pointerEvents: fadingOut ? "all" : "none", transition: "opacity 0.5s ease" }} />
 
-    <div style={{ background: "#F5F5F7", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", transition: "opacity 0.3s ease", opacity: fadingOut ? 0 : 1 }}>
+    <div style={{ background: "#121212", minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", transition: "opacity 0.3s ease", opacity: fadingOut ? 0 : 1 }}>
       <style>{`
         @keyframes checkIn { 0%{transform:scale(0)} 70%{transform:scale(1.1)} 100%{transform:scale(1)} }
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -166,6 +166,7 @@ export default function SuccessPage() {
         @keyframes dot2 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
         @keyframes dot3 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
         @keyframes cb-spin { to { transform: rotate(360deg); } }
+        @keyframes skeletonPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
         .status-label{animation:fadeIn 0.5s ease forwards}
         .review-card{transition:opacity 0.4s ease}
         .progress-bar{background:linear-gradient(90deg,#1DB954,#25D366,#1DB954);background-size:200% auto;animation:progressShimmer 2s linear infinite}
@@ -174,11 +175,12 @@ export default function SuccessPage() {
         .dot-1{animation:dot1 1.2s ease-in-out infinite}
         .dot-2{animation:dot2 1.2s ease-in-out 0.2s infinite}
         .dot-3{animation:dot3 1.2s ease-in-out 0.4s infinite}
+        .skeleton-pulse{animation:skeletonPulse 1.8s ease-in-out infinite}
       `}</style>
 
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#F5F5F7", padding: "20px 24px", zIndex: 99, borderBottom: "0.5px solid #e0e0e0" }}>
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#121212", padding: "16px 24px", zIndex: 99, borderBottom: "1px solid #1e1e1e" }}>
         <a href="/" style={{ display: "inline-flex" }}>
-          <Image src="/logo.png" width={120} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
+          <Image src="/logo-secondary.png" width={130} height={38} alt="Audynia" style={{ objectFit: "contain" }} />
         </a>
       </div>
 
@@ -186,7 +188,7 @@ export default function SuccessPage() {
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "96px 24px 80px" }}>
 
         {/* Title */}
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: "#1a1a1a", marginTop: 0, marginBottom: 8, textAlign: "center", lineHeight: 1.2, width: "100%", maxWidth: 640, ...fadeIn("0s") }}>
+        <h1 style={{ fontSize: 30, fontWeight: 800, color: "#fff", marginTop: 0, marginBottom: 8, textAlign: "center", lineHeight: 1.2, width: "100%", maxWidth: 640, ...fadeIn("0s") }}>
           {previewReady ? t("title_ready") : t("title_creating")}
         </h1>
 
@@ -199,7 +201,7 @@ export default function SuccessPage() {
 
         {/* YouTube video — TOP */}
         <div style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.1s") }}>
-          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.18)" }}>
+          <div style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
             <iframe
               ref={iframeRef}
               src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0&enablejsapi=1"
@@ -212,78 +214,75 @@ export default function SuccessPage() {
         </div>
 
         {/* Progress Bar */}
-        <div style={{ width: "100%", maxWidth: 640, marginBottom: 20, ...fadeIn("0.2s") }}>
+        <div style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
             <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
               {previewReady ? t("status_ready") : currentLabel}
             </div>
-            <div style={{ fontSize: 13, fontWeight: 800, color: "#1a1a1a" }}>{percent}%</div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: "#fff" }}>{percent}%</div>
           </div>
-          <div style={{ height: 10, background: "#e0e0e0", borderRadius: 500, overflow: "hidden" }}>
+          <div style={{ height: 8, background: "#2a2a2a", borderRadius: 500, overflow: "hidden" }}>
             <div className="progress-bar" style={{ height: "100%", width: `${percent}%`, borderRadius: 500, transition: previewReady ? "width 1.5s ease-in-out" : "width 1s linear" }} />
           </div>
-          <p style={{ fontSize: 12, color: "#999", marginTop: 8, textAlign: "center" }}>
+          <p style={{ fontSize: 12, color: "#555", marginTop: 8, textAlign: "center" }}>
             {previewReady ? t("progress_redirect") : done ? t("progress_done") : t("progress_sub")}
           </p>
         </div>
 
-        {/* Preview Skeleton — shows what's coming */}
+        {/* Player Card — exact copy from song page, skeleton state while loading */}
         {!previewReady && (
-          <div style={{ width: "100%", maxWidth: 640, marginBottom: 28, borderRadius: 20, background: "#111", padding: "28px 24px", boxShadow: "0 8px 40px rgba(0,0,0,0.22)", ...fadeIn("0.25s") }}>
-            {/* Label */}
-            <div style={{ textAlign: "center", marginBottom: 18 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(29,185,84,0.15)", color: "#1DB954", borderRadius: 500, padding: "5px 14px", fontSize: 12, fontWeight: 700 }}>
+          <div style={{ width: "100%", maxWidth: 640, marginBottom: 28, ...fadeIn("0.25s") }}>
+
+            {/* Loading pill */}
+            <div style={{ textAlign: "center", marginBottom: 16 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(29,185,84,0.12)", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 12, fontWeight: 700 }}>
                 <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#1DB954", display: "inline-block", animation: "activePulse 1.5s infinite" }} />
-                Dein Song wird vorbereitet...
+                Dein Song wird vorbereitet — erscheint hier automatisch
               </span>
             </div>
 
-            {/* Track info */}
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-              <div style={{ width: 52, height: 52, borderRadius: 10, background: "#2a2a2a", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-                </svg>
+            {/* Player card — identical structure to song page */}
+            <div style={{ background: "#181818", border: "1px solid #282828", borderRadius: 20, padding: "28px 28px 24px", textAlign: "left" }}>
+
+              {/* Track header */}
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+                <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
+                  <Image src="/Vynil.jpg" alt="Vinyl" fill style={{ objectFit: "cover", filter: "grayscale(60%) brightness(0.5)" }} sizes="60px" />
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: "#555", fontWeight: 700, fontSize: 16 }}>Dein persönlicher Song</div>
+                  <div style={{ color: "#3a3a3a", fontSize: 13, marginTop: 3 }}>Audynia · Vorschau</div>
+                </div>
+                <div style={{ background: "#1DB95415", color: "#1DB95460", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95420" }}>
+                  30s Preview
+                </div>
               </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ color: "#fff", fontWeight: 700, fontSize: 15 }}>Dein persönlicher Song</div>
-                <div style={{ color: "#555", fontSize: 13, marginTop: 2 }}>Audynia · Vorschau</div>
+
+              {/* Waveform skeleton */}
+              <div style={{ display: "flex", alignItems: "center", gap: 3, height: 44, marginBottom: 14 }}>
+                {[18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28].map((h, i) => (
+                  <div key={i} className="skeleton-pulse" style={{ flex: 1, height: h, background: "#2a2a2a", borderRadius: 3, animationDelay: `${i * 0.05}s` }} />
+                ))}
               </div>
-              <div style={{ background: "#1DB95430", color: "#1DB954", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 700 }}>30s Preview</div>
-            </div>
 
-            {/* Waveform skeleton */}
-            <div style={{ display: "flex", alignItems: "center", gap: 3, height: 36, marginBottom: 10 }}>
-              {[18, 28, 20, 34, 24, 30, 18, 32, 26, 36, 22, 30, 18, 28, 24, 34, 20, 26].map((h, i) => (
-                <div key={i} style={{ flex: 1, height: h, background: "#2a2a2a", borderRadius: 3 }} />
-              ))}
-            </div>
-            <div style={{ height: 3, background: "#2a2a2a", borderRadius: 2, marginBottom: 6 }} />
-            <div style={{ display: "flex", justifyContent: "space-between", color: "#444", fontSize: 11, marginBottom: 20 }}>
-              <span>0:00</span><span>0:30</span>
-            </div>
+              {/* Progress bar skeleton */}
+              <div style={{ height: 4, background: "#2a2a2a", borderRadius: 2, marginBottom: 8 }} />
+              <div style={{ display: "flex", justifyContent: "space-between", color: "#3a3a3a", fontSize: 12, marginBottom: 22 }}>
+                <span>0:00</span><span>0:30</span>
+              </div>
 
-            {/* Controls skeleton */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 28, marginBottom: 24 }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a" }} />
-              <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#2a2a2a" }} />
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a" }} />
-            </div>
-
-            {/* Divider */}
-            <div style={{ height: 1, background: "#222", marginBottom: 18 }} />
-
-            {/* Info text */}
-            <div style={{ textAlign: "center" }}>
-              <p style={{ margin: 0, fontSize: 13, color: "#555", lineHeight: 1.6 }}>
-                Sobald dein Song fertig ist, wirst du <strong style={{ color: "#777" }}>automatisch weitergeleitet</strong> — kein Reload nötig. Bitte lass diesen Tab offen.
-              </p>
+              {/* Controls skeleton */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 32 }}>
+                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a" }} />
+                <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#2a2a2a" }} />
+                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a" }} />
+              </div>
             </div>
           </div>
         )}
 
         {/* Live Counter */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.1)", border: "0.5px solid #1DB954", borderRadius: 500, padding: "6px 14px", fontSize: 12, color: "#1a7a35", marginBottom: 28, ...fadeIn("0s") }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.08)", border: "0.5px solid rgba(29,185,84,0.3)", borderRadius: 500, padding: "6px 14px", fontSize: 12, color: "#1DB954", marginBottom: 28, ...fadeIn("0s") }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1DB954", display: "inline-block", animation: "activePulse 1.5s infinite" }} />
           {t("live_counter", { count: liveCount })}
         </div>
@@ -307,10 +306,9 @@ export default function SuccessPage() {
           )}
         </div>
 
-
         {/* Hint / Ready Card */}
         {previewReady ? (
-          <div className="ready-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "#1DB954", borderRadius: 14, padding: "16px 24px", marginTop: 16, maxWidth: 400, width: "100%" }}>
+          <div className="ready-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "#1DB954", borderRadius: 14, padding: "16px 24px", marginTop: 16, maxWidth: 580, width: "100%" }}>
             <div style={{ fontSize: 15, fontWeight: 800, color: "#000" }}>{t("ready_card")}</div>
             <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
               <div className="dot-1" style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(0,0,0,0.5)" }} />
@@ -319,32 +317,31 @@ export default function SuccessPage() {
             </div>
           </div>
         ) : (
-          <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#fff", border: "1.5px solid #1DB954", borderRadius: 10, padding: "10px 16px", marginTop: 16, maxWidth: 400, width: "100%", ...fadeIn("0.3s") }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#1a1a1a", border: "1px solid #1DB95440", borderRadius: 10, padding: "10px 16px", marginTop: 16, maxWidth: 580, width: "100%", ...fadeIn("0.3s") }}>
             <span style={{ fontSize: 18 }}>🎵</span>
-            <p style={{ margin: 0, fontSize: 13, color: "#1a1a1a", lineHeight: 1.5 }}>
-              <strong>{t("hint").split("—")[0].trim()}</strong> — {t("hint").split("—")[1]?.trim()}
+            <p style={{ margin: 0, fontSize: 13, color: "#aaa", lineHeight: 1.5 }}>
+              <strong style={{ color: "#fff" }}>{t("hint").split("—")[0].trim()}</strong> — {t("hint").split("—")[1]?.trim()}
             </p>
           </div>
         )}
 
-
         {/* Email Card */}
         {email && !previewReady && (
-          <div style={{ background: "#fff", borderRadius: 12, padding: "14px 18px", marginTop: 20, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", display: "flex", alignItems: "center", gap: 12, ...fadeIn("0.7s") }}>
+          <div style={{ background: "#1a1a1a", borderRadius: 12, padding: "14px 18px", marginTop: 20, maxWidth: 580, width: "100%", border: "0.5px solid #2a2a2a", display: "flex", alignItems: "center", gap: 12, ...fadeIn("0.7s") }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#1a1a1a" }}>{t("email_backup")}</div>
-              <div style={{ fontSize: 12, color: "#777", marginTop: 1 }}>{email}</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#fff" }}>{t("email_backup")}</div>
+              <div style={{ fontSize: 12, color: "#666", marginTop: 1 }}>{email}</div>
             </div>
           </div>
         )}
 
         {/* Rotating Review */}
         {!previewReady && (
-          <div className="review-card" style={{ opacity: reviewVisible ? 1 : 0, background: "#fff", borderRadius: 14, padding: "18px 20px", marginTop: 24, maxWidth: 400, width: "100%", border: "0.5px solid #e0e0e0", boxShadow: "0 2px 12px rgba(0,0,0,0.04)", ...fadeIn("0.9s") }}>
+          <div className="review-card" style={{ opacity: reviewVisible ? 1 : 0, background: "#181818", borderRadius: 14, padding: "18px 20px", marginTop: 24, maxWidth: 580, width: "100%", border: "0.5px solid #2a2a2a", ...fadeIn("0.9s") }}>
             <div style={{ display: "flex", gap: 2, marginBottom: 10 }}>
               {[...Array(5)].map((_, i) => (
                 <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#1DB954">
@@ -352,7 +349,7 @@ export default function SuccessPage() {
                 </svg>
               ))}
             </div>
-            <p style={{ margin: 0, fontSize: 14, color: "#1a1a1a", lineHeight: 1.6, fontStyle: "italic" }}>
+            <p style={{ margin: 0, fontSize: 14, color: "#ccc", lineHeight: 1.6, fontStyle: "italic" }}>
               "{review.text}"
             </p>
             <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 8 }}>
@@ -360,8 +357,8 @@ export default function SuccessPage() {
                 {review.name[0]}
               </div>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a1a" }}>{review.name}</div>
-                <div style={{ fontSize: 11, color: "#999" }}>{review.occasion}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>{review.name}</div>
+                <div style={{ fontSize: 11, color: "#555" }}>{review.occasion}</div>
               </div>
             </div>
           </div>
@@ -369,7 +366,7 @@ export default function SuccessPage() {
 
         {/* Timeline */}
         {!previewReady && (
-          <div style={{ width: "100%", maxWidth: 400, marginTop: 28, ...fadeIn("1s") }}>
+          <div style={{ width: "100%", maxWidth: 580, marginTop: 28, ...fadeIn("1s") }}>
             {[
               { active: true,  title: t("timeline_step1_title"), sub: t("timeline_step1_sub") },
               { active: false, title: t("timeline_step2_title"), sub: t("timeline_step2_sub") },
@@ -377,21 +374,21 @@ export default function SuccessPage() {
             ].map((step, i) => (
               <div key={i} style={{ display: "flex", gap: 16 }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <div style={{ position: "relative", width: 24, height: 24, borderRadius: "50%", background: step.active ? "#1DB954" : "#ddd", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <div style={{ position: "relative", width: 24, height: 24, borderRadius: "50%", background: step.active ? "#1DB954" : "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     {step.active && <span style={{ position: "absolute", width: 24, height: 24, borderRadius: "50%", background: "#1DB954", animation: "activePulse 1.5s infinite" }} />}
                     {step.active ? (
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative", zIndex: 1 }}>
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     ) : (
-                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#bbb" }} />
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#3a3a3a" }} />
                     )}
                   </div>
-                  {i < 2 && <div style={{ width: 2, flex: 1, background: "#ddd", minHeight: 32, margin: "4px 0" }} />}
+                  {i < 2 && <div style={{ width: 2, flex: 1, background: "#2a2a2a", minHeight: 32, margin: "4px 0" }} />}
                 </div>
                 <div style={{ paddingBottom: i < 2 ? 28 : 0 }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: step.active ? "#1a1a1a" : "#aaa" }}>{step.title}</div>
-                  <div style={{ fontSize: 13, color: step.active ? "#1DB954" : "#bbb", marginTop: 2, fontWeight: step.active ? 600 : 400 }}>{step.sub}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: step.active ? "#fff" : "#444" }}>{step.title}</div>
+                  <div style={{ fontSize: 13, color: step.active ? "#1DB954" : "#333", marginTop: 2, fontWeight: step.active ? 600 : 400 }}>{step.sub}</div>
                 </div>
               </div>
             ))}
