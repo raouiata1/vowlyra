@@ -42,23 +42,14 @@ export default function SuccessPage() {
   const [previewReady, setPreviewReady]   = useState(false);
   const [showConfetti, setShowConfetti]   = useState(false);
   const [fadingOut, setFadingOut]         = useState(false);
-  const [videoLoaded, setVideoLoaded]     = useState(false);
+  const [isMuted, setIsMuted]             = useState(true);
   const redirectUrl                       = useRef<string>("");
+  const videoRef                          = useRef<HTMLVideoElement>(null);
 
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  // Unmute via postMessage once iframe has loaded
-  const handleVideoLoad = () => {
-    setVideoLoaded(true);
-    // Give the player a moment to initialise, then unmute
-    setTimeout(() => {
-      iframeRef.current?.contentWindow?.postMessage(
-        JSON.stringify({ event: "command", func: "unMute", args: [] }), "*"
-      );
-      iframeRef.current?.contentWindow?.postMessage(
-        JSON.stringify({ event: "command", func: "setVolume", args: [100] }), "*"
-      );
-    }, 500);
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !videoRef.current.muted;
+    setIsMuted(videoRef.current.muted);
   };
 
   useEffect(() => {
@@ -255,10 +246,33 @@ export default function SuccessPage() {
         {/* UGC Video — Kundenstimme während Song lädt */}
         <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 16, ...fadeIn("0.2s") }}>
           <div style={{ borderRadius: 14, overflow: "hidden", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", background: "#000", position: "relative" }}>
-            <div style={{ position: "absolute", top: 10, left: 12, zIndex: 2, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", borderRadius: 500, padding: "3px 10px", fontSize: 11, color: "#fff", fontWeight: 600 }}>
+            {/* Badge */}
+            <div style={{ position: "absolute", top: 10, left: 12, zIndex: 3, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", borderRadius: 500, padding: "3px 10px", fontSize: 11, color: "#fff", fontWeight: 600 }}>
               ★★★★★ Echte Kundenstimme
             </div>
+            {/* Mute/Unmute button */}
+            <button
+              onClick={toggleMute}
+              style={{ position: "absolute", bottom: 10, right: 12, zIndex: 3, background: isMuted ? "rgba(255,255,255,0.15)" : "rgba(29,185,84,0.85)", backdropFilter: "blur(6px)", border: isMuted ? "1px solid rgba(255,255,255,0.3)" : "1px solid #1DB954", borderRadius: 500, padding: "5px 12px", fontSize: 12, color: "#fff", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, transition: "background 0.2s, border 0.2s" }}
+            >
+              {isMuted ? (
+                <>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+                  </svg>
+                  Ton an
+                </>
+              ) : (
+                <>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                  </svg>
+                  Ton aus
+                </>
+              )}
+            </button>
             <video
+              ref={videoRef}
               src="https://media.vowlyra.com/ugc_1.mp4"
               autoPlay
               muted
