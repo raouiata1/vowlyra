@@ -52,6 +52,21 @@ export default function SuccessPage() {
     setIsMuted(videoRef.current.muted);
   };
 
+  // Try to autoplay with sound — browser allows it if user interacted before (wizard/payment)
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = false;
+    vid.play().then(() => {
+      setIsMuted(false);
+    }).catch(() => {
+      // Browser blocked unmuted autoplay — fall back to muted
+      vid.muted = true;
+      vid.play().catch(() => {});
+      setIsMuted(true);
+    });
+  }, []);
+
   useEffect(() => {
     const stored = sessionStorage.getItem("vowlyra_email");
     if (stored) setEmail(stored);
@@ -250,27 +265,30 @@ export default function SuccessPage() {
             <div style={{ position: "absolute", top: 10, left: 12, zIndex: 3, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", borderRadius: 500, padding: "3px 10px", fontSize: 11, color: "#fff", fontWeight: 600 }}>
               ★★★★★ Echte Kundenstimme
             </div>
-            {/* Mute/Unmute button */}
-            <button
-              onClick={toggleMute}
-              style={{ position: "absolute", bottom: 10, right: 12, zIndex: 3, background: isMuted ? "rgba(255,255,255,0.15)" : "rgba(29,185,84,0.85)", backdropFilter: "blur(6px)", border: isMuted ? "1px solid rgba(255,255,255,0.3)" : "1px solid #1DB954", borderRadius: 500, padding: "5px 12px", fontSize: 12, color: "#fff", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, transition: "background 0.2s, border 0.2s" }}
-            >
-              {isMuted ? (
-                <>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            {/* Mute/Unmute button — centered overlay when muted, small corner when unmuted */}
+            {isMuted ? (
+              <button
+                onClick={toggleMute}
+                style={{ position: "absolute", inset: 0, zIndex: 3, background: "rgba(0,0,0,0.45)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, border: "none", cursor: "pointer", width: "100%", height: "100%" }}
+              >
+                <div style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.35)", borderRadius: 500, padding: "10px 22px", display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#fff", fontWeight: 700 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
                   </svg>
-                  Ton an
-                </>
-              ) : (
-                <>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-                  </svg>
-                  Ton aus
-                </>
-              )}
-            </button>
+                  Ton an — tippe zum Abspielen
+                </div>
+              </button>
+            ) : (
+              <button
+                onClick={toggleMute}
+                style={{ position: "absolute", bottom: 10, right: 12, zIndex: 3, background: "rgba(29,185,84,0.85)", backdropFilter: "blur(6px)", border: "1px solid #1DB954", borderRadius: 500, padding: "5px 12px", fontSize: 12, color: "#fff", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+                Ton aus
+              </button>
+            )}
             <video
               ref={videoRef}
               src="https://media.vowlyra.com/ugc_1.mp4"
