@@ -247,13 +247,13 @@ export default function SuccessPage() {
               {/* Track header */}
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
                 <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
-                  <Image src="/Vynil.jpg" alt="Vinyl" fill style={{ objectFit: "cover", filter: "grayscale(60%) brightness(0.5)" }} sizes="60px" />
+                  <Image src="/Vynil.jpg" alt="Vinyl" fill style={{ objectFit: "cover" }} sizes="60px" />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ color: "#555", fontWeight: 700, fontSize: 16 }}>Dein persönlicher Song</div>
-                  <div style={{ color: "#3a3a3a", fontSize: 13, marginTop: 3 }}>Audynia · Vorschau</div>
+                  <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Dein persönlicher Song</div>
+                  <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>Audynia · Vorschau</div>
                 </div>
-                <div style={{ background: "#1DB95415", color: "#1DB95460", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95420" }}>
+                <div style={{ background: "#1DB95415", color: "#1DB954", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95430" }}>
                   30s Preview
                 </div>
               </div>
@@ -261,21 +261,36 @@ export default function SuccessPage() {
               {/* Waveform skeleton */}
               <div style={{ display: "flex", alignItems: "center", gap: 3, height: 44, marginBottom: 14 }}>
                 {[18, 30, 22, 38, 26, 32, 20, 36, 28, 40, 24, 34, 18, 30, 26, 38, 22, 28].map((h, i) => (
-                  <div key={i} className="skeleton-pulse" style={{ flex: 1, height: h, background: "#2a2a2a", borderRadius: 3, animationDelay: `${i * 0.05}s` }} />
+                  <div key={i} className="skeleton-pulse" style={{ flex: 1, height: h, background: "#333", borderRadius: 3, animationDelay: `${i * 0.05}s` }} />
                 ))}
               </div>
 
               {/* Progress bar skeleton */}
-              <div style={{ height: 4, background: "#2a2a2a", borderRadius: 2, marginBottom: 8 }} />
-              <div style={{ display: "flex", justifyContent: "space-between", color: "#3a3a3a", fontSize: 12, marginBottom: 22 }}>
+              <div style={{ height: 4, background: "#333", borderRadius: 2, marginBottom: 8 }} />
+              <div style={{ display: "flex", justifyContent: "space-between", color: "#555", fontSize: 12, marginBottom: 22 }}>
                 <span>0:00</span><span>0:30</span>
               </div>
 
-              {/* Controls skeleton */}
+              {/* Controls — exact icons from song page, greyed out */}
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 32 }}>
-                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a" }} />
-                <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#2a2a2a" }} />
-                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#2a2a2a" }} />
+                {/* Skip back */}
+                <div style={{ color: "#444", padding: 8, display: "flex", alignItems: "center" }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
+                  </svg>
+                </div>
+                {/* Play button */}
+                <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#444" style={{ marginLeft: 2 }}>
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                </div>
+                {/* Skip forward */}
+                <div style={{ color: "#444", padding: 8, display: "flex", alignItems: "center" }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>

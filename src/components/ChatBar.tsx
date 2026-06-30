@@ -188,6 +188,8 @@ export default function ChatBar() {
   };
 
   // ── render ───────────────────────────────────────────────────────────────
+  if (isSuccess) return null; // keine ChatBar auf der Success-Seite
+
   return (
     <div
       className="cb-root"
