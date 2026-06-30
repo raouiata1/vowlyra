@@ -236,22 +236,8 @@ export default function SuccessPage() {
           </p>
         )}
 
-        {/* YouTube video — TOP */}
-        <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.1s") }}>
-          <div className="success-video-inner" style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
-            <iframe
-              ref={iframeRef}
-              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0&enablejsapi=1"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              onLoad={handleVideoLoad}
-              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-            />
-          </div>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="success-progress" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
+        {/* Progress Bar — vor dem Video */}
+        <div className="success-progress" style={{ width: "100%", maxWidth: 640, marginBottom: 20, ...fadeIn("0.1s") }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
             <div key={labelKey} className="status-label" style={{ fontSize: 13, color: "#1DB954", fontWeight: 600 }}>
               {previewReady ? t("status_ready") : currentLabel}
@@ -264,6 +250,20 @@ export default function SuccessPage() {
           <p style={{ fontSize: 12, color: "#555", marginTop: 8, textAlign: "center" }}>
             {previewReady ? t("progress_redirect") : done ? t("progress_done") : t("progress_sub")}
           </p>
+        </div>
+
+        {/* YouTube video — nach Progress Bar */}
+        <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
+          <div className="success-video-inner" style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
+            <iframe
+              ref={iframeRef}
+              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0&enablejsapi=1"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              onLoad={handleVideoLoad}
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+            />
+          </div>
         </div>
 
         {/* Player Card — exact copy from song page, skeleton state while loading */}
