@@ -114,7 +114,7 @@
       },
       {
         "q": "Wie lange dauert die Lieferung des vollständigen Songs?",
-        "a": "Der Trailer kommt in ~5 Minuten. Nach der Zahlung erhältst du den vollständigen Song (ca. 3 Minuten) innerhalb weniger Minuten per E-Mail – manchmal sogar schneller."
+        "a": "Der Trailer kommt in ~3 Minuten. Nach der Zahlung erhältst du den vollständigen Song (ca. 3 Minuten) innerhalb weniger Minuten per E-Mail – manchmal sogar schneller."
       },
       {
         "q": "In welchen Fällen bekomme ich eine vollständige Erstattung?",
@@ -188,11 +188,11 @@
     "step6_sub": "Ein Spitzname, ein Innenwitz, eine Eigenheit — das wird die Zeile, die sie nie vergessen.",
     "step6_placeholder": "z.B. 'Sie lacht immer zu laut in Kinos'",
     "step7_title": "Fast fertig{name}! Wohin schicken wir deinen Trailer?",
-    "step7_sub": "In ~5 Minuten hörst du deinen kostenlosen Song-Trailer — du zahlst nur wenn er dir gefällt.",
+    "step7_sub": "In ~3 Minuten hörst du deinen kostenlosen Song-Trailer — du zahlst nur wenn er dir gefällt.",
     "step7_email_placeholder": "deine@email.de",
     "step7_no_spam": "Nur für deinen Trailer. Kein Spam, kein Abo.",
     "step7_next_title": "Was passiert als nächstes",
-    "step7_next1": "Kostenloser Trailer für {name} wird in ~5 Min. erstellt",
+    "step7_next1": "Kostenloser Trailer für {name} wird in ~3 Min. erstellt",
     "step7_next2": "Kostenloser Trailer kommt in dein Postfach",
     "step7_next3": "Nur zahlen wenn er dich begeistert",
     "cta0": "Anlass bestätigen →",
