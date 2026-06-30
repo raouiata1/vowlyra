@@ -167,6 +167,12 @@ export default function SuccessPage() {
         @keyframes dot3 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
         @keyframes cb-spin { to { transform: rotate(360deg); } }
         @keyframes skeletonPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+        @keyframes vinylSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes ringPulse {
+          0%   { stroke-dashoffset: 283; opacity: 0.3; }
+          50%  { stroke-dashoffset: 70;  opacity: 1; }
+          100% { stroke-dashoffset: 283; opacity: 0.3; }
+        }
         @keyframes pillVibrate {
           0%,14%,100% { transform: translateX(0); }
           2%  { transform: translateX(-3px); }
@@ -260,12 +266,24 @@ export default function SuccessPage() {
 
               {/* Track header */}
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
-                <div style={{ width: 60, height: 60, borderRadius: 12, overflow: "hidden", flexShrink: 0, position: "relative" }}>
-                  <Image src="/Vynil.jpg" alt="Vinyl" fill style={{ objectFit: "cover" }} sizes="60px" />
+
+                {/* Vinyl with spinning animation + Suno-style loading ring */}
+                <div style={{ position: "relative", width: 60, height: 60, flexShrink: 0 }}>
+                  {/* Spinning loading ring (SVG) */}
+                  <svg width="60" height="60" viewBox="0 0 60 60" style={{ position: "absolute", inset: 0, zIndex: 2 }}>
+                    <circle cx="30" cy="30" r="28" fill="none" stroke="#1DB954" strokeWidth="2.5" strokeDasharray="176" strokeDashoffset="176" strokeLinecap="round"
+                      style={{ animation: "ringPulse 2s ease-in-out infinite", transformOrigin: "center", transform: "rotate(-90deg)" }}
+                    />
+                  </svg>
+                  {/* Spinning Vinyl image */}
+                  <div style={{ width: 60, height: 60, borderRadius: "50%", overflow: "hidden", position: "relative", animation: "vinylSpin 3s linear infinite" }}>
+                    <Image src="/Vynil.jpg" alt="Vinyl" fill style={{ objectFit: "cover" }} sizes="60px" />
+                  </div>
                 </div>
+
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ color: "#fff", fontWeight: 700, fontSize: 16 }}>Dein persönlicher Song</div>
-                  <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>Audynia · Vorschau</div>
+                  <div style={{ color: "#777", fontSize: 13, marginTop: 3 }}>Audynia · wird erstellt...</div>
                 </div>
                 <div style={{ background: "#1DB95415", color: "#1DB954", borderRadius: 6, padding: "4px 10px", fontSize: 11, fontWeight: 600, flexShrink: 0, border: "1px solid #1DB95430" }}>
                   30s Preview
