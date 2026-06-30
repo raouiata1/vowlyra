@@ -252,16 +252,19 @@ export default function SuccessPage() {
           </p>
         </div>
 
-        {/* YouTube video — nach Progress Bar */}
+        {/* UGC Video — Kundenstimme während Song lädt */}
         <div className="success-video-wrap" style={{ width: "100%", maxWidth: 640, marginBottom: 24, ...fadeIn("0.2s") }}>
-          <div className="success-video-inner" style={{ position: "relative", width: "100%", paddingTop: "56.25%", borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
-            <iframe
-              ref={iframeRef}
-              src="https://www.youtube.com/embed/6RbWFfsnI2s?autoplay=1&mute=1&loop=1&playlist=6RbWFfsnI2s&controls=1&modestbranding=1&rel=0&enablejsapi=1"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              onLoad={handleVideoLoad}
-              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+          <div style={{ borderRadius: 18, overflow: "hidden", boxShadow: "0 8px 40px rgba(0,0,0,0.5)", background: "#000", position: "relative" }}>
+            <div style={{ position: "absolute", top: 12, left: 14, zIndex: 2, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", borderRadius: 500, padding: "4px 12px", fontSize: 11, color: "#fff", fontWeight: 600 }}>
+              ★★★★★ Echte Kundenstimme
+            </div>
+            <video
+              src="https://media.vowlyra.com/ugc_1.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ width: "100%", maxHeight: 360, objectFit: "cover", display: "block" }}
             />
           </div>
         </div>
