@@ -40,17 +40,17 @@ export async function POST(request: NextRequest) {
     })
 
     const orderData = {
-      order_id: body.order_id,
+      order_id: Math.floor(1000 + Math.random() * 9000),
       date,
       time,
       customer_name: body.customer_name,
       customer_email: body.customer_email,
+      customer_phone: body.customer_phone,
       anlass: body.anlass,
       empfaenger: body.empfaenger,
       geschichte: body.geschichte,
       klang: body.klang,
-      stil: body.stil,
-      spezialzeile: body.spezialzeile || ''
+      stil: body.stil
     }
 
     const success = await sendToProducer(orderData)

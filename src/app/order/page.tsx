@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 ;
 import Footer from "@/components/Footer";
 
-const TOTAL_STEPS = 8;
+const TOTAL_STEPS = 7;
 
 const validateEmailFrontend = (email: string): string | null => {
   if (!email) return 'Bitte gib deine E-Mail-Adresse ein.'
@@ -54,6 +54,18 @@ const validateEmailFrontend = (email: string): string | null => {
   return null
 }
 
+
+const validatePhone = (phone: string): string | null => {
+  if (!phone || !phone.trim()) return 'Bitte gib deine Telefonnummer ein.'
+  // Entferne Leerzeichen, Bindestriche, Klammern
+  const cleaned = phone.replace(/[\s\-\(\)\.]/g, '')
+  // Muss mit + oder Ziffer beginnen, danach nur Ziffern
+  if (!/^\+?\d+$/.test(cleaned)) return 'Bitte gib eine gültige Telefonnummer ein.'
+  // E.164: 7–15 Ziffern (ohne +)
+  const digits = cleaned.replace(/^\+/, '')
+  if (digits.length < 7 || digits.length > 15) return 'Bitte gib eine gültige Telefonnummer ein.'
+  return null
+}
 
 const LockIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -131,6 +143,7 @@ export default function OrderPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [stepError, setStepError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState<'validating' | 'submitting' | null>(null);
@@ -181,8 +194,7 @@ export default function OrderPage() {
       case 3: return "Geschichte hinzufügen →";
       case 4: return "Klang festlegen →";
       case 5: return "Stil wählen →";
-      case 6: return "Moment festhalten →";
-      case 7: return "Kostenlosen Trailer anfordern →";
+      case 6: return "Kostenlosen Trailer anfordern →";
       default: return "Weiter →";
     }
   }
@@ -196,8 +208,7 @@ export default function OrderPage() {
       case 3: return !!(answers.geschichte ?? '').trim();
       case 4: return !!answers.klang;
       case 5: return !!answers.stil;
-      case 6: return !!(answers.spezialzeile ?? '').trim();
-      case 7: return !!(answers.email ?? '').trim() && !emailError;
+      case 6: return !!(answers.email ?? '').trim() && !emailError && !!(answers.phone ?? '').trim() && !phoneError;
       default: return true;
     }
   }
@@ -210,7 +221,6 @@ export default function OrderPage() {
       case 3: return "Bitte schreib etwas über die Person.";
       case 4: return "Bitte wähle einen Klangstil.";
       case 5: return "Bitte wähle einen Musikstil.";
-      case 6: return "Bitte beschreib kurz was diesen Moment einzigartig macht.";
       default: return "Bitte füll dieses Feld aus.";
     }
   }
@@ -269,6 +279,7 @@ export default function OrderPage() {
         body: JSON.stringify({
           customer_name: answers.name,
           customer_email: answers.email,
+          customer_phone: answers.phone,
           anlass: answers.anlass,
           empfaenger: answers.empfaenger,
           geschichte: answers.geschichte,
@@ -462,33 +473,11 @@ export default function OrderPage() {
       case 6:
         return (
           <>
-            <h1 className="dark-input-title" style={h1Style}>Was macht {answers.empfaenger || "diese Person"} einzigartig?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
-            <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>Ein Spitzname, ein Innenwitz, eine Eigenheit — das wird die Zeile, die sie nie vergessen.</p>
-            <div className="dark-input-wrapper">
-              <input
-                className="dark-input"
-                style={inputStyle}
-                placeholder={"z.B. 'Sie lacht immer zu laut in Kinos'"}
-                value={answers.spezialzeile ?? ""}
-                onChange={(e) => setAnswer("spezialzeile", e.target.value)}
-                onKeyDown={inputKeyDown}
-                enterKeyHint="next"
-                onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")}
-              />
-            </div>
-          </>
-        );
-
-      case 7:
-        return (
-          <>
             <h1 className="dark-input-title" style={h1Style}>
               Fast fertig{answers.name ? `, ${answers.name}` : ""}! Wohin schicken wir deinen Trailer?<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup>
             </h1>
             <Required />
-            <p className="dark-input-subtitle" style={subtitleStyle}>In ~5 Minuten hörst du deinen kostenlosen Song-Trailer — du zahlst nur wenn er dir gefällt.</p>
+            <p className="dark-input-subtitle" style={subtitleStyle}>In ~3 Minuten hörst du deinen kostenlosen Song-Trailer — du zahlst nur wenn er dir gefällt.</p>
             <div className="dark-input-wrapper">
               <input
                 type="email"
@@ -528,11 +517,56 @@ export default function OrderPage() {
               <div style={{ color: "#777", fontSize: 12, marginTop: 8 }}>
                 Nur für deinen Trailer. Kein Spam, kein Abo.
               </div>
+
+              {/* Telefonnummer */}
+              <div style={{ marginTop: 20 }}>
+                <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "#1a1a1a", marginBottom: 6 }}>
+                  Telefonnummer<sup style={{ color: "#e53e3e", fontSize: "0.7em", verticalAlign: "super", marginLeft: 2 }}>*</sup>
+                </label>
+                <input
+                  type="tel"
+                  className="dark-input"
+                  style={{
+                    ...inputStyle,
+                    border: phoneError ? "1.5px solid #e53e3e" : "1.5px solid rgba(0,0,0,0.8)",
+                  }}
+                  placeholder="+49 123 456 789"
+                  value={answers.phone ?? ""}
+                  enterKeyHint="done"
+                  onChange={(e) => {
+                    const val = e.target.value
+                    setAnswers({ ...answers, phone: val })
+                    setPhoneError(validatePhone(val))
+                    setStepError(null)
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleNextRef.current();
+                    }
+                  }}
+                  onFocus={(e) => {
+                    if (!phoneError) e.currentTarget.style.borderColor = "#1DB954"
+                  }}
+                  onBlur={(e) => {
+                    setPhoneError(validatePhone(e.target.value))
+                  }}
+                />
+                {phoneError && (
+                  <p style={{ color: '#e53e3e', fontSize: '13px', marginTop: '6px' }}>
+                    {phoneError}
+                  </p>
+                )}
+                <div style={{ color: "#777", fontSize: 12, marginTop: 6 }}>
+                  Internationales Format, z.B. +49 170 1234567
+                </div>
+              </div>
+
               {/* What happens next */}
               <div style={{ marginTop: 24, borderTop: "1px solid rgba(0,0,0,0.12)", paddingTop: 20 }}>
                 <p style={{ fontSize: 11, color: "#555", margin: "0 0 12px 0", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px" }}>Was passiert als nächstes</p>
                 {[
-                  `Kostenloser Trailer für ${answers.empfaenger || "sie"} wird in ~5 Min. erstellt`,
+                  `Kostenloser Trailer für ${answers.empfaenger || "sie"} wird in ~3 Min. erstellt`,
                   "Kostenloser Trailer kommt in dein Postfach",
                   "Nur zahlen wenn er dich begeistert",
                 ].map((text, i) => (
@@ -757,7 +791,7 @@ export default function OrderPage() {
 
         <button
           onClick={handleNext}
-          disabled={loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))}
+          disabled={loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email || !!phoneError || !answers.phone))}
           className="order-next-btn"
           style={{
             background: "#1DB954",
@@ -768,8 +802,8 @@ export default function OrderPage() {
             minHeight: 52,
             fontWeight: 700,
             fontSize: 15,
-            cursor: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))) ? "not-allowed" : "pointer",
-            opacity: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))) ? 0.5 : 1,
+            cursor: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email || !!phoneError || !answers.phone))) ? "not-allowed" : "pointer",
+            opacity: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email || !!phoneError || !answers.phone))) ? 0.5 : 1,
             transition: "opacity 0.15s, transform 0.15s",
             display: "block",
             margin: "16px auto 0",
