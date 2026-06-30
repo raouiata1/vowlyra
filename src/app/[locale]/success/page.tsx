@@ -167,6 +167,19 @@ export default function SuccessPage() {
         @keyframes dot3 { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
         @keyframes cb-spin { to { transform: rotate(360deg); } }
         @keyframes skeletonPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+        @keyframes pillVibrate {
+          0%,14%,100% { transform: translateX(0); }
+          2%  { transform: translateX(-3px); }
+          4%  { transform: translateX(3px); }
+          6%  { transform: translateX(-3px); }
+          8%  { transform: translateX(3px); }
+          10% { transform: translateX(-2px); }
+          12% { transform: translateX(2px); }
+        }
+        @keyframes pillGlow {
+          0%,100% { box-shadow: 0 0 0 0 rgba(29,185,84,0); }
+          50%     { box-shadow: 0 0 16px 4px rgba(29,185,84,0.25); }
+        }
         .status-label{animation:fadeIn 0.5s ease forwards}
         .review-card{transition:opacity 0.4s ease}
         .progress-bar{background:linear-gradient(90deg,#1DB954,#25D366,#1DB954);background-size:200% auto;animation:progressShimmer 2s linear infinite}
@@ -176,6 +189,7 @@ export default function SuccessPage() {
         .dot-2{animation:dot2 1.2s ease-in-out 0.2s infinite}
         .dot-3{animation:dot3 1.2s ease-in-out 0.4s infinite}
         .skeleton-pulse{animation:skeletonPulse 1.8s ease-in-out infinite}
+        .pill-vibrate { animation: pillVibrate 3.5s ease-in-out infinite, pillGlow 3.5s ease-in-out infinite; }
       `}</style>
 
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#121212", padding: "16px 24px", zIndex: 99, borderBottom: "1px solid #1e1e1e" }}>
@@ -194,8 +208,8 @@ export default function SuccessPage() {
 
         {/* Subtitle */}
         {!previewReady && (
-          <p style={{ fontSize: 14, color: "#777", textAlign: "center", marginBottom: 20, marginTop: 0, maxWidth: 480, lineHeight: 1.6, ...fadeIn("0.05s") }}>
-            Schau dir an, wie andere ihre Songs erlebt haben — deiner erscheint <strong style={{ color: "#1DB954" }}>automatisch hier</strong>, sobald er fertig ist.
+          <p style={{ fontSize: 15, color: "#666", textAlign: "center", marginBottom: 20, marginTop: 0, maxWidth: 520, lineHeight: 1.7, ...fadeIn("0.05s") }}>
+            Unsere KI komponiert gerade deinen persönlichen Song. Das dauert ca. <strong style={{ color: "#fff" }}>3–5 Minuten</strong>. Der Player unten aktiviert sich <strong style={{ color: "#1DB954" }}>automatisch</strong> — bitte lass diesen Tab offen.
           </p>
         )}
 
@@ -233,11 +247,11 @@ export default function SuccessPage() {
         {!previewReady && (
           <div style={{ width: "100%", maxWidth: 640, marginBottom: 28, ...fadeIn("0.25s") }}>
 
-            {/* Loading pill */}
+            {/* Loading pill — vibriert um Aufmerksamkeit zu ziehen */}
             <div style={{ textAlign: "center", marginBottom: 16 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(29,185,84,0.12)", color: "#1DB954", borderRadius: 500, padding: "6px 16px", fontSize: 12, fontWeight: 700 }}>
-                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#1DB954", display: "inline-block", animation: "activePulse 1.5s infinite" }} />
-                Dein Song wird vorbereitet — erscheint hier automatisch
+              <span className="pill-vibrate" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(29,185,84,0.15)", color: "#1DB954", borderRadius: 500, padding: "8px 20px", fontSize: 13, fontWeight: 700, border: "1px solid rgba(29,185,84,0.3)", cursor: "default" }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#1DB954", display: "inline-block", flexShrink: 0, animation: "activePulse 1.2s infinite" }} />
+                🎵 Dein Song wird gerade erstellt — erscheint hier automatisch
               </span>
             </div>
 
