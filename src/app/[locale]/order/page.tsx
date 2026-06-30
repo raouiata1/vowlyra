@@ -226,7 +226,7 @@ export default function OrderPage() {
           <Required />
           <p className="dark-input-subtitle" style={subtitleStyle}>{t("step3_sub")}</p>
           <div className="dark-input-wrapper">
-            <textarea className="dark-input" style={{ ...inputStyle, minHeight: 180, resize: "none" }} placeholder={t("step3_placeholder", { name: name || "..." })} value={answers.geschichte ?? ""} onChange={(e) => setAnswer("geschichte", e.target.value)} onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")} onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")} />
+            <textarea className="dark-input" style={{ ...inputStyle, minHeight: 180, resize: "none" }} placeholder={t("step3_placeholder", { name: name || "..." })} value={answers.geschichte ?? ""} onChange={(e) => setAnswer("geschichte", e.target.value)} onKeyDown={(e) => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); handleNextRef.current(); } }} onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")} onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")} />
           </div>
         </>);
       case 4:
