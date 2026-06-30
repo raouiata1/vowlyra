@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { loadCrisp } from "@/lib/crisp";
 
@@ -55,6 +56,10 @@ function saveConsent(consent: ConsentState) {
 }
 
 export default function CookieBanner() {
+  const pathname = usePathname();
+  // Only show banner on the landing page (e.g. /de or /en)
+  const isLandingPage = /^\/[a-z]{2}\/?$/.test(pathname ?? "");
+
   const [visible, setVisible] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [consent, setConsent] = useState<ConsentState>({ crisp: true, meta: false });
@@ -63,10 +68,10 @@ export default function CookieBanner() {
     const saved = getSavedConsent();
     if (saved) {
       activateServices(saved);
-    } else {
+    } else if (isLandingPage) {
       setVisible(true);
     }
-  }, []);
+  }, [isLandingPage]);
 
   const acceptAll = () => {
     const c: ConsentState = { crisp: true, meta: true };

@@ -111,15 +111,16 @@ export default function ChatBar() {
     return () => window.removeEventListener("audynia:openchat", handler);
   }, []);
 
-  // ── auto-show welcome bubble once per session ────────────────────────────
+  // ── auto-show welcome bubble once per session (not on success page) ─────
   useEffect(() => {
+    if (isSuccess) return; // no popup on success page
     if (sessionStorage.getItem("audynia_bubble_shown")) return;
     const t = setTimeout(() => {
       setShowBubble(true);
       sessionStorage.setItem("audynia_bubble_shown", "1");
     }, 4_000);
     return () => clearTimeout(t);
-  }, []);
+  }, [isSuccess]);
 
   // ── focus input when panel opens ─────────────────────────────────────────
   useEffect(() => {
