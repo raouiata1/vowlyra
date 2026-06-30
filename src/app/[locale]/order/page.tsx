@@ -6,7 +6,16 @@ import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 import { useTranslations, useLocale } from "next-intl";
 
-const TOTAL_STEPS = 8;
+const TOTAL_STEPS = 7;
+
+const validatePhone = (phone: string): string | null => {
+  if (!phone || !phone.trim()) return 'Bitte gib deine Telefonnummer ein.'
+  const cleaned = phone.replace(/[\s\-\(\)\.]/g, '')
+  if (!/^\+?\d+$/.test(cleaned)) return 'Bitte gib eine gültige Telefonnummer ein.'
+  const digits = cleaned.replace(/^\+/, '')
+  if (digits.length < 7 || digits.length > 15) return 'Bitte gib eine gültige Telefonnummer ein.'
+  return null
+}
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
 
 function VerticalOptionSelector({ options, selected, onSelect }: { options: string[]; selected: string; onSelect: (v: string) => void }) {
@@ -36,6 +45,7 @@ export default function OrderPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [stepError, setStepError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState<"validating" | "submitting" | null>(null);
@@ -107,8 +117,7 @@ export default function OrderPage() {
       case 3: return !!(answers.geschichte ?? "").trim();
       case 4: return !!answers.klang;
       case 5: return !!answers.stil;
-      case 6: return !!(answers.spezialzeile ?? "").trim();
-      case 7: return !!(answers.email ?? "").trim() && !emailError;
+      case 6: return !!(answers.email ?? "").trim() && !emailError && !!(answers.phone ?? "").trim() && !phoneError;
       default: return true;
     }
   }
@@ -145,7 +154,7 @@ export default function OrderPage() {
       const response = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customer_name: answers.name, customer_email: answers.email, anlass: answers.anlass, empfaenger: answers.empfaenger, geschichte: answers.geschichte, klang: answers.klang, stil: answers.stil, spezialzeile: answers.spezialzeile || "" }),
+        body: JSON.stringify({ customer_name: answers.name, customer_email: answers.email, customer_phone: answers.phone, anlass: answers.anlass, empfaenger: answers.empfaenger, geschichte: answers.geschichte, klang: answers.klang, stil: answers.stil }),
       });
       const data = await response.json();
       if (data.success) {
@@ -234,22 +243,13 @@ export default function OrderPage() {
         </>);
       case 6:
         return (<>
-          <h1 className="dark-input-title" style={h1Style}>{t("step6_title", { name: name || "..." })}<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
-          <Required />
-          <p className="dark-input-subtitle" style={subtitleStyle}>{t("step6_sub")}</p>
-          <div className="dark-input-wrapper">
-            <input className="dark-input" style={inputStyle} placeholder={t("step6_placeholder")} value={answers.spezialzeile ?? ""} onChange={(e) => setAnswer("spezialzeile", e.target.value)} onKeyDown={inputKeyDown} enterKeyHint="next" onFocus={(e) => (e.currentTarget.style.borderColor = "#1DB954")} onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.8)")} />
-          </div>
-        </>);
-      case 7:
-        return (<>
           <h1 className="dark-input-title" style={h1Style}>{t("step7_title", { name: answers.name ? `, ${answers.name}` : "" })}<sup style={{ color: "#e53e3e", fontSize: "0.5em", verticalAlign: "super", marginLeft: 2 }}>*</sup></h1>
           <Required />
           <p className="dark-input-subtitle" style={subtitleStyle}>{t("step7_sub")}</p>
           <div className="dark-input-wrapper">
             <input type="email" className="dark-input" data-fb-disable-autotrack="true"
               style={{ ...inputStyle, border: emailError ? "1.5px solid #e53e3e" : "1.5px solid rgba(0,0,0,0.8)" }}
-              placeholder={t("step7_email_placeholder")} value={answers.email ?? ""} enterKeyHint="done"
+              placeholder={t("step7_email_placeholder")} value={answers.email ?? ""} enterKeyHint="next"
               onChange={(e) => { const v = e.target.value; setAnswers({ ...answers, email: v }); setEmailError(validateEmailFrontend(v)); setStepError(null); }}
               onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleNextRef.current(); } }}
               onFocus={(e) => { if (!emailError) e.currentTarget.style.borderColor = "#1DB954"; }}
@@ -257,6 +257,28 @@ export default function OrderPage() {
             />
             {emailError && <p style={{ color: "#e53e3e", fontSize: "13px", marginTop: "6px" }}>{emailError}</p>}
             <div style={{ color: "#777", fontSize: 12, marginTop: 8 }}>{t("step7_no_spam")}</div>
+
+            {/* Telefonnummer */}
+            <div style={{ marginTop: 20 }}>
+              <label style={{ display: "block", fontSize: 14, fontWeight: 600, color: "#1a1a1a", marginBottom: 6 }}>
+                Telefonnummer<sup style={{ color: "#e53e3e", fontSize: "0.7em", verticalAlign: "super", marginLeft: 2 }}>*</sup>
+              </label>
+              <input
+                type="tel"
+                className="dark-input"
+                style={{ ...inputStyle, border: phoneError ? "1.5px solid #e53e3e" : "1.5px solid rgba(0,0,0,0.8)" }}
+                placeholder="+49 123 456 789"
+                value={answers.phone ?? ""}
+                enterKeyHint="done"
+                onChange={(e) => { const val = e.target.value; setAnswers({ ...answers, phone: val }); setPhoneError(validatePhone(val)); setStepError(null); }}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleNextRef.current(); } }}
+                onFocus={(e) => { if (!phoneError) e.currentTarget.style.borderColor = "#1DB954"; }}
+                onBlur={(e) => { setPhoneError(validatePhone(e.target.value)); }}
+              />
+              {phoneError && <p style={{ color: "#e53e3e", fontSize: "13px", marginTop: "6px" }}>{phoneError}</p>}
+              <div style={{ color: "#777", fontSize: 12, marginTop: 6 }}>Internationales Format, z.B. +49 170 1234567</div>
+            </div>
+
             <div style={{ marginTop: 24, borderTop: "1px solid rgba(0,0,0,0.12)", paddingTop: 20 }}>
               <p style={{ fontSize: 11, color: "#555", margin: "0 0 12px 0", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px" }}>{t("step7_next_title")}</p>
               {[
@@ -338,8 +360,8 @@ export default function OrderPage() {
               {stepError}
             </div>
           )}
-          <button onClick={handleNext} disabled={loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))} className="order-next-btn"
-            style={{ background: "#1DB954", color: "#000", border: "none", borderRadius: 500, padding: "16px 40px", minHeight: 52, fontWeight: 700, fontSize: 15, cursor: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))) ? "not-allowed" : "pointer", opacity: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email))) ? 0.5 : 1, transition: "opacity 0.15s, transform 0.15s", display: "block", margin: "16px auto 0", position: "relative", zIndex: 10, touchAction: "manipulation" }}>
+          <button onClick={handleNext} disabled={loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email || !!phoneError || !answers.phone))} className="order-next-btn"
+            style={{ background: "#1DB954", color: "#000", border: "none", borderRadius: 500, padding: "16px 40px", minHeight: 52, fontWeight: 700, fontSize: 15, cursor: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email || !!phoneError || !answers.phone))) ? "not-allowed" : "pointer", opacity: (loading || (currentStep === TOTAL_STEPS - 1 && (!!emailError || !answers.email || !!phoneError || !answers.phone))) ? 0.5 : 1, transition: "opacity 0.15s, transform 0.15s", display: "block", margin: "16px auto 0", position: "relative", zIndex: 10, touchAction: "manipulation" }}>
             {getCtaLabel()}
           </button>
           <p style={{ textAlign: "center", fontSize: 12, color: "#888", marginTop: 10 }}>
