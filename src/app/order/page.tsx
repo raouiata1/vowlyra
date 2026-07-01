@@ -67,13 +67,8 @@ const validateEmailFrontend = (email: string): string | null => {
 
 const validatePhone = (phone: string): string | null => {
   if (!phone || !phone.trim()) return 'Bitte gib deine Telefonnummer ein.'
-  // Entferne Leerzeichen, Bindestriche, Klammern
-  const cleaned = phone.replace(/[\s\-\(\)\.]/g, '')
-  // Muss mit + oder Ziffer beginnen, danach nur Ziffern
-  if (!/^\+?\d+$/.test(cleaned)) return 'Bitte gib eine gültige Telefonnummer ein.'
-  // E.164: 7–15 Ziffern (ohne +)
-  const digits = cleaned.replace(/^\+/, '')
-  if (digits.length < 7 || digits.length > 15) return 'Bitte gib eine gültige Telefonnummer ein.'
+  // E.164: + gefolgt von 7–15 Ziffern, keine Leerzeichen oder Sonderzeichen
+  if (!/^\+[1-9]\d{6,14}$/.test(phone.trim())) return 'Bitte im Format +4915123456789 (ohne Leerzeichen, mit Ländercode).'
   return null
 }
 
@@ -563,7 +558,7 @@ export default function OrderPage() {
                     ...inputStyle,
                     border: phoneError ? "1.5px solid #e53e3e" : "1.5px solid rgba(0,0,0,0.8)",
                   }}
-                  placeholder="+49 123 456 789"
+                  placeholder="+4915123456789"
                   value={answers.phone ?? ""}
                   enterKeyHint="done"
                   onChange={(e) => {
@@ -591,7 +586,7 @@ export default function OrderPage() {
                   </p>
                 )}
                 <div style={{ color: "#777", fontSize: 12, marginTop: 6 }}>
-                  Internationales Format, z.B. +49 170 1234567
+                  E.164-Format: + Ländercode + Nummer ohne führende 0, z.B. +4915123456789
                 </div>
               </div>
 
